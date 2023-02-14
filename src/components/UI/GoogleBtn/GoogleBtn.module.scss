@@ -5,12 +5,14 @@
   @include mixins.flexbox(
     $display: flex,
     $justifyContent: center,
-    $alignItems: center
+    $alignItems: center,
+    $grow: 1
   );
   background-color: #fff;
   color: #000;
   font-size: 1.5rem;
   font-weight: variables.$font-regular;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   padding: 1rem;
   border-radius: 25px;
   transition: 0.3s ease-in-out;
@@ -22,6 +24,6 @@
   }
 
   &:hover {
-    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.25);
   }
 }

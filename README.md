@@ -7,3 +7,7 @@ To install the node_modules folder, run:
 ```bash
 npm install
 ```
+
+```bash
+npm install sass
+```

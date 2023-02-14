@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { publicRoutes } from "../../routes";
+import { publicRoutes } from "../../routes/routes";
 import { SIGNUP_ROUTE } from "../../utils/consts";
 
 const AppRouter = () => {

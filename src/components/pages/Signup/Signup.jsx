@@ -1,18 +1,16 @@
 import React from "react";
 import styles from "./Signup.module.scss";
-import Logo from "../UI/Logo/Logo";
-import LoginBtn from "../UI/LoginBtn/LoginBtn";
-import Input from "../UI/Input/Input";
-import CreateAccountBtn from "../UI/CreateAccBtn/CreateAccountBtn";
-import GoogleBtn from "../UI/GoogleBtn/GoogleBtn";
-import google from "../../assets/icons/google.svg";
+import Logo from "../../UI/Logo/Logo";
+import Input from "../../UI/Input/Input";
+import CreateAccountBtn from "../../UI/CreateAccBtn/CreateAccountBtn";
+import GoogleBtn from "../../UI/GoogleBtn/GoogleBtn";
+import google from "../../../assets/icons/google.svg";
 
 const Signup = () => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <nav className={styles.nav}>
-          <LoginBtn>Login</LoginBtn>
           <Logo />
         </nav>
       </div>

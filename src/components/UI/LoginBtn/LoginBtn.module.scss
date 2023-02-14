@@ -1,0 +1,20 @@
+@use "../../../styles/variables.scss";
+@use "../../../styles/mixins.scss";
+
+.loginBtn {
+  padding: 0.5rem 2rem;
+  min-height: 40px;
+  display: flex;
+  background-color: variables.$golden;
+  border-radius: 25px;
+  color: #fff;
+  transition: 0.3s ease-in-out;
+  @include mixins.flexbox(
+    $display: flex,
+    $justifyContent: center,
+    $alignItems: center
+  );
+  &:hover {
+    background-color: variables.$secondary-color;
+  }
+}

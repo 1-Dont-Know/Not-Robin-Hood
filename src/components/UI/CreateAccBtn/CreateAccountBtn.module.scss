@@ -1,0 +1,16 @@
+@use "../../../styles//variables.scss";
+
+.createAccBtn {
+  background-color: variables.$green;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 1rem;
+  border-radius: 25px;
+  transition: 0.3s ease-in-out;
+  margin-top: 2rem;
+
+  &:hover {
+    background-color: variables.$secondary-color;
+  }
+}

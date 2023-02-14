@@ -1,0 +1,14 @@
+@use "../../../styles/variables.scss";
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: variables.$secondary-color;
+  letter-spacing: -2px;
+  h2 {
+    font-size: 100px;
+    height: 150px;
+  }
+}

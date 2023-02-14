@@ -11,3 +11,8 @@ To install the SASS file:
 ```bash
 npm install sass
 ```
+
+## Run
+```bash
+npm start
+```

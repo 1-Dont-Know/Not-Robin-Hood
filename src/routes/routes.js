@@ -3,7 +3,7 @@ import Signup from "../components/pages/Signup/Signup";
 import Portfolio from "../components/pages/Portfolio/Portfolio";
 import Login from "../components/pages/Login/Login";
 
-// public routes
+//? PUBLIC ROUTES
 
 export const publicRoutes = [
   {
@@ -16,7 +16,7 @@ export const publicRoutes = [
   },
 ];
 
-// private routes
+//? PRIVATE ROUTES (routes which are available for authorized users only)
 
 export const privateRoutes = [
   {

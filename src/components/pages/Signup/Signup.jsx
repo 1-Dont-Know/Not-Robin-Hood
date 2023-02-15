@@ -17,7 +17,7 @@ const Signup = () => {
       <div className={styles.box}>
         <div className={styles.image}></div>
         <div className={styles.signup}>
-          {/* !TODO: REGISTRATION / LOGIN FORM  */}
+          {/* LOGIN FORM  */}
           <form className={styles.signupForm}>
             <h1>Create an account</h1>
             <h3>Make your parents happy.</h3>
@@ -25,19 +25,23 @@ const Signup = () => {
             <Input type="email" placeholder="Email" />
             <Input type="password" placeholder="Password" />
 
+            {/* Create an account button*/}
             <div className={styles.cta}>
-              {/* Create an account button*/}
               <Button type="default">Create account</Button>
+
               {/* Google Login Button */}
               <Button type="google">
                 <img src={google} alt="google" />
                 Sign up with Google
               </Button>
             </div>
+            {/* LINK TO SIGNUP */}
             <p className={styles.loginLink}>
               Already have an account? <Link to="/login">Sign in</Link>
             </p>
           </form>
+
+          {/* FOOTER SECTION */}
           <p className={styles.footer}>console-cobras 2023 ⓒ</p>
         </div>
       </div>

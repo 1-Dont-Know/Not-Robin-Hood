@@ -1,6 +1,8 @@
 @use "../../../styles//variables.scss";
 @use "../../../styles//mixins.scss";
 
+// Default type button
+
 .default {
   margin: 0.7rem 0rem;
   background-color: variables.$green;
@@ -22,6 +24,8 @@
   }
 }
 
+// Login type button
+
 .login {
   margin: 0.7rem 0rem;
   background-color: variables.$golden;
@@ -42,6 +46,8 @@
     background-color: variables.$secondary-color;
   }
 }
+
+// Google type button
 
 .google {
   @include mixins.flexbox(

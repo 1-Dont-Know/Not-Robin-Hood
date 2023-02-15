@@ -9,24 +9,27 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
+        {/* NAVIGATION SECTION  */}
         <nav className={styles.nav}>
+          {/* LOGO SECTION */}
           <Logo />
         </nav>
       </div>
       <div className={styles.box}>
         <div className={styles.image}></div>
         <div className={styles.signup}>
-          {/* !TODO: REGISTRATION / LOGIN FORM  */}
+          {/*  LOGIN FORM  */}
           <form className={styles.signinForm}>
             <h1>Sign in</h1>
             <h3>Release your bull.</h3>
             <Input type="email" placeholder="Email" />
             <Input type="password" placeholder="Password" />
-
+            {/* SIGN IN BUTTON SECTION */}
             <div className={styles.cta}>
               {/* Sign in button*/}
               <Button type="login">Sign in</Button>
             </div>
+            {/* LINK TO SIGN UP */}
             <p className={styles.loginLink}>
               New to HobinRood? <Link to="/signup">Sign up for free</Link>
             </p>

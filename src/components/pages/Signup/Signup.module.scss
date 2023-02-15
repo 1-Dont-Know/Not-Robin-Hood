@@ -1,6 +1,7 @@
 @use "../../../styles/mixins.scss";
 @use "../../../styles//variables.scss";
 
+// CONTAINER/WRAPPER SECTION
 .container {
   height: 100vh;
   width: 100vw;
@@ -14,6 +15,8 @@
   position: absolute;
 }
 
+// NAV SECTION
+
 .nav {
   min-height: 3.125rem;
   max-height: 6.25rem;
@@ -24,10 +27,14 @@
   );
 }
 
+// FORM SECTION
+
 .box {
-  display: flex;
+  @include mixins.flexbox($display: flex, $grow: 1);
   width: 100%;
 }
+
+// IMAGE SECTION
 
 .image {
   width: 60%;
@@ -36,6 +43,8 @@
   background-image: url(../../../assets/bull.png);
   background-repeat: no-repeat;
 }
+
+// SIGN UP SECTION
 
 .signup {
   width: 40%;
@@ -52,6 +61,30 @@
     $grow: 1
   );
 }
+// CALL TO ACTION SECTION
+
+.cta {
+  width: 100%;
+  margin-top: 2rem;
+  @include mixins.flexbox($display: flex, $direction: column);
+}
+
+// LINK TO LOGIN
+
+.loginLink {
+  margin-top: 1rem;
+
+  a {
+    font-weight: variables.$font-bold;
+    color: variables.$golden;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      color: variables.$green;
+    }
+  }
+}
+
+// SIGN UP FORM SECTION
 
 .signupForm {
   width: 60%;
@@ -69,6 +102,8 @@
     margin: 1rem 0rem;
   }
 }
+
+// FOOTER SECTION
 
 .footer {
   font-weight: variables.$font-light;

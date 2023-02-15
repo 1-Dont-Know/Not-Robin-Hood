@@ -15,6 +15,7 @@ const AppRouter = () => {
             element={<route.element />}
           />
         ))}
+
         <Route path="/" element={<Navigate to={SIGNUP_ROUTE} replace />} />
         <Route path="/" element={<Navigate to={MARKETS_PAGE} replace />} />
       </Routes>

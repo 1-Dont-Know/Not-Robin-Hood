@@ -7,3 +7,8 @@ To install the node_modules folder, run:
 ```bash
 npm install
 ```
+
+## Run
+```bash
+npm start
+```

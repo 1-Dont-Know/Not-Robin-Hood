@@ -53,6 +53,25 @@
   );
 }
 
+.cta {
+  width: 100%;
+  margin-top: 2rem;
+  @include mixins.flexbox($display: flex, $direction: column);
+}
+
+.loginLink {
+  margin-top: 1rem;
+
+  a {
+    font-weight: variables.$font-bold;
+    color: variables.$golden;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      color: variables.$green;
+    }
+  }
+}
+
 .signupForm {
   width: 60%;
   @include mixins.flexbox($display: flex, $direction: column);

@@ -12,6 +12,7 @@ export const publicRoutes = [
   {
     path: Account_ROUTE,
     element: Account,
+    // terstint safpda[nf'nads[fn op[asdfn ]]]
   },
 ];
 

@@ -20,7 +20,7 @@ export const publicRoutes = [
   },
 
   {
-    path: MARKETS_PAGE,
+    path: MARKETS_ROUTE,
     element: Markets,
   },
 

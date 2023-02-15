@@ -14,7 +14,6 @@ export const publicRoutes = [
   },
   
   {
-    Markets-page
     path: MARKETS_PAGE,
     element: Markets,
   },

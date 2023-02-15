@@ -1,8 +1,13 @@
-import { SIGNUP_ROUTE, Account_ROUTE } from "../utils/consts";
+
+import { LOGIN_ROUTE, PORTFOLIO_ROUTE, SIGNUP_ROUTE, Account_ROUTE } from "../utils/consts";
 import Signup from "../components/pages/Signup/Signup";
+import Portfolio from "../components/pages/Portfolio/Portfolio";
+import Login from "../components/pages/Login/Login";
 import Account from "../components/pages/Account/Account";
 
-// public routes
+
+
+//? PUBLIC ROUTES
 
 export const publicRoutes = [
   {
@@ -10,11 +15,20 @@ export const publicRoutes = [
     element: Signup,
   },
   {
+
+    path: LOGIN_ROUTE,
+    element: Login,
+
     path: Account_ROUTE,
     element: Account,
   },
 ];
 
-// private routes
+//? PRIVATE ROUTES (routes which are available for authorized users only)
 
-export const privateRoutes = [];
+export const privateRoutes = [
+  {
+    path: PORTFOLIO_ROUTE,
+    element: Portfolio,
+  },
+];

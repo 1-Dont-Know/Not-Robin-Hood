@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./Signup.module.scss";
 import Logo from "../../UI/Logo/Logo";
 import Input from "../../UI/Input/Input";
-import CreateAccountBtn from "../../UI/CreateAccBtn/CreateAccountBtn";
-import GoogleBtn from "../../UI/GoogleBtn/GoogleBtn";
 import google from "../../../assets/icons/google.svg";
+import Button from "../../UI/Button/Button";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
@@ -17,18 +17,31 @@ const Signup = () => {
       <div className={styles.box}>
         <div className={styles.image}></div>
         <div className={styles.signup}>
+          {/* LOGIN FORM  */}
           <form className={styles.signupForm}>
             <h1>Create an account</h1>
             <h3>Make your parents happy.</h3>
             <Input type="text" placeholder="Name" />
             <Input type="email" placeholder="Email" />
             <Input type="password" placeholder="Password" />
-            <CreateAccountBtn>Create account</CreateAccountBtn>
-            <GoogleBtn>
-              <img src={google} alt="google" />
-              Sign up with Google
-            </GoogleBtn>
+
+            {/* Create an account button*/}
+            <div className={styles.cta}>
+              <Button type="default">Create account</Button>
+
+              {/* Google Login Button */}
+              <Button type="google">
+                <img src={google} alt="google" />
+                Sign up with Google
+              </Button>
+            </div>
+            {/* LINK TO SIGNUP */}
+            <p className={styles.loginLink}>
+              Already have an account? <Link to="/login">Sign in</Link>
+            </p>
           </form>
+
+          {/* FOOTER SECTION */}
           <p className={styles.footer}>console-cobras 2023 ⓒ</p>
         </div>
       </div>

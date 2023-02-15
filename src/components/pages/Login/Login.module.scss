@@ -1,0 +1,109 @@
+@use "../../../styles/mixins.scss";
+@use "../../../styles//variables.scss";
+
+// CONTAINER / WRAPPER SECTION
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  background-color: variables.$primary-color;
+  @include mixins.flexbox($display: flex);
+}
+
+.wrapper {
+  width: 100%;
+  padding: 2.25rem 4.6875rem 0rem;
+  position: absolute;
+}
+
+.nav {
+  min-height: 3.125rem;
+  max-height: 6.25rem;
+  @include mixins.flexbox(
+    $display: flex,
+    $justifyContent: space-between,
+    $alignItems: center
+  );
+}
+
+.box {
+  display: flex;
+  width: 100%;
+}
+
+// IMAGE SECTION
+
+.image {
+  width: 60%;
+  background-size: cover;
+  height: 100%;
+  background-image: url(../../../assets/bull.png);
+  background-repeat: no-repeat;
+}
+
+// SIGNUP SECTION
+
+.signup {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  @include mixins.flexbox(
+    $display: flex,
+    $justifyContent: center,
+    $alignItems: center,
+    $direction: column,
+    $grow: 1
+  );
+}
+
+// CALL TO ACTION BUTTONS SECTION
+
+.cta {
+  width: 100%;
+  margin-top: 2rem;
+  @include mixins.flexbox($display: flex, $direction: column);
+}
+
+.loginLink {
+  margin-top: 1rem;
+
+  a {
+    font-weight: variables.$font-bold;
+    color: variables.$golden;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      color: variables.$green;
+    }
+  }
+}
+
+// SIGN IN FORM SECTION
+
+.signinForm {
+  width: 60%;
+  @include mixins.flexbox($display: flex, $direction: column);
+  text-align: center;
+  h1 {
+    font-size: variables.$font-lg;
+    font-weight: variables.$font-bold;
+    color: #203424;
+  }
+  h3 {
+    font-size: 1.5rem;
+    font-weight: variables.$font-regular;
+    color: variables.$green;
+    margin: 1rem 0rem;
+  }
+}
+
+// FOOTER SECTION
+
+.footer {
+  font-weight: variables.$font-light;
+  color: variables.$green;
+  font-size: 1.125rem;
+  margin-top: 4rem;
+}

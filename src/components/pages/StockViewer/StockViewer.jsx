@@ -1,7 +1,7 @@
 import React from "react";
 
-const Stock_Viewer = () => {
+const StockViewer = () => {
   return <div>Stock Viewer page</div>;
 };
 
-export default Stock_Viewer;
+export default StockViewer;

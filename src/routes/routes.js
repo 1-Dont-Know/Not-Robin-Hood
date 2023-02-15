@@ -18,6 +18,8 @@ export const publicRoutes = [
 
     path: LOGIN_ROUTE,
     element: Login,
+  },
+  {
 
     path: Account_ROUTE,
     element: Account,

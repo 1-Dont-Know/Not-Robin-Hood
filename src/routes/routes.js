@@ -1,11 +1,27 @@
+
+import {
+  LOGIN_ROUTE,
+  PORTFOLIO_ROUTE,
+  SIGNUP_ROUTE,
+  STOCK_VIEWER_ROUTE,
+  ACCOUNT_ROUTE,
+  MARKETS_PAGE,
+  SETTINGS_ROUTE,
+} from "../utils/consts";
+
 import { LOGIN_ROUTE, PORTFOLIO_ROUTE, SIGNUP_ROUTE, STOCK_VIEWER_ROUTE, ACCOUNT_ROUTE, MARKETS_ROUTE, STOCK_TRANSACTIONS_ROUTE, SETTINGS_ROUTE } from "../utils/consts";
+
 import Signup from "../components/pages/Signup/Signup";
 import Portfolio from "../components/pages/Portfolio/Portfolio";
 import Login from "../components/pages/Login/Login";
 import Account from "../components/pages/Account/Account";
 import Markets from "../components/pages/Markets/Markets";
+
+import Stock_Viewer from "../components/pages/StockViewer/StockViewer";
+=======
 import StockViewer from "../components/pages/StockViewer/StockViewer";
 import StockTransactions from "../components/pages/StockTransactions/StockTransactions";
+
 import Settings from "../components/pages/Settings/Settings";
 
 //? PUBLIC ROUTES
@@ -30,8 +46,11 @@ export const publicRoutes = [
     element: Login,
   },
 
+
   {
 
+
+  {
     path: ACCOUNT_ROUTE,
     element: Account,
   },
@@ -40,6 +59,9 @@ export const publicRoutes = [
     path: SETTINGS_ROUTE,
     element: Settings,
   },
+
+];
+
 
   {
     path: STOCK_TRANSACTIONS_ROUTE,

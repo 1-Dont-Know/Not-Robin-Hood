@@ -1,5 +1,5 @@
 @use "../../../styles//variables.scss";
-
+@use "../../../styles/mixins.scss";
 .input {
   padding: 2rem 2rem 1rem 0rem;
   margin: 1rem 0rem;
@@ -11,5 +11,17 @@
     font-size: 1.125rem;
     color: #32543a;
     font-weight: variables.$font-medium;
+  }
+  @include mixins.breakpoint-down(large) {
+    padding: 1rem 2rem 1rem 0rem;
+  }
+  @include mixins.breakpoint-down(medium) {
+    background-color: #fff;
+    border-radius: 15px;
+    border: none;
+    padding-left: 1.5rem;
+    &::placeholder {
+      font-weight: variables.$font-regular;
+    }
   }
 }

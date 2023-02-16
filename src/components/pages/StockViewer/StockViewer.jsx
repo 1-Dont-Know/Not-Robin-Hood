@@ -1,5 +1,6 @@
 import React from "react";
 
+
 import styles from "./StockViewer.module.scss";
 
 const StockViewer = () => {
@@ -8,6 +9,9 @@ const StockViewer = () => {
       <h1 className={styles.title}>Stock Viewer page</h1>
     </>
   );
+
+const StockViewer = () => {
+  return <div>Stock Viewer page</div>;
 };
 
 export default StockViewer;

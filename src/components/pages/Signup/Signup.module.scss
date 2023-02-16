@@ -42,9 +42,10 @@
     );
     background-image: linear-gradient(
         rgba(166, 222, 207, 0.5),
-        rgba(219, 251, 236, 0.5)
+        rgba(166, 222, 207, 0.5)
       ),
       url("../../../assets/bull.png");
+    background-repeat: no-repeat;
   }
 }
 

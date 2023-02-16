@@ -1,4 +1,4 @@
-import { LOGIN_ROUTE, PORTFOLIO_ROUTE, SIGNUP_ROUTE, STOCK_VIEWER_ROUTE, ACCOUNT_ROUTE, MARKETS_PAGE, STOCK_TRANSACTIONS_ROUTE } from "../utils/consts";
+import { LOGIN_ROUTE, PORTFOLIO_ROUTE, SIGNUP_ROUTE, STOCK_VIEWER_ROUTE, ACCOUNT_ROUTE, MARKETS_ROUTE, STOCK_TRANSACTIONS_ROUTE } from "../utils/consts";
 import Signup from "../components/pages/Signup/Signup";
 import Portfolio from "../components/pages/Portfolio/Portfolio";
 import Login from "../components/pages/Login/Login";

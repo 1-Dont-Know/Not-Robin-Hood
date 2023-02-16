@@ -27,11 +27,25 @@
   );
 }
 
-// FORM SECTION
+// MAIN SECTION
 
 .box {
   @include mixins.flexbox($display: flex, $grow: 1);
   width: 100%;
+  @include mixins.breakpoint-down(medium) {
+    @include mixins.flexbox(
+      $display: flex,
+      $grow: 1,
+      $direction: column,
+      $alignItems: center,
+      $justifyContent: center
+    );
+    background-image: linear-gradient(
+        rgba(166, 222, 207, 0.5),
+        rgba(219, 251, 236, 0.5)
+      ),
+      url("../../../assets/bull.png");
+  }
 }
 
 // IMAGE SECTION
@@ -42,6 +56,12 @@
   height: 100%;
   background-image: url(../../../assets/bull.png);
   background-repeat: no-repeat;
+  @include mixins.breakpoint-down(medium) {
+    display: none;
+    // width: 100%;
+    // height: 50%;
+    // background-position-y: 13%;
+  }
 }
 
 // SIGN UP SECTION
@@ -60,6 +80,11 @@
     $direction: column,
     $grow: 1
   );
+  @include mixins.breakpoint-down(medium) {
+    align-items: center;
+    height: 100%;
+    width: 50%;
+  }
 }
 // CALL TO ACTION SECTION
 
@@ -94,12 +119,27 @@
     font-size: variables.$font-lg;
     font-weight: variables.$font-bold;
     color: #203424;
+    @include mixins.breakpoint-down(xlarge) {
+      font-size: 2.5rem;
+    }
+    @include mixins.breakpoint-down(large) {
+      font-size: 2rem;
+    }
   }
   h3 {
     font-size: 1.5rem;
     font-weight: variables.$font-regular;
     color: variables.$green;
     margin: 1rem 0rem;
+    @include mixins.breakpoint-down(large) {
+      font-size: 1.25rem;
+    }
+  }
+  @include mixins.breakpoint-down(medium) {
+    width: 100%;
+    flex-grow: 1;
+    margin-top: 2rem;
+    justify-content: center;
   }
 }
 
@@ -110,4 +150,8 @@
   color: variables.$green;
   font-size: 1.125rem;
   margin-top: 4rem;
+  @include mixins.breakpoint-down(medium) {
+    margin-top: 0rem;
+    margin-bottom: 2rem;
+  }
 }

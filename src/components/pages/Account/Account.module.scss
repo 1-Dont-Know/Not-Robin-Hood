@@ -1,0 +1,19 @@
+@use "../../../styles/mixins.scss";
+@use "../../../styles/variables.scss";
+
+// WRAPPER SECTION
+
+.wrapper {
+  background-color: pink;
+  @include mixins.flexbox($display: flex, $grow: 1);
+}
+
+// HERO SECTION
+.hero {
+  @include mixins.flexbox(
+    $display: flex,
+    $grow: 1,
+    $direction: column,
+    $flex-basis: 90%
+  );
+}

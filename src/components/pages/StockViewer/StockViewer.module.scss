@@ -1,3 +1,24 @@
+@use "../../../styles/variables.scss";
+@use "../../../styles/mixins.scss";
+
 .title {
   font-size: 2rem;
+}
+
+.notificationQty {
+  position: absolute;
+  font-size: 0.85rem;
+  color: rgb(255, 255, 255);
+  top: 0;
+  right: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background-color: variables.$golden;
+  // include makes number or characters centered
+  @include mixins.flexbox(
+    $display:flex, 
+    $grow:1, 
+    $justifyContent:center, 
+    $alignItems: center);
 }

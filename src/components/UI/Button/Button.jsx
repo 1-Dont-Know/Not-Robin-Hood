@@ -7,8 +7,8 @@ const Button = ({ type, children }) => {
   return (
     <button
       className={
-        type === "login"
-          ? styles.login
+        type === "golden"
+          ? styles.golden
           : type === "google"
           ? styles.google
           : type === "buy"

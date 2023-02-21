@@ -1,0 +1,37 @@
+@use "../../../styles/variables.scss";
+@use "../../../styles/mixins.scss";
+.container {
+  background-color: variables.$secondary-color;
+  max-width: 325px;
+  width: 100%;
+  border-radius: 25px;
+  color: #fff;
+  padding: 22px 37px;
+  p {
+    position: relative;
+    font-weight: variables.$font-bold;
+    font-size: 24px;
+    margin: 20px 0;
+    span {
+      position: absolute;
+      top: -10px;
+      right: 90px;
+      font-size: 18px;
+      font-weight: variables.$font-regular;
+    }
+  }
+  div {
+    margin-top: 1rem;
+    color: #2ab795;
+    font-size: 18px;
+    img {
+      max-width: 3rem;
+      margin-right: 1rem;
+    }
+    span {
+      margin-left: 0.5rem;
+      color: #fff;
+      font-size: 1rem;
+    }
+  }
+}

@@ -17,22 +17,7 @@
 
 }
 
-.search {
-    background: url(../../../assets/icons/search-icon.svg) no-repeat left; //Search Icon
-    height: 30px;
-    padding: 20px 0px 20px 25px;
-
-    //Styling for the default placeholder text
-    &::placeholder {
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 300;
-        font-size: 18px;
-        line-height: 21px;
-    }
-}
-
-//Styling Text for the Search Bar
+//Styling for the Search Bar Text
 input{
     font-family: 'Roboto';
     font-style: normal;
@@ -40,3 +25,11 @@ input{
     font-size: 18px;
     line-height: 21px;
 }
+
+
+.search {
+    background: url(../../../assets/icons/search-icon.svg) no-repeat left; //Search Icon
+    height: 30px;
+    padding: 20px 0px 20px 25px;
+}
+

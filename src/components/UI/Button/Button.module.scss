@@ -199,3 +199,22 @@
     margin-right: 0.5rem;
   }
 }
+
+.settingsButton {
+  padding: 1rem 3rem;
+  background: #D5E3E1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  transition: 0.3s ease-in-out;
+  &:first-child {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    }
+  &:last-child {
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    }
+  &:hover {
+    background-color: variables.$secondary-color;
+    color: #fff;
+  }
+}

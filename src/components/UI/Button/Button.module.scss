@@ -76,69 +76,63 @@
   }
 }
 
-.buyButton{
-  margin: 0.7rem 1rem;
-  background-color: #C18E60;
+.buyButton {
+  margin: 0rem 1rem;
+  background-color: #c18e60;
   padding: 1rem 2rem;
   font-size: 24px;
-  font-weight: variables.$font-regular;
+  font-weight: variables.$font-medium;
   @include mixins.flexbox(
     $display: flex,
     $justifyContent: center,
     $alignItems: center,
     $grow: 1
   );
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 25px;
   color: #fff;
   transition: 0.3s ease-in-out;
   &:hover {
     background-color: variables.$secondary-color;
   }
-  width: 224px;
-  height: 67px;
-  left: 1380px;
-  top: 42px;
 
   img {
     max-width: 41.79px;
     max-height: 40.25px;
     margin-right: 0.5rem;
   }
-
 }
 
-.portfolioButton{
-  margin: 0.7rem 1rem;
-  background-color: #D5E3E1;
-  padding: 1rem 3rem;
+.portfolioButton {
+  margin: 0rem 1rem;
+  background-color: #d5e3e1;
+  padding: 1rem 2rem;
   font-size: 24px;
-  font-weight: variables.$font-regular;
+  font-weight: variables.$font-medium;
   @include mixins.flexbox(
     $display: flex,
     $justifyContent: center,
     $alignItems: center,
     $grow: 1
   );
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
-  border-radius: 20px;
-  color: #37433A;
+  // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  border-radius: 25px;
+  color: #37433a;
   transition: 0.3s ease-in-out;
   &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    svg {
+      path {
+        fill: red;
+      }
+    }
   }
-  width: 224px;
-  height: 67px;
-  left: 1380px;
-  top: 42px;
 
   img {
     max-width: 41.79px;
     max-height: 40.25px;
     margin-right: 0.5rem;
   }
-
 }
 
 .notificationButton{

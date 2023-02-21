@@ -1,0 +1,15 @@
+@use "../../../styles/variables.scss";
+@use "../../../styles/mixins.scss";
+
+.container {
+  background-color: #fff;
+  color: variables.$secondary-color;
+  margin: 2rem 0rem;
+  padding: 1rem;
+  max-width: 326px;
+  width: 100%;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+}

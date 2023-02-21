@@ -4,23 +4,25 @@
 .container {
     @include mixins.flexbox(
         $display: flex,
-        $justifyContent: center,
+        $justifyContent: left,
         $alignItems: center
     );
     box-sizing: border-box; //box-sizing property allows us to include the padding and border in an element's total width and height.
     background: #FFFFFF;
     border: 1px solid #32543A;
     border-radius: 25px;
-    width: 200px;
+    padding-left: 20px;
+    min-width: 300px; //Temp Value for now
+    
 
 }
 
 .search {
-    border-radius: 15px;
-    background: url(../../../assets/icons/search-icon.svg) no-repeat left;
+    background: url(../../../assets/icons/search-icon.svg) no-repeat left; //Search Icon
     height: 30px;
     padding: 20px 0px 20px 25px;
 
+    //Styling for the default placeholder text
     &::placeholder {
         font-family: 'Roboto';
         font-style: normal;
@@ -28,4 +30,13 @@
         font-size: 18px;
         line-height: 21px;
     }
+}
+
+//Styling Text for the Search Bar
+input{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
 }

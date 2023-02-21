@@ -1,5 +1,5 @@
 import React from "react";
-// import styles from "./StockTransactions.module.scss";
+import styles from "./StockTransactions.module.scss";
 import Search from "../../UI/Search/Search";
 
 const StockTransactions = () => {

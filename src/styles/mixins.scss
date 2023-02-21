@@ -46,12 +46,16 @@
 
 //* ======================== Breakpoints Mixin ========================
 
+//? MIN-WIDTH
+
 //! ======= 640px, 1024px, 1400px ========
 $breakpoints-up: (
   "medium": "40em",
   "large": "64em",
   "xlarge": "87.5em",
 );
+
+//? MAX-WIDTH
 
 //! ===== 639px, 1023px, 1399px, 1430px ======
 $breakpoints-down: (
@@ -61,11 +65,15 @@ $breakpoints-down: (
   "xlarge": "89.375em",
 );
 
+//?  apply breakpoint for an element with min-width, where size mentioned about in the MIN-WIDTH COMMENT
+
 @mixin breakpoint-up($size) {
   @media (min-width: map-get($breakpoints-up, $size)) {
     @content;
   }
 }
+
+//?  apply breakpoint for an element with max-width, where size mentioned about in the MIN-WIDTH COMMENT
 
 @mixin breakpoint-down($size) {
   @media (max-width: map-get($breakpoints-down, $size)) {

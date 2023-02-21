@@ -4,12 +4,12 @@
 // WRAPPER SECTION
 
 .wrapper {
-  background-color: pink;
   @include mixins.flexbox($display: flex, $grow: 1);
 }
 
 // HERO SECTION
-.hero {
+.heroSection {
+  height: 100%;
   @include mixins.flexbox(
     $display: flex,
     $grow: 1,

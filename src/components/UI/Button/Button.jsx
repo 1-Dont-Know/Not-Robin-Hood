@@ -19,6 +19,8 @@ const Button = ({ type, children }) => {
           ? styles.notificationButton
           : type === "tools"
           ? styles.toolsButton
+          : type === "timeBar"
+          ? styles.timeBarButton
           : styles.default
       }
     >

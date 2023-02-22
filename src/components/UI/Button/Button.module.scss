@@ -76,10 +76,37 @@
   }
 }
 
-.buyButton{
-  margin: 0.7rem 1rem;
-  background-color: #C18E60;
+.buyButton {
+  margin: 0rem 1rem;
+  background-color: #c18e60;
   padding: 1rem 2rem;
+  font-size: 24px;
+  font-weight: variables.$font-medium;
+  @include mixins.flexbox(
+    $display: flex,
+    $justifyContent: center,
+    $alignItems: center,
+    $grow: 1
+  );
+  // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  border-radius: 25px;
+  color: #fff;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    background-color: variables.$secondary-color;
+  }
+
+  img {
+    max-width: 41.79px;
+    max-height: 40.25px;
+    margin-right: 0.5rem;
+  }
+}
+
+.buyBoxButton{
+
+  background-color: #37433A;
+  padding: 1.2rem 2rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
   @include mixins.flexbox(
@@ -88,17 +115,14 @@
     $alignItems: center,
     $grow: 1
   );
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 25px;
   color: #fff;
   transition: 0.3s ease-in-out;
   &:hover {
     background-color: variables.$secondary-color;
   }
-  width: 224px;
-  height: 67px;
-  left: 1380px;
-  top: 42px;
+
 
   img {
     max-width: 41.79px;
@@ -108,10 +132,9 @@
 
 }
 
-.portfolioButton{
-  margin: 0.7rem 1rem;
-  background-color: #D5E3E1;
-  padding: 1rem 3rem;
+.sellButton{
+  background-color: #E1C5C1;
+  padding: 1.2rem 2rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
   @include mixins.flexbox(
@@ -120,18 +143,14 @@
     $alignItems: center,
     $grow: 1
   );
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
-  border-radius: 20px;
-  color: #37433A;
+  // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  border-radius: 25px;
+  color: #AE2424;
   transition: 0.3s ease-in-out;
   &:hover {
     background-color: variables.$secondary-color;
-    color: #fff;
   }
-  width: 224px;
-  height: 67px;
-  left: 1380px;
-  top: 42px;
+
 
   img {
     max-width: 41.79px;
@@ -139,6 +158,38 @@
     margin-right: 0.5rem;
   }
 
+}
+
+.portfolioButton {
+  margin: 0rem 1rem;
+  background-color: #d5e3e1;
+  padding: 1rem 2rem;
+  font-size: 24px;
+  font-weight: variables.$font-medium;
+  @include mixins.flexbox(
+    $display: flex,
+    $justifyContent: center,
+    $alignItems: center,
+    $grow: 1
+  );
+  // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  border-radius: 25px;
+  color: #37433a;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    svg {
+      path {
+        fill: red;
+      }
+    }
+  }
+
+  img {
+    max-width: 41.79px;
+    max-height: 40.25px;
+    margin-right: 0.5rem;
+  }
 }
 
 .notificationButton{
@@ -237,4 +288,50 @@
   
 }
 
+
+.settingsButton {
+  padding: 1rem 3rem;
+  background: #D5E3E1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  transition: 0.3s ease-in-out;
+  &:first-child {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    }
+  &:last-child {
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    }
+  &:hover {
+    background-color: variables.$secondary-color;
+    color: #fff;
+  }
+}
+.profileButton{
+  position: relative; 
+  margin: 0.7rem 1rem;
+  background-color: #d8f3ef;
+  padding: 1rem;
+  @include mixins.flexbox(
+    $display: flex,
+    $justifyContent: center,
+    $alignItems: center,
+    $grow: 1
+  );
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  border-radius: 50%;
+  color: #37433A;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    background-color: variables.$secondary-color;
+    color: #fff;
+  }
+
+  img {
+    max-width: 1.3rem;
+    width: 100%;
+    max-height: 41px;
+  }
+
+}
 

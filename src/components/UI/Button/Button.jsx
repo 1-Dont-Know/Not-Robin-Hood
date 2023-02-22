@@ -21,10 +21,8 @@ const Button = ({ type, children }) => {
           ? styles.profileButton
           : type === "tools"
           ? styles.toolsButton
-
           : type === "timeBar"
           ? styles.timeBarButton
-
           : type === "settings"
           ? styles.settingsButton
           : type === "buyBox"

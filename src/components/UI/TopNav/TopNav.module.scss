@@ -13,7 +13,12 @@
 }
 
 .search {
-  @include mixins.flexbox($display: flex, $flex-basis: 40%, $grow: 1);
+  @include mixins.flexbox(
+    $display: flex,
+    $flex-basis: 40%,
+    $grow: 1,
+    $shrink: 1
+  );
 }
 
 .cta {
@@ -31,7 +36,7 @@
     $flex-basis: 20%,
     $grow: 1,
     $shrink: 1,
-    $gap: 2.5rem,
+    $gap: 2rem,
     $justifyContent: flex-end
   );
 }

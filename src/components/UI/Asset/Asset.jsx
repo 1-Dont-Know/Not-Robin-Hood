@@ -5,11 +5,11 @@ import assetUp from "../../../assets/icons/asset-up.svg";
 const Asset = () => {
   return (
     <div className={styles.container}>
-      <h3>Asset Value</h3>
-      <p>
+      <h3 className={styles.title}>Asset Value</h3>
+      <p className={styles.amount}>
         $12,345,67 <span>USD</span>
       </p>
-      <div>
+      <div className={styles.results}>
         <img src={assetUp} alt="up" />
         $51.29(4.78%)<span>Today</span>
       </div>

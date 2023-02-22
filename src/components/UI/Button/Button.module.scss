@@ -76,11 +76,14 @@
   }
 }
 
+// Buy type button
+
 .buyButton {
   margin: 0rem 1rem;
   background-color: #c18e60;
   padding: 1rem 2rem;
   font-size: 24px;
+  min-width: 14rem;
   font-weight: variables.$font-medium;
   @include mixins.flexbox(
     $display: flex,
@@ -103,9 +106,10 @@
   }
 }
 
-.buyBoxButton{
+// Buy box type button
 
-  background-color: #37433A;
+.buyBoxButton {
+  background-color: #37433a;
   padding: 1.2rem 2rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
@@ -123,17 +127,17 @@
     background-color: variables.$secondary-color;
   }
 
-
   img {
     max-width: 41.79px;
     max-height: 40.25px;
     margin-right: 0.5rem;
   }
-
 }
 
-.sellButton{
-  background-color: #E1C5C1;
+// Sell type button
+
+.sellButton {
+  background-color: #e1c5c1;
   padding: 1.2rem 2rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
@@ -145,25 +149,26 @@
   );
   // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 25px;
-  color: #AE2424;
+  color: #ae2424;
   transition: 0.3s ease-in-out;
   &:hover {
     background-color: variables.$secondary-color;
   }
-
 
   img {
     max-width: 41.79px;
     max-height: 40.25px;
     margin-right: 0.5rem;
   }
-
 }
+
+// Portfolio type button
 
 .portfolioButton {
   margin: 0rem 1rem;
   background-color: #d5e3e1;
   padding: 1rem 2rem;
+  min-width: 14rem;
   font-size: 24px;
   font-weight: variables.$font-medium;
   @include mixins.flexbox(
@@ -192,10 +197,13 @@
   }
 }
 
-.notificationButton{
-  position: relative; 
-  margin: 0.7rem 1rem;
-  background-color: #d8f3ef;
+// Notifications type button
+
+.notificationButton {
+  position: relative;
+  max-width: 3.75rem;
+  width: 100%;
+  background-color: variables.$primary-color;
   padding: 1rem;
   @include mixins.flexbox(
     $display: flex,
@@ -205,7 +213,7 @@
   );
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 50%;
-  color: #37433A;
+  color: #37433a;
   transition: 0.3s ease-in-out;
   &:hover {
     background-color: variables.$secondary-color;
@@ -217,33 +225,36 @@
     width: 100%;
     max-height: 41px;
   }
-
 }
+
+// Tools type button
 
 .toolsButton {
   margin: 0.7rem 1rem;
   padding: 1rem 3rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
-  @include mixins.flexbox($display: flex,
+  @include mixins.flexbox(
+    $display: flex,
     $justifyContent: center,
     $alignItems: center,
-    $grow: 1);
+    $grow: 1
+  );
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
-  background: #D5E3E1;
+  background: #d5e3e1;
   border-radius: 25px;
   transition: 0.3s ease-in-out;
-  
+
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
   }
-  
+
   width: 167px;
   height: 69px;
   left: 481px;
   top: 498px;
-  
+
   img {
     max-width: 41.79px;
     max-height: 40.25px;
@@ -251,19 +262,50 @@
   }
 }
 
+// Profile type button
+
+.profileButton {
+  max-width: 3.75rem;
+  width: 100%;
+  background-color: variables.$primary-color;
+  padding: 1rem;
+  @include mixins.flexbox(
+    $display: flex,
+    $justifyContent: center,
+    $alignItems: center,
+    $grow: 1
+  );
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  border-radius: 50%;
+  color: #37433a;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    background-color: variables.$secondary-color;
+    color: #fff;
+  }
+
+  img {
+    max-width: 1.3rem;
+    width: 100%;
+    max-height: 41px;
+  }
+}
+
+// Settings type button
+
 .settingsButton {
   padding: 1rem 3rem;
-  background: #D5E3E1;
+  background: #d5e3e1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   transition: 0.3s ease-in-out;
   &:first-child {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
-    }
+  }
   &:last-child {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
-    }
+  }
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;

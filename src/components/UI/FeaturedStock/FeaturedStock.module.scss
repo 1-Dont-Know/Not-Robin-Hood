@@ -1,0 +1,99 @@
+@use "../../../styles/mixins.scss";
+@use "../../../styles/variables.scss";
+
+.positive,
+.negative {
+  max-width: 320px;
+  width: 100%;
+  background-color: variables.$primary-color;
+  border-radius: 25px;
+  padding: 1.3rem;
+  @include mixins.flexbox(
+    $display: flex,
+    $direction: column,
+    $gap: 1rem,
+    $grow: 1,
+    $alignItems: center,
+    $justifyContent: center
+  );
+
+  .stockInformation {
+    @include mixins.flexbox(
+      $display: flex,
+      $gap: 1rem,
+      $alignItems: center,
+      $justifyContent: center
+    );
+    .stockIcon {
+      background-color: #b3c5c2;
+      border-radius: 25px;
+      width: 4.375rem;
+      padding: 1rem;
+      @include mixins.flexbox(
+        $display: flex,
+        $justifyContent: center,
+        $alignItems: center
+      );
+    }
+    .stockName {
+      @include mixins.flexbox(
+        $display: flex,
+        $gap: 0.3rem,
+        $direction: column,
+        $grow: 1
+      );
+      h1 {
+        font-size: 1.5rem;
+        font-weight: variables.$font-medium;
+        color: #000;
+      }
+      h4 {
+        font-size: 1rem;
+        color: #798482;
+      }
+    }
+  }
+  .stockResults {
+    @include mixins.flexbox(
+      $display: flex,
+      $gap: 1rem,
+      $grow: 1,
+      $alignItems: center
+    );
+    p {
+      color: #0f1310;
+      background-color: #b3c5c2;
+      border-radius: 25px;
+      padding: 0.7rem 1rem;
+      font-weight: variables.$font-medium;
+    }
+    span {
+      background-color: #b3c5c2;
+      padding: 0.5rem;
+      border-radius: 50%;
+    }
+  }
+  .stockPrice {
+    font-size: 1.5rem;
+    color: variables.$secondary-color;
+    font-weight: variables.$font-bold;
+  }
+}
+
+.negative {
+  background-color: #e1c5c1;
+  .stockResults {
+    p,
+    span {
+      background-color: #ceb0ac;
+      img {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  .stockInformation {
+    .stockIcon {
+      background-color: #ceb0ac;
+    }
+  }
+}

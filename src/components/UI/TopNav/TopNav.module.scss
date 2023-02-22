@@ -2,7 +2,7 @@
 @use "../../../styles/mixins.scss";
 
 .container {
-  min-height: 9.6375rem;
+  min-height: 9rem;
   padding: 1rem 2rem;
 
   @include mixins.flexbox(
@@ -13,13 +13,25 @@
 }
 
 .search {
-  @include mixins.flexbox($display: flex, $flex-basis: 30%);
+  @include mixins.flexbox($display: flex, $flex-basis: 40%, $grow: 1);
 }
 
 .cta {
-  @include mixins.flexbox($display: flex, $flex-basis: 30%);
+  @include mixins.flexbox(
+    $display: flex,
+    $flex-basis: 40%,
+    $grow: 1,
+    $shrink: 1
+  );
 }
 
 .profile {
-  @include mixins.flexbox($display: flex, $flex-basis: 30%);
+  @include mixins.flexbox(
+    $display: flex,
+    $flex-basis: 20%,
+    $grow: 1,
+    $shrink: 1,
+    $gap: 2.5rem,
+    $justifyContent: flex-end
+  );
 }

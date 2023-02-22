@@ -3,7 +3,8 @@ import styles from "./TopNav.module.scss";
 import Button from "../../UI/Button/Button";
 import cart from "../../../assets/icons/shopping-cart.svg";
 import portfolioIcon from "../../../assets/icons/portfolio-icon.svg";
-import Profile from "../Profile/Profile";
+import notification from "../../../assets/icons/bell-icon.svg";
+import profile from "../../../assets/icons/profile.svg";
 import Search from "../Search/Search";
 
 const TopNav = () => {
@@ -26,9 +27,14 @@ const TopNav = () => {
             Portfolio
           </Button>
         </section>
-        {/* PROFILE SECTION */}
+        {/* NOTIFICATIONS / PROFILE SECTION */}
         <section className={styles.profile}>
-          <Profile />
+          <Button type="notification">
+            <img src={notification} alt="notification" />
+          </Button>
+          <Button type="profile">
+            <img src={profile} alt="profile" />
+          </Button>
         </section>
       </div>
     </>

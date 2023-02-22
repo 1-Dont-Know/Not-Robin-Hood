@@ -7,14 +7,28 @@ const Button = ({ type, children }) => {
   return (
     <button
       className={
-        type === "golden"
-          ? styles.golden
+        type === "login"
+          ? styles.login
           : type === "google"
           ? styles.google
           : type === "buy"
           ? styles.buyButton
           : type === "portfolio"
           ? styles.portfolioButton
+          : type === "notification"
+          ? styles.notificationButton
+          : type === "profile"
+          ? styles.profileButton
+          : type === "tools"
+          ? styles.toolsButton
+          : type === "settings"
+          ? styles.settingsButton
+          : type === "buyBox"
+          ? styles.buyBoxButton
+          : type === "sell"
+          ? styles.sellButton
+          : type === "profile"
+          ? styles.profileButton
           : styles.default
       }
     >

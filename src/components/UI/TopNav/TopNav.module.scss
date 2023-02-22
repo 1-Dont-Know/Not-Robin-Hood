@@ -1,3 +1,37 @@
+@use "../../../styles/variables.scss";
+@use "../../../styles/mixins.scss";
+
 .container {
-  background-color: yellow;
+  min-height: 9rem;
+  padding: 1rem 2rem;
+
+  @include mixins.flexbox(
+    $display: flex,
+    $alignItems: center,
+    $justifyContent: space-between
+  );
+}
+
+.search {
+  @include mixins.flexbox($display: flex, $flex-basis: 40%, $grow: 1);
+}
+
+.cta {
+  @include mixins.flexbox(
+    $display: flex,
+    $flex-basis: 40%,
+    $grow: 1,
+    $shrink: 1
+  );
+}
+
+.profile {
+  @include mixins.flexbox(
+    $display: flex,
+    $flex-basis: 20%,
+    $grow: 1,
+    $shrink: 1,
+    $gap: 2.5rem,
+    $justifyContent: flex-end
+  );
 }

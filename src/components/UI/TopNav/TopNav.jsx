@@ -4,6 +4,7 @@ import Button from "../../UI/Button/Button";
 import cart from "../../../assets/icons/shopping-cart.svg";
 import portfolioIcon from "../../../assets/icons/portfolio-icon.svg";
 import Profile from "../Profile/Profile";
+import Search from "../Search/Search";
 
 const TopNav = () => {
   return (
@@ -12,7 +13,7 @@ const TopNav = () => {
         {/* SEARCH SECTION */}
         <section className={styles.search}>
           {/* Search Component */}
-          <input type="text" placeholder="search" />
+          <Search placeholder="Search for market" />
         </section>
         {/* BUY / PORTFOLIO BUTTON SECTION */}
         <section className={styles.cta}>

@@ -12,7 +12,8 @@
   $alignContent: null,
   $justifyContent: null,
   $alignItems: null,
-  $justifyItems: null
+  $justifyItems: null,
+  $gap: null
 ) {
   display: $display;
   flex-direction: $direction;
@@ -42,6 +43,7 @@
   flex-shrink: $shrink;
   flex-grow: $grow;
   flex-basis: $flex-basis;
+  gap: $gap;
 }
 
 //* ======================== Breakpoints Mixin ========================

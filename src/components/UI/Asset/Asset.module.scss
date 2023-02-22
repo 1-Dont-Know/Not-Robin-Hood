@@ -7,7 +7,7 @@
   border-radius: 25px;
   color: #fff;
   padding: 22px 37px;
-  p {
+  .amount {
     position: relative;
     font-weight: variables.$font-bold;
     font-size: 24px;
@@ -20,7 +20,7 @@
       font-weight: variables.$font-regular;
     }
   }
-  div {
+  .results {
     margin-top: 1rem;
     color: #2ab795;
     font-size: 18px;
@@ -34,4 +34,8 @@
       font-size: 1rem;
     }
   }
+}
+
+.title {
+  font-size: 1.125rem;
 }

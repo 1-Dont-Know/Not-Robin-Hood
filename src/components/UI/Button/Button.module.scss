@@ -65,6 +65,9 @@
   border-radius: 25px;
   transition: 0.3s ease-in-out;
   margin: 0.7rem 0rem;
+  @include mixins.breakpoint-down(large) {
+    font-size: 1.2rem;
+  }
   img {
     max-width: 1.5rem;
     max-height: 1.5rem;

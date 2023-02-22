@@ -22,3 +22,14 @@
     $justifyContent:center, 
     $alignItems: center);
 }
+
+.timeBar {
+  background-color: #D5E3E1;
+  @include mixins.flexbox($display: flex,
+    $justifyContent: center,
+    $alignItems: center,
+    $grow: 1);
+  //margin: 0.1rem 0.2rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+}

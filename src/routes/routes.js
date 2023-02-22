@@ -7,6 +7,7 @@ import Markets from "../components/pages/Markets/Markets";
 import StockViewer from "../components/pages/StockViewer/StockViewer";
 import StockTransactions from "../components/pages/StockTransactions/StockTransactions";
 import Settings from "../components/pages/Settings/Settings";
+import TimeBar from "../components/pages/StockViewer/StockViewer";
 
 //? PUBLIC ROUTES
 

@@ -13,12 +13,6 @@
 }
 
 .search {
-  input {
-    width: 100%;
-    padding: 1.3rem;
-    border-radius: 25px;
-    border: 1px solid variables.$secondary-color;
-  }
   @include mixins.flexbox($display: flex, $flex-basis: 30%);
 }
 

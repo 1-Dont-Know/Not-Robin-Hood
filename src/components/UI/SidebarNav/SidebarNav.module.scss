@@ -1,0 +1,55 @@
+@use "../../../styles//mixins.scss";
+@use "../../../styles//variables.scss";
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: variables.$secondary-color;
+  @include mixins.flexbox($display: flex, $alignItems: center, $gap: 2.5rem);
+}
+
+.divider {
+  width: 200px;
+  height: 1px;
+  background-color: variables.$secondary-color;
+  opacity: 0.45;
+}
+
+.listItem {
+  font-size: 1.2rem;
+  color: variables.$secondary-color;
+  margin: 1rem 0rem;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  @include mixins.flexbox($display: flex, $gap: 1rem);
+
+  &:hover {
+    background-color: #fff;
+    border-radius: 25px;
+  }
+}
+
+.active {
+  background-color: #fff;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  color: variables.$secondary-color;
+  margin: 1rem 0rem;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  @include mixins.flexbox($display: flex, $gap: 1rem);
+}
+.supportList {
+  a {
+    &:last-child {
+      .listItem {
+        &:last-child {
+          font-weight: variables.$font-bold;
+        }
+      }
+    }
+  }
+}

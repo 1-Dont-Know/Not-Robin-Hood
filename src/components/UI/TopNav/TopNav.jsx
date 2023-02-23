@@ -3,7 +3,9 @@ import styles from "./TopNav.module.scss";
 import Button from "../../UI/Button/Button";
 import cart from "../../../assets/icons/shopping-cart.svg";
 import portfolioIcon from "../../../assets/icons/portfolio-icon.svg";
-import Profile from "../Profile/Profile";
+import notification from "../../../assets/icons/bell-icon.svg";
+import profile from "../../../assets/icons/profile.svg";
+import Search from "../Search/Search";
 
 const TopNav = () => {
   return (
@@ -12,7 +14,7 @@ const TopNav = () => {
         {/* SEARCH SECTION */}
         <section className={styles.search}>
           {/* Search Component */}
-          <input type="text" placeholder="search" />
+          <Search placeholder="Search for market" />
         </section>
         {/* BUY / PORTFOLIO BUTTON SECTION */}
         <section className={styles.cta}>
@@ -25,9 +27,15 @@ const TopNav = () => {
             Portfolio
           </Button>
         </section>
-        {/* PROFILE SECTION */}
+        {/* NOTIFICATIONS / PROFILE SECTION */}
         <section className={styles.profile}>
-          <Profile />
+          <Button type="notification">
+            <img src={notification} alt="notification" />
+            <span className={styles.notifications}>3</span>
+          </Button>
+          <Button type="profile">
+            <img src={profile} alt="profile" />
+          </Button>
         </section>
       </div>
     </>

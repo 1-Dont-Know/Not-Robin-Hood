@@ -269,3 +269,30 @@
     color: #fff;
   }
 }
+
+.addFundsButton {
+  margin: 0.7rem 1rem;
+  padding: 1rem 2rem;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color:#fff;
+  @include mixins.flexbox(
+    $display: flex,
+    $justifyContent: center,
+    $alignItems: center,);
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  background: #37433A;
+  border-radius: 25px;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    background-color: variables.$secondary-color;
+    color: #67f7ff;
+  }
+  
+  img {
+    margin-right: 0.5rem;
+  }
+}

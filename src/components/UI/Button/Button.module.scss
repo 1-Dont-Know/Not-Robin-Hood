@@ -300,35 +300,6 @@
 }
 
 
-// Profile type button
-
-.profileButton {
-  max-width: 3.75rem;
-  width: 100%;
-  background-color: variables.$primary-color;
-  padding: 1rem;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
-  border-radius: 50%;
-  color: #37433a;
-  transition: 0.3s ease-in-out;
-  &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
-  }
-
-  img {
-    max-width: 1.3rem;
-    width: 100%;
-    max-height: 41px;
-  }
-}
-
 .settingsButton {
   padding: 1rem 3rem;
   background: #d5e3e1;
@@ -347,6 +318,7 @@
     color: #fff;
   }
 }
+
 .profileButton {
   position: relative;
   margin: 0.7rem 1rem;

@@ -121,10 +121,10 @@
     font-weight: variables.$font-bold;
     color: #203424;
     @include mixins.breakpoint-down(xlarge) {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
     @include mixins.breakpoint-down(large) {
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
   }
   h3 {

@@ -1,10 +1,10 @@
-import React from "react"
+import React from "react";
+import Sidebar from "../../UI/Sidebar/Sidebar";
 
 export default function Markets() {
   return (
-    <div>
-      <h1>Markets Page</h1>
-    </div>
-  )
+    <>
+      <Sidebar />
+    </>
+  );
 }
-  

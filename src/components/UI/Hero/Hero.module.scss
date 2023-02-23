@@ -1,9 +1,8 @@
 @use "../../../styles/variables.scss";
 @use "../../../styles/mixins.scss";
 .container {
-  height: 100%;
   padding: 1rem 2rem;
-  height: 100vh;
+  height: calc(100vh - 9rem);
 }
 
 .featured {

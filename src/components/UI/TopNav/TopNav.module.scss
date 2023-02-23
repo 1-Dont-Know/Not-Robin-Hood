@@ -39,4 +39,19 @@
     $gap: 2rem,
     $justifyContent: flex-end
   );
+  .notifications {
+    @include mixins.flexbox(
+      $display: flex,
+      $justifyContent: center,
+      $alignItems: center
+    );
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: variables.$golden;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+  }
 }

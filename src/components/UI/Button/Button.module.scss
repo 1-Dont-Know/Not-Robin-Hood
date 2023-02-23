@@ -203,6 +203,7 @@
 // Notifications type button
 
 .notificationButton {
+  position: relative;
   max-width: 3.75rem;
   width: 100%;
   background-color: variables.$primary-color;
@@ -218,8 +219,7 @@
   color: #37433a;
   transition: 0.3s ease-in-out;
   &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
+    transform: scale(1.1);
   }
   img {
     max-width: 1.3rem;
@@ -317,6 +317,9 @@
   border-radius: 50%;
   color: #37433a;
   transition: 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
 
   img {
     max-width: 1.3rem;

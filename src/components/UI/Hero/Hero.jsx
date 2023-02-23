@@ -10,9 +10,9 @@ const Hero = () => {
   const [stockData, setStockData] = useState({
     labels: fakeData.map((data) => data.day),
     datasets: [{
-      label: "Stock Prices",
+      label: "Price",
       data: fakeData.map((data) => data.price),
-    }]
+    }],
   });
 
 
@@ -25,6 +25,7 @@ const Hero = () => {
         <FeaturedStock status="up" />
       </div>
       
+      {/* Graph Component */}
       <div className={styles.graph}>
         <Graph chartData={stockData}/>
       </div>

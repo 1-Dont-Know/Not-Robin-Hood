@@ -31,8 +31,6 @@ const Button = ({ type, children }) => {
           ? styles.buyBoxButton
           : type === "sell"
           ? styles.sellButton
-          : type === "profile"
-          ? styles.profileButton
           : styles.default
       }
     >

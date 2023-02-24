@@ -4,14 +4,3 @@
   padding: 1rem 2rem;
   height: calc(100vh - 9rem);
 }
-
-.featured {
-  @include mixins.flexbox(
-    $display: flex,
-    $gap: 1rem,
-    $justifyContent: space-between
-  );
-  background-color: variables.$light-yellow;
-  border-radius: 25px;
-  padding: 1.4rem;
-}

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Hero.module.scss";
+
 import FeaturedStock from "../FeaturedStock/FeaturedStock";
 import Graph from "../Graph/Graph";
 import { fakeData } from "../../../utils/fakeData" //Temporary Fake Data used for Testing
@@ -14,8 +15,6 @@ const Hero = () => {
       data: fakeData.map((data) => data.price),
     }],
   });
-
-
   return (
     <section className={styles.container}>
       <div className={styles.featured}>
@@ -31,6 +30,5 @@ const Hero = () => {
     </section>
   );
 
-};
 
 export default Hero;

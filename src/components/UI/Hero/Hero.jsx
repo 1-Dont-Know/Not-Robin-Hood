@@ -26,9 +26,7 @@ const Hero = () => {
       </div>
       
       {/* Graph Component */}
-      <div className={styles.graph}>
-        <Graph chartData={stockData}/>
-      </div>
+      <Graph chartData={stockData}/>
    
     </section>
   );

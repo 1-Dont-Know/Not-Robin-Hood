@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Hero.module.scss";
+
 import Graph from "../Graph/Graph";
 import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used for Testing
 

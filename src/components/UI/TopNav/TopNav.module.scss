@@ -2,7 +2,7 @@
 @use "../../../styles/mixins.scss";
 
 .container {
-  min-height: 9rem;
+  min-height: 7rem;
   padding: 1rem 2rem;
 
   @include mixins.flexbox(

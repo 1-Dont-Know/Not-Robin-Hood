@@ -13,7 +13,7 @@ const Graph = ({ chartData }) => {
                 data={chartData}
                 options= {{
                     responsive: true,
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
                 }
                 }
             />

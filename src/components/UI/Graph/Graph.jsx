@@ -9,7 +9,13 @@ const Graph = ({ chartData }) => {
     return (
         <div class={styles.container}>
             <Line
+                class={styles.graph}
                 data={chartData}
+                options= {{
+                    responsive: true,
+                    maintainAspectRatio: true,
+                }
+                }
             />
         </div>
     );

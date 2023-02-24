@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Hero.module.scss";
 
 import FeaturedStock from "../FeaturedStock/FeaturedStock";
@@ -15,6 +15,8 @@ const Hero = () => {
       data: fakeData.map((data) => data.price),
     }],
   });
+
+
   return (
     <section className={styles.container}>
       <div className={styles.featured}>
@@ -23,12 +25,12 @@ const Hero = () => {
         <FeaturedStock status="up" />
         <FeaturedStock status="up" />
       </div>
-      
+
       {/* Graph Component */}
-      <Graph chartData={stockData}/>
-   
+      <Graph chartData={stockData} />
+
     </section>
   );
-
+};
 
 export default Hero;

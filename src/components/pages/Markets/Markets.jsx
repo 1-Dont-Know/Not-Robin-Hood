@@ -22,7 +22,6 @@ const Markets = () => {
             <img src={PlusIcon} alt="plus icon" />
             Add Funds
           </Button>
-        </div>
         </section>
       </div>
     </>

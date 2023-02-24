@@ -1,6 +1,5 @@
 import React from 'react'
 import Button from "../../UI/Button/Button";
-
 import ToolIcon from "../../../assets/icons/tools-icon.svg";
 import CameraIcon from "../../../assets/icons/camera-icon.svg";
 import SquareIcon from "../../../assets/icons/square-icon.svg";

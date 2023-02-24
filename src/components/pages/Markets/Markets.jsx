@@ -1,10 +1,12 @@
 import React from "react";
+import Button from "../../UI/Button/Button";
+import PlusIcon from "../../../assets/icons/plus-icon.svg";
 import Sidebar from "../../UI/Sidebar/Sidebar";
 import TopNav from "../../UI/TopNav/TopNav";
 import styles from "./Markets.module.scss";
 import Hero from "../../UI/Hero/Hero";
 
-export default function Markets() {
+const Markets = () => {
   return (
     <>
       <div className={styles.wrapper}>
@@ -16,8 +18,14 @@ export default function Markets() {
           <TopNav />
           {/* Hero Section */}
           <Hero />
+          <Button type="addFunds">
+            <img src={PlusIcon} alt="plus icon" />
+            Add Funds
+          </Button>
         </section>
       </div>
     </>
   );
-}
+};
+
+export default Markets;

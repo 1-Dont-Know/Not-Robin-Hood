@@ -1,7 +1,6 @@
 import React from "react"
 import Button from "../../UI/Button/Button";
 import PlusIcon from "../../../assets/icons/plus-icon.svg";
-import React from "react";
 import Sidebar from "../../UI/Sidebar/Sidebar";
 
 const Markets = () => {

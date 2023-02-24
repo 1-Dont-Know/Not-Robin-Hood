@@ -31,6 +31,7 @@ const TopNav = () => {
         <section className={styles.profile}>
           <Button type="notification">
             <img src={notification} alt="notification" />
+            <span className={styles.notifications}>3</span>
           </Button>
           <Button type="profile">
             <img src={profile} alt="profile" />

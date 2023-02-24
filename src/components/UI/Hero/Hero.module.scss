@@ -1,14 +1,6 @@
 @use "../../../styles/variables.scss";
 @use "../../../styles/mixins.scss";
 .container {
-  height: 100%;
   padding: 1rem 2rem;
-  height: 100vh;
-}
-
-.featured {
-  @include mixins.flexbox($display: flex, $gap: 1rem);
-  background-color: variables.$light-yellow;
-  border-radius: 25px;
-  padding: 1.4rem;
+  height: calc(100vh - 9rem);
 }

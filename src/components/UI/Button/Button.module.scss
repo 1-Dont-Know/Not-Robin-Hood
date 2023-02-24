@@ -65,6 +65,9 @@
   border-radius: 25px;
   transition: 0.3s ease-in-out;
   margin: 0.7rem 0rem;
+  @include mixins.breakpoint-down(large) {
+    font-size: 1.2rem;
+  }
   img {
     max-width: 1.5rem;
     max-height: 1.5rem;
@@ -219,14 +222,12 @@
   color: #37433a;
   transition: 0.3s ease-in-out;
   &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
+    transform: scale(1.1);
   }
-
   img {
     max-width: 1.3rem;
     width: 100%;
-    max-height: 41px;
+    // max-height: 41px;
   }
 }
 
@@ -283,8 +284,7 @@
   color: #37433a;
   transition: 0.3s ease-in-out;
   &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
+    transform: scale(1.1);
   }
 
   img {
@@ -295,34 +295,6 @@
 }
 
 // Settings type button
-
-.timeBarButton {
-  margin: 0.1rem 0.2rem;
-  margin-left: 1.1rem;
-  margin-right: 1.1rem;
-  padding: 0.5rem 1.2rem;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 28px;
-  color: #37433a;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.17);
-  background: #ffffff;
-  border-radius: 25px;
-  transition: 0.3s ease-in-out;
-
-  &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
-    border-radius: 25px;
-  }
-}
 
 .settingsButton {
   padding: 1rem 3rem;

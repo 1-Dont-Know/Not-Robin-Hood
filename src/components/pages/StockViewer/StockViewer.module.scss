@@ -23,6 +23,34 @@
     $alignItems: center);
 }
 
+
+.timeBarButton {
+  margin: 0.1rem 0.2rem;
+  margin-left: 1.1rem;
+  margin-right: 1.1rem;
+  padding: 0.5rem 1.2rem;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  color: #37433A;
+  @include mixins.flexbox($display: flex,
+    $justifyContent: center,
+    $alignItems: center,
+    $grow: 1);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.17);
+  background: #ffffff;
+  border-radius: 15px;
+  transition: 0.3s ease-in-out;
+  
+  &:hover {
+    background-color: variables.$secondary-color;
+    color: #fff;
+    border-radius: 25px;
+  }
+  
+}
+
 .timeBar {
   background-color: #D5E3E1;
   @include mixins.flexbox($display: flex,
@@ -33,3 +61,151 @@
   padding: 0.5rem 0.75rem;
   width: 100%;
 }
+
+.fundButton {
+  background-color: #D5E3E1;
+  @include mixins.flexbox($display: flex,
+    $justifyContent: center,
+    $alignItems: center,
+    $grow: 1);
+  //margin: 0.1rem 0.2rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+}
+//App Funds Styles
+//@use "../../../styles/variables.scss";
+//@use "../../../styles/mixins.scss";
+.container {
+  display: grid;
+  grid-template-areas: 
+  "Header Header"
+  "Currency ."
+  "Mid-1 Mid-1"
+  "Mid-2 Mid-2"
+  "Footer Footer";
+  grid-template-columns: repeat(2,1fr);
+  grid-template-rows: auto;
+  background-color: variables.$secondary-color;
+  //width: 1069px;
+  //height: 833px;
+  //width: 100%;
+  //max-width: 65%;
+  border-radius: 25px;
+  color: #fff;
+  padding: 22px 37px;
+  }
+  
+  .Header {
+    grid-area: Header;
+  }
+  /*
+  .container:nth-child(1) {
+    grid-area: Header;
+  }
+
+  .container:nth-child(2) {
+    grid-area: Currency;
+
+  }
+  .container:nth-child(3) {
+    grid-area: Mid-1;
+
+  }
+  .container:nth-child(4) {
+    grid-area: Mid-2;
+
+  }
+  .container:nth-child(5) {
+    grid-area: Footer;
+
+  }*/
+
+  
+  .title {
+    position: relative;
+    font-weight: variables.$font-bold;
+    font-size: 24px;
+    margin: 20px 0;
+    span {
+      position: absolute;
+      top: -10px;
+      right: 90px;
+      font-size: 18px;
+      font-weight: variables.$font-regular;
+    }
+  }
+  .emphasize {
+    font-weight: bold;
+  }
+
+
+.buttonContainer {
+  @include mixins.flexbox($display: flex,
+    $justifyContent: center,
+    $alignItems: center,
+    $grow: 1);
+  width: 100%;
+}
+
+input {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-size: 1.5rem;
+  border-radius: 15px;
+}
+
+img {
+  padding: 10px;
+}
+
+select {
+  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 15px;
+  background-color: transparent;
+  border-bottom: black;
+}
+option {
+  background-color: #D5E3E1;
+  color: #37433A;
+}
+
+//SCSS for Toggle Slider
+input[type=checkbox]{
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 65px;
+  height: 30px;
+  background: grey;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+}
+label:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 21px;
+  height: 21px;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+input:checked + label {
+  background: #bada55;
+}
+input:checked + label:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+} //end toggle scss

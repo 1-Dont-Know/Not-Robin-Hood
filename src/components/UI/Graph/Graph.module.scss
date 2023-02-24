@@ -1,0 +1,10 @@
+@use "../../../styles/variables.scss";
+@use "../../../styles/mixins.scss";
+
+.container{
+    height:100%; 
+    margin-top: 10px;
+    border-radius: 25px;
+    padding: 20px;
+    background-color: variables.$light-yellow;
+}

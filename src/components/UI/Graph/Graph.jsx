@@ -6,8 +6,15 @@ import { Line } from "react-chartjs-2";
 // Graph component
 const Graph = ({ chartData }) => {
   return (
-    <div className={styles.container}>
-      <Line data={chartData} />
+    <div class={styles.container}>
+      <Line
+        class={styles.graph}
+        data={chartData}
+        options={{
+          responsive: true,
+          maintainAspectRatio: false,
+        }}
+      />
     </div>
   );
 };

@@ -1,17 +1,6 @@
 import React from "react";
-import styles from "./StockViewer.module.scss";
-import Button from "../../UI/Button/Button";
-import bell from "../../../assets/icons/bell-icon.svg";
-import profile from "../../../assets/icons/profile-icon.svg";
-import BuyBox from "../../UI/BuyBox/BuyBox";
-
-const StockViewer = () => {
-  return (
-    <>
-      <BuyBox></BuyBox>
-    </>
-  );
-};
+import Button from "../Button/Button";
+import styles from "./TimeBar.module.scss";
 
 const TimeBar = () => {
   return (
@@ -49,4 +38,4 @@ const TimeBar = () => {
   );
 };
 
-export default StockViewer;
+export default TimeBar;

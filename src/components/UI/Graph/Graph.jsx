@@ -5,19 +5,18 @@ import { Line } from "react-chartjs-2";
 
 // Graph component
 const Graph = ({ chartData }) => {
-    return (
-        <div class={styles.container}>
-            <Line
-                class={styles.graph}
-                data={chartData}
-                options= {{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                }
-                }
-            />
-        </div>
-    );
+  return (
+    <div className={styles.container}>
+      <Line
+        className={styles.graph}
+        data={chartData}
+        options={{
+          responsive: true,
+          maintainAspectRatio: false,
+        }}
+      />
+    </div>
+  );
 };
 
 export default Graph;

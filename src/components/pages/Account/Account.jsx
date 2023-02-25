@@ -6,6 +6,13 @@ import Hero from "../../UI/Hero/Hero";
 import FeaturedStock from "../../UI/FeaturedStock/FeaturedStock";
 import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used for Testing
 import Graph from "../../UI/Graph/Graph";
+import Button from "../../UI/Button/Button";
+import ToolIcon from "../../../assets/icons/tools-icon.svg";
+import CameraIcon from "../../../assets/icons/camera-icon.svg";
+import SquareIcon from "../../../assets/icons/square-icon.svg";
+import SettingIcon from "../../../assets/icons/settings-icon.svg";
+import TimeBar from "../../UI/TimeBar/TimeBar";
+import Filter from "../../UI/Filter/Filter";
 
 const Account = () => {
   //State Hook for Graph Component
@@ -29,20 +36,21 @@ const Account = () => {
           <TopNav />
           {/* Hero Section */}
           <Hero>
+            {/* //! FEATURED STOCKS */}
             <section className={styles.featured}>
               <FeaturedStock status="up" />
               <FeaturedStock status="down" />
               <FeaturedStock status="up" />
               <FeaturedStock status="up" />
             </section>
-            {/* Divider Section */}
+            {/* //! DIVIDER SECTION */}
             <div className={styles.divider}>
               <hr />
             </div>
-            {/* Filter Section */}
-            <section className={styles.filter}>FILTER COMPONENT</section>
+            {/* //! FILTER SECTION */}
+            <Filter />
 
-            {/* Graph Section */}
+            {/* //! GRAPH SECTION */}
             <section className={styles.graph}>
               <Graph chartData={stockData} />
             </section>

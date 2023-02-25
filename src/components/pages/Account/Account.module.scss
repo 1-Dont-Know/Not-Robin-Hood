@@ -54,7 +54,6 @@
 }
 
 .graph {
-  max-height: 50%;
   height: 100%;
   @include mixins.flexbox(
     $display: flex,

@@ -1,3 +1,12 @@
+
+@mixin boxShadow(){
+  box-shadow: 3px 12px 18px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 3px 12px 18px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 3px 12px 18px 0px rgba(0,0,0,0.75);
+}
+
+
+
 //* ======================== Flexbox Mixin ========================
 
 @mixin flexbox(

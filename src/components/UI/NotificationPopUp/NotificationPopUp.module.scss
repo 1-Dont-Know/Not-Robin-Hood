@@ -1,0 +1,40 @@
+@use "../../../styles//variables.scss";
+@use "../../../styles/mixins.scss";
+
+.popUp{
+    max-width: 80%;
+    height: 90svh;
+
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    background-color: variables.$secondary-color;
+    padding: 2rem;
+    margin: 1rem 0rem;
+    font-weight: bold;
+    @include mixins.boxShadow();
+    color: variables.$primary-color;
+    
+}
+
+.notification{
+    top: 342px;
+    left: 521px;
+    border-radius: 25px;
+    background-color: #FFFFFF;
+    padding: 2rem;
+    margin: 1rem 0rem;
+    font-size: 25px;
+    font-weight: variables.$font-regular;
+    outline: auto;
+    color: variables.$secondary-color;
+}
+
+.greeting{
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.subTitle{
+    font-size: 25px;
+}

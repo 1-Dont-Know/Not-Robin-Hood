@@ -14,9 +14,9 @@ const NotificationPopUp = ({ children }) => {
 
         <p>2/27/2023</p>
 
-        <div className={styles.notification}> Thia is just test</div>
+        <div className={styles.notification}> This is just test</div>
 
-        <div className={styles.notification}> Thia is just test</div>
+        <div className={styles.notification}> This is just test</div>
       </div>
     </>
   );

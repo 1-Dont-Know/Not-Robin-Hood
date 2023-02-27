@@ -15,10 +15,12 @@
     $alignItems: center,
     $grow: 1
   );
+
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 25px;
   color: #fff;
   transition: 0.3s ease-in-out;
+  
   &:hover {
     background-color: variables.$secondary-color;
   }
@@ -273,9 +275,6 @@
 }
 
 .timeBarButton {
-  margin: 0.1rem 0.2rem;
-  margin-left: 1.1rem;
-  margin-right: 1.1rem;
   padding: 0.5rem 1.2rem;
   font-family: "Roboto";
   font-style: normal;
@@ -328,9 +327,8 @@
   }
 }
 
-
 .settingsButton {
-  padding: 1rem 3rem;
+  padding: 1rem;
   background: #d5e3e1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   transition: 0.3s ease-in-out;
@@ -346,30 +344,35 @@
     background-color: variables.$secondary-color;
     color: #fff;
   }
+  img {
+    max-width: 2rem;
+  }
 }
 
 .addFundsButton {
-  margin: 0.7rem 1rem;
-  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
   font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 16px;
-  line-height: 19px;
-  color:#fff;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,);
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
-  background: #37433A;
-  border-radius: 25px;
-  transition: 0.3s ease-in-out;
-  &:hover {
-    background-color: variables.$secondary-color;
-    color: #67f7ff;
-  }
+
+  // Perhaps we may want to use a global variable to define a fixed min height for all buttons for design consistency 
+  min-height: 60px; 
   
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  background: white;
+  color: variables.$secondary-color;
+
+  border-radius: 25px;
+  transition: 0.1s ease-in-out;
+
+  &:hover {
+    outline: 6px solid variables.$green;
+  }
+
   img {
     margin-right: 0.5rem;
   }

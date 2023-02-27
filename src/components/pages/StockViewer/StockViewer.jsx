@@ -1,48 +1,75 @@
 import React from "react";
 import styles from "./StockViewer.module.scss";
 import Button from "../../UI/Button/Button";
-import bell from "../../../assets/icons/bell-icon.svg"
-import profile from "../../../assets/icons/profile-icon.svg"
-import BuyBox from "../../UI/BuyBox/BuyBox";
+import people from "../../../assets/icons/people-icon.svg"
+import creditCard from "../../../assets/icons/credit-card-icon.svg"
 
-const StockViewer = () => {
+const AppFundsPopup = () => {
   return (
-    <>
-    {/* <Button type="notification"> 
-      <img src={bell} alt="bell" />
-      <div className={styles.notificationQty}>3</div>
-    </Button> */}
-    {/* <Button type="profile">
-      <img src={profile} alt="profile" />
-      <div className={styles.profileQty}>3</div>
 
-      </Button> */}
-        
+    <div className={styles.gridContainerAppFunds}>
 
-    <BuyBox>
+      {/* 1 - title and subtitle */}
+      <div style={{textAlign:'center'}}>
+        <h2 className={styles.modalHeader}>Add funds</h2>
+        <p>Select payments option to add balance to your funds for trading</p>
+      </div>
 
-    </BuyBox>
-    </>
-  );
-};
+      {/* 2 - currency dropdown menu */}
+      <div className={styles.currencyContainer}>
+        <h3>Deposit Amount</h3>
+        <select name="currency" id="currency">
+        <option value="usd">USD</option>
+        <option value="eur">EUR</option>
+        <option value="aud">AUD</option>
+        <option value="cad">CAD</option>
+        </select>
+      </div>
 
-const TimeBar = () => {
-  return (
-    <>
-    <div className={styles.timeBar}>
-      <Button type="timeBar"><div className={styles.timeBarButton}>1d</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>5d</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>2w</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>1m</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>6m</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>1y</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>5y</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>7y</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>MAX</div></Button>
+      {/* 3 - $50 button */}
+      <Button type={"addFunds"}>
+        $50
+      </Button>
+
+      {/* 4 - $100 button */}
+      <Button type={"addFunds"}>
+        $100
+      </Button>
+
+      {/* 5 - $500 button */}
+      <Button type={"addFunds"}>
+        $500
+      </Button>
+
+      {/* 6 - custom amount input */}
+      <input className={styles.currencyInput} type="number" name="Amount" placeholder="Enter amount" />
+      
+      {/* 7 - credit/debit button */}
+      <Button type={"addFunds"}>
+        <img src={people} alt="profile"/>
+        Credit/Debit
+      </Button>
+      
+      {/* 8 - bank transfer button */}
+      <Button type={"addFunds"}>
+        <img src={creditCard} alt="credit-card"/>
+        Bank Transfer
+      </Button>
+
+      {/* 9 - save as default toggle */}
+      <div className={styles.toggleContainer}>
+        <strong>Save as a default payment</strong>
+        <input type="checkbox" id="switch" /><label for="switch">Toggle</label>
+      </div>
+
+      {/* 10 - select payment and continue button */}
+      <Button type={"addFunds"}>
+          Select Payment And Continue
+      </Button>
+
     </div>
-    </>
+
   );
 };
 
-//export default StockViewer;
-export default TimeBar;
+export default AppFundsPopup;

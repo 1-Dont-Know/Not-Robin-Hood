@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import Button from "../../UI/Button/Button";
 import PlusIcon from "../../../assets/icons/plus-icon.svg";
 import Sidebar from "../../UI/Sidebar/Sidebar";
@@ -26,7 +26,6 @@ const Markets = () => {
       </div>
     </>
   );
-
-}
+};
 
 export default Markets;

@@ -1,174 +1,138 @@
 @use "../../../styles/variables.scss";
 @use "../../../styles/mixins.scss";
 
-.title {
-  font-size: 2rem;
-}
-
-.notificationQty {
-  position: absolute;
-  font-size: 0.85rem;
-  color: rgb(255, 255, 255);
-  top: 0;
-  right: 0;
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  background-color: variables.$golden;
-  // include makes number or characters centered
-  @include mixins.flexbox(
-    $display:flex, 
-    $grow:1, 
-    $justifyContent:center, 
-    $alignItems: center);
-}
-
-
-.timeBarButton {
-  margin: 0.1rem 0.2rem;
-  margin-left: 1.1rem;
-  margin-right: 1.1rem;
-  padding: 0.5rem 1.2rem;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 28px;
-  color: #37433A;
-  @include mixins.flexbox($display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1);
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.17);
-  background: #ffffff;
-  border-radius: 15px;
-  transition: 0.3s ease-in-out;
-  
-  &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
-    border-radius: 25px;
-  }
-  
-}
-
-.timeBar {
-  background-color: #D5E3E1;
-  @include mixins.flexbox($display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1);
-  //margin: 0.1rem 0.2rem;
-  padding: 0.5rem 0.75rem;
-  width: 100%;
-}
-
-.fundButton {
-  background-color: #D5E3E1;
-  @include mixins.flexbox($display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1);
-  //margin: 0.1rem 0.2rem;
-  padding: 0.5rem 0.75rem;
-  width: 100%;
-}
-//App Funds Styles
-//@use "../../../styles/variables.scss";
-//@use "../../../styles/mixins.scss";
-.container {
+.gridContainerAppFunds {
   display: grid;
+  // 4 column layout
+  grid-template-columns: repeat(4, 1fr);
   grid-template-areas: 
-  "Header Header"
-  "Currency ."
-  "Mid-1 Mid-1"
-  "Mid-2 Mid-2"
-  "Footer Footer";
-  grid-template-columns: repeat(2,1fr);
-  grid-template-rows: auto;
+  "title   title   title   title"
+  "option  option  option  option"
+  "amount1 amount2 amount3 input1"
+  ".       credit  bank     ."
+  ".       toggle  continue ."
+  ;
+
+  gap: 1rem;
   background-color: variables.$secondary-color;
-  //width: 1069px;
-  //height: 833px;
-  //width: 100%;
-  //max-width: 65%;
   border-radius: 25px;
   color: #fff;
-  padding: 22px 37px;
+  padding: 1.5rem;
+  max-width: max-content;
+
+  > :nth-child(1) {
+    grid-area: title;
   }
   
-  .Header {
-    grid-area: Header;
+  > :nth-child(2){
+    grid-area: option;
   }
-  /*
-  .container:nth-child(1) {
-    grid-area: Header;
-  }
-
-  .container:nth-child(2) {
-    grid-area: Currency;
-
-  }
-  .container:nth-child(3) {
-    grid-area: Mid-1;
-
-  }
-  .container:nth-child(4) {
-    grid-area: Mid-2;
-
-  }
-  .container:nth-child(5) {
-    grid-area: Footer;
-
-  }*/
-
   
-  .title {
-    position: relative;
-    font-weight: variables.$font-bold;
-    font-size: 24px;
-    margin: 20px 0;
-    span {
-      position: absolute;
-      top: -10px;
-      right: 90px;
-      font-size: 18px;
-      font-weight: variables.$font-regular;
-    }
+  > :nth-child(3){
+    grid-area: amount1;
   }
-  .emphasize {
-    font-weight: bold;
+  
+  > :nth-child(4){
+    grid-area: amount2;
   }
-
-
-.buttonContainer {
-  @include mixins.flexbox($display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1);
-  width: 100%;
+  
+  > :nth-child(5){
+    grid-area: amount3;
+  }
+  
+  > :nth-child(6){
+    grid-area: input1;
+  }
+  
+  > :nth-child(7){
+    grid-area: credit;
+  }
+  
+  > :nth-child(8){
+    grid-area: bank;
+  }
+  
+  > :nth-child(9){
+    grid-area: toggle;
+  }
+  
+  > :nth-child(10){
+    grid-column: continue;
+  }
 }
 
-input {
-  padding-top: 25px;
-  padding-bottom: 25px;
+@media (max-width: 73rem) {
+  .gridContainerAppFunds {
+    // 2 column layout
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    "title    title"
+    "option   option"
+    "amount1  amount2"
+    "amount3  input1"
+    "credit   bank"
+    "toggle   continue"
+    ;
+  }
+}
+
+@media (max-width: 40rem) {
+  .gridContainerAppFunds {
+    // single column layout
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    grid-template-areas: 
+    "title"
+    "option"
+    "amount1"
+    "amount2"
+    "amount3"
+    "input1"
+    "credit"
+    "bank"
+    "toggle"
+    "continue"
+    ;
+}
+
+  .currencyInput{
+    // Same as buttons
+    min-height: 60px;
+  }
+}
+
+.modalHeader {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 0.7rem;
+}
+
+.currencyContainer {
   font-size: 1.5rem;
-  border-radius: 15px;
+  display:flex;
+  align-items: center;
 }
 
-img {
-  padding: 10px;
+.currencyInput{
+  font-size: 1.5rem;
+  border-radius: 25px;
+}
+
+.toggleContainer {
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 select {
-  padding: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  margin-left: 5px;
   font-size: 1.5rem;
   font-weight: bold;
   color: white;
   border-radius: 15px;
   background-color: transparent;
-  border-bottom: black;
 }
+
 option {
   background-color: #D5E3E1;
   color: #37433A;
@@ -180,6 +144,7 @@ input[type=checkbox]{
   width: 0;
   visibility: hidden;
 }
+
 label {
   cursor: pointer;
   text-indent: -9999px;
@@ -190,6 +155,7 @@ label {
   border-radius: 100px;
   position: relative;
 }
+
 label:after {
   content: '';
   position: absolute;
@@ -203,8 +169,10 @@ label:after {
 }
 
 input:checked + label {
-  background: #bada55;
+  // background: #bada55;
+  background-color: variables.$green;
 }
+
 input:checked + label:after {
   left: calc(100% - 5px);
   transform: translateX(-100%);

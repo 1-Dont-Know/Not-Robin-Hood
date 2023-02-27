@@ -16,6 +16,7 @@ export const publicRoutes = [
     path: SIGNUP_ROUTE,
     element: Signup,
   },
+  
   {
     path: STOCK_VIEWER_ROUTE,
     element: StockViewer,
@@ -32,7 +33,6 @@ export const publicRoutes = [
   },
 
   {
-
     path: ACCOUNT_ROUTE,
     element: Account,
   },

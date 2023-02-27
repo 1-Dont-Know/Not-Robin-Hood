@@ -275,9 +275,6 @@
 }
 
 .timeBarButton {
-  margin: 0.1rem 0.2rem;
-  margin-left: 1.1rem;
-  margin-right: 1.1rem;
   padding: 0.5rem 1.2rem;
   font-family: "Roboto";
   font-style: normal;
@@ -330,9 +327,8 @@
   }
 }
 
-
 .settingsButton {
-  padding: 1rem 3rem;
+  padding: 1rem;
   background: #d5e3e1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   transition: 0.3s ease-in-out;
@@ -347,6 +343,9 @@
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
+  }
+  img {
+    max-width: 2rem;
   }
 }
 
@@ -373,7 +372,7 @@
   &:hover {
     outline: 6px solid variables.$green;
   }
-  
+
   img {
     margin-right: 0.5rem;
   }

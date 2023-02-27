@@ -15,9 +15,9 @@
   $justifyItems: null,
   $gap: null
 ) {
+  
   display: $display;
   flex-direction: $direction;
-
   @if $placeContent == null {
     @if $alignContent {
       align-content: $alignContent;

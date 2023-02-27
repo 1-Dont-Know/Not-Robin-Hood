@@ -13,7 +13,7 @@ const Markets = () => {
         {/* Sidebar Section */}
         <Sidebar />
         {/* Nav/Hero Section */}
-        <section className={styles.heroSection}>
+        <main className={styles.mainSection}>
           {/* Top Navigation */}
           <TopNav />
           {/* Hero Section */}
@@ -22,7 +22,7 @@ const Markets = () => {
             <img src={PlusIcon} alt="plus icon" />
             Add Funds
           </Button>
-        </section>
+        </main>
       </div>
     </>
   );

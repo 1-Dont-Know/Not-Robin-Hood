@@ -9,6 +9,7 @@
 
 // HERO SECTION
 .mainSection {
+  height: 100vh;
   @include mixins.flexbox(
     $display: flex,
     $grow: 1,
@@ -22,7 +23,7 @@
     $gap: 1rem,
     $justifyContent: space-evenly,
     $grow: 1,
-    $flex-basis: 40%,
+    $flex-basis: 35%,
     $shrink: 1,
     $wrap: wrap
   );
@@ -36,6 +37,15 @@
   height: 1px;
   background-color: variables.$secondary-color;
   margin: 1rem 0rem;
+}
+
+.filter {
+  @include mixins.flexbox(
+    $display: flex,
+    $grow: 1,
+    $flex-basis: 15%,
+    $shrink: 1
+  );
 }
 
 .graph {

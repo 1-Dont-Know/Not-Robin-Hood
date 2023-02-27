@@ -8,7 +8,7 @@
 }
 
 // HERO SECTION
-.heroSection {
+.mainSection {
   height: 100%;
   @include mixins.flexbox(
     $display: flex,

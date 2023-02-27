@@ -3,7 +3,6 @@
 
 .container {
   width: 100%;
-  padding: 1rem;
   border-radius: 25px;
   gap: 2.1875rem;
   @include mixins.flexbox(

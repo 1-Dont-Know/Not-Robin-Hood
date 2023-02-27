@@ -31,7 +31,7 @@ const Account = () => {
         {/* Sidebar Section */}
         <Sidebar />
         {/* Nav/Hero Section */}
-        <section className={styles.heroSection}>
+        <section className={styles.mainSection}>
           {/* Top Navigation */}
           <TopNav />
           {/* Hero Section */}

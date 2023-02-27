@@ -8,13 +8,11 @@
 }
 
 // HERO SECTION
-.heroSection {
-  height: 90%;
+.mainSection {
   @include mixins.flexbox(
     $display: flex,
     $grow: 1,
     $direction: column,
-    $flex-basis: 90%,
     $shrink: 1
   );
 }

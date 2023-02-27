@@ -31,7 +31,7 @@ const Account = () => {
         {/* Sidebar Section */}
         <Sidebar />
         {/* Nav/Hero Section */}
-        <section className={styles.heroSection}>
+        <main className={styles.mainSection}>
           {/* Top Navigation */}
           <TopNav />
           {/* Hero Section */}
@@ -48,14 +48,15 @@ const Account = () => {
               <hr />
             </div>
             {/* //! FILTER SECTION */}
-            <Filter />
-
+            <section className={styles.filter}>
+              <Filter />
+            </section>
             {/* //! GRAPH SECTION */}
             <section className={styles.graph}>
               <Graph chartData={stockData} />
             </section>
           </Hero>
-        </section>
+        </main>
       </div>
     </>
   );

@@ -20,7 +20,7 @@
   border-radius: 25px;
   color: #fff;
   transition: 0.3s ease-in-out;
-  
+
   &:hover {
     background-color: variables.$secondary-color;
   }
@@ -246,16 +246,21 @@
   background: #d5e3e1;
   border-radius: 25px;
   transition: 0.3s ease-in-out;
+  svg {
+    max-width: 36.79px;
+    max-height: 36.25px;
+    margin-right: 0.5rem;
+  }
 
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
-  }
-
-  img {
-    max-width: 41.79px;
-    max-height: 40.25px;
-    margin-right: 0.5rem;
+    svg {
+      path {
+        transition: 0.3s ease-in-out;
+        fill: #fff;
+      }
+    }
   }
 }
 
@@ -313,10 +318,11 @@
 }
 
 .settingsButton {
-  padding: 1rem;
+  padding: 1.25rem;
   background: #d5e3e1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   transition: 0.3s ease-in-out;
+  @include mixins.flexbox($display: flex, $alignItems: center);
   &:first-child {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
@@ -328,9 +334,18 @@
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
+    svg {
+      path {
+        transition: 0.3s ease-in-out;
+        fill: #fff;
+      }
+    }
   }
-  img {
-    max-width: 2rem;
+
+  svg {
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    transition: 0.3s ease-in-out;
   }
 }
 
@@ -340,13 +355,13 @@
   align-items: center;
   flex-grow: 1;
 
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-weight: 600;
   font-size: 16px;
 
-  // Perhaps we may want to use a global variable to define a fixed min height for all buttons for design consistency 
-  min-height: 60px; 
-  
+  // Perhaps we may want to use a global variable to define a fixed min height for all buttons for design consistency
+  min-height: 60px;
+
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   background: white;
   color: variables.$secondary-color;

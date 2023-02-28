@@ -3,6 +3,7 @@
 
 .container {
   padding: 1.5rem 2rem;
+  padding-top: 0rem;
   overflow-y: auto;
 
   @include mixins.flexbox(

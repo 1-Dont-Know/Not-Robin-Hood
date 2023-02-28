@@ -25,6 +25,7 @@ const Account = () => {
       },
     ],
   });
+  
   return (
     <>
       <div className={styles.wrapper}>
@@ -43,10 +44,6 @@ const Account = () => {
               <FeaturedStock status="up" />
               <FeaturedStock status="up" />
             </section>
-            {/* //! DIVIDER SECTION */}
-            <div className={styles.divider}>
-              <hr />
-            </div>
             {/* //! FILTER SECTION */}
             <section className={styles.filter}>
               <Filter />

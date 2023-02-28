@@ -4,11 +4,11 @@
 .container {
   padding: 1.5rem 2rem;
   overflow-y: auto;
-  // height: calc(100vh - 9rem);
+
   @include mixins.flexbox(
     $display: flex,
     $direction: column,
     $grow: 1,
-    $flex-basis: 90%
+    $shrink: 1,
   );
 }

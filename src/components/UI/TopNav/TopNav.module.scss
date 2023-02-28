@@ -7,8 +7,7 @@
   @include mixins.flexbox(
     $display: flex,
     $alignItems: center,
-    $justifyContent: space-between,
-    $flex-basis: 10%
+    $justifyContent: space-between
   );
 }
 

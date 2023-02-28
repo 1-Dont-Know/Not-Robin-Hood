@@ -16,7 +16,7 @@
   @include mixins.flexbox(
     $display: flex,
     $direction: column,
-    // $gap: 1rem,
+    $gap: 1rem,
     $grow: 1,
     $shrink: 1,
     $alignItems: center,

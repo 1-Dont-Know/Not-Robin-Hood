@@ -10,6 +10,7 @@ import { NavLink } from "react-router-dom";
 const SidebarNav = () => {
   return (
     <nav>
+      {/* //! GENERAL LIST */}
       <ul className={styles.generalList}>
         <h2 className={styles.sectionTitle}>
           General
@@ -41,6 +42,7 @@ const SidebarNav = () => {
           )}
         </NavLink>
       </ul>
+      {/* //! SUPPORT LIST */}
       <ul className={styles.supportList}>
         <h2 className={styles.sectionTitle}>
           Support

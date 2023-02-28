@@ -236,6 +236,7 @@
   padding: 1rem 1.2rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
+  color: #37433a;
   @include mixins.flexbox(
     $display: flex,
     $justifyContent: center,
@@ -250,16 +251,14 @@
     max-width: 36.79px;
     max-height: 36.25px;
     margin-right: 0.5rem;
+    transition: 0.3s ease-in-out;
   }
 
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
     svg {
-      path {
-        transition: 0.3s ease-in-out;
-        fill: #fff;
-      }
+      fill: #fff;
     }
   }
 }
@@ -334,11 +333,9 @@
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
+    transition: 0.3s ease-in-out;
     svg {
-      path {
-        transition: 0.3s ease-in-out;
-        fill: #fff;
-      }
+      fill: #fff;
     }
   }
 

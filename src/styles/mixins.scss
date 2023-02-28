@@ -1,11 +1,8 @@
-
-@mixin boxShadow(){
-  box-shadow: 3px 12px 18px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 3px 12px 18px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 3px 12px 18px 0px rgba(0,0,0,0.75);
+@mixin boxShadow() {
+  box-shadow: 3px 12px 18px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 12px 18px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 12px 18px 0px rgba(0, 0, 0, 0.75);
 }
-
-
 
 //* ======================== Flexbox Mixin ========================
 
@@ -24,7 +21,6 @@
   $justifyItems: null,
   $gap: null
 ) {
-  
   display: $display;
   flex-direction: $direction;
   @if $placeContent == null {

@@ -12,7 +12,7 @@
     $display: flex,
     $direction: column,
     $grow: 1,
-    $shrink: 1,
+    $shrink: 1
   );
 }
 
@@ -34,15 +34,13 @@
     $display: flex,
     $gap: 1rem,
     $justifyContent: space-evenly,
-    $wrap: wrap,
+    $wrap: wrap
   );
   margin-top: 10px;
-  padding: 0 20px 0 20px;
+  padding: 1rem 0rem;
 }
 
 .graph {
-  @include mixins.flexbox(
-    $grow: 1,
-  );
+  @include mixins.flexbox($grow: 1);
   margin: 10px 0 10px 0;
 }

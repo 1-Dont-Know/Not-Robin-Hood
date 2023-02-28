@@ -4,12 +4,13 @@
 .container {
   padding: 1.5rem 2rem;
   padding-top: 0rem;
-  overflow-y: auto;
+  // overflow-y: auto;
 
   @include mixins.flexbox(
     $display: flex,
     $direction: column,
     $grow: 1,
     $shrink: 1,
+    $flex-basis: 0
   );
 }

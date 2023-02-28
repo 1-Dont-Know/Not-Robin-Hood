@@ -7,24 +7,21 @@
   @include mixins.flexbox($display: flex, $grow: 1);
 }
 
-// HERO SECTION
 .mainSection {
-  height: 100vh;
   @include mixins.flexbox(
     $display: flex,
-    $grow: 1,
     $direction: column,
-    $shrink: 1
+    $grow: 1,
+    $shrink: 1,
   );
 }
+
+// HERO SECTION
 .featured {
   @include mixins.flexbox(
     $display: flex,
     $gap: 1rem,
     $justifyContent: space-evenly,
-    $grow: 1,
-    $flex-basis: 25%,
-    $shrink: 1,
     $wrap: wrap
   );
   background-color: variables.$light-yellow;
@@ -35,18 +32,17 @@
 .filter {
   @include mixins.flexbox(
     $display: flex,
-    $grow: 1,
-    $flex-basis: 10%,
-    $shrink: 1
+    $gap: 1rem,
+    $justifyContent: space-evenly,
+    $wrap: wrap,
   );
+  margin-top: 10px;
+  padding: 0 20px 0 20px;
 }
 
 .graph {
-  height: 100%;
   @include mixins.flexbox(
-    $display: flex,
     $grow: 1,
-    $flex-basis: 50%,
-    $shrink: 1
   );
+  margin: 10px 0 10px 0;
 }

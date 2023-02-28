@@ -5,15 +5,27 @@ import { Line } from "react-chartjs-2";
 
 // Graph component
 const Graph = ({ chartData }) => {
+
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: "GAINS!"
+      },
+      legend: {
+        display: false
+      }
+    }
+  };
+
+
   return (
     <div className={styles.container}>
       <Line
-        className={styles.graph}
         data={chartData}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false,
-        }}
+        options={options}
       />
     </div>
   );

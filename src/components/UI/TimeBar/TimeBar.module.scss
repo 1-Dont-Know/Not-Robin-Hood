@@ -3,13 +3,17 @@
 
 .timeBar {
   background-color: #d5e3e1;
+
   @include mixins.flexbox(
     $display: flex,
     $justifyContent: center,
     $alignItems: center,
-    $grow: 1,
-    $gap: 1rem
+    $grow: 1
   );
+
+  flex-wrap: wrap;
+  gap: 1rem;
+
   padding: 0.5rem 0.75rem;
   width: 100%;
   border-radius: 25px;

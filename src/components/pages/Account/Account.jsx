@@ -25,6 +25,7 @@ const Account = () => {
       },
     ],
   });
+  
   return (
     <>
       <div className={styles.wrapper}>

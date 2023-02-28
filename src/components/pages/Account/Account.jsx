@@ -10,7 +10,7 @@ import Button from "../../UI/Button/Button";
 import ToolIcon from "../../../assets/icons/tools-icon.svg";
 import CameraIcon from "../../../assets/icons/camera-icon.svg";
 import SquareIcon from "../../../assets/icons/square-icon.svg";
-import SettingIcon from "../../../assets/icons/settings-icon.svg";
+import SettingIcon from "../../../assets/icons/settings.svg";
 import TimeBar from "../../UI/TimeBar/TimeBar";
 import Filter from "../../UI/Filter/Filter";
 
@@ -43,10 +43,6 @@ const Account = () => {
               <FeaturedStock status="up" />
               <FeaturedStock status="up" />
             </section>
-            {/* //! DIVIDER SECTION */}
-            <div className={styles.divider}>
-              <hr />
-            </div>
             {/* //! FILTER SECTION */}
             <section className={styles.filter}>
               <Filter />

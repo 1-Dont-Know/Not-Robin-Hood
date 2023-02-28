@@ -24,6 +24,10 @@
   transition: 0.3s ease-in-out;
   @include mixins.flexbox($display: flex, $gap: 1rem);
 
+  img {
+    max-width: 1rem;
+  }
+
   &:hover {
     background-color: #fff;
     border-radius: 25px;

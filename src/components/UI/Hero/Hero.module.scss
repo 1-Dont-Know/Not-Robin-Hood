@@ -3,5 +3,13 @@
 
 .container {
   padding: 1.5rem 2rem;
-  height: calc(100vh - 9rem);
+  padding-top: 0rem;
+  overflow-y: auto;
+
+  @include mixins.flexbox(
+    $display: flex,
+    $direction: column,
+    $grow: 1,
+    $shrink: 1,
+  );
 }

@@ -19,6 +19,8 @@ ChartJS.register(
 );
 
 const Portfolio = () => {
+
+  //Fake data for pie chart
   const data = {
     labels: [],
     datasets:[{
@@ -32,6 +34,7 @@ const Portfolio = () => {
   const options = {
 
   }
+
   const textCenter ={
     id: "textCenter",
     beforeDatasetsDraw(chart, args, pluginOptions){
@@ -40,7 +43,7 @@ const Portfolio = () => {
       ctx.font = 'bolder 24px sans-serif';
       ctx.fillStyle = 'black';
       ctx.textAlign = 'center';
-      ctx.fillText(`Total Portfolio Value: ${data.datasets[0].data[0]}`, 
+      ctx.fillText(`Total Portfolio Value: $200`, 
       chart.getDatasetMeta(0).data[0].x, 
       chart.getDatasetMeta(0).data[0].y);
     }
@@ -56,12 +59,11 @@ const Portfolio = () => {
           {/* Top Navigation */}
           <TopNav />
 
-          <br></br>
           <div className={styles.accName}>
             {/* Under this section will be populated by the name given
             in the account */}
             <strong className={styles.name}>John Doe</strong>
-            <br></br>
+            
 
             <div className={styles.ihsButtons}>
               <Button type="settings">
@@ -77,7 +79,7 @@ const Portfolio = () => {
               </Button>
             </div>
           </div>
-          <br></br>
+          
           <div className={styles.tanSquare}>
             <ol className={styles.valueText}>Total Portfolio Value</ol>
             <ol className={styles.dollarAmount}>$200.00</ol>

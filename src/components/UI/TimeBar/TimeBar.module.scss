@@ -8,7 +8,8 @@
     $display: flex,
     $justifyContent: center,
     $alignItems: center,
-    $grow: 1
+    $grow: 1,
+    $flex-basis: auto
   );
 
   flex-wrap: wrap;

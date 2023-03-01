@@ -37,7 +37,7 @@ const SidebarNav = () => {
         <NavLink to="/stock-transactions">
           {({ isActive }) => (
             <li className={isActive ? styles.active : styles.listItem}>
-              <img src={transactions} alt="transactions" /> Stock Transaction
+              <img src={transactions} alt="transactions" /> Stock Transactions
             </li>
           )}
         </NavLink>

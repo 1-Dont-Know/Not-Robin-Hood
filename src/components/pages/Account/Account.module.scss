@@ -23,7 +23,8 @@
     $display: flex,
     $gap: 1rem,
     $justifyContent: space-evenly,
-    $wrap: wrap
+    $wrap: wrap,
+    $flex-basis: 25%
   );
   background-color: variables.$light-yellow;
   border-radius: 25px;
@@ -31,10 +32,16 @@
 }
 
 .filter {
-  @include mixins.flexbox($display: flex, $gap: 1rem, $wrap: wrap);
+  @include mixins.flexbox(
+    $display: flex,
+    $gap: 1rem,
+    $wrap: wrap,
+    $shrink: 1,
+    $flex-basis: 10%
+  );
 }
 
 .graph {
-  @include mixins.flexbox($grow: 1);
+  @include mixins.flexbox($grow: 1, $shrink: 1, $flex-basis: 65%);
   // margin: 10px 0 10px 0;
 }

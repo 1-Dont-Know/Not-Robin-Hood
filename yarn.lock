@@ -1535,9 +1535,9 @@
     "@jridgewell/sourcemap-codec" "1.4.14"
 
 "@kurkle/color@^0.3.0":
-  version "0.3.2"
-  resolved "https://registry.npmjs.org/@kurkle/color/-/color-0.3.2.tgz"
-  integrity sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==
+  "integrity" "sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw=="
+  "resolved" "https://registry.npmjs.org/@kurkle/color/-/color-0.3.2.tgz"
+  "version" "0.3.2"
 
 "@leichtgewicht/ip-codec@^2.0.1":
   "integrity" "sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A=="
@@ -3089,24 +3089,17 @@
   "resolved" "https://registry.npmjs.org/char-regex/-/char-regex-2.0.1.tgz"
   "version" "2.0.1"
 
-<<<<<<< HEAD
-chart.js@^4.1.1, chart.js@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.npmjs.org/chart.js/-/chart.js-4.2.1.tgz"
-  integrity sha512-6YbpQ0nt3NovAgOzbkSSeeAQu/3za1319dPUQTXn9WcOpywM8rGKxJHrhS8V8xEkAlk8YhEfjbuAPfUyp6jIsw==
+"chart.js@^4.1.1", "chart.js@^4.2.1":
+  "integrity" "sha512-6YbpQ0nt3NovAgOzbkSSeeAQu/3za1319dPUQTXn9WcOpywM8rGKxJHrhS8V8xEkAlk8YhEfjbuAPfUyp6jIsw=="
+  "resolved" "https://registry.npmjs.org/chart.js/-/chart.js-4.2.1.tgz"
+  "version" "4.2.1"
   dependencies:
     "@kurkle/color" "^0.3.0"
 
-check-types@^11.1.1:
-  version "11.2.2"
-  resolved "https://registry.npmjs.org/check-types/-/check-types-11.2.2.tgz"
-  integrity sha512-HBiYvXvn9Z70Z88XKjz3AEKd4HJhBXsa3j7xFnITAzoS8+q6eIGi8qDB8FKPBAjtuxjI/zFpwuiCb8oDtKOYrA==
-=======
 "check-types@^11.1.1":
   "integrity" "sha512-HBiYvXvn9Z70Z88XKjz3AEKd4HJhBXsa3j7xFnITAzoS8+q6eIGi8qDB8FKPBAjtuxjI/zFpwuiCb8oDtKOYrA=="
   "resolved" "https://registry.npmjs.org/check-types/-/check-types-11.2.2.tgz"
   "version" "11.2.2"
->>>>>>> 4683e93999eb705e010ea300283e5481aa3f4d04
 
 "chokidar@^3.4.2", "chokidar@^3.5.3", "chokidar@>=3.0.0 <4.0.0":
   "integrity" "sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw=="
@@ -4686,22 +4679,15 @@ check-types@^11.1.1:
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
 
-<<<<<<< HEAD
-fsevents@^2.3.2, fsevents@~2.3.2:
-  version "2.3.2"
-  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
-  integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
+"fsevents@^2.3.2", "fsevents@~2.3.2":
+  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
+  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  "version" "2.3.2"
 
-function-bind@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
-  integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
-=======
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
   "version" "1.1.1"
->>>>>>> 4683e93999eb705e010ea300283e5481aa3f4d04
 
 "function.prototype.name@^1.1.5":
   "integrity" "sha512-uN7m/BzVKQnCUF/iW8jYea67v++2u7m5UgENbHRtdDVclOUP+FMPlCNdmk0h/ysGyo2tavMJEDqJAkJdRa1vMA=="
@@ -7592,22 +7578,15 @@ function-bind@^1.1.1:
     "regenerator-runtime" "^0.13.9"
     "whatwg-fetch" "^3.6.2"
 
-<<<<<<< HEAD
-react-chartjs-2@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-5.2.0.tgz"
-  integrity sha512-98iN5aguJyVSxp5U3CblRLH67J8gkfyGNbiK3c+l1QI/G4irHMPQw44aEPmjVag+YKTyQ260NcF82GTQ3bdscA==
+"react-chartjs-2@^5.2.0":
+  "integrity" "sha512-98iN5aguJyVSxp5U3CblRLH67J8gkfyGNbiK3c+l1QI/G4irHMPQw44aEPmjVag+YKTyQ260NcF82GTQ3bdscA=="
+  "resolved" "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-5.2.0.tgz"
+  "version" "5.2.0"
 
-react-dev-utils@^12.0.1:
-  version "12.0.1"
-  resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.1.tgz"
-  integrity sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ==
-=======
 "react-dev-utils@^12.0.1":
   "integrity" "sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ=="
   "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.1.tgz"
   "version" "12.0.1"
->>>>>>> 4683e93999eb705e010ea300283e5481aa3f4d04
   dependencies:
     "@babel/code-frame" "^7.16.0"
     "address" "^1.1.2"
@@ -7737,17 +7716,10 @@ react-dev-utils@^12.0.1:
   optionalDependencies:
     "fsevents" "^2.3.2"
 
-<<<<<<< HEAD
-"react@^16.8.0 || ^17.0.0 || ^18.0.0", react@^18.0.0, react@^18.2.0, "react@>= 16", react@>=16.8:
-  version "18.2.0"
-  resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
-  integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
-=======
-"react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=16.8":
+"react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=16.8":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
->>>>>>> 4683e93999eb705e010ea300283e5481aa3f4d04
   dependencies:
     "loose-envify" "^1.1.0"
 

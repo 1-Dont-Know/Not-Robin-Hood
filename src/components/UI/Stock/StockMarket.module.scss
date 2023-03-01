@@ -1,0 +1,34 @@
+@use "../../../styles/variables.scss";
+@use "../../../styles/mixins.scss";
+
+.stockSection {
+  padding-top: 2rem;
+  margin-left: 2rem;
+}
+
+.stockBody {
+  @include mixins.flexbox(
+    $display: flex,
+    $direction: row,
+    $alignItems: center,
+    );
+
+  width: 1450px;
+  height: 89px;
+  left: 470px;
+  top: 274px;
+  background: #D5E3E1;
+  border-radius: 25px;
+}
+
+.stockInfo {
+
+}
+
+.buyButton {
+  width: 150px;
+  height: 54px;
+  left: 1693px;
+  top: 291px;
+  background: #FFFFFF;
+}

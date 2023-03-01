@@ -20,7 +20,7 @@
   border-radius: 25px;
   color: #fff;
   transition: 0.3s ease-in-out;
-
+  
   &:hover {
     background-color: variables.$secondary-color;
   }
@@ -236,7 +236,6 @@
   padding: 1rem 1.2rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
-  color: #37433a;
   @include mixins.flexbox(
     $display: flex,
     $justifyContent: center,
@@ -247,19 +246,16 @@
   background: #d5e3e1;
   border-radius: 25px;
   transition: 0.3s ease-in-out;
-  svg {
-    max-width: 36.79px;
-    max-height: 36.25px;
-    margin-right: 0.5rem;
-    transition: 0.3s ease-in-out;
-  }
 
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
-    svg {
-      fill: #fff;
-    }
+  }
+
+  img {
+    max-width: 41.79px;
+    max-height: 40.25px;
+    margin-right: 0.5rem;
   }
 }
 
@@ -317,11 +313,10 @@
 }
 
 .settingsButton {
-  padding: 1.25rem;
+  padding: 1rem;
   background: #d5e3e1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   transition: 0.3s ease-in-out;
-  @include mixins.flexbox($display: flex, $alignItems: center);
   &:first-child {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
@@ -333,16 +328,9 @@
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
-    transition: 0.3s ease-in-out;
-    svg {
-      fill: #fff;
-    }
   }
-
-  svg {
-    max-width: 1.5rem;
-    max-height: 1.5rem;
-    transition: 0.3s ease-in-out;
+  img {
+    max-width: 2rem;
   }
 }
 
@@ -352,25 +340,41 @@
   align-items: center;
   flex-grow: 1;
 
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-weight: 600;
-  font-size: 16px;
+  font-size: 24px;
 
-  // Perhaps we may want to use a global variable to define a fixed min height for all buttons for design consistency
-  min-height: 60px;
-
+  // Perhaps we may want to use a global variable to define a fixed min height for all buttons for design consistency 
+  min-height: 60px; 
+  
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   background: white;
   color: variables.$secondary-color;
 
   border-radius: 25px;
-  transition: 0.1s ease-in-out;
+  transition: 0.3s ease-in-out;
 
   &:hover {
-    outline: 6px solid variables.$green;
+    outline: 4px solid #D5E3E1;
+    background-color: variables.$secondary-color;
+    color: #ffff;
+    img { //Modifies the credit/bank icon colors on hover
+      filter:     
+      invert(0.65)
+      sepia(1)
+      hue-rotate(100deg)
+      saturate(5);
+    }
+
+    &:nth-child(5) // Colors the $500 button
+    {
+      background-color: #FFE0C5;
+      outline: 4px solid #ffcda0;
+    }
   }
 
-  img {
-    margin-right: 0.5rem;
+  img { // Credit / Bank icon positioning
+    margin-right: 0.75rem;
+    margin-left: -0.55rem;
   }
 }

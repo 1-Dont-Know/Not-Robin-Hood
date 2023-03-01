@@ -43,9 +43,9 @@ const AppFundsPopup = () => {
          {/* <AddFunds></AddFunds> */}
           <div className={styles.preview}>
            {/* //! GRAPH SECTION */}
-            <section className={styles.graph}>
+            {/* <section className={styles.graph}> */}
               <Graph chartData={stockData} />
-            </section>
+            {/* </section> */}
             <section className={styles.buybox}>
             <BuyBox/>
             </section>
@@ -60,5 +60,7 @@ const AppFundsPopup = () => {
 
   );
 };
+
+
 
 export default AppFundsPopup;

@@ -357,19 +357,20 @@
   &:hover {
     outline: 4px solid #D5E3E1;
     background-color: variables.$secondary-color;
-    color: #ffff;
+    color: #000000;
     img { //Modifies the credit/bank icon colors on hover
       filter:     
-      invert(0.65)
+      invert(0.35)
       sepia(1)
-      hue-rotate(100deg)
-      saturate(5);
+      //hue-rotate(100deg)
+      saturate(7);
+      transition: 0.3s ease-in-out;
     }
 
-    &:nth-child(5) // Colors the $500 button
+    &:nth-child(n) // Colors the buttons
     {
       background-color: #FFE0C5;
-      outline: 4px solid #ffcda0;
+      outline: 4px solid #ebb485;
     }
   }
 

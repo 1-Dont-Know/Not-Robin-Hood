@@ -1,0 +1,51 @@
+@use "../../../styles/mixins.scss";
+@use "../../../styles/variables.scss";
+
+.transactionItem {
+  @include mixins.flexbox(
+    $display: flex,
+    $grow: 1,
+    $flex-basis: 100%,
+    $alignItems: center,
+    $shrink: 1
+  );
+  padding: 1.125rem;
+  background-color: rgb(111, 133, 126);
+  border-radius: 25px;
+  width: 100%;
+  color: #000;
+  gap: 1rem;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+  }
+}
+
+.stockName,
+.stockPrice,
+.stockInfo {
+  background-color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 25px;
+}
+
+.stockName,
+.stockPrice {
+  @include mixins.flexbox(
+    $display: flex,
+    $grow: 0,
+    $flex-basis: 15%,
+    $shrink: 1,
+    $justifyContent: center
+  );
+}
+
+.stockInfo {
+  @include mixins.flexbox(
+    $display: flex,
+    $grow: 1,
+    $flex-basis: 60%,
+    $shrink: 1
+  );
+}

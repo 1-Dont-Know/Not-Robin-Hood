@@ -1,72 +1,61 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./StockViewer.module.scss";
 import Button from "../../UI/Button/Button";
 import people from "../../../assets/icons/people-icon.svg"
 import creditCard from "../../../assets/icons/credit-card-icon.svg"
+import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used for Testing
+import Graph from "../../UI/Graph/Graph";
+import BuyBox from "../../UI/BuyBox/BuyBox";
+import Filter from "../../UI/Filter/Filter";
+import Sidebar from "../../UI/Sidebar/Sidebar";
+import TopNav from "../../UI/TopNav/TopNav";
+// import styles from "./Account.module.scss";
+import Hero from "../../UI/Hero/Hero";
+import AddFunds from "../../UI/AddFunds/AddFunds";
 
 const AppFundsPopup = () => {
+  const [stockData, setStockData] = useState({
+    labels: fakeData.map((data) => data.day),
+    datasets: [
+      {
+        label: "Price",
+        data: fakeData.map((data) => data.price),
+      },
+    ],
+  });
+
   return (
-
-    <div className={styles.gridContainerAppFunds}>
-
-      {/* 1 - title and subtitle */}
-      <div style={{textAlign:'center'}}>
-        <h2 className={styles.modalHeader}>Add funds</h2>
-        <p>Select payments option to add balance to your funds for trading</p>
-      </div>
-
-      {/* 2 - currency dropdown menu */}
-      <div className={styles.currencyContainer}>
-        <h3>Deposit Amount</h3>
-        <select name="currency" id="currency">
-        <option value="usd">USD</option>
-        <option value="eur">EUR</option>
-        <option value="aud">AUD</option>
-        <option value="cad">CAD</option>
-        </select>
-      </div>
-
-      {/* 3 - $50 button */}
-      <Button type={"addFunds"}>
-        $50
-      </Button>
-
-      {/* 4 - $100 button */}
-      <Button type={"addFunds"}>
-        $100
-      </Button>
-
-      {/* 5 - $500 button */}
-      <Button type={"addFunds"}>
-        $500
-      </Button>
-
-      {/* 6 - custom amount input */}
-      <input className={styles.currencyInput} type="number" name="Amount" placeholder="Enter amount" />
-      
-      {/* 7 - credit/debit button */}
-      <Button type={"addFunds"}>
-        <img src={people} alt="profile"/>
-        Credit/Debit
-      </Button>
-      
-      {/* 8 - bank transfer button */}
-      <Button type={"addFunds"}>
-        <img src={creditCard} alt="credit-card"/>
-        Bank Transfer
-      </Button>
-
-      {/* 9 - save as default toggle */}
-      <div className={styles.toggleContainer}>
-        <strong>Save as a default payment</strong>
-        <input type="checkbox" id="switch" /><label for="switch">Toggle</label>
-      </div>
-
-      {/* 10 - select payment and continue button */}
-      <Button type={"addFunds"}>
-          Select Payment And Continue
-      </Button>
-
+    <div className={styles.wrapper}>
+      {/* Sidebar Section */}
+      <Sidebar />
+      {/* Nav/Hero Section */}
+      <main className={styles.mainSection}>
+        {/* Top Navigation */}
+        <TopNav />
+        {/* Hero Section */}
+        <Hero>
+          <div className={styles.stockNameWrapper}>
+          <h1 className={styles.stockName}>BINANCE (BNB-USD)</h1>
+          <p className={styles.stockPrice}>$59.71
+          <span className={styles.growth}>$51.29(4.78%)</span>
+          </p>
+          </div>
+         {/* <AddFunds></AddFunds> */}
+          <div className={styles.preview}>
+           {/* //! GRAPH SECTION */}
+            <section className={styles.graph}>
+              <Graph chartData={stockData} />
+            </section>
+            <section className={styles.buybox}>
+            <BuyBox/>
+            </section>
+          </div>
+          {/* //! FILTER SECTION */}
+          <section className={styles.filter}>
+            <Filter />
+          </section>
+        </Hero>
+      </main>
     </div>
 
   );

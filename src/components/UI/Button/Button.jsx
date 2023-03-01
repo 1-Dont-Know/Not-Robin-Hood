@@ -21,10 +21,8 @@ const Button = ({ type, children }) => {
           ? styles.profileButton
           : type === "tools"
           ? styles.toolsButton
-
           : type === "timeBar"
           ? styles.timeBarButton
-
           : type === "settings"
           ? styles.settingsButton
           : type === "buyBox"
@@ -33,6 +31,16 @@ const Button = ({ type, children }) => {
           ? styles.sellButton
           : type === "addFunds"
           ? styles.addFundsButton
+          : type === "sort"
+          ? styles.sortButton
+          : type === "stockSymbol"
+          ? styles.stockSymbolButton
+          : type === "stockValue"
+          ? styles.stockValueButton
+          : type === "stockInfo"
+          ? styles.stockInfoButton
+          : type === "whiteBuy"
+          ? styles.whiteBuyButton
           : styles.default
       }
     >

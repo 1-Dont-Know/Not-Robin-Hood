@@ -7,25 +7,23 @@
   @include mixins.flexbox($display: flex, $grow: 1);
 }
 
-// HERO SECTION
-.heroSection {
-  height: 90%;
-  @include mixins.flexbox(
-    $display: flex,
-    $grow: 1,
-    $direction: column,
-    $flex-basis: 90%,
-    $shrink: 1
-  );
+.mainSection {
+  display: flex;
+  flex-direction: column;
+
+  //Fix for the graph not resizing correctly
+  //Using flex-grow here won't work. 400px is the size of the sidebar.
+  width: calc(100% - 400px);
+  
 }
+
+// HERO SECTION
 .featured {
   @include mixins.flexbox(
     $display: flex,
     $gap: 1rem,
     $justifyContent: space-evenly,
-    $grow: 1,
-    $flex-basis: 40%,
-    $shrink: 1
+    $wrap: wrap
   );
   background-color: variables.$light-yellow;
   border-radius: 25px;
@@ -33,33 +31,19 @@
 }
 
 .filter {
-  width: 100%;
-  background-color: #d5e3e1;
-  padding: 1rem;
-  border-radius: 25px;
-  margin: 1rem 0rem;
   @include mixins.flexbox(
     $display: flex,
-    $grow: 1,
-    $flex-basis: 10%,
-    $shrink: 1
+    $gap: 1rem,
+    $justifyContent: space-evenly,
+    $wrap: wrap,
   );
-}
-
-.divider {
-  width: 100%;
-  height: 1px;
-  background-color: variables.$secondary-color;
-  margin: 1rem 0rem;
+  margin-top: 10px;
+  padding: 0 20px 0 20px;
 }
 
 .graph {
-  max-height: 50%;
-  height: 100%;
   @include mixins.flexbox(
-    $display: flex,
     $grow: 1,
-    $flex-basis: 50%,
-    $shrink: 1
   );
+  margin: 10px 0 10px 0;
 }

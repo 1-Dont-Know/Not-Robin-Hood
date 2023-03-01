@@ -1,35 +1,74 @@
 @use "../../../styles/variables.scss";
 @use "../../../styles/mixins.scss";
 
-.title {
-  font-size: 2rem;
+.wrapper{
+  display: flex;
 }
 
-.notificationQty {
-  position: absolute;
-  font-size: 0.85rem;
-  color: rgb(255, 255, 255);
-  top: 0;
-  right: 0;
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  background-color: variables.$golden;
-  // include makes number or characters centered
+.mainSection {
   @include mixins.flexbox(
-    $display:flex, 
-    $grow:1, 
-    $justifyContent:center, 
-    $alignItems: center);
+    $display: flex,
+    $direction: column,
+    $grow: 1,
+    $shrink: 1,
+  );
 }
 
-.timeBar {
-  background-color: #D5E3E1;
-  @include mixins.flexbox($display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1);
-  //margin: 0.1rem 0.2rem;
-  padding: 0.5rem 0.75rem;
+.stockNameWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0rem;
+  flex: 10%;
+}
+
+.stockPrice {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  span {
+    font-size: 18px;
+    color: #2AB795;
+  }
+}
+
+.stockName {
+  font-size: 36px;
+  font-weight: variables.$font-bold;
+}
+
+.preview{
+  display: flex;
   width: 100%;
+  flex-direction: row;
+  margin: 1rem 0rem;
+  gap: 2rem;
+  flex: 80%;
+
+}
+.graph {
+display: flex;
+flex: 60%;
+}
+
+.buybox {
+  display: flex;
+  flex: 40%;
+}
+
+.filter {
+  @include mixins.flexbox(
+    $display: flex,
+    $gap: 1rem,
+    $justifyContent: space-evenly,
+    $wrap: wrap,
+    $flex-basis: 10%
+  
+  );
+ 
+  margin-top: 10px;
+
+  
+  
 }

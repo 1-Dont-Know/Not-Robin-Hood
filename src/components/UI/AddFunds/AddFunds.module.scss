@@ -1,0 +1,215 @@
+@use "../../../styles/variables.scss";
+@use "../../../styles/mixins.scss";
+
+.gridContainerAppFunds {
+  display: grid;
+  // 4 column layout
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: 
+  "title   title   title   title"
+  "option  option  option  option"
+  "amount1 amount2 amount3 input1"
+  ".       credit  bank     ."
+  ".       toggle  continue ."
+  ;
+
+  gap: 1rem;
+  background-color: variables.$secondary-color;
+  border-radius: 25px;
+  color: #fff;
+  padding: 1.5rem;
+  max-width: max-content;
+
+  h1 { // Close Button
+    margin-left: 95%;
+    margin-bottom: 1rem;
+    padding: 7px;
+    border-radius: 6px;
+    font-size: 20px;
+    z-index: 1;
+
+    &:hover { //Close Button hover styles
+      background: rgb(119, 199, 245);
+      transition: 0.3s ease-in-out;
+    }
+  }
+
+  > :nth-child(1) {
+    grid-area: title;
+  }
+  
+  > :nth-child(2){
+    grid-area: option;
+    gap: 15px;
+  }
+  
+  > :nth-child(3){
+    grid-area: amount1;
+  }
+  
+  > :nth-child(4){
+    grid-area: amount2;
+  }
+  
+  > :nth-child(5){
+    grid-area: amount3;
+    // background-color: pink;
+  }
+  
+  > :nth-child(6){
+    grid-area: input1;
+  }
+  
+  > :nth-child(7){
+    grid-area: credit;
+  }
+  
+  > :nth-child(8){
+    grid-area: bank;
+  }
+  
+  > :nth-child(9){
+    grid-area: toggle;
+  }
+  
+  > :nth-child(10){
+    grid-column: continue;
+  }
+}
+
+@media (max-width: 74rem) {
+  .gridContainerAppFunds {
+    // 2 column layout
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    "title    title"
+    "option   option"
+    "amount1  amount2"
+    "amount3  input1"
+    "credit   bank"
+    "toggle   continue"
+    ;
+  }
+}
+
+@media (max-width: 40rem) {
+  .gridContainerAppFunds {
+    // single column layout
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    grid-template-areas: 
+    "title"
+    "option"
+    "amount1"
+    "amount2"
+    "amount3"
+    "input1"
+    "credit"
+    "bank"
+    "toggle"
+    "continue"
+    ;
+}
+
+.addFunds {
+  font-size: 150px;
+
+  &:nth-child(10) {
+    font-size: 15px;
+  }
+}
+  .currencyInput{
+    // Same as buttons
+    min-height: 60px;
+  }
+}
+
+.modalHeader {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.7rem;
+}
+
+.currencyContainer {
+  font-size: 1.5rem;
+  display:flex;
+  align-items: center;
+
+  select:hover {
+    color: variables.$secondary-color;
+    background: #aeedff;
+    transition: 0.3s ease-in-out;
+    }
+}
+
+select {
+  margin-left: 5px;
+  padding-left: 7px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+option {
+  background-color: #b6e3f0;
+  color: variables.$secondary-color;
+}
+
+.currencyInput{
+  font-size: 1.5rem;
+  border-radius: 25px;
+}
+
+.toggleContainer {
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+  
+  input {
+    margin-right: -6rem;
+  }
+}
+
+
+//SCSS for Toggle Slider
+input[type=checkbox]{
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 65px;
+  height: 30px;
+  background: grey;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+}
+
+label:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 21px;
+  height: 21px;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+input:checked + label {
+  background-color: #42ebd1;
+  transition: 0.3s ease-in-out;
+}
+
+input:checked + label:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+} //end toggle scss

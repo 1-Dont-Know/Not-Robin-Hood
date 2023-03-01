@@ -7,7 +7,7 @@
   width: 100%;
   background-color: variables.$primary-color;
   border-radius: 25px;
-  padding: 1.3rem;
+  padding: 1rem;
   cursor: pointer;
   transition: 0.3s ease-in-out;
   &:hover {
@@ -18,8 +18,9 @@
     $direction: column,
     $gap: 1rem,
     $grow: 1,
+    $shrink: 1,
     $alignItems: center,
-    $justifyContent: center
+    $justifyContent: space-evenly
   );
 
   .stockInformation {
@@ -62,7 +63,7 @@
     @include mixins.flexbox(
       $display: flex,
       $gap: 1rem,
-      $grow: 1,
+      // $grow: 1,
       $alignItems: center
     );
     p {

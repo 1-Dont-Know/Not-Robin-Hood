@@ -1,18 +1,15 @@
 @use "../../../styles/variables.scss";
 @use "../../../styles/mixins.scss";
-.container {
-  padding: 1rem 2rem;
-}
 
-.featured {
+.container {
+  padding: 1.5rem 2rem;
+  padding-top: 0rem;
+  overflow-y: auto;
+
   @include mixins.flexbox(
     $display: flex,
-    $gap: 1rem,
-    $justifyContent: space-between,
-    $wrap: wrap,
-    );
-  background-color: variables.$light-yellow;
-  border-radius: 25px;
-  padding: 1.4rem;
+    $direction: column,
+    $grow: 1,
+    $shrink: 1,
+  );
 }
-

@@ -4,7 +4,6 @@
 .container {
   min-height: 7rem;
   padding: 1rem 2rem;
-
   @include mixins.flexbox(
     $display: flex,
     $alignItems: center,

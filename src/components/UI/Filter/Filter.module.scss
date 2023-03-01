@@ -1,0 +1,33 @@
+@use "../../../styles/mixins.scss";
+@use "../../../styles//variables.scss";
+
+.container {
+  width: 100%;
+  border-radius: 25px;
+  gap: 2.1875rem;
+  @include mixins.flexbox(
+    $display: flex,
+    $grow: 1,
+    $shrink: 1,
+    $alignItems: center
+  );
+}
+
+.tools,
+.settings {
+  @include mixins.flexbox(
+    $display: flex,
+    $grow: 1,
+    $shrink: 1,
+    $flex-basis: 10%
+  );
+}
+
+.timeBar {
+  @include mixins.flexbox(
+    $display: flex,
+    $grow: 1,
+    $shrink: 1,
+    $flex-basis: 80%
+  );
+}

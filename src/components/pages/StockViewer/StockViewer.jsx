@@ -1,48 +1,64 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./StockViewer.module.scss";
 import Button from "../../UI/Button/Button";
-import bell from "../../../assets/icons/bell-icon.svg"
-import profile from "../../../assets/icons/profile-icon.svg"
+import people from "../../../assets/icons/people-icon.svg"
+import creditCard from "../../../assets/icons/credit-card-icon.svg"
+import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used for Testing
+import Graph from "../../UI/Graph/Graph";
 import BuyBox from "../../UI/BuyBox/BuyBox";
+import Filter from "../../UI/Filter/Filter";
+import Sidebar from "../../UI/Sidebar/Sidebar";
+import TopNav from "../../UI/TopNav/TopNav";
+// import styles from "./Account.module.scss";
+import Hero from "../../UI/Hero/Hero";
+import AddFunds from "../../UI/AddFunds/AddFunds";
 
-const StockViewer = () => {
+const AppFundsPopup = () => {
+  const [stockData, setStockData] = useState({
+    labels: fakeData.map((data) => data.day),
+    datasets: [
+      {
+        label: "Price",
+        data: fakeData.map((data) => data.price),
+      },
+    ],
+  });
+
   return (
-    <>
-    {/* <Button type="notification"> 
-      <img src={bell} alt="bell" />
-      <div className={styles.notificationQty}>3</div>
-    </Button> */}
-    {/* <Button type="profile">
-      <img src={profile} alt="profile" />
-      <div className={styles.profileQty}>3</div>
-
-      </Button> */}
-        
-
-    <BuyBox>
-
-    </BuyBox>
-    </>
-  );
-};
-
-const TimeBar = () => {
-  return (
-    <>
-    <div className={styles.timeBar}>
-      <Button type="timeBar"><div className={styles.timeBarButton}>1d</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>5d</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>2w</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>1m</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>6m</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>1y</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>5y</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>7y</div></Button>
-      <Button type="timeBar"><div className={styles.timeBarButton}>MAX</div></Button>
+    <div className={styles.wrapper}>
+      {/* Sidebar Section */}
+      <Sidebar />
+      {/* Nav/Hero Section */}
+      <main className={styles.mainSection}>
+        {/* Top Navigation */}
+        <TopNav />
+        {/* Hero Section */}
+        <Hero>
+          <div className={styles.stockNameWrapper}>
+          <h1 className={styles.stockName}>BINANCE (BNB-USD)</h1>
+          <p className={styles.stockPrice}>$59.71
+          <span className={styles.growth}>$51.29(4.78%)</span>
+          </p>
+          </div>
+         {/* <AddFunds></AddFunds> */}
+          <div className={styles.preview}>
+           {/* //! GRAPH SECTION */}
+            <section className={styles.graph}>
+              <Graph chartData={stockData} />
+            </section>
+            <section className={styles.buybox}>
+            <BuyBox/>
+            </section>
+          </div>
+          {/* //! FILTER SECTION */}
+          <section className={styles.filter}>
+            <Filter />
+          </section>
+        </Hero>
+      </main>
     </div>
-    </>
+
   );
 };
 
-//export default StockViewer;
-export default TimeBar;
+export default AppFundsPopup;

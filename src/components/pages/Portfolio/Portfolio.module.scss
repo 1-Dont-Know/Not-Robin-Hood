@@ -1,0 +1,152 @@
+// WRAPPER SECTION
+
+@use "../../../styles/mixins.scss";
+@use "../../../styles/variables.scss";
+
+// WRAPPER SECTION
+
+.wrapper {
+  @include mixins.flexbox($display: flex, $grow: 1);
+  @media (max-width: 900px){
+    height: 100%;
+    width: fit-content;
+    @include mixins.flexbox(
+        
+        $display: flex,
+        $grow: 1,
+        $direction: column,
+        $flex-basis: 90%,
+        $shrink: 1
+    )
+    
+    
+}
+overflow: auto;
+overflow-x: auto;
+overflow-y: scroll !important;
+}
+.accName{
+    height: auto;
+    display: flex;
+    justify-content: left;
+    padding-left: 50px;
+    font-size: 38px;
+
+}
+.name{
+    padding-top: 20px;
+    white-space: nowrap;
+    display: flex;
+    font-size: 42px;
+}
+.ihsButtons{
+  padding-left: 1000px;
+  display: flex;
+  justify-content: right;
+  height: 80px;
+  text-size-adjust: 20px;
+  
+}
+.ihsButtons
+.ihs{
+    padding-right: 54px;
+    justify-content: center;
+    font-size: 28px;
+    padding-left: 80px;
+}
+
+
+.container{
+    width: 200px;
+    height: 200px;
+    background-color: #FBF2EA;
+    border: 1px solid #000;
+    padding: 10px;
+    justify-content: center;
+    padding: none;
+    
+}
+
+.tanSquare{
+    margin-top: 24px;
+    margin-left: 54px;
+    width: 2000px;
+    height: 1000px;
+    border: 1px solid #ccc;
+    background-color: #FBF2EA;
+    opacity: 100%;
+    position: relative;
+
+}
+.valueText{
+    margin-top: 80px;
+    margin-left: 48px;
+    font-weight: 700;
+    font-size: 32px;
+}
+.dollarAmount{
+    margin-top: 50px;
+    margin-left: 52px;
+    font-weight: 400;
+    font-size: 32px;
+}
+.stocksOptions{
+    margin-top: 50px;
+    margin-left: 52px;
+    font-weight: 900;
+    font-size: 54px;
+}
+
+.stocksOptions 
+.wordSpace{
+    padding-left: 12%;
+    word-spacing: 24px;
+    
+    
+}
+.stocksOptions
+.moneyAmount{
+    margin-left: 190px;
+}
+
+.line{
+    border: none;
+    border-top: 1px solid black;
+    margin: 36px 0;
+    width: 68%;
+}
+.profileLowerSection{
+    margin-top: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5%;
+}
+
+.stocksOptions
+.moneyColorGreen{
+    margin-left: 200px;
+    color: #2AB795;
+}
+.moneyColorTan{
+    margin-left: 232px;
+    color: #C18E60;
+}
+.pls{
+    display: flex;
+    font-size:32px;
+    width: 500px;
+    justify-content: center;
+
+}
+.tanSquare
+.doughnutGraph{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 60%;
+    margin-top: 200px;
+    padding-left: 32%;
+
+}

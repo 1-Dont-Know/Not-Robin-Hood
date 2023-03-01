@@ -335,10 +335,11 @@
 }
 
 .addFundsButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+  @include mixins.flexbox(
+    $display: flex, 
+    $alignItems: center,
+    $justifyContent: center,
+    $grow: 1);
 
   font-family: 'Roboto';
   font-weight: 600;
@@ -350,7 +351,6 @@
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   background: white;
   color: variables.$secondary-color;
-
   border-radius: 25px;
   transition: 0.3s ease-in-out;
 
@@ -377,4 +377,77 @@
     margin-right: 0.75rem;
     margin-left: -0.55rem;
   }
+}
+
+.stockInfoButton {
+    @include mixins.flexbox(
+      $display: flex,
+      $alignItems: center,
+      $justifyContent: end,
+      $grow: 1);
+
+    padding: 1rem 1.5rem;
+    margin-left: 7.25rem;
+    width: 615px;
+    height: 54px;
+    left: 1003px;
+    top: 291px;
+    background: #FFFFFF;
+    border-radius: 25px;
+
+  
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+
+    &:hover {
+      background-color: variables.$secondary-color;
+      transition: 0.3s ease-in-out;
+  
+      svg {
+        fill: #fff;
+      }
+    }
+
+    svg {
+      margin-left: 11rem;
+    }
+
+}
+
+.whiteBuyButton {
+  @include mixins.flexbox(
+    $display: flex,
+    $alignItems: center,
+    $justifyContent: center,
+    $grow: 1);
+
+  background: #FFFFFF;
+  border-radius: 25px;
+  width: 150px;
+  height: 54px;
+  left: 1693px;
+  top: 291px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  padding: 1rem 1.5rem;
+  margin-left: 7rem;
+  margin-right: 1.5rem;
+
+  &:hover {
+    background-color: variables.$secondary-color;
+    transition: 0.3s ease-in-out;
+  
+    svg {
+      fill: #fff;
+      }
+    }
+  
+    svg {
+      padding-right: .5rem;
+    }
 }

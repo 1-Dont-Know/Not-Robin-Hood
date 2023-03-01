@@ -10,14 +10,15 @@ const AddFunds = () => {
 
             {/* 1 - title and subtitle */}
             <div style={{textAlign:'center'}}>
-            <h2 className={styles.modalHeader}>Add funds</h2>
-            <p>Select payments option to add balance to your funds for trading</p>
+                <h1>✖</h1>
+                <h2 className={styles.modalHeader}>Add funds</h2>
+                <p>Select payments option to add balance to your funds for trading</p>
             </div>
 
             {/* 2 - currency dropdown menu */}
             <div className={styles.currencyContainer}>
                 <h3>Deposit Amount</h3>
-                <select name="currency" id="currency">
+                <select name="currency" id="currency" onfocus="this.size=10;" onblur="this.size=0;" onchange="this.size=1; this.blur();">
                     <option value="usd">USD</option>
                     <option value="eur">EUR</option>
                     <option value="aud">AUD</option>
@@ -27,17 +28,17 @@ const AddFunds = () => {
 
             {/* 3 - $50 button */}
             <Button type={"addFunds"}>
-            $50
+                $50
             </Button>
 
             {/* 4 - $100 button */}
             <Button type={"addFunds"}>
-            $100
+                $100
             </Button>
 
             {/* 5 - $500 button */}
             <Button type={"addFunds"}>
-            $500
+                $500
             </Button>
 
             {/* 6 - custom amount input */}
@@ -45,26 +46,27 @@ const AddFunds = () => {
             
             {/* 7 - credit/debit button */}
             <Button type={"addFunds"}>
-            <img src={people} alt="profile"/>
-            Credit/Debit
+                <img src={people} alt="profile"/>
+                Credit/Debit
             </Button>
             
             {/* 8 - bank transfer button */}
             <Button type={"addFunds"}>
-            <img src={creditCard} alt="credit-card"/>
-            Bank Transfer
+                <img src={creditCard} alt="credit-card"/>
+                Bank Transfer
             </Button>
 
             {/* 9 - save as default toggle */}
             <div className={styles.toggleContainer}>
-            <strong>Save as a default payment</strong>
-            <input type="checkbox" id="switch" /><label for="switch">Toggle</label>
+                <strong>Save as a default payment</strong>
+                <input type="checkbox" id="switch" /><label for="switch">Toggle</label>
             </div>
 
             {/* 10 - select payment and continue button */}
             <Button type={"addFunds"}>
-                Select Payment And Continue
+                SELECT PAYMENT AND CONTINUE
             </Button>
+
         </div>
     );
 };

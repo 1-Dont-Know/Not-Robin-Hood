@@ -20,7 +20,7 @@
   border-radius: 25px;
   color: #fff;
   transition: 0.3s ease-in-out;
-
+  
   &:hover {
     background-color: variables.$secondary-color;
   }
@@ -236,7 +236,6 @@
   padding: 1rem 1.2rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
-  color: #37433a;
   @include mixins.flexbox(
     $display: flex,
     $justifyContent: center,
@@ -247,19 +246,16 @@
   background: #d5e3e1;
   border-radius: 25px;
   transition: 0.3s ease-in-out;
-  svg {
-    max-width: 36.79px;
-    max-height: 36.25px;
-    margin-right: 0.5rem;
-    transition: 0.3s ease-in-out;
-  }
 
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
-    svg {
-      fill: #fff;
-    }
+  }
+
+  img {
+    max-width: 41.79px;
+    max-height: 40.25px;
+    margin-right: 0.5rem;
   }
 }
 
@@ -317,11 +313,10 @@
 }
 
 .settingsButton {
-  padding: 1.25rem;
+  padding: 1rem;
   background: #d5e3e1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   transition: 0.3s ease-in-out;
-  @include mixins.flexbox($display: flex, $alignItems: center);
   &:first-child {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
@@ -333,16 +328,9 @@
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
-    transition: 0.3s ease-in-out;
-    svg {
-      fill: #fff;
-    }
   }
-
-  svg {
-    max-width: 1.5rem;
-    max-height: 1.5rem;
-    transition: 0.3s ease-in-out;
+  img {
+    max-width: 2rem;
   }
 }
 
@@ -353,99 +341,41 @@
     $justifyContent: center,
     $grow: 1);
 
-  /* font style */
   font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
+  font-weight: 600;
+  font-size: 24px;
 
-  /* the white button spec */
-  height: 27px;
-  width: 151px;
-  top: 130px;
-  left: 1691px;
-
+  // Perhaps we may want to use a global variable to define a fixed min height for all buttons for design consistency 
+  min-height: 60px; 
+  
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   background: white;
   color: variables.$secondary-color;
   border-radius: 25px;
-  transition: 0.1s ease-in-out;
+  transition: 0.3s ease-in-out;
 
   &:hover {
-    outline: 3px solid variables.$green;
-  }
-
-  img {
-    margin-right: 0.3rem;
-  }
-}
-
-.sortButton {
-  margin: 0rem .5rem 0rem 2rem ;
-  width: 159px;
-  height: 67px;
-  left: 470px;
-  top: 166px;
-  
-  font-style: normal;
-  font-weight: 400;
-  line-height: 29px;
-  font-size: 24px;
-  color: #ffffff;
-  background: #37433A;
-  border-radius: 25px;
-  box-shadow: 0px 3px 5px 0px rgba(0, 4, 4, 0.25);
-  
-  &:hover {
-      outline: 3px solid variables.$green;
+    outline: 4px solid #D5E3E1;
+    background-color: variables.$secondary-color;
+    color: #ffff;
+    img { //Modifies the credit/bank icon colors on hover
+      filter:     
+      invert(0.65)
+      sepia(1)
+      hue-rotate(100deg)
+      saturate(5);
     }
 
-  img {
-    margin-left: 1rem;
-    margin-top: .7rem;
-  }
-} 
-
-.stockSymbolButton {
-  padding: 1rem 1.5rem;
-  margin-left: 1.313rem;
-  width: 150px;
-  height: 54px;
-  left: 491px;
-  top: 291px;
-  background: #FFFFFF;
-  border-radius: 25px;
-
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-
-  transition: 0.3s ease-in-out;
-  &:hover {
-    background-color: variables.$secondary-color;
+    &:nth-child(5) // Colors the $500 button
+    {
+      background-color: #FFE0C5;
+      outline: 4px solid #ffcda0;
+    }
   }
 
-}
-.stockValueButton{
-  padding: 1rem 1.5rem;
-  margin-left: 6rem;
-  width: 150px;
-  height: 54px;
-  left: 737px;
-  top: 291px;
-  background: #FFFFFF;
-  border-radius: 25px;
-
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-
-  transition: 0.3s ease-in-out;
-  &:hover {
-    background-color: variables.$secondary-color;
+  img { // Credit / Bank icon positioning
+    margin-right: 0.75rem;
+    margin-left: -0.55rem;
   }
 }
 

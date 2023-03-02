@@ -3,7 +3,7 @@ import styles from "./Signup.module.scss";
 import Logo from "../../UI/Logo/Logo";
 import Input from "../../UI/Input/Input";
 import google from "../../../assets/icons/google.svg";
-import Button from "../../UI/Button/Button";
+import globalStyles from "../../../styles/main.module.scss";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
@@ -27,13 +27,15 @@ const Signup = () => {
 
             {/* Create an account button*/}
             <div className={styles.cta}>
-              <Button type="default">Create account</Button>
+              <button className={globalStyles.defaultButton}>
+                Create account
+              </button>
 
               {/* Google Login Button */}
-              <Button type="google">
+              <button className={globalStyles.googleButton}>
                 <img src={google} alt="google" />
                 Sign up with Google
-              </Button>
+              </button>
             </div>
             {/* LINK TO SIGNUP */}
             <p className={styles.loginLink}>

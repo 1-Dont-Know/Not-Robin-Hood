@@ -4,47 +4,67 @@
 .container {
   min-height: 7rem;
   padding: 1rem 2rem;
-  @include mixins.flexbox(
-    $display: flex,
-    $alignItems: center,
-    $justifyContent: space-between,
-    $grow: 1,
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $alignItems: center,
+  //   $justifyContent: space-between
+  // );
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
 }
 
 .search {
-  @include mixins.flexbox(
-    $display: flex,
-    $flex-basis: 40%,
-    $grow: 1,
-    $shrink: 1
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $flex-basis: 40%,
+  //   $grow: 1,
+  //   $shrink: 1
+  // );
+  display: flex;
+  flex-basis: 40%;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
 .cta {
-  @include mixins.flexbox(
-    $display: flex,
-    $flex-basis: 40%,
-    $grow: 1,
-    $shrink: 1
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $flex-basis: 40%,
+  //   $grow: 1,
+  //   $shrink: 1
+  // );
+  display: flex;
+  flex-basis: 40%;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
 .profile {
-  @include mixins.flexbox(
-    $display: flex,
-    $flex-basis: 20%,
-    $grow: 1,
-    $shrink: 1,
-    $gap: 2rem,
-    $justifyContent: flex-end
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $flex-basis: 20%,
+  //   $grow: 1,
+  //   $shrink: 1,
+  //   $gap: 2rem,
+  //   $justifyContent: flex-end
+  // );
+  display: flex;
+  flex-basis: 20%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  gap: 2rem;
+  justify-content: flex-end;
   .notifications {
-    @include mixins.flexbox(
-      $display: flex,
-      $justifyContent: center,
-      $alignItems: center
-    );
+    // @include mixins.flexbox(
+    //   $display: flex,
+    //   $justifyContent: center,
+    //   $alignItems: center
+    // );
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 1.5rem;
     height: 1.5rem;
     background-color: variables.$golden;

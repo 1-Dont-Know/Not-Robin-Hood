@@ -1,12 +1,12 @@
 import React from "react";
-import Button from "../../UI/Button/Button";
+import globalStyles from "../../../styles/main.module.scss";
 // import PlusIcon from "../../../assets/icons/plus-icon.svg";
 import Sidebar from "../../UI/Sidebar/Sidebar";
 import TopNav from "../../UI/TopNav/TopNav";
 import styles from "./Markets.module.scss";
 import Hero from "../../UI/Hero/Hero";
-import Stock from "../../UI/Stock/StockMarket"
-import DownVectorIcon from "../../../assets/icons/down-vector.svg"
+import StockItem from "../../UI/StockItem/StockItem";
+import DownVectorIcon from "../../../assets/icons/down-vector.svg";
 
 const Markets = () => {
   return (
@@ -21,30 +21,29 @@ const Markets = () => {
           {/* Hero Section */}
           <Hero />
 
-                
-        <div >
-          <Button type="sort">
-            Sort
-            <img src={DownVectorIcon} alt="Vector "/>
-          </Button>
+          <div>
+            <button className={globalStyles.sortButton}>
+              Sort
+              <img src={DownVectorIcon} alt="Vector " />
+            </button>
 
-          <Button type="sort">
-            Time
-            <img src={DownVectorIcon} alt="Vector "/>
-          </Button>
-        </div>
+            <button className={globalStyles.sortButton}>
+              Time
+              <img src={DownVectorIcon} alt="Vector " />
+            </button>
+          </div>
 
-        <div className={styles.stockSection}>  
-          <Stock />
+          <div className={styles.stockSection}>
+            <StockItem />
 
-          <Stock />
+            <StockItem />
 
-          <Stock />
+            <StockItem />
 
-          <Stock />
+            <StockItem />
 
-          <Stock />
-        </div>  
+            <StockItem />
+          </div>
 
           {/* <Button type="addFunds">
             <img src={PlusIcon} alt="plus icon" />

@@ -1,7 +1,7 @@
 @use "../../../styles/variables.scss";
 @use "../../../styles/mixins.scss";
 
-.wrapper{
+.wrapper {
   display: flex;
   flex: 1;
   height: 100vh; //Temp
@@ -31,7 +31,7 @@
   gap: 0.5rem;
   span {
     font-size: 18px;
-    color: #2AB795;
+    color: #2ab795;
   }
 }
 
@@ -40,13 +40,12 @@
   font-weight: variables.$font-bold;
 }
 
-.preview{
+.preview {
   display: flex;
   // width: 100%;
   margin: 1rem 0rem;
   gap: 2rem;
   flex: 80%;
-
 }
 .graph {
   display: flex;
@@ -55,7 +54,6 @@
   //Fix for the graph not shrinking correctly. You cannot use
   //flex-grow for the graph component container. Width property used instead.
   width: 60%;
-
 }
 
 .buybox {
@@ -64,17 +62,18 @@
 }
 
 .filter {
-  @include mixins.flexbox(
-    $display: flex,
-    $gap: 1rem,
-    $justifyContent: space-evenly,
-    $wrap: wrap,
-    $flex-basis: 10%
-  
-  );
- 
-  margin-top: 10px;
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $gap: 1rem,
+  //   $justifyContent: space-evenly,
+  //   $wrap: wrap,
+  //   $flex-basis: 10%
+  // );
+  display: flex;
+  gap: 1rem;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-basis: 10%;
 
-  
-  
+  margin-top: 10px;
 }

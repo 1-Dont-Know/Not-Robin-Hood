@@ -10,13 +10,13 @@
 }
 
 .mainSection {
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 
   //Fix for the graph not resizing correctly
   //Using flex-grow here won't work. 400px is the size of the sidebar.
   width: calc(100% - 400px);
-  
 }
 
 // HERO SECTION
@@ -25,7 +25,8 @@
     $display: flex,
     $gap: 1rem,
     $justifyContent: space-evenly,
-    $wrap: wrap
+    $wrap: wrap,
+    $flex-basis: 25%
   );
   background-color: variables.$light-yellow;
   border-radius: 25px;
@@ -36,16 +37,13 @@
   @include mixins.flexbox(
     $display: flex,
     $gap: 1rem,
-    $justifyContent: space-evenly,
     $wrap: wrap,
+    $shrink: 1,
+    $flex-basis: 10%
   );
-  margin-top: 10px;
-  padding: 0 20px 0 20px;
 }
 
 .graph {
-  @include mixins.flexbox(
-    $grow: 1,
-  );
+  @include mixins.flexbox($grow: 1);
   margin: 10px 0 10px 0;
 }

@@ -6,12 +6,6 @@ import Hero from "../../UI/Hero/Hero";
 import FeaturedStock from "../../UI/FeaturedStock/FeaturedStock";
 import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used for Testing
 import Graph from "../../UI/Graph/Graph";
-import Button from "../../UI/Button/Button";
-import ToolIcon from "../../../assets/icons/tools-icon.svg";
-import CameraIcon from "../../../assets/icons/camera-icon.svg";
-import SquareIcon from "../../../assets/icons/square-icon.svg";
-import SettingIcon from "../../../assets/icons/settings.svg";
-import TimeBar from "../../UI/TimeBar/TimeBar";
 import Filter from "../../UI/Filter/Filter";
 
 const Account = () => {
@@ -25,7 +19,7 @@ const Account = () => {
       },
     ],
   });
-  
+
   return (
     <>
       <div className={styles.wrapper}>

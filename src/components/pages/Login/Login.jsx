@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Login.module.scss";
+import globalStyles from "../../../styles/main.module.scss";
 import Logo from "../../UI/Logo/Logo";
 import Input from "../../UI/Input/Input";
-import Button from "../../UI/Button/Button";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -27,7 +27,7 @@ const Login = () => {
             {/* SIGN IN BUTTON SECTION */}
             <div className={styles.cta}>
               {/* Sign in button*/}
-              <Button type="login">Sign in</Button>
+              <button className={globalStyles.loginButton}>Sign in</button>
             </div>
             {/* LINK TO SIGN UP */}
             <p className={styles.loginLink}>

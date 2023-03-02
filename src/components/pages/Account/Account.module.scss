@@ -9,42 +9,50 @@
 }
 
 .mainSection {
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-
   //Fix for the graph not resizing correctly
   //Using flex-grow here won't work. 400px is the size of the sidebar.
   width: calc(100% - 400px);
-  
 }
 
 // HERO SECTION
 .featured {
-  @include mixins.flexbox(
-    $display: flex,
-    $gap: 1rem,
-    $justifyContent: space-evenly,
-    $wrap: wrap
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $gap: 1rem,
+  //   $justifyContent: space-evenly,
+  //   $wrap: wrap,
+  //   $flex-basis: 25%
+  // );
+  display: flex;
+  gap: 1rem;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-basis: 25%;
   background-color: variables.$light-yellow;
   border-radius: 25px;
   padding: 1.4rem;
 }
 
 .filter {
-  @include mixins.flexbox(
-    $display: flex,
-    $gap: 1rem,
-    $justifyContent: space-evenly,
-    $wrap: wrap,
-  );
-  margin-top: 10px;
-  padding: 0 20px 0 20px;
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $gap: 1rem,
+  //   $wrap: wrap,
+  //   $shrink: 1,
+  //   $flex-basis: 10%
+  // );
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  flex-basis: 10%;
 }
 
 .graph {
-  @include mixins.flexbox(
-    $grow: 1,
-  );
+  // @include mixins.flexbox($grow: 1);
+  flex-grow: 1;
   margin: 10px 0 10px 0;
 }

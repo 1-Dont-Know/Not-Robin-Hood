@@ -2,11 +2,14 @@
 @use "../../../styles/mixins.scss";
 
 .container {
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: left,
-    $alignItems: center
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $justifyContent: left,
+  //   $alignItems: center
+  // );
+  display: flex;
+  justify-content: left;
+  align-items: center;
   box-sizing: border-box; //box-sizing property allows us to include the padding and border in an element's total width and height.
   background: #ffffff;
   border: 1px solid #32543a;

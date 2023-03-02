@@ -1,58 +1,76 @@
-
-@mixin boxShadow(){
-  box-shadow: 3px 12px 18px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 3px 12px 18px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 3px 12px 18px 0px rgba(0,0,0,0.75);
+@use "../styles//variables.scss";
+@mixin boxShadow() {
+  box-shadow: 3px 12px 18px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 12px 18px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 12px 18px 0px rgba(0, 0, 0, 0.75);
 }
-
-
 
 //* ======================== Flexbox Mixin ========================
 
-@mixin flexbox(
-  $display: flex,
-  $direction: row,
-  $placeContent: null,
-  $placeItems: null,
-  $wrap: nowrap,
-  $shrink: 1, //Default flexbox values
-  $grow: 0, //Default flexbox values
-  $flex-basis: 0,
-  $alignContent: null,
-  $justifyContent: null,
-  $alignItems: null,
-  $justifyItems: null,
-  $gap: null
-) {
-  
-  display: $display;
-  flex-direction: $direction;
-  @if $placeContent == null {
-    @if $alignContent {
-      align-content: $alignContent;
-    }
-    @if $justifyContent {
-      justify-content: $justifyContent;
-    }
-  } @else {
-    place-content: $placeContent;
-  }
+// @mixin flexbox(
+//   $display: flex,
+//   $direction: row,
+//   $placeContent: null,
+//   $placeItems: null,
+//   $wrap: nowrap,
+//   $shrink: 1, //Default flexbox values
+//   $grow: 0, //Default flexbox values
+//   $flex-basis: 0,
+//   $alignContent: null,
+//   $justifyContent: null,
+//   $alignItems: null,
+//   $justifyItems: null,
+//   $gap: null
+// ) {
+//   display: $display;
+//   flex-direction: $direction;
+//   @if $placeContent == null {
+//     @if $alignContent {
+//       align-content: $alignContent;
+//     }
+//     @if $justifyContent {
+//       justify-content: $justifyContent;
+//     }
+//   } @else {
+//     place-content: $placeContent;
+//   }
 
-  @if $placeItems == null {
-    @if $alignItems {
-      align-items: $alignItems;
-    }
-    @if $justifyItems {
-      justify-items: $justifyItems;
-    }
-  } @else {
-    place-items: $placeItems;
+//   @if $placeItems == null {
+//     @if $alignItems {
+//       align-items: $alignItems;
+//     }
+//     @if $justifyItems {
+//       justify-items: $justifyItems;
+//     }
+//   } @else {
+//     place-items: $placeItems;
+//   }
+//   flex-wrap: $wrap;
+//   flex-shrink: $shrink;
+//   flex-grow: $grow;
+//   flex-basis: $flex-basis;
+//   gap: $gap;
+// }
+
+//* ======================== Button Mixin ========================
+
+@mixin button {
+  margin: 0.7rem 0rem;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: variables.$font-regular;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  border-radius: 25px;
+  color: #fff;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background-color: variables.$secondary-color;
   }
-  flex-wrap: $wrap;
-  flex-shrink: $shrink;
-  flex-grow: $grow;
-  flex-basis: $flex-basis;
-  gap: $gap;
 }
 
 //* ======================== Breakpoints Mixin ========================

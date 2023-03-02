@@ -2,40 +2,30 @@ import React from "react";
 import Sidebar from "../../UI/Sidebar/Sidebar";
 import TopNav from "../../UI/TopNav/TopNav";
 import styles from "./Portfolio.module.scss";
-import Button from "../../UI/Button/Button";
 import Hero from "../../UI/Hero/Hero";
+import globalStyles from "../../../styles/main.module.scss";
 import vector from "../../../assets/icons/vector.svg";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend
-} from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
-ChartJS.register(
-  ArcElement,
-  Tooltip,
-  Legend
-);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Portfolio = () => {
 
   //Fake data for pie chart
   const data = {
     labels: [],
-    datasets: [{
-      label: 'Portfolio Value',
-      data: [45, 10, 45],
-      backgroundColor: ['#2AB795', '#C18E60', '#37433A',],
-      borderColor: ['#2AB795', '#C18E60', '#37433A'],
-    }]
-  }
+    datasets: [
+      {
+        label: "Portfolio Value",
+        data: [45, 10, 45],
+        backgroundColor: ["#2AB795", "#C18E60", "#37433A"],
+        borderColor: ["#2AB795", "#C18E60", "#37433A"],
+      },
+    ],
+  };
 
-  const options = {
-
-  }
-
+  const options = {};
   const textCenter = {
     id: "textCenter",
     beforeDatasetsDraw(chart, args, pluginOptions) {
@@ -94,18 +84,16 @@ const Portfolio = () => {
                 </div>
               </div>
 
+              <div className={styles.profileLowerSection}>
+                <span>
+                  <button className={globalStyles.settingsButton}>
+                    <span className={styles.pls}>
+                      Portfolio Lower Section{" "}
+                      <img src={vector} alt="vector"></img>
+                    </span>
+                  </button>
+                </span>
 
-              <div className="row">
-                <div className={styles.profileLowerSection}>
-                  <span>
-                    <Button type="settings">
-                      <span className={styles.pls}>
-                        Portfolio Lower Section{" "}
-                        <img src={vector} alt="vector"></img>
-                      </span>
-                    </Button>
-                  </span>
-                </div>
               </div>
             </div>
           </Hero>

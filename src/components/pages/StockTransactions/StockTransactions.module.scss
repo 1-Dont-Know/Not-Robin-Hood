@@ -4,17 +4,73 @@
 // WRAPPER SECTION
 
 .wrapper {
-  @include mixins.flexbox($display: flex, $grow: 1);
+  // @include mixins.flexbox($display: flex, $grow: 1);
+  display: flex;
+  flex-grow: 1;
 }
 
 // HERO SECTION
-.heroSection {
-  height: 100%;
-  @include mixins.flexbox(
-    $display: flex,
-    $grow: 1,
-    $direction: column,
-    $flex-basis: 90%,
-    $shrink: 1
-  );
+.mainSection {
+  height: 100vh;
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $grow: 1,
+  //   $direction: column,
+  //   // $flex-basis: 90%,
+  //   $shrink: 1
+  // );
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  flex-shrink: 1;
+}
+
+.titleSection {
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $grow: 0,
+  //   // $flex-basis: 10%,
+  //   $shrink: 1
+  // );
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 1;
+  margin-bottom: 13px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: variables.$font-bold;
+}
+
+.transactions {
+  background-color: variables.$primary-color;
+  border-radius: 25px;
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $grow: 1,
+  //   $flex-basis: 80%,
+  //   $shrink: 1
+  // );
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 80%;
+  flex-shrink: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  max-height: 60%;
+}
+
+.transactionsList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.filter {
+  // @include mixins.flexbox($display: flex, $grow: 0, $flex-basis: 10%);
+  display: flex;
+  flex-grow: 0;
+  flex-basis: 10%;
 }

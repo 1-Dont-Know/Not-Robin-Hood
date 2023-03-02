@@ -8,12 +8,6 @@
 }
 
 .mainSection {
-  @include mixins.flexbox(
-    $display: flex,
-    $direction: column,
-    $grow: 1,
-    $shrink: 1
-  );
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -48,6 +42,6 @@
 }
 
 .graph {
-  @include mixins.flexbox($grow: 1, $shrink: 1, $flex-basis: 65%);
-  // margin: 10px 0 10px 0;
+  @include mixins.flexbox($grow: 1);
+  margin: 10px 0 10px 0;
 }

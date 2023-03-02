@@ -1,3 +1,66 @@
 @use "../../../styles/mixins.scss";
 @use "../../../styles//variables.scss";
 
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #d5e3e1;
+}
+.settingsNavBar { 
+    display: flex;
+    align-content: row;
+    margin-top: 10%;
+    margin-right: 25px;
+    gap: 5%;
+    background-color: red;
+}
+.settingsContainer 
+{ 
+    /*@include mixins.flexbox(
+    $display: flex,
+    $direction: row,
+    $alignItems: center,
+    );*/
+    
+    background-color: white;
+    border-radius: 25px;
+    padding-left: 1%;
+    margin-left: 2.5%;
+    width: 95%;
+    height: 30rem;
+}
+
+Button {
+    //font-size: 15px;
+
+}
+.logo {
+    display: flex;
+    //position: fixed;
+    //margin-left: 25px;
+    align-content: flex-end;
+}
+.listItem { //Logout button
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: variables.$secondary-color;
+    margin: 3px;
+    padding-top: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    display: flex;
+    position: relative;
+
+    img {
+        max-width: 10.5rem;
+    }
+
+    &:hover {
+        background-color: #fff;
+        border-radius: 25px;
+    }
+
+    
+}

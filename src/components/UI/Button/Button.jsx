@@ -41,6 +41,10 @@ const Button = ({ type, children }) => {
           ? styles.stockInfoButton
           : type === "whiteBuy"
           ? styles.whiteBuyButton
+          : type === "settingsPage"
+          ? styles.settingsPageButton
+          : type === "saveChanges"
+          ? styles.saveChangesButton
           : styles.default
       }
     >

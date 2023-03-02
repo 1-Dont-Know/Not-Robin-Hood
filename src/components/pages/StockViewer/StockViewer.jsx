@@ -1,8 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styles from "./StockViewer.module.scss";
-import Button from "../../UI/Button/Button";
-import people from "../../../assets/icons/people-icon.svg"
-import creditCard from "../../../assets/icons/credit-card-icon.svg"
+import people from "../../../assets/icons/people-icon.svg";
+import creditCard from "../../../assets/icons/credit-card-icon.svg";
 import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used for Testing
 import Graph from "../../UI/Graph/Graph";
 import BuyBox from "../../UI/BuyBox/BuyBox";
@@ -35,19 +34,20 @@ const AppFundsPopup = () => {
         {/* Hero Section */}
         <Hero>
           <div className={styles.stockNameWrapper}>
-          <h1 className={styles.stockName}>BINANCE (BNB-USD)</h1>
-          <p className={styles.stockPrice}>$59.71
-          <span className={styles.growth}>$51.29(4.78%)</span>
-          </p>
+            <h1 className={styles.stockName}>BINANCE (BNB-USD)</h1>
+            <p className={styles.stockPrice}>
+              $59.71
+              <span className={styles.growth}>$51.29(4.78%)</span>
+            </p>
           </div>
-         {/* <AddFunds></AddFunds> */}
+          {/* <AddFunds></AddFunds> */}
           <div className={styles.preview}>
-           {/* //! GRAPH SECTION */}
+            {/* //! GRAPH SECTION */}
             <section className={styles.graph}>
               <Graph chartData={stockData} />
             </section>
             <section className={styles.buybox}>
-            <BuyBox/>
+              <BuyBox />
             </section>
           </div>
           {/* //! FILTER SECTION */}
@@ -57,8 +57,9 @@ const AppFundsPopup = () => {
         </Hero>
       </main>
     </div>
-
   );
 };
+
+
 
 export default AppFundsPopup;

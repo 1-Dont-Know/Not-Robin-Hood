@@ -1,17 +1,19 @@
 @use "../../../styles/variables.scss";
 @use "../../../styles/mixins.scss";
 
-.wrapper{
+.wrapper {
   display: flex;
+  flex: 1;
+  height: 100vh; //Temp
 }
 
 .mainSection {
-  @include mixins.flexbox(
-    $display: flex,
-    $direction: column,
-    $grow: 1,
-    $shrink: 1,
-  );
+  display: flex;
+  flex-direction: column;
+
+  //Fix for the graph not resizing correctly
+  //Using flex-grow here won't work. 400px is the size of the sidebar.
+  width: 100%;
 }
 
 .stockNameWrapper {
@@ -29,7 +31,7 @@
   gap: 0.5rem;
   span {
     font-size: 18px;
-    color: #2AB795;
+    color: #2ab795;
   }
 }
 
@@ -38,37 +40,40 @@
   font-weight: variables.$font-bold;
 }
 
-.preview{
+.preview {
   display: flex;
-  width: 100%;
-  flex-direction: row;
+  // width: 100%;
   margin: 1rem 0rem;
   gap: 2rem;
   flex: 80%;
-
 }
 .graph {
-display: flex;
-flex: 60%;
+  display: flex;
+  height: 100%;
+
+  //Fix for the graph not shrinking correctly. You cannot use
+  //flex-grow for the graph component container. Width property used instead.
+  width: 60%;
 }
 
 .buybox {
   display: flex;
-  flex: 40%;
+  flex: 1;
 }
 
 .filter {
-  @include mixins.flexbox(
-    $display: flex,
-    $gap: 1rem,
-    $justifyContent: space-evenly,
-    $wrap: wrap,
-    $flex-basis: 10%
-  
-  );
- 
-  margin-top: 10px;
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $gap: 1rem,
+  //   $justifyContent: space-evenly,
+  //   $wrap: wrap,
+  //   $flex-basis: 10%
+  // );
+  display: flex;
+  gap: 1rem;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-basis: 10%;
 
-  
-  
+  margin-top: 10px;
 }

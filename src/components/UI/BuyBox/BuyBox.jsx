@@ -5,11 +5,11 @@ import Button from "../Button/Button";
 const BuyBox = ({ type, placeholder }) => {
     return (
       <div className={styles.BuyBody}>
-            <div className={styles.wrapper}>
-            <div className={styles.button}> 
-                <Button type="buyBox"> Buy </Button>
-                <Button type="sell"> Sell </Button>
-            </div>
+            
+                <div className={styles.button}> 
+                    <Button type="buyBox"> Buy </Button>
+                    <Button type="sell"> Sell </Button>
+                </div>
                 <input type="select" className={styles.dropdown} value="QTR"/>
                 <input type="select" className={styles.dropdown} value="MM/DD"/>
 
@@ -17,7 +17,7 @@ const BuyBox = ({ type, placeholder }) => {
                 <div className={styles.orders}>
                     <p>Order conformation</p>
                 </div>
-            </div>
+            
         </div>
   
     );

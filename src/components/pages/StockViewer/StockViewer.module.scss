@@ -51,6 +51,9 @@
 .graph {
   display: flex;
   height: 100%;
+
+  //Fix for the graph not shrinking correctly. You cannot use
+  //flex-grow for the graph component container. Width property used instead.
   width: 60%;
 
 }

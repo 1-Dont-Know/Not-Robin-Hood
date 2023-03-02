@@ -2,13 +2,18 @@
 @use "../../../styles/variables.scss";
 
 .transactionItem {
-  @include mixins.flexbox(
-    $display: flex,
-    $grow: 1,
-    $flex-basis: 100%,
-    $alignItems: center,
-    $shrink: 1
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $grow: 1,
+  //   $flex-basis: 100%,
+  //   $alignItems: center,
+  //   $shrink: 1
+  // );
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 100%;
+  align-items: center;
+  flex-shrink: 1;
   padding: 1.125rem;
   background-color: rgb(111, 133, 126);
   border-radius: 25px;
@@ -32,20 +37,29 @@
 
 .stockName,
 .stockPrice {
-  @include mixins.flexbox(
-    $display: flex,
-    $grow: 0,
-    $flex-basis: 15%,
-    $shrink: 1,
-    $justifyContent: center
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $grow: 0,
+  //   $flex-basis: 15%,
+  //   $shrink: 1,
+  //   $justifyContent: center
+  // );
+  display: flex;
+  flex-grow: 0;
+  flex-basis: 15%;
+  flex-shrink: 1;
+  justify-content: center;
 }
 
 .stockInfo {
-  @include mixins.flexbox(
-    $display: flex,
-    $grow: 1,
-    $flex-basis: 60%,
-    $shrink: 1
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $grow: 1,
+  //   $flex-basis: 60%,
+  //   $shrink: 1
+  // );
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 60%;
+  flex-shrink: 1;
 }

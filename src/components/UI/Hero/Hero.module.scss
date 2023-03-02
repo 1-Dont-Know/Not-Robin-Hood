@@ -3,15 +3,19 @@
 
 .container {
   padding: 1.5rem 2rem;
-  // padding-top: 0rem;
-  // overflow-y: auto;
+  padding-top: 0rem;
+  overflow-y: auto;
 
-  @include mixins.flexbox(
-    $display: flex,
-    $direction: column,
-    $grow: 1,
-    $shrink: 1,
-    $flex-basis: 100%,
-    $gap: 1rem
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $direction: column,
+  //   $grow: 1,
+  //   $shrink: 1,
+  //   // $flex-basis: 100%,
+  //   // $gap: 1rem
+  // );
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
 }

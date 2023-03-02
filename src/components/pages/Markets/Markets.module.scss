@@ -4,19 +4,26 @@
 // WRAPPER SECTION
 
 .wrapper {
-  @include mixins.flexbox($display: flex, $grow: 1);
+  // @include mixins.flexbox($display: flex, $grow: 1);
+  display: flex;
+  flex-grow: 1;
 }
 
 // HERO SECTION
 .mainSection {
   height: 100%;
-  @include mixins.flexbox(
-    $display: flex,
-    $grow: 1,
-    $direction: column,
-    $flex-basis: 90%,
-    $shrink: 1
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $grow: 1,
+  //   $direction: column,
+  //   $flex-basis: 90%,
+  //   $shrink: 1
+  // );
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 90%;
 }
 
 .stockSection {

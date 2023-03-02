@@ -97,43 +97,24 @@ body {
 
 // Default type button
 
-.default {
-  margin: 0.7rem 0rem;
+.defaultButton {
   background-color: variables.$green;
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
-  font-weight: variables.$font-regular;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
-
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
-  border-radius: 25px;
-  color: #fff;
-  transition: 0.3s ease-in-out;
-
-  &:hover {
-    background-color: variables.$secondary-color;
-  }
+  margin: 0.7rem 0rem;
+  @include mixins.button;
 }
 
 // Login type button
 
-.login {
+.loginButton {
   margin: 0.7rem 0rem;
   background-color: variables.$golden;
   padding: 1rem 2rem;
   font-size: 1.5rem;
   font-weight: variables.$font-regular;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 25px;
   color: #fff;
@@ -145,13 +126,11 @@ body {
 
 // Google type button
 
-.google {
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
+.googleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   background-color: #fff;
   color: #000;
   font-size: 1.5rem;
@@ -184,12 +163,16 @@ body {
   font-size: 24px;
   min-width: 14rem;
   font-weight: variables.$font-medium;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $justifyContent: center,
+  //   $alignItems: center,
+  //   $grow: 1
+  // );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 25px;
   color: #fff;
@@ -212,12 +195,10 @@ body {
   padding: 1.2rem 2rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 25px;
   color: #fff;
@@ -240,12 +221,10 @@ body {
   padding: 1.2rem 2rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 25px;
   color: #ae2424;
@@ -270,12 +249,10 @@ body {
   min-width: 14rem;
   font-size: 24px;
   font-weight: variables.$font-medium;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   // box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 25px;
   color: #37433a;
@@ -304,12 +281,10 @@ body {
   width: 100%;
   background-color: variables.$primary-color;
   padding: 1rem;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 50%;
   color: #37433a;
@@ -330,12 +305,10 @@ body {
   padding: 1rem 1.2rem;
   font-size: 24px;
   font-weight: variables.$font-regular;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   background: #d5e3e1;
   border-radius: 25px;
@@ -360,12 +333,10 @@ body {
   font-size: 1rem;
   padding: 1rem 0rem;
   color: #37433a;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.17);
   background: #ffffff;
   border-radius: 25px;
@@ -385,12 +356,10 @@ body {
   width: 100%;
   background-color: variables.$primary-color;
   padding: 1rem;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $grow: 1
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   border-radius: 50%;
   color: #37433a;
@@ -411,12 +380,10 @@ body {
   background: #d5e3e1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   transition: 0.3s ease-in-out;
-  @include mixins.flexbox(
-    $display: flex,
-    $alignItems: center,
-    $grow: 1,
-    $justifyContent: center
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   &:first-child {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
@@ -435,20 +402,16 @@ body {
 }
 
 .addFundsButton {
-  @include mixins.flexbox(
-    $display: flex,
-    $alignItems: center,
-    $justifyContent: center,
-    $grow: 1
-  );
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   font-family: "Roboto";
   font-weight: 600;
   font-size: 24px;
 
   // Perhaps we may want to use a global variable to define a fixed min height for all buttons for design consistency
   min-height: 60px;
-
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   background: white;
   color: variables.$secondary-color;
@@ -481,13 +444,10 @@ body {
 }
 
 .stockInfoButton {
-  @include mixins.flexbox(
-    $display: flex,
-    $alignItems: center,
-    $justifyContent: end,
-    $grow: 1
-  );
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   padding: 1rem 1.5rem;
   margin-left: 7.25rem;
   width: 615px;
@@ -496,7 +456,6 @@ body {
   top: 291px;
   background: #ffffff;
   border-radius: 25px;
-
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -517,13 +476,10 @@ body {
 }
 
 .whiteBuyButton {
-  @include mixins.flexbox(
-    $display: flex,
-    $alignItems: center,
-    $justifyContent: center,
-    $grow: 1
-  );
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   background: #ffffff;
   border-radius: 25px;
   width: 150px;
@@ -534,7 +490,6 @@ body {
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
-
   padding: 1rem 1.5rem;
   margin-left: 7rem;
   margin-right: 1.5rem;
@@ -554,13 +509,10 @@ body {
 }
 
 .stockInfoButton {
-  @include mixins.flexbox(
-    $display: flex,
-    $alignItems: center,
-    $justifyContent: end,
-    $grow: 1
-  );
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   padding: 1rem 1.5rem;
   margin-left: 7.25rem;
   width: 615px;
@@ -569,12 +521,10 @@ body {
   top: 291px;
   background: #ffffff;
   border-radius: 25px;
-
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
-
   &:hover {
     background-color: variables.$secondary-color;
     transition: 0.3s ease-in-out;
@@ -590,13 +540,10 @@ body {
 }
 
 .whiteBuyButton {
-  @include mixins.flexbox(
-    $display: flex,
-    $alignItems: center,
-    $justifyContent: center,
-    $grow: 1
-  );
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
   background: #ffffff;
   border-radius: 25px;
   width: 150px;
@@ -607,7 +554,6 @@ body {
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
-
   padding: 1rem 1.5rem;
   margin-left: 7rem;
   margin-right: 1.5rem;

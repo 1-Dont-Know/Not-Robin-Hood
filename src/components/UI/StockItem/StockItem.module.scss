@@ -7,22 +7,19 @@
 }
 
 .stockBody {
-  @include mixins.flexbox(
-    $display: flex,
-    $direction: row,
-    $alignItems: center,
-    );
+  // @include mixins.flexbox($display: flex, $direction: row, $alignItems: center);
+  display: flex;
+  align-items: center;
 
   width: 1450px;
   height: 89px;
   left: 470px;
   top: 274px;
-  background: #D5E3E1;
+  background: #d5e3e1;
   border-radius: 25px;
 }
 
 .stockInfo {
-
 }
 
 .buyButton {
@@ -30,5 +27,5 @@
   height: 54px;
   left: 1693px;
   top: 291px;
-  background: #FFFFFF;
+  background: #ffffff;
 }

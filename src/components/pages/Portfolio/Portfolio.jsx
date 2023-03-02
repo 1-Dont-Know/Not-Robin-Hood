@@ -2,49 +2,42 @@ import React from "react";
 import Sidebar from "../../UI/Sidebar/Sidebar";
 import TopNav from "../../UI/TopNav/TopNav";
 import styles from "./Portfolio.module.scss";
-import Button from "../../UI/Button/Button";
+import globalStyles from "../../../styles/main.module.scss";
 import vector from "../../../assets/icons/vector.svg";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend
-} from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
-ChartJS.register(
-  ArcElement,
-  Tooltip,
-  Legend
-);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Portfolio = () => {
   const data = {
     labels: [],
-    datasets:[{
-      label: 'Portfolio Value',
-      data: [45, 10, 45],
-      backgroundColor: ['#2AB795','#C18E60','#37433A',],
-      borderColor: ['#2AB795', '#C18E60', '#37433A'],
-    }]
-  }
+    datasets: [
+      {
+        label: "Portfolio Value",
+        data: [45, 10, 45],
+        backgroundColor: ["#2AB795", "#C18E60", "#37433A"],
+        borderColor: ["#2AB795", "#C18E60", "#37433A"],
+      },
+    ],
+  };
 
-  const options = {
-
-  }
-  const textCenter ={
+  const options = {};
+  const textCenter = {
     id: "textCenter",
-    beforeDatasetsDraw(chart, args, pluginOptions){
-      const {ctx, data } = chart;
+    beforeDatasetsDraw(chart, args, pluginOptions) {
+      const { ctx, data } = chart;
       ctx.save();
-      ctx.font = 'bolder 24px sans-serif';
-      ctx.fillStyle = 'black';
-      ctx.textAlign = 'center';
-      ctx.fillText(`Total Portfolio Value: ${data.datasets[0].data[0]}`, 
-      chart.getDatasetMeta(0).data[0].x, 
-      chart.getDatasetMeta(0).data[0].y);
-    }
-  }
+      ctx.font = "bolder 24px sans-serif";
+      ctx.fillStyle = "black";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        `Total Portfolio Value: ${data.datasets[0].data[0]}`,
+        chart.getDatasetMeta(0).data[0].x,
+        chart.getDatasetMeta(0).data[0].y
+      );
+    },
+  };
   return (
     <>
       <div className={styles.wrapper}>
@@ -64,17 +57,17 @@ const Portfolio = () => {
             <br></br>
 
             <div className={styles.ihsButtons}>
-              <Button type="settings">
+              <button className={globalStyles.settingsButton}>
                 <strong className={styles.ihs}>Investing</strong>
-              </Button>
+              </button>
 
-              <Button type="settings">
+              <button className={globalStyles.settingsButton}>
                 <strong className={styles.ihs}>History</strong>
-              </Button>
+              </button>
 
-              <Button type="settings">
+              <button className={globalStyles.settingsButton}>
                 <strong className={styles.ihs}>Settings</strong>
-              </Button>
+              </button>
             </div>
           </div>
           <br></br>
@@ -82,7 +75,6 @@ const Portfolio = () => {
             <ol className={styles.valueText}>Total Portfolio Value</ol>
             <ol className={styles.dollarAmount}>$200.00</ol>
             <ol className={styles.stocksOptions}>
-            
               {" "}
               Stocks & Options
               <span className={styles.wordSpace}>26.35%</span>
@@ -105,22 +97,20 @@ const Portfolio = () => {
             <hr className={styles.line}></hr>
             <div className={styles.doughnutGraph}>
               <Doughnut
-                data = {data}
-                options = {options}
-                plugins = {[textCenter]}
+                data={data}
+                options={options}
+                plugins={[textCenter]}
               ></Doughnut>
             </div>
 
-              
-
             <div className={styles.profileLowerSection}>
               <span>
-                <Button type="settings">
+                <button className={globalStyles.settingsButton}>
                   <span className={styles.pls}>
                     Portfolio Lower Section{" "}
                     <img src={vector} alt="vector"></img>
                   </span>
-                </Button>
+                </button>
               </span>
             </div>
           </div>

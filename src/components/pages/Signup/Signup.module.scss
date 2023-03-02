@@ -6,7 +6,8 @@
   height: 100vh;
   width: 100vw;
   background-color: variables.$primary-color;
-  @include mixins.flexbox($display: flex);
+  // @include mixins.flexbox($display: flex);
+  display: flex;
 }
 
 .wrapper {
@@ -20,26 +21,32 @@
 .nav {
   min-height: 3.125rem;
   max-height: 6.25rem;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: space-between,
-    $alignItems: center
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $justifyContent: space-between,
+  //   $alignItems: center
+  // );
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include mixins.breakpoint-down(small) {
+    justify-content: center;
+  }
 }
 
 // MAIN SECTION
 
 .box {
-  @include mixins.flexbox($display: flex, $grow: 1);
+  display: flex;
+  flex-grow: 1;
   width: 100%;
   @include mixins.breakpoint-down(medium) {
-    @include mixins.flexbox(
-      $display: flex,
-      $grow: 1,
-      $direction: column,
-      $alignItems: center,
-      $justifyContent: center
-    );
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     background-image: linear-gradient(
         rgba(166, 222, 207, 0.5),
         rgba(166, 222, 207, 0.5)
@@ -70,17 +77,18 @@
 .signup {
   width: 40%;
   height: 100%;
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $justifyContent: center,
+  //   $alignItems: center,
+  //   $direction: column,
+  //   $grow: 1
+  // );
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  @include mixins.flexbox(
-    $display: flex,
-    $justifyContent: center,
-    $alignItems: center,
-    $direction: column,
-    $grow: 1
-  );
+  flex-grow: 1;
   @include mixins.breakpoint-down(medium) {
     align-items: center;
     height: 100%;
@@ -92,7 +100,9 @@
 .cta {
   width: 100%;
   margin-top: 2rem;
-  @include mixins.flexbox($display: flex, $direction: column);
+  // @include mixins.flexbox($display: flex, $direction: column);
+  display: flex;
+  flex-direction: column;
 }
 
 // LINK TO LOGIN
@@ -114,7 +124,9 @@
 
 .signupForm {
   width: 60%;
-  @include mixins.flexbox($display: flex, $direction: column);
+  // @include mixins.flexbox($display: flex, $direction: column);
+  display: flex;
+  flex-direction: column;
   text-align: center;
   h1 {
     font-size: variables.$font-lg;
@@ -132,6 +144,9 @@
     font-weight: variables.$font-regular;
     color: variables.$green;
     margin: 1rem 0rem;
+    @include mixins.breakpoint-down(xlarge) {
+      font-size: 1.2rem;
+    }
     @include mixins.breakpoint-down(large) {
       font-size: 1.25rem;
     }

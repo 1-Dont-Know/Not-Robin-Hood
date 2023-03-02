@@ -7,7 +7,7 @@ const Settings = () => {
     <div>
       <h1>Setting Page</h1>
       {/* <NotificationPopUp></NotificationPopUp> */}
-      { <AddFunds></AddFunds> }
+      <AddFunds></AddFunds>
     </div>
   );
 };

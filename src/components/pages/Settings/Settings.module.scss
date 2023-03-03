@@ -1,19 +1,26 @@
 @use "../../../styles/mixins.scss";
 @use "../../../styles//variables.scss";
 
-
+.logo {
+    display: flex;
+    //position: fixed;
+    margin-left: 2.5%;
+    align-content: flex-end;
+}
 .container {
     display: flex;
     flex-direction: column;
     background-color: #d5e3e1;
+    height: 1500rem;
 }
 .settingsNavBar { 
     display: flex;
-    align-content: row;
-    margin-top: 10%;
-    margin-right: 25px;
-    gap: 5%;
-    background-color: red;
+    //align-content: row;
+    //margin-top: 10%;
+    //margin-right: 25px;
+    margin-bottom: 25px;
+    gap: 2%;
+    background-color: transparent;
 }
 .settingsContainer 
 { 
@@ -22,45 +29,69 @@
     $direction: row,
     $alignItems: center,
     );*/
-    
+    display: wrap;
+    //justify-content: space-between;
+    height: 1500rem;
+
+
     background-color: white;
     border-radius: 25px;
-    padding-left: 1%;
+    padding-left: 2rem;
+    padding-right: 2rem;
     margin-left: 2.5%;
+    padding-top: 2%;
     width: 95%;
     height: 30rem;
+
+    h1 {
+        display: flex;
+        font-weight: 500;
+        font-size: 32px;
+        font-family: Arial;
+    }
+
+    h2 {
+        display: flex;
+        font-weight: 200;
+        font-size: 24px;
+        font-family: Arial;
+    }
+    input[type=text], select {
+        width: 25%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    & #delete {
+        color: red;
+    } //NEED HELP
 }
 
-Button {
-    //font-size: 15px;
-
-}
-.logo {
-    display: flex;
-    //position: fixed;
-    //margin-left: 25px;
-    align-content: flex-end;
-}
 .listItem { //Logout button
+    display: flex;
+    position: relative;    
     font-size: 1.6rem;
     font-weight: bold;
     color: variables.$secondary-color;
-    margin: 3px;
+    margin: 5px;
     padding-top: 5px;
+    padding-left: 5px;
     border-radius: 25px;
+    width: 8rem;
     cursor: pointer;
     transition: 0.3s ease-in-out;
-    display: flex;
-    position: relative;
+
 
     img {
-        max-width: 10.5rem;
+        width: 2rem;
     }
 
     &:hover {
         background-color: #fff;
-        border-radius: 25px;
+        border-radius: 15px;
     }
 
-    
 }

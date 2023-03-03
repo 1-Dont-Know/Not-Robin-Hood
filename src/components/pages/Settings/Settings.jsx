@@ -4,8 +4,7 @@ import AddFunds from "../../UI/AddFunds/AddFunds";
 import Sidebar from "../../UI/Sidebar/Sidebar";
 //import TopNav from "../../UI/TopNav/TopNav";
 import styles from "./Settings.module.scss";
-import Button from "../../UI/Button/Button";
-import buttonStyle from "../../UI/Button/Button.module.scss";
+import globalStyles from "../../../styles/main.module.scss";
 import Logo from "../../UI/Logo/Logo";
 import logout from "../../../assets/icons/logout.svg";
 import settings from "../../../assets/icons/settings.svg";
@@ -27,28 +26,56 @@ const Settings = () => {
           <Hero>
             {/* */}
               <section className={styles.featured}>
+                Modify your settings.
             {/* */}
             </section>
 
         </Hero>        
-        <div className={styles.settingsNavBar}> 
-          <Button type={"settingsPage"} className="saveChangesButton"><img src={settings} alt="settings"/>Settings<img src={divider} alt="divider"/></Button>
-          <Button type={"settingsPage"} className="saveChangesButton"><img src={alert} alt="alert"/>Notifications<img src={divider} alt="divider"/></Button>
-          <Button type={"settingsPage"} className="saveChangesButton"><img src={person} alt="person"/>Account Info<img src={divider} alt="divider"/></Button>        
+        <div className={styles.settingsNavBar}>
+          <button className={globalStyles.settingsPageButton}><img src={settings} alt="settings"/>
+            Settings</button><img src={divider} alt="divider" id="divider"/>
+          <button className={globalStyles.settingsPageButton}><img src={alert} alt="alert"/>
+            Notifications</button><img src={divider} alt="divider" id="divider"/>
+          <button className={globalStyles.settingsPageButton}><img src={person} alt="person"/>
+            Account Info</button><img src={divider} alt="divider" id="divider"/>       
         </div>
         </main>
 
         {/*Settings, Notifications, Account Info Container*/}
+        {/*Settings Tab*/}
         <section className={styles.settingsContainer}>
-        Hey hi hello yeah whats up
+          <h1 id="settingsOption">Dark Mode</h1>
+          <input type="checkbox" id="switch" /><label for="switch">Toggle</label>
+        {}
+          <h1 id="settingsOption">Receive Notifications</h1>
+            <input type="checkbox" id="switch" /><label for="switch">Receive Notifications</label>
+            
+          <h1 id="settingsOption">Text Notifications</h1>
+            <input type="checkbox" id="switch" /><label for="switch">Text Notifications</label>
 
-        {/*Save Changes Button*/}
-          <section>
-            <Button type={"saveChanges"}>Save Changes</Button>
-          </section>
+          <h2 id="settingsOption">Text Number</h2>
+            <input type="text" id="phoneNumber" placeholder="(___)---___---____"/>
+            
+          <h1 id="settingsOption">Change your password</h1>
+            <input type="text" id="password" placeholder="current password"/>
+            <input type="text" id="password" placeholder="new password"/>
+            <button className={globalStyles.saveChangesButton}>Save</button>
+
+          <h1 id="settingsOption">Change your name</h1>
+            <input type="text" id="name" placeholder="current name"/>
+            <input type="text" id="name" placeholder="new name"/>
+            <button className={globalStyles.saveChangesButton}>Save</button>
+
+          <h1 id="settingsOption">Delete Account</h1>
+            <button className={globalStyles.saveChangesButton} id="delete">Delete Account</button>
 
         </section>
 
+        {/*Save Changes Button*/}
+        <section>
+          <button className={globalStyles.saveChangesButton}>Save Changes</button>
+        </section>
+    
         {/*Logout section*/}
         <NavLink to="/signup">
           <div className={styles.listItem} id="logout">

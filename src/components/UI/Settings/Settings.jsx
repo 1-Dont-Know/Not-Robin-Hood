@@ -5,6 +5,7 @@ import React from "react";
 import globalStyles from "../../../styles/main.module.scss";
 
 const Settings = () => {
+
   return (
     <>
       <button className={globalStyles.settingsButton}>

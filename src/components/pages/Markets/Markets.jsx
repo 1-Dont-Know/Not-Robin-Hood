@@ -1,6 +1,5 @@
 import React from "react";
 import globalStyles from "../../../styles/main.module.scss";
-// import PlusIcon from "../../../assets/icons/plus-icon.svg";
 import Sidebar from "../../UI/Sidebar/Sidebar";
 import TopNav from "../../UI/TopNav/TopNav";
 import styles from "./Markets.module.scss";
@@ -9,6 +8,9 @@ import StockItem from "../../UI/StockItem/StockItem";
 import DownVectorIcon from "../../../assets/icons/down-vector.svg";
 
 const Markets = () => {
+  /*declare a constant variable and set value to 5*/
+   const numStocks = 5;
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -33,22 +35,15 @@ const Markets = () => {
             </button>
           </div>
 
+          {/* created array with numStocks,
+          each StockItem have unique key base on index of array.
+          Then display numStock value.*/}
           <div className={styles.stockSection}>
-            <StockItem />
-
-            <StockItem />
-
-            <StockItem />
-
-            <StockItem />
-
-            <StockItem />
+            {Array.from({ length: numStocks }, (_, index) => (
+              <StockItem key={index} />
+            ))}
           </div>
 
-          {/* <Button type="addFunds">
-            <img src={PlusIcon} alt="plus icon" />
-            Add Funds
-          </Button> */}
         </main>
       </div>
     </>

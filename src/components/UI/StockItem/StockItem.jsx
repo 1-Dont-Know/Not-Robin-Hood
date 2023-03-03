@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./StockItem.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 import DownVectorIcon from "../../../assets/icons/down-vector.svg";
 import cart from "../../../assets/icons/shopping-cart.svg";
+
+function Accordion(props) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className={styles.stockInfo}>
+      <button className={globalStyles.stockInfoButton} onClick={toggleAccordion}>
+        <p>{props.title}</p>
+        <img src={DownVectorIcon} alt="arrow down" className={isOpen ? styles.rotated : ""}/>
+      </button>
+      {isOpen && (
+        <div className={styles.stockInfoContent}>
+          <div className={styles.stockInfoText}>{props.children}</div>
+        </div>
+      )}
+    </div>
+  );
+}
+/*fake data */
+const stockSymbols = ["AAPL", "GOOG", "TSLA", "AMZN", "FB"];
+const stockValues = [100, 200, 300, 400, 500];
+
+const generateRandomStockValue = () => {
+  const randomIndex = Math.floor(Math.random() * stockValues.length);
+  return stockValues[randomIndex];
+};
+
 
 const StockMarket = () => {
   return (
@@ -10,51 +41,24 @@ const StockMarket = () => {
       <div>
         <div className={styles.stockSection}>
           <div className={styles.stockBody}>
-            <button className={globalStyles.stockSymbolButton}>BNB-USD</button>
+            
+            <button className={globalStyles.stockSymbolButton}>
+              {stockSymbols[Math.floor(Math.random() * stockSymbols.length)]}
+            </button>
 
-            <button className={globalStyles.stockValueButton}>$35</button>
+            <button className={globalStyles.stockValueButton}>
+              ${generateRandomStockValue()}
+            </button>
 
-            <div className={styles.stockInfo}>
-              <button className={globalStyles.stockInfoButton}>
-                <p> Stock Information</p>
-                <svg
-                  width="15"
-                  height="9"
-                  viewBox="0 0 15 9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M0.31343 0.326813C0.514179 0.126125 0.786417 0.0133838 1.07028 0.0133838C1.35414 0.0133838 1.62637 0.126125 1.82712 0.326813L7.49331 5.993L13.1595 0.326813C13.2582 0.224569 13.3764 0.143015 13.507 0.086911C13.6376 0.0308068 13.7781 0.00127558 13.9202 4.04177e-05C14.0623 -0.00119475 14.2033 0.0258916 14.3349 0.0797176C14.4664 0.133544 14.5859 0.213032 14.6865 0.313545C14.787 0.414057 14.8665 0.533581 14.9203 0.665142C14.9741 0.796703 15.0012 0.937666 15 1.07981C14.9987 1.22195 14.9692 1.36242 14.9131 1.49303C14.857 1.62363 14.7754 1.74176 14.6732 1.84051L8.25016 8.26354C8.04941 8.46423 7.77717 8.57697 7.49331 8.57697C7.20945 8.57697 6.93721 8.46423 6.73646 8.26354L0.31343 1.84051C0.112741 1.63976 0 1.36752 0 1.08366C0 0.799801 0.112741 0.527563 0.31343 0.326813Z"
-                    fill="black"
-                  />
-                </svg>
-              </button>
-            </div>
+            <Accordion title="Stock Information">
+              <p>This is the content for Stock Information.</p>
+            </Accordion>
 
             <button className={globalStyles.whiteBuyButton}>
-              <svg
-                width="27"
-                height="27"
-                viewBox="0 0 27 27"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M23.715 7.87502C23.5206 7.53822 23.2423 7.25754 22.9071 7.06038C22.5719 6.86321 22.1913 6.75628 21.8025 6.75002H7.4025L6.75 4.20752C6.68407 3.96209 6.53699 3.74621 6.33271 3.59504C6.12843 3.44387 5.87898 3.36632 5.625 3.37502H3.375C3.07663 3.37502 2.79048 3.49355 2.5795 3.70452C2.36853 3.9155 2.25 4.20165 2.25 4.50002C2.25 4.79839 2.36853 5.08454 2.5795 5.29551C2.79048 5.50649 3.07663 5.62502 3.375 5.62502H4.77L7.875 17.1675C7.94093 17.413 8.08801 17.6288 8.29229 17.78C8.49657 17.9312 8.74602 18.0087 9 18H19.125C19.3328 17.9994 19.5363 17.9412 19.713 17.832C19.8897 17.7228 20.0328 17.5668 20.1262 17.3813L23.8162 10.0013C23.9762 9.66604 24.0506 9.29642 24.033 8.92541C24.0153 8.5544 23.9061 8.19354 23.715 7.87502ZM18.4275 15.75H9.855L8.02125 9.00002H21.8025L18.4275 15.75Z"
-                  fill="black"
-                />
-                <path
-                  d="M8.4375 23.625C9.36948 23.625 10.125 22.8695 10.125 21.9375C10.125 21.0055 9.36948 20.25 8.4375 20.25C7.50552 20.25 6.75 21.0055 6.75 21.9375C6.75 22.8695 7.50552 23.625 8.4375 23.625Z"
-                  fill="black"
-                />
-                <path
-                  d="M19.6875 23.625C20.6195 23.625 21.375 22.8695 21.375 21.9375C21.375 21.0055 20.6195 20.25 19.6875 20.25C18.7555 20.25 18 21.0055 18 21.9375C18 22.8695 18.7555 23.625 19.6875 23.625Z"
-                  fill="black"
-                />
-              </svg>
+              <img src={cart} alt="cart"/>
               Buy
             </button>
+            
           </div>
         </div>
       </div>

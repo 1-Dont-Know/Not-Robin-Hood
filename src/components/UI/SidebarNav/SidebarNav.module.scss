@@ -4,7 +4,10 @@
 .sectionTitle {
   font-size: 1.5rem;
   color: variables.$secondary-color;
-  @include mixins.flexbox($display: flex, $alignItems: center, $gap: 2.5rem);
+  // @include mixins.flexbox($display: flex, $alignItems: center, $gap: 2.5rem);
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
 }
 
 .divider {
@@ -22,7 +25,9 @@
   border-radius: 25px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
-  @include mixins.flexbox($display: flex, $gap: 1rem);
+  // @include mixins.flexbox($display: flex, $gap: 1rem);
+  display: flex;
+  gap: 1rem;
 
   img {
     max-width: 1rem;
@@ -44,7 +49,9 @@
   border-radius: 25px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
-  @include mixins.flexbox($display: flex, $gap: 1rem);
+  // @include mixins.flexbox($display: flex, $gap: 1rem);
+  display: flex;
+  gap: 1rem;
 }
 .supportList {
   a {

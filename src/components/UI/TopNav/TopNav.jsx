@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./TopNav.module.scss";
-import Button from "../../UI/Button/Button";
+import globalStyles from "../../../styles/main.module.scss";
 import cart from "../../../assets/icons/shopping-cart.svg";
 import portfolioIcon from "../../../assets/icons/portfolio-icon.svg";
 import notification from "../../../assets/icons/bell-icon.svg";
@@ -18,24 +18,24 @@ const TopNav = () => {
         </section>
         {/* BUY / PORTFOLIO BUTTON SECTION */}
         <section className={styles.cta}>
-          <Button type="buy">
+          <button className={globalStyles.buyButton}>
             <img src={cart} alt="cart" />
             Buy
-          </Button>
-          <Button type="portfolio">
+          </button>
+          <button className={globalStyles.portfolioButton}>
             <img src={portfolioIcon} alt="cart" />
             Portfolio
-          </Button>
+          </button>
         </section>
         {/* NOTIFICATIONS / PROFILE SECTION */}
         <section className={styles.profile}>
-          <Button type="notification">
+          <button className={globalStyles.notificationButton}>
             <img src={notification} alt="notification" />
             <span className={styles.notifications}>3</span>
-          </Button>
-          <Button type="profile">
+          </button>
+          <button className={globalStyles.profileButton}>
             <img src={profile} alt="profile" />
-          </Button>
+          </button>
         </section>
       </div>
     </>

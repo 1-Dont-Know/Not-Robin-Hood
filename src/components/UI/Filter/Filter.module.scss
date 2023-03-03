@@ -5,29 +5,41 @@
   width: 100%;
   border-radius: 25px;
   gap: 2.1875rem;
-  @include mixins.flexbox(
-    $display: flex,
-    $grow: 1,
-    $shrink: 1,
-    $alignItems: center
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $grow: 1,
+  //   $shrink: 1,
+  //   $alignItems: center
+  // );
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  align-items: center;
 }
 
 .tools,
 .settings {
-  @include mixins.flexbox(
-    $display: flex,
-    $grow: 1,
-    $shrink: 1,
-    $flex-basis: 10%
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $grow: 1,
+  //   $shrink: 1,
+  //   $flex-basis: 10%
+  // );
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 10%;
 }
 
 .timeBar {
-  @include mixins.flexbox(
-    $display: flex,
-    $grow: 1,
-    $shrink: 1,
-    $flex-basis: 80%
-  );
+  // @include mixins.flexbox(
+  //   $display: flex,
+  //   $grow: 1,
+  //   $shrink: 1,
+  //   $flex-basis: 80%
+  // );
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 80%;
 }

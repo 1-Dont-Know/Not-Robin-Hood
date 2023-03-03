@@ -401,6 +401,7 @@ body {
   }
 }
 
+
 .addFundsButton {
   display: flex;
   justify-content: center;
@@ -443,6 +444,50 @@ body {
   }
 }
 
+.whiteBuyButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  background: #ffffff;
+  border-radius: 25px;
+  width: 150px;
+  height: 54px;
+  left: 1693px;
+  top: 291px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 1rem 1.5rem;
+  margin-left: 7rem;
+  margin-right: 1.5rem;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background-color: variables.$secondary-color;
+    .whiteBuyButton img {
+        filter: invert(100%);
+      }
+    
+      .whiteBuyButton:hover img {
+        filter: none;
+      }
+  }
+
+  img {
+    padding-right: 0.5rem;
+  } 
+}
+
+// .whiteBuyButton img {
+//   filter: invert(100%);
+// }
+
+// .whiteBuyButton:hover img {
+//   filter: none;
+// }
+
 .stockInfoButton {
   display: flex;
   justify-content: center;
@@ -464,110 +509,79 @@ body {
   &:hover {
     background-color: variables.$secondary-color;
     transition: 0.3s ease-in-out;
-
-    svg {
-      fill: #fff;
-    }
   }
 
-  svg {
-    margin-left: 11rem;
-  }
-}
-
-.whiteBuyButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  background: #ffffff;
-  border-radius: 25px;
-  width: 150px;
-  height: 54px;
-  left: 1693px;
-  top: 291px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  padding: 1rem 1.5rem;
-  margin-left: 7rem;
-  margin-right: 1.5rem;
-
-  &:hover {
-    background-color: variables.$secondary-color;
-    transition: 0.3s ease-in-out;
-
-    svg {
-      fill: #fff;
-    }
-  }
-
-  svg {
+  img {
     padding-right: 0.5rem;
   }
 }
 
-.stockInfoButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  padding: 1rem 1.5rem;
-  margin-left: 7.25rem;
-  width: 615px;
-  height: 54px;
-  left: 1003px;
-  top: 291px;
-  background: #ffffff;
-  border-radius: 25px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  &:hover {
-    background-color: variables.$secondary-color;
-    transition: 0.3s ease-in-out;
+.sortButton {
+  margin: 0rem .5rem 0rem 2rem;
+  width: 159px;
+  height: 67px;
+  left: 470px;
+  top: 166px;
 
-    svg {
-      fill: #fff;
-    }
+  font-style: normal;
+  font-weight: 400;
+  line-height: 29px;
+  font-size: 24px;
+  color: #ffffff;
+  background: #37433A;
+  border-radius: 25px;
+  box-shadow: 0px 3px 5px 0px rgba(0, 4, 4, 0.25);
+
+  &:hover {
+    outline: 3px solid variables.$green;
   }
 
-  svg {
-    margin-left: 11rem;
+  img {
+    margin-left: 1rem;
+    margin-top: .7rem;
   }
 }
 
-.whiteBuyButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  background: #ffffff;
-  border-radius: 25px;
+.stockSymbolButton {
+  padding: 1rem 1.5rem;
+  margin-left: 1.313rem;
   width: 150px;
   height: 54px;
-  left: 1693px;
+  left: 491px;
   top: 291px;
+  background: #FFFFFF;
+  border-radius: 25px;
+
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
-  padding: 1rem 1.5rem;
-  margin-left: 7rem;
-  margin-right: 1.5rem;
+
+  transition: 0.3s ease-in-out;
 
   &:hover {
     background-color: variables.$secondary-color;
-    transition: 0.3s ease-in-out;
-
-    svg {
-      fill: #fff;
-    }
   }
+}
 
-  svg {
-    padding-right: 0.5rem;
+.stockValueButton {
+  padding: 1rem 1.5rem;
+  margin-left: 6rem;
+  width: 150px;
+  height: 54px;
+  left: 737px;
+  top: 291px;
+  background: #FFFFFF;
+  border-radius: 25px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background-color: variables.$secondary-color;
   }
 }

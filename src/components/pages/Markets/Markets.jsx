@@ -53,7 +53,7 @@ const getStockData = () => {
             <button className={globalStyles.sortButton} onClick={toggleSort}>
               {/* Change button text depending on the sortOrder state */}
               {sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A"}
-              <img src={DownVectorIcon} alt="Vector" />
+              <img src={DownVectorIcon} alt="Vector"/>
             </button>
           </div>
 

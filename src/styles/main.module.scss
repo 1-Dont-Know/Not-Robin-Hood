@@ -466,18 +466,19 @@ body {
 
   &:hover {
     background-color: variables.$secondary-color;
-    .whiteBuyButton img {
-        filter: invert(100%);
-      }
-    
-      .whiteBuyButton:hover img {
-        filter: none;
-      }
   }
-
+  // since the svg path fill="white" we need to apply filter:invert(100%)
+  // In this case, filter: invert(100%) in the :hover pseudo-class inverts the color of the <img> element to black
   img {
     padding-right: 0.5rem;
+    filter: invert(100%);
+    transition: 0.3s ease-in-out; 
   } 
+  //filter: none removes the invert effect applied to the image on hover,
+  // causing it to return to its original color fill="white"
+  &:hover img {
+    filter: none;
+  }
 }
 
 .stockInfoButton {
@@ -526,8 +527,6 @@ body {
 
   &:hover {
     outline: 3px solid variables.$green;
-    transform: rotate(0deg);
-    transition: transform 0.2s ease-in-out;
   }
 
   img {
@@ -535,6 +534,7 @@ body {
     margin-top: .7rem;
   }
 }
+
 
 .stockSymbolButton {
   padding: 1rem 1.5rem;

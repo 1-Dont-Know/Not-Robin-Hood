@@ -17,27 +17,14 @@
 }
 
 .cta {
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $flex-basis: 40%,
-  //   $grow: 1,
-  //   $shrink: 1
-  // );
   display: flex;
   flex-basis: 40%;
   flex-grow: 1;
   flex-shrink: 1;
+  gap: 1rem;
 }
 
 .profile {
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $flex-basis: 20%,
-  //   $grow: 1,
-  //   $shrink: 1,
-  //   $gap: 2rem,
-  //   $justifyContent: flex-end
-  // );
   display: flex;
   flex-basis: 20%;
   flex-grow: 1;
@@ -45,11 +32,6 @@
   gap: 2rem;
   justify-content: flex-end;
   .notifications {
-    // @include mixins.flexbox(
-    //   $display: flex,
-    //   $justifyContent: center,
-    //   $alignItems: center
-    // );
     display: flex;
     justify-content: center;
     align-items: center;

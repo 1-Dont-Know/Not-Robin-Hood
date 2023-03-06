@@ -55,38 +55,40 @@ const StockTransactions = () => {
     },
   ];
   return (
-    <div className={styles.wrapper}>
+    <>
+      {/* <div className={styles.wrapper}> */}
       {/* Sidebar Section */}
-      <Sidebar />
+      {/* <Sidebar /> */}
       {/* Nav/Hero Section */}
-      <main className={styles.mainSection}>
-        {/* Top Navigation */}
-        <TopNav />
-        {/* Hero Section */}
-        <Hero>
-          <section className={styles.titleSection}>
-            <h4 className={styles.title}>Recent Transactions</h4>
-          </section>
-          <section className={styles.transactions}>
-            <ul className={styles.transactionsList}>
-              {data.map((item) => {
-                return (
-                  <Stock
-                    key={item.name}
-                    name={item.name}
-                    price={item.price}
-                    info={item.info}
-                  />
-                );
-              })}
-            </ul>
-          </section>
-          <section className={styles.filter}>
-            <Filter />
-          </section>
-        </Hero>
-      </main>
-    </div>
+      {/* <main className={styles.mainSection}> */}
+      {/* Top Navigation */}
+      {/* <TopNav /> */}
+      {/* Hero Section */}
+      <Hero>
+        <section className={styles.titleSection}>
+          <h4 className={styles.title}>Recent Transactions</h4>
+        </section>
+        <section className={styles.transactions}>
+          <ul className={styles.transactionsList}>
+            {data.map((item) => {
+              return (
+                <Stock
+                  key={item.name}
+                  name={item.name}
+                  price={item.price}
+                  info={item.info}
+                />
+              );
+            })}
+          </ul>
+        </section>
+        <section className={styles.filter}>
+          <Filter />
+        </section>
+      </Hero>
+      {/* </main> */}
+      {/* </div> */}
+    </>
   );
 };
 

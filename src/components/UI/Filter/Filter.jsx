@@ -10,7 +10,6 @@ const Filter = () => {
     <div className={styles.container}>
       <div className={styles.tools}>
         <button className={globalStyles.toolsButton}>
-          {/* <img src={ToolIcon} alt="Tool Icon" /> */}
           <svg
             width="30"
             height="30"

@@ -11,7 +11,7 @@ const Graph = ({ chartData }) => {
     plugins: {
       title: {
         display: true,
-        text: "GAINS!",
+        // text: "GAINS!",
       },
       legend: {
         display: false,

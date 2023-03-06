@@ -2,11 +2,11 @@
 @use "../../../styles/mixins.scss";
 
 .container {
-  padding: 1.5rem 2rem;
-  padding-top: 0rem;
-  overflow-y: auto;
-
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  padding-top: 0rem;
+  overflow-y: auto;
 }

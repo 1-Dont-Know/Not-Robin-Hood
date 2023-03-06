@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Login.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 import Logo from "../../UI/Logo/Logo";
-import Input from "../../UI/Input/Input";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -22,8 +21,16 @@ const Login = () => {
           <form className={styles.signinForm}>
             <h1>Sign in</h1>
             <h3>Release your bull.</h3>
-            <Input type="email" placeholder="Email" />
-            <Input type="password" placeholder="Password" />
+            <input
+              className={globalStyles.input}
+              type="email"
+              placeholder="Email"
+            />
+            <input
+              className={globalStyles.input}
+              type="password"
+              placeholder="Password"
+            />
             {/* SIGN IN BUTTON SECTION */}
             <div className={styles.cta}>
               {/* Sign in button*/}

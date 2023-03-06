@@ -11,46 +11,45 @@ import DownVectorIcon from "../../../assets/icons/down-vector.svg";
 const Markets = () => {
   return (
     <>
-      <div className={styles.wrapper}>
-        {/* Sidebar Section */}
-        <Sidebar />
-        {/* Nav/Hero Section */}
-        <main className={styles.mainSection}>
-          {/* Top Navigation */}
-          <TopNav />
-          {/* Hero Section */}
-          <Hero />
+      {/* <div className={styles.wrapper}> */}
+      {/* Sidebar Section */}
+      {/* <Sidebar /> */}
+      {/* Nav/Hero Section */}
+      {/* <main className={styles.mainSection}> */}
+      {/* Top Navigation */}
+      {/* <TopNav /> */}
+      {/* Hero Section */}
 
-          <div>
-            <button className={globalStyles.sortButton}>
-              Sort
-              <img src={DownVectorIcon} alt="Vector " />
-            </button>
+      <Hero>
+        <button className={globalStyles.sortButton}>
+          Sort
+          <img src={DownVectorIcon} alt="Vector " />
+        </button>
 
-            <button className={globalStyles.sortButton}>
-              Time
-              <img src={DownVectorIcon} alt="Vector " />
-            </button>
-          </div>
+        <button className={globalStyles.sortButton}>
+          Time
+          <img src={DownVectorIcon} alt="Vector " />
+        </button>
 
-          <div className={styles.stockSection}>
-            <StockItem />
+        <div className={styles.stockSection}>
+          <StockItem />
 
-            <StockItem />
+          <StockItem />
 
-            <StockItem />
+          <StockItem />
 
-            <StockItem />
+          <StockItem />
 
-            <StockItem />
-          </div>
+          <StockItem />
+        </div>
+      </Hero>
 
-          {/* <Button type="addFunds">
+      {/* <Button type="addFunds">
             <img src={PlusIcon} alt="plus icon" />
             Add Funds
           </Button> */}
-        </main>
-      </div>
+      {/* </main> */}
+      {/* </div> */}
     </>
   );
 };

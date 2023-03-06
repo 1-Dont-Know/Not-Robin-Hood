@@ -3,23 +3,6 @@
 @use "../../../styles/mixins.scss";
 @use "../../../styles/variables.scss";
 
-// WRAPPER SECTION
-
-.wrapper {
-    display: flex;
-    flex-grow: 1;
-}
-
-.mainSection {
-    display: flex;
-    flex-direction: column;
-
-    // Fix for the graph not resizing correctly
-    // Using flex-grow here won't work.
-    width: 100%;
-
-}
-
 .tabs {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
     border-radius: 25px 25px 0 0;

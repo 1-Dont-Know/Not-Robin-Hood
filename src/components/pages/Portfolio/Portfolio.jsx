@@ -51,59 +51,50 @@ const Portfolio = () => {
 
   return (
     <>
-      <div className={styles.wrapper}>
-        {/* Sidebar Section */}
-        <Sidebar />
-        {/* Nav/Hero Section */}
-        <main className={styles.mainSection}>
-          {/* Top Navigation */}
-          <TopNav />
-          {/* Hero Section */}
-          <Hero>
-            <div className={styles.tabs}>
-            
-            </div>
+      {/* Hero Section */}
+      <Hero>
+        <div className={styles.tabs}>
+
+        </div>
 
 
-            <div className={styles.tanSquare}>
-              <div className={styles.details}>
+        <div className={styles.tanSquare}>
+          <div className={styles.details}>
 
-                <section className={styles.totalPortfolio}>
-                  <h1 className={styles.totalPortfolioTitle}>Total Portfolio Value</h1>
-                  <h1 className={styles.totalPortfolioValue}>$1200.00</h1>
-                </section>
+            <section className={styles.totalPortfolio}>
+              <h1 className={styles.totalPortfolioTitle}>Total Portfolio Value</h1>
+              <h1 className={styles.totalPortfolioValue}>$1200.00</h1>
+            </section>
 
-                <section className={styles.stocks}>
-                  <h1 className={styles.sectionTitle}>Stocks</h1>
-                  <h1 className={styles.sectionPercent}>50%</h1>
-                  <h1 className={styles.sectionValue} id={styles.stockValue}>$600</h1>
-                </section>
+            <section className={styles.stocks}>
+              <h1 className={styles.sectionTitle}>Stocks</h1>
+              <h1 className={styles.sectionPercent}>50%</h1>
+              <h1 className={styles.sectionValue} id={styles.stockValue}>$600</h1>
+            </section>
 
-                <div className = {styles.line}></div>
+            <div className={styles.line}></div>
 
 
 
-                <section className={styles.buyingPower}>
-                  <h1 className={styles.sectionTitle}>Buying Power</h1>
-                  <h1 className={styles.sectionPercent}>50%</h1>
-                  <h1 className={styles.sectionValue} id={styles.buyingPowerValue}>$600</h1>
-                </section>
+            <section className={styles.buyingPower}>
+              <h1 className={styles.sectionTitle}>Buying Power</h1>
+              <h1 className={styles.sectionPercent}>50%</h1>
+              <h1 className={styles.sectionValue} id={styles.buyingPowerValue}>$600</h1>
+            </section>
 
-                <div className = {styles.line}></div>
+            <div className={styles.line}></div>
 
-              </div>
+          </div>
 
-              <div className={styles.doughnutGraph}>
-                <Doughnut
-                  data={data}
-                  options={options}
-                  plugins={[textCenter]}
-                ></Doughnut>
-              </div>
-            </div>
-          </Hero>
-        </main>
-      </div>
+          <div className={styles.doughnutGraph}>
+            <Doughnut
+              data={data}
+              options={options}
+              plugins={[textCenter]}
+            ></Doughnut>
+          </div>
+        </div>
+      </Hero>
     </>
   );
 };

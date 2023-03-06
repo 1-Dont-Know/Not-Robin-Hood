@@ -11,31 +11,31 @@ import { stockData } from "../../UI/StockItem/StockData";
 const Markets = () => {
   // declares a new state variable setSortedStocks and initializes it with the value false
   const [setSortedStocks] = useState(false);
-  // declares a new state variable sortOrder and initializes it with the value "asc". 
+  // declares a new state variable sortOrder and initializes it with the value "asc".
   // Also declares a setter function setSortOrder that will be used to update the sortOrder state variable
   const [sortOrder, setSortOrder] = useState("asc");
   // This variable will display only 5 stockItem on the screen
   const numStocks = 5;
 
-//This function toggles the sort order when the user clicks the Sort button
+  //This function toggles the sort order when the user clicks the Sort button
   const toggleSort = () => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    setSortedStocks(prevState => !prevState);
+    setSortedStocks((prevState) => !prevState);
   };
 
-// This function gets the stock data and sorts it in alphabetical order based on the stock symbol
-const getStockData = () => {
-  const sortedData = stockData.slice().sort((a, b) => {
-    return a.symbol.localeCompare(b.symbol);
-  });
+  // This function gets the stock data and sorts it in alphabetical order based on the stock symbol
+  const getStockData = () => {
+    const sortedData = stockData.slice().sort((a, b) => {
+      return a.symbol.localeCompare(b.symbol);
+    });
 
-  // Rearrange the data to match the desired sort order
-  if (sortOrder === "asc") {
-    return sortedData;
-  } else {
-    return sortedData.reverse();
-  }
-};
+    // Rearrange the data to match the desired sort order
+    if (sortOrder === "asc") {
+      return sortedData;
+    } else {
+      return sortedData.reverse();
+    }
+  };
 
   return (
     <>
@@ -53,7 +53,7 @@ const getStockData = () => {
             <button className={globalStyles.sortButton} onClick={toggleSort}>
               {/* Change button text depending on the sortOrder state */}
               {sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A"}
-              <img src={DownVectorIcon} alt="Vector"/>
+              <img src={DownVectorIcon} alt="Vector" />
             </button>
           </div>
 
@@ -61,11 +61,16 @@ const getStockData = () => {
             {/* Call the getStockData function to sort the stockData array.
             Slice the sorted stockData array to display only the first numStocks stocks.
             Create a StockItem component for each stock and pass the symbol and value props */}
-            {getStockData().slice(0, numStocks).map((stock) => (
-              <StockItem key={stock.symbol} symbol={stock.symbol} value={stock.value} />
-            ))}
+            {getStockData()
+              .slice(0, numStocks)
+              .map((stock) => (
+                <StockItem
+                  key={stock.symbol}
+                  symbol={stock.symbol}
+                  value={stock.value}
+                />
+              ))}
           </div>
-
         </main>
       </div>
     </>

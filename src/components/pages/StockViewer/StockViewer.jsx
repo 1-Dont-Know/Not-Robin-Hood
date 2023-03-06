@@ -24,42 +24,42 @@ const AppFundsPopup = () => {
   });
 
   return (
-    <div className={styles.wrapper}>
+    <>
+      {/* <div className={styles.wrapper}> */}
       {/* Sidebar Section */}
-      <Sidebar />
+      {/* <Sidebar /> */}
       {/* Nav/Hero Section */}
-      <main className={styles.mainSection}>
-        {/* Top Navigation */}
-        <TopNav />
-        {/* Hero Section */}
-        <Hero>
-          <div className={styles.stockNameWrapper}>
-            <h1 className={styles.stockName}>BINANCE (BNB-USD)</h1>
-            <p className={styles.stockPrice}>
-              $59.71
-              <span className={styles.growth}>$51.29(4.78%)</span>
-            </p>
-          </div>
-          {/* <AddFunds></AddFunds> */}
-          <div className={styles.preview}>
-            {/* //! GRAPH SECTION */}
-            <section className={styles.graph}>
-              <Graph chartData={stockData} />
-            </section>
-            <section className={styles.buybox}>
-              <BuyBox />
-            </section>
-          </div>
-          {/* //! FILTER SECTION */}
-          <section className={styles.filter}>
-            <Filter />
+      {/* <main className={styles.mainSection}> */}
+      {/* Top Navigation */}
+      {/* <TopNav /> */}
+      {/* Hero Section */}
+      <Hero>
+        <div className={styles.stockNameWrapper}>
+          <h1 className={styles.stockName}>BINANCE (BNB-USD)</h1>
+          <p className={styles.stockPrice}>
+            $59.71
+            <span className={styles.growth}>$51.29(4.78%)</span>
+          </p>
+        </div>
+        {/* <AddFunds></AddFunds> */}
+        <div className={styles.preview}>
+          {/* //! GRAPH SECTION */}
+          <section className={styles.graph}>
+            <Graph chartData={stockData} />
           </section>
-        </Hero>
-      </main>
-    </div>
+          <section className={styles.buybox}>
+            <BuyBox />
+          </section>
+        </div>
+        {/* //! FILTER SECTION */}
+        <section className={styles.filter}>
+          <Filter />
+        </section>
+      </Hero>
+      {/* </main> */}
+      {/* </div> */}
+    </>
   );
 };
-
-
 
 export default AppFundsPopup;

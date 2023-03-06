@@ -56,7 +56,7 @@ const SidebarNav = () => {
             Settings
           </li>
         </NavLink>
-        <NavLink to="/signup">
+        <NavLink to="/">
           <li className={styles.listItem} id="logout">
             <img src={logout} alt="logout" />
             Log out

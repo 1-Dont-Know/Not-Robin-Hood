@@ -4,7 +4,6 @@
 // WRAPPER SECTION
 
 .wrapper {
-  // @include mixins.flexbox($display: flex, $grow: 1);
   display: flex;
   flex-grow: 1;
 }
@@ -12,13 +11,6 @@
 // HERO SECTION
 .mainSection {
   height: 100vh;
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $grow: 1,
-  //   $direction: column,
-  //   // $flex-basis: 90%,
-  //   $shrink: 1
-  // );
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -26,12 +18,6 @@
 }
 
 .titleSection {
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $grow: 0,
-  //   // $flex-basis: 10%,
-  //   $shrink: 1
-  // );
   display: flex;
   flex-grow: 0;
   flex-shrink: 1;
@@ -46,19 +32,16 @@
 .transactions {
   background-color: variables.$primary-color;
   border-radius: 25px;
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $grow: 1,
-  //   $flex-basis: 80%,
-  //   $shrink: 1
-  // );
   display: flex;
   flex-grow: 1;
   flex-basis: 80%;
   flex-shrink: 1;
   padding: 1rem;
   overflow-y: auto;
-  max-height: 60%;
+  scroll-behavior: smooth;
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
 }
 
 .transactionsList {
@@ -69,7 +52,6 @@
 }
 
 .filter {
-  // @include mixins.flexbox($display: flex, $grow: 0, $flex-basis: 10%);
   display: flex;
   flex-grow: 0;
   flex-basis: 10%;

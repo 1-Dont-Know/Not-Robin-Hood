@@ -5,12 +5,6 @@
   width: 100%;
   border-radius: 25px;
   gap: 2.1875rem;
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $grow: 1,
-  //   $shrink: 1,
-  //   $alignItems: center
-  // );
   display: flex;
   flex-grow: 1;
   flex-shrink: 1;
@@ -19,25 +13,18 @@
 
 .tools,
 .settings {
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $grow: 1,
-  //   $shrink: 1,
-  //   $flex-basis: 10%
-  // );
   display: flex;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 10%;
+  svg {
+    transition: 0.3s ease-in-out;
+    max-width: 1.3rem;
+    max-height: 1.3rem;
+  }
 }
 
 .timeBar {
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $grow: 1,
-  //   $shrink: 1,
-  //   $flex-basis: 80%
-  // );
   display: flex;
   flex-grow: 1;
   flex-shrink: 1;

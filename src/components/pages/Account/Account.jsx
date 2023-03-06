@@ -22,33 +22,23 @@ const Account = () => {
 
   return (
     <>
-      <div className={styles.wrapper}>
-        {/* Sidebar Section */}
-        <Sidebar />
-        {/* Nav/Hero Section */}
-        <main className={styles.mainSection}>
-          {/* Top Navigation */}
-          <TopNav />
-          {/* Hero Section */}
-          <Hero>
-            {/* //! FEATURED STOCKS */}
-            <section className={styles.featured}>
-              <FeaturedStock status="up" />
-              <FeaturedStock status="down" />
-              <FeaturedStock status="up" />
-              <FeaturedStock status="up" />
-            </section>
-            {/* //! FILTER SECTION */}
-            <section className={styles.filter}>
-              <Filter />
-            </section>
-            {/* //! GRAPH SECTION */}
-            <section className={styles.graph}>
-              <Graph chartData={stockData} />
-            </section>
-          </Hero>
-        </main>
-      </div>
+      <Hero style={{gap: "1rem"}}>
+        {/* //! FEATURED STOCKS */}
+        <section className={styles.featured}>
+          <FeaturedStock status="up" />
+          <FeaturedStock status="down" />
+          <FeaturedStock status="up" />
+          <FeaturedStock status="up" />
+        </section>
+        {/* //! FILTER SECTION */}
+        <section className={styles.filter}>
+          <Filter />
+        </section>
+        {/* //! GRAPH SECTION */}
+        <section className={styles.graph}>
+          <Graph chartData={stockData} />
+        </section>{" "}
+      </Hero>
     </>
   );
 };

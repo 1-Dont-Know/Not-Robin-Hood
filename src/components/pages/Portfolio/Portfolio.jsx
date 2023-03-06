@@ -40,82 +40,81 @@ const Portfolio = () => {
   };
   return (
     <>
-      <div className={styles.wrapper}>
-        {/* Sidebar Section */}
-        <Sidebar />
+      {/* <div className={styles.wrapper}> */}
+      {/* Sidebar Section */}
+      {/* <Sidebar /> */}
 
-        {/* Nav/Hero Section */}
-        <section className={styles.heroSection}>
-          {/* Top Navigation */}
-          <TopNav />
+      {/* Nav/Hero Section */}
+      {/* <section className={styles.heroSection}> */}
+      {/* Top Navigation */}
+      {/* <TopNav /> */}
 
-          <br></br>
-          <div className={styles.accName}>
-            {/* Under this section will be populated by the name given
+      <br></br>
+      <div className={styles.accName}>
+        {/* Under this section will be populated by the name given
             in the account */}
-            <strong className={styles.name}>John Doe</strong>
-            <br></br>
+        <strong className={styles.name}>John Doe</strong>
+        <br></br>
 
-            <div className={styles.ihsButtons}>
-              <button className={globalStyles.settingsButton}>
-                <strong className={styles.ihs}>Investing</strong>
-              </button>
+        <div className={styles.ihsButtons}>
+          <button className={globalStyles.settingsButton}>
+            <strong className={styles.ihs}>Investing</strong>
+          </button>
 
-              <button className={globalStyles.settingsButton}>
-                <strong className={styles.ihs}>History</strong>
-              </button>
+          <button className={globalStyles.settingsButton}>
+            <strong className={styles.ihs}>History</strong>
+          </button>
 
-              <button className={globalStyles.settingsButton}>
-                <strong className={styles.ihs}>Settings</strong>
-              </button>
-            </div>
-          </div>
-          <br></br>
-          <div className={styles.tanSquare}>
-            <ol className={styles.valueText}>Total Portfolio Value</ol>
-            <ol className={styles.dollarAmount}>$200.00</ol>
-            <ol className={styles.stocksOptions}>
-              {" "}
-              Stocks & Options
-              <span className={styles.wordSpace}>26.35%</span>
-              <span className={styles.moneyColorGreen}>$52.7</span>
-            </ol>
-            <hr className={styles.line}></hr>
-            <ol className={styles.stocksOptions}>
-              {" "}
-              Cryptocurrencies
-              <span className={styles.wordSpace}>2.09%</span>
-              <span className={styles.moneyColorTan}>$4.18</span>
-            </ol>
-            <hr className={styles.line}></hr>
-            <ol className={styles.stocksOptions}>
-              {" "}
-              Brokerage Cash
-              <span className={styles.wordSpace}> 71.65%</span>
-              <span className={styles.moneyAmount}>$143.24</span>
-            </ol>
-            <hr className={styles.line}></hr>
-            <div className={styles.doughnutGraph}>
-              <Doughnut
-                data={data}
-                options={options}
-                plugins={[textCenter]}
-              ></Doughnut>
-            </div>
-
-            <div className={styles.profileLowerSection}>
-              <span>
-                <button className={globalStyles.settingsButton}>
-                  <span className={styles.pls}>
-                    Portfolio Lower Section{" "}
-                    <img src={vector} alt="vector"></img>
-                  </span>
-                </button>
-              </span>
-            </div>
-          </div>
-        </section>
+          <button className={globalStyles.settingsButton}>
+            <strong className={styles.ihs}>Settings</strong>
+          </button>
+        </div>
       </div>
+      <br></br>
+      <div className={styles.tanSquare}>
+        <ol className={styles.valueText}>Total Portfolio Value</ol>
+        <ol className={styles.dollarAmount}>$200.00</ol>
+        <ol className={styles.stocksOptions}>
+          {" "}
+          Stocks & Options
+          <span className={styles.wordSpace}>26.35%</span>
+          <span className={styles.moneyColorGreen}>$52.7</span>
+        </ol>
+        <hr className={styles.line}></hr>
+        <ol className={styles.stocksOptions}>
+          {" "}
+          Cryptocurrencies
+          <span className={styles.wordSpace}>2.09%</span>
+          <span className={styles.moneyColorTan}>$4.18</span>
+        </ol>
+        <hr className={styles.line}></hr>
+        <ol className={styles.stocksOptions}>
+          {" "}
+          Brokerage Cash
+          <span className={styles.wordSpace}> 71.65%</span>
+          <span className={styles.moneyAmount}>$143.24</span>
+        </ol>
+        <hr className={styles.line}></hr>
+        <div className={styles.doughnutGraph}>
+          <Doughnut
+            data={data}
+            options={options}
+            plugins={[textCenter]}
+          ></Doughnut>
+        </div>
+
+        <div className={styles.profileLowerSection}>
+          <span>
+            <button className={globalStyles.settingsButton}>
+              <span className={styles.pls}>
+                Portfolio Lower Section <img src={vector} alt="vector"></img>
+              </span>
+            </button>
+          </span>
+        </div>
+      </div>
+      {/* </section> */}
+      {/* </div> */}
     </>
   );
 };

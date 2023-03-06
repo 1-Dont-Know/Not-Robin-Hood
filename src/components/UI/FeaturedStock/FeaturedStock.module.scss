@@ -3,25 +3,16 @@
 
 .positive,
 .negative {
-  max-width: 320px;
   width: 100%;
   background-color: variables.$primary-color;
   border-radius: 25px;
   padding: 1rem;
+  flex: 1;
   cursor: pointer;
   transition: 0.3s ease-in-out;
   &:hover {
     box-shadow: 0px 0px 0px 2px #667269;
   }
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $direction: column,
-  //   $gap: 1rem,
-  //   $grow: 1,
-  //   $shrink: 1,
-  //   $alignItems: center,
-  //   $justifyContent: space-evenly
-  // );
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -31,12 +22,6 @@
   justify-content: space-evenly;
 
   .stockInformation {
-    // @include mixins.flexbox(
-    //   $display: flex,
-    //   $gap: 1rem,
-    //   $alignItems: center,
-    //   $justifyContent: center
-    // );
     display: flex;
     gap: 1rem;
     align-items: center;
@@ -46,22 +31,11 @@
       border-radius: 25px;
       width: 4.375rem;
       padding: 1rem;
-      // @include mixins.flexbox(
-      //   $display: flex,
-      //   $justifyContent: center,
-      //   $alignItems: center
-      // );
       display: flex;
       justify-content: center;
       align-items: center;
     }
     .stockName {
-      // @include mixins.flexbox(
-      //   $display: flex,
-      //   $gap: 0.3rem,
-      //   $direction: column,
-      //   $grow: 1
-      // );
       display: flex;
       gap: 0.3rem;
       flex-direction: column;
@@ -78,12 +52,6 @@
     }
   }
   .stockResults {
-    // @include mixins.flexbox(
-    //   $display: flex,
-    //   $gap: 1rem,
-    //   // $grow: 1,
-    //   $alignItems: center
-    // );
     display: flex;
     gap: 1rem;
     align-items: center;

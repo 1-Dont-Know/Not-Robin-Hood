@@ -5,7 +5,7 @@
 
 .wrapper {
   display: flex;
-  flex-grow: 1;
+  height: 100vh;
 }
 
 .mainSection {
@@ -14,18 +14,11 @@
   flex-direction: column;
   //Fix for the graph not resizing correctly
   //Using flex-grow here won't work. 400px is the size of the sidebar.
-  width: calc(100% - 400px);
+  width: 100%;
 }
 
 // HERO SECTION
 .featured {
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $gap: 1rem,
-  //   $justifyContent: space-evenly,
-  //   $wrap: wrap,
-  //   $flex-basis: 25%
-  // );
   display: flex;
   gap: 1rem;
   justify-content: space-evenly;
@@ -37,13 +30,6 @@
 }
 
 .filter {
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $gap: 1rem,
-  //   $wrap: wrap,
-  //   $shrink: 1,
-  //   $flex-basis: 10%
-  // );
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -52,7 +38,9 @@
 }
 
 .graph {
-  // @include mixins.flexbox($grow: 1);
+  display: flex;
   flex-grow: 1;
   margin: 10px 0 10px 0;
+  min-height: 700px;
+  min-width: 350px;
 }

@@ -18,27 +18,37 @@ const Portfolio = () => {
     datasets: [
       {
         label: "Portfolio Value",
-        data: [45, 10, 45],
-        backgroundColor: ["#2AB795", "#C18E60", "#37433A"],
-        borderColor: ["#2AB795", "#C18E60", "#37433A"],
+        data: [50, 50],
+        backgroundColor: ["#2AB795", "#C18E60"],
+        borderColor: ["#2AB795", "#C18E60"],
       },
     ],
   };
 
-  const options = {};
+
+
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+  };
+
+
+
+
   const textCenter = {
     id: "textCenter",
     beforeDatasetsDraw(chart, args, pluginOptions) {
       const { ctx, data } = chart;
       ctx.save();
-      ctx.font = 'bolder 24px sans-serif';
+      ctx.font = 'bolder sans-serif';
       ctx.fillStyle = 'black';
       ctx.textAlign = 'center';
-      ctx.fillText(`Total Portfolio Value: $200`,
+      ctx.fillText(`Total Portfolio Value: $1200`,
         chart.getDatasetMeta(0).data[0].x,
         chart.getDatasetMeta(0).data[0].y);
     }
   }
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -50,50 +60,45 @@ const Portfolio = () => {
           <TopNav />
           {/* Hero Section */}
           <Hero>
-            <div className={styles.tanSquare}>
-              <div className="row">
-                <div className="details">
-                  <ol className={styles.valueText}>Total Portfolio Value</ol>
-                  <ol className={styles.dollarAmount}>$200.00</ol>
-                  <ol className={styles.stocksOptions}>
-                    Stocks & Options
-                    <span className={styles.wordSpace}>26.35%</span>
-                    <span className={styles.moneyColorGreen}>$52.7</span>
-                  </ol>
-                  <hr className={styles.line}></hr>
-                  <ol className={styles.stocksOptions}>
-                    Cryptocurrencies
-                    <span className={styles.wordSpace}>2.09%</span>
-                    <span className={styles.moneyColorTan}>$4.18</span>
-                  </ol>
-                  <hr className={styles.line}></hr>
-                  <ol className={styles.stocksOptions}>
-                    Brokerage Cash
-                    <span className={styles.wordSpace}> 71.65%</span>
-                    <span className={styles.moneyAmount}>$143.24</span>
-                  </ol>
-                  <hr className={styles.line}></hr>
-                </div>
+            <div className={styles.tabs}>
+            
+            </div>
 
-                <div className={styles.doughnutGraph}>
-                  <Doughnut
-                    data={data}
-                    options={options}
-                    plugins={[textCenter]}
-                  ></Doughnut>
-                </div>
+
+            <div className={styles.tanSquare}>
+              <div className={styles.details}>
+
+                <section className={styles.totalPortfolio}>
+                  <h1 className={styles.totalPortfolioTitle}>Total Portfolio Value</h1>
+                  <h1 className={styles.totalPortfolioValue}>$1200.00</h1>
+                </section>
+
+                <section className={styles.stocks}>
+                  <h1 className={styles.sectionTitle}>Stocks</h1>
+                  <h1 className={styles.sectionPercent}>50%</h1>
+                  <h1 className={styles.sectionValue} id={styles.stockValue}>$600</h1>
+                </section>
+
+                <div className = {styles.line}></div>
+
+
+
+                <section className={styles.buyingPower}>
+                  <h1 className={styles.sectionTitle}>Buying Power</h1>
+                  <h1 className={styles.sectionPercent}>50%</h1>
+                  <h1 className={styles.sectionValue} id={styles.buyingPowerValue}>$600</h1>
+                </section>
+
+                <div className = {styles.line}></div>
+
               </div>
 
-              <div className={styles.profileLowerSection}>
-                <span>
-                  <button className={globalStyles.settingsButton}>
-                    <span className={styles.pls}>
-                      Portfolio Lower Section{" "}
-                      <img src={vector} alt="vector"></img>
-                    </span>
-                  </button>
-                </span>
-
+              <div className={styles.doughnutGraph}>
+                <Doughnut
+                  data={data}
+                  options={options}
+                  plugins={[textCenter]}
+                ></Doughnut>
               </div>
             </div>
           </Hero>

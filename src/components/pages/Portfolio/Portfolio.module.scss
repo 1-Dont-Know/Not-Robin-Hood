@@ -15,87 +15,116 @@
     flex-direction: column;
 
     // Fix for the graph not resizing correctly
-    // Using flex-grow here won't work. 400px is the size of the sidebar.
-    width: calc(100% - 400px);
+    // Using flex-grow here won't work.
+    width: 100%;
 
+}
+
+.tabs {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 25px 25px 0 0;
+    background-color: variables.$light-yellow;
+    padding: 20px;
+    height: 10%;
+    min-height: 10%;
+    width: 30%;
 }
 
 .tanSquare {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+    flex-grow: 1;
+
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 25px;
-    background-color: #FBF2EA;
+    border-radius: 0 25px 25px 25px;
+    background-color: variables.$light-yellow;
+    padding: 20px;
+    overflow-y: auto;
 
 }
 
-.valueText {
-    margin-top: 80px;
-    margin-left: 48px;
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    flex: 1;
+}
+
+
+
+.totalPortfolio {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 60px 0;
+}
+
+.totalPortfolioTitle {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 38px;
+    color: variables.$secondary-color;
+    margin-bottom: 20px;
+}
+
+.totalPortfolioValue {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+
+.sectionTitle {
+    font-weight: 700;
+    font-size: 2rem;
+    color: variables.$secondary-color;
+    margin-bottom: 30px;
+    flex: 1 1 50%
+}
+
+.sectionPercent {
     font-weight: 700;
     font-size: 32px;
+    line-height: 39px;
+    flex: 1 1 25%;
+    color: #32543A;
 }
 
-.dollarAmount {
-    margin-top: 50px;
-    margin-left: 52px;
-    font-weight: 400;
+.sectionValue {
+    font-weight: 800;
     font-size: 32px;
+    line-height: 39px;
+    flex: 1 1 25%;
 }
 
-.stocksOptions {
-    margin-top: 50px;
-    margin-left: 52px;
-    font-weight: 900;
-    font-size: 54px;
+#stockValue{
+    color: variables.$golden;
 }
 
-.stocksOptions .wordSpace {
-    padding-left: 12%;
-    word-spacing: 24px;
-
-
-}
-
-.stocksOptions .moneyAmount {
-    margin-left: 190px;
-}
-
-.line {
-    border: none;
-    border-top: 1px solid black;
-    margin: 36px 0;
-    width: 68%;
-}
-
-.profileLowerSection {
-    margin-top: 12%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-right: 5%;
-}
-
-.stocksOptions .moneyColorGreen {
-    margin-left: 200px;
+#buyingPowerValue{
     color: #2AB795;
 }
 
-.moneyColorTan {
-    margin-left: 232px;
-    color: #C18E60;
-}
-
-.pls {
+.stocks {
     display: flex;
-    font-size: 32px;
-    width: 500px;
-    justify-content: center;
+    justify-content: space-between;
 
 }
 
-.tanSquare .doughnutGraph {
-    padding-left: 20px;
+.buyingPower {
+    display: flex;
+    justify-content: space-between;
+}
+
+.doughnutGraph {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+
+.line{
+    border-top: 1px solid #000;
+    width: 90%; 
+    margin-bottom: 60px;
 }

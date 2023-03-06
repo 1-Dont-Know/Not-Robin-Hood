@@ -180,22 +180,22 @@ body {
   @include mixins.button;
   color: variables.$secondary-color;
   gap: 0.5rem;
-  svg {
-    transition: 0.3s ease-in-out;
-  }
-  &:hover {
-    color: #fff;
-    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
-    &:hover {
-      svg {
-        fill: #fff;
-      }
-    }
-  }
+  transition: 0.3s ease-in-out;
   img {
+    transition: 0.3s ease-in-out;
     max-width: 41.79px;
     max-height: 40.25px;
     margin-right: 0.5rem;
+  }
+
+  &:hover {
+    color: #fff;
+    // box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(1) contrast(200%) //hue-rotate(100deg)
+        saturate(0);
+    }
   }
 }
 
@@ -233,13 +233,19 @@ body {
   font-size: 1rem;
   background: #d5e3e1;
   color: variables.$secondary-color;
+  img {
+    transition: 0.3s ease-in-out;
+    max-width: 20px;
+    max-height: 20.25px;
+  }
   &:hover {
-    background-color: variables.$secondary-color;
     color: #fff;
-    &:hover {
-      svg {
-        fill: #fff;
-      }
+    background-color: variables.$secondary-color;
+    // box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(1) contrast(200%) //hue-rotate(100deg)
+        saturate(0);
     }
   }
 }
@@ -295,6 +301,21 @@ body {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  img {
+    transition: 0.3s ease-in-out;
+    max-width: 21.79px;
+    max-height: 40.25px;
+  }
+  &:hover {
+    color: #fff;
+    background-color: variables.$secondary-color;
+    // box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(1) contrast(200%) //hue-rotate(100deg)
+        saturate(0);
+    }
+  }
   &:first-child {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
@@ -302,15 +323,6 @@ body {
   &:last-child {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
-  }
-  &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
-    &:hover {
-      svg {
-        fill: #fff;
-      }
-    }
   }
 }
 

@@ -2,6 +2,7 @@
   // @include mixins.flexbox($display: flex, $grow: 1);
   display: flex;
   flex-grow: 1;
+  height: 100vh;
 }
 
 // HERO SECTION
@@ -10,6 +11,4 @@
   overflow-y: auto;
   flex-direction: column;
   flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 90%;
 }

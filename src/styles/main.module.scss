@@ -508,7 +508,8 @@ body {
   }
 }
 
-.stockInfoButton {
+.stockInfoButton 
+{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -577,15 +578,14 @@ transition: 0.3s ease-in-out;
   }
 }
 
-img { // Icon nav-bar adjustments
-  display: flex;
-  margin-right: 0.55rem;
-  margin-left: 1.55rem;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 35px;
-}
-
+  img { // Icon nav-bar adjustments
+    display: flex;
+    margin-right: 0.55rem;
+    margin-left: 1.55rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 35px;
+  }
 }
 
 .saveChangesButton
@@ -600,8 +600,6 @@ img { // Icon nav-bar adjustments
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   width: 11rem;
   height: 55px;
-  //left: 1693px;
-  //top: 291px;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -609,12 +607,8 @@ img { // Icon nav-bar adjustments
   line-height: 24px;
   
   padding: 2rem 1.5rem;
-  //margin-left: 7rem;
-  //margin-right: 1.5rem;
+  //margin-left: 5rem;
 
-  & #delete {
-    background-color: red;
-  } //NEED HELP
   &:hover 
   {
     background-color: #cecece;
@@ -622,13 +616,17 @@ img { // Icon nav-bar adjustments
     transition: 0.15s ease-in-out;
   
     svg {
-      fill: #fff;}
+      fill: #fff;
+    }
   }
-  
-    svg {
-      padding-right: .5rem;}
+    
+  svg {
+      padding-right: 0.5rem;
+  }
 
-//Toggle
+}
+
+.toggleButton {//Toggle
 input[type=checkbox]{
 	height: 0;
 	width: 0;
@@ -678,4 +676,4 @@ body {
 	align-items: center;
 	height: 100vh;
 } //End Toggle
-}  
+}

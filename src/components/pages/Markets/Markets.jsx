@@ -39,31 +39,29 @@ const Markets = () => {
     <>
      {/* Hero Section */}
       <Hero />
-        <main className={styles.mainSection}>
-          <div>
-            {/* Create a button to trigger toggleSort function when clicked */}
-            <button className={globalStyles.sortButton} onClick={toggleSort}>
-              {/* Change button text depending on the sortOrder state */}
-              {sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A"}
-              <img src={DownVectorIcon} alt="Vector" />
-            </button>
-          </div>
+        <section className={styles.sortSection}>
+          {/* Create a button to trigger toggleSort function when clicked */}
+          <button className={globalStyles.sortButton} onClick={toggleSort}>
+            {/* Change button text depending on the sortOrder state */}
+            {sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A"}
+            <img src={DownVectorIcon} alt="Vector" />
+          </button>
+        </section>
 
-          <div className={styles.stockSection}>
-            {/* Call the getStockData function to sort the stockData array.
-            Slice the sorted stockData array to display only the first numStocks stocks.
-            Create a StockItem component for each stock and pass the symbol and value props */}
-            {getStockData()
-              .slice(0, numStocks)
-              .map((stock) => (
-                <StockItem
-                  key={stock.symbol}
-                  symbol={stock.symbol}
-                  value={stock.value}
-                />
-              ))}
-          </div>
-        </main>
+        <section className={styles.stockSection}>
+          {/* Call the getStockData function to sort the stockData array.
+          Slice the sorted stockData array to display only the first numStocks stocks.
+          Create a StockItem component for each stock and pass the symbol and value props */}
+          {getStockData()
+            .slice(0, numStocks)
+            .map((stock) => (
+              <StockItem
+                key={stock.symbol}
+                symbol={stock.symbol}
+                value={stock.value}
+              />
+            ))}
+        </section>
       <Hero />
     </>
   );

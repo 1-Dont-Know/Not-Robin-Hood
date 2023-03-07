@@ -180,28 +180,29 @@ body {
   @include mixins.button;
   color: variables.$secondary-color;
   gap: 0.5rem;
-  svg {
-    transition: 0.3s ease-in-out;
-  }
-  &:hover {
-    color: #fff;
-    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
-    &:hover {
-      svg {
-        fill: #fff;
-      }
-    }
-  }
+  transition: 0.3s ease-in-out;
   img {
+    transition: 0.3s ease-in-out;
     max-width: 41.79px;
     max-height: 40.25px;
     margin-right: 0.5rem;
+  }
+
+  &:hover {
+    color: #fff;
+    // box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(1) contrast(200%) //hue-rotate(100deg)
+        saturate(0);
+    }
   }
 }
 
 // Notifications type button
 
 .notificationButton {
+  visibility: visible;
   position: relative;
   max-width: 3.75rem;
   width: 100%;
@@ -233,13 +234,19 @@ body {
   font-size: 1rem;
   background: #d5e3e1;
   color: variables.$secondary-color;
+  img {
+    transition: 0.3s ease-in-out;
+    max-width: 20px;
+    max-height: 20.25px;
+  }
   &:hover {
-    background-color: variables.$secondary-color;
     color: #fff;
-    &:hover {
-      svg {
-        fill: #fff;
-      }
+    background-color: variables.$secondary-color;
+    // box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(1) contrast(200%) //hue-rotate(100deg)
+        saturate(0);
     }
   }
 }
@@ -282,6 +289,9 @@ body {
     width: 100%;
     max-height: 41px;
   }
+  .name {
+    display: none;
+  }
 }
 
 // Settings Type Button
@@ -295,6 +305,21 @@ body {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  img {
+    transition: 0.3s ease-in-out;
+    max-width: 21.79px;
+    max-height: 40.25px;
+  }
+  &:hover {
+    color: #fff;
+    background-color: variables.$secondary-color;
+    // box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(1) contrast(200%) //hue-rotate(100deg)
+        saturate(0);
+    }
+  }
   &:first-child {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
@@ -302,15 +327,6 @@ body {
   &:last-child {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
-  }
-  &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
-    &:hover {
-      svg {
-        fill: #fff;
-      }
-    }
   }
 }
 
@@ -395,8 +411,7 @@ body {
   }
 }
 
-.stockInfoButton 
-{
+.stockInfoButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -450,46 +465,44 @@ body {
   }
 }
 
-
 .settingsPageButton // Modifies nav bar buttons
 {
-display: flex;
-align-items: center;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-font-family: 'Roboto';
-//font-weight: 600;
-font-size: 24px;
-padding-right: 1.5rem;
-//padding: 0.25rem 0.05rem;
+  font-family: "Roboto";
+  //font-weight: 600;
+  font-size: 24px;
+  padding-right: 1.5rem;
+  //padding: 0.25rem 0.05rem;
 
-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
-background: white;
-color: variables.$secondary-color;
-border-radius: 25px;
-transition: 0.3s ease-in-out;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  background: white;
+  color: variables.$secondary-color;
+  border-radius: 25px;
+  transition: 0.3s ease-in-out;
 
-&:hover {
-  outline: 4px solid #D5E3E1;
-  background-color: variables.$secondary-color;
-  color: #000000;
-  img { //Modifies the credit/bank icon colors on hover
-    filter:     
-    invert(0)
-    sepia(0)
-    //hue-rotate(100deg)
-    saturate(0);
-    transition: 0.3s ease-in-out;
+  &:hover {
+    outline: 4px solid #d5e3e1;
+    background-color: variables.$secondary-color;
+    color: #000000;
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(0) sepia(0) //hue-rotate(100deg)
+        saturate(0);
+      transition: 0.3s ease-in-out;
+    }
+
+    &:nth-child(n) // Colors the buttons
+    {
+      background-color: #91cae0;
+      outline: 4px solid #5999b3;
+    }
   }
 
-  &:nth-child(n) // Colors the buttons
-  {
-    background-color: #91cae0;
-    outline: 4px solid #5999b3;
-  }
-}
-
-  img { // Icon nav-bar adjustments
+  img {
+    // Icon nav-bar adjustments
     display: flex;
     margin-right: 0.55rem;
     margin-left: 1.55rem;
@@ -499,13 +512,12 @@ transition: 0.3s ease-in-out;
   }
 }
 
-.saveChangesButton
-{
+.saveChangesButton {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #EAEAEA;
+  background: #eaeaea;
   border-radius: 35px;
   outline: 1.5px solid black;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
@@ -514,28 +526,26 @@ transition: 0.3s ease-in-out;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  font-family: 'Inter', 'Roboto', 'arial';
+  font-family: "Inter", "Roboto", "arial";
   line-height: 24px;
-  
+
   padding: 2rem 1.5rem;
   //margin-left: 5rem;
 
-  &:hover 
-  {
+  &:hover {
     background-color: #cecece;
     outline: 1.5px solid rgb(87, 87, 87);
     transition: 0.15s ease-in-out;
-  
+
     svg {
       fill: #fff;
     }
   }
-    
+
   svg {
-      padding-right: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
-
 
 .stockSymbolButton {
   padding: 1rem 1.5rem;
@@ -568,7 +578,7 @@ transition: 0.3s ease-in-out;
   top: 291px;
   background: #ffffff;
   border-radius: 25px;
-  
+
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -581,19 +591,44 @@ transition: 0.3s ease-in-out;
   }
 }
 
-//* ======================== Input styles ========================
+// ADD FUNDS PROFILE BUTTON
 
-.input {
-  padding: 2rem 2rem 1rem 0rem;
-  margin: 1rem 0rem;
-  border-bottom: 1px solid variables.$default;
+.AddFundsProfileButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.5rem;
+  border-radius: 25px;
+  background-color: variables.$secondary-color;
+  color: #fff;
+  font-weight: variables.$font-bold;
+  transition: 0.3s ease-in-out;
+  img {
+    filter: invert(1) contrast(200%) //hue-rotate(100deg)
+      saturate(0);
+  }
+  &:hover {
+    background-color: variables.$golden;
+  }
+}
+
+// SHARE PROFILE BUTTON
+
+.ShareButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
   background: none;
-  font-size: 1.25rem;
-  color: #32543a;
-  &::placeholder {
-    font-size: 1.125rem;
-    color: #32543a;
-    font-weight: variables.$font-medium;
+  border-radius: 25px;
+  padding: 1rem 0.5rem;
+  color: variables.$secondary-color;
+  font-weight: variables.$font-bold;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    color: variables.$secondary-color;
   }
   @include mixins.breakpoint-down(large) {
     padding: 1rem 2rem 1rem 0rem;
@@ -606,59 +641,58 @@ transition: 0.3s ease-in-out;
     &::placeholder {
       font-weight: variables.$font-regular;
     }
+  }
+}
 
+.toggleButton {
+  //Toggle
+  input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
   }
 
-}
+  label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 200px;
+    height: 100px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+  }
 
-.toggleButton {//Toggle
-input[type=checkbox]{
-	height: 0;
-	width: 0;
-	visibility: hidden;
-}
+  label:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 90px;
+    height: 90px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+  }
 
-label {
-	cursor: pointer;
-	text-indent: -9999px;
-	width: 200px;
-	height: 100px;
-	background: grey;
-	display: block;
-	border-radius: 100px;
-	position: relative;
-}
+  input:checked + label {
+    background: #bada55;
+  }
 
-label:after {
-	content: '';
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	width: 90px;
-	height: 90px;
-	background: #fff;
-	border-radius: 90px;
-	transition: 0.3s;
-}
+  input:checked + label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+  }
 
-input:checked + label {
-	background: #bada55;
-}
+  label:active:after {
+    width: 130px;
+  }
 
-input:checked + label:after {
-	left: calc(100% - 5px);
-	transform: translateX(-100%);
-}
-
-label:active:after {
-	width: 130px;
-}
-
-// centering
-body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-} //End Toggle
+  // centering
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  } //End Toggle
 }

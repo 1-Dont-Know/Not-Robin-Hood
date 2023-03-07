@@ -1,3 +1,200 @@
 @use "../../../styles/mixins.scss";
 @use "../../../styles//variables.scss";
 
+.logo {
+    display: flex;
+    margin-left: 40px;
+}
+
+.image { //Bull in the background
+    position: absolute;
+    width: 65rem;
+    margin-left: -65px;
+    opacity: calc(3%);
+    background-size: cover;
+    height: 55rem;
+    background-image: url(../../../assets/bull.png);
+    background-repeat: no-repeat;
+    pointer-events: none
+    }
+
+.headerSection { //Contains featured bar, navigation bar
+    //display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 40px;
+    width: calc(100% - 85px);
+
+    .settingsNavBar { 
+        display: flex;
+        margin-right: 25px;
+        margin-bottom: 25px;
+        gap: 25px;
+        background-color: transparent;
+    }
+    .featured {
+        font-weight: bold;
+        font-size: 20px;
+        margin: 1rem 0rem;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #d5e3e1;
+    height: calc(100% - 15rem);
+
+    button[id="mainSaveChanges"] //Save Changes button that exists on all tabs
+    { 
+        margin-top: -5.5rem;
+        margin-left: 4rem;
+    }    
+    
+    .logoutButton { //Logout button
+    display: flex;
+    position: relative;    
+    font-size: 2rem;
+    font-weight: bold;
+    color: variables.$secondary-color;
+    margin-left: 25px;
+    margin-top: 15px;
+    padding-top: 5px;
+    border-radius: 25px;
+    width: 9.5rem;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    img {
+        width: 2.5rem;
+    }
+
+    &:hover {
+        background-color: #fff;
+        border-radius: 15px;
+    }
+    }
+}
+
+.settings { //Modifies the container when Settings is active
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.notifications, .accountInfo { //Modifies the container when Notifications/Account Info is active
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.notifications { //Modifies certain elements when Notifications is active
+
+    input[type=text], select //Modifies input boxes in the Notifications tab
+    { 
+        width: 20%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    h2 { //Modifies the subtext options in the notifications tab
+    text-indent: 5rem;  
+    }
+
+}
+
+
+.settingsContainer 
+{ 
+    display: wrap;
+    justify-content: space-between;
+
+    background-color: rgb(255, 255, 255);
+    box-shadow:5px rgb(0, 0, 0);
+    border-radius: 25px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-left: 40px;
+    padding-top: 25px;
+    width: calc(100% - 85px);
+    height: 35rem;
+
+    h1 { //Modifies settings options text
+        display: flex;
+        font-weight: bold;
+        font-size: 26px;
+        font-family: Arial;
+    }
+
+    h2 { //Modifies settings options subtext
+        display: flex;
+        font-weight: 200;
+        font-size: 24px;
+        font-family: Arial;
+    }   
+
+    button[id="delete"] { //Changes Delete Account font color red
+        color: red;
+    }
+}
+
+.accountInfo { //Modifies the account settings options
+    display: flex;
+    //flex-wrap:unset;
+    width: 100%;
+
+    flex-direction: row;
+    //padding: 2rem;
+    
+    gap: 2rem;
+
+    h1 { //Modifies the h1 text in the accountInfo class
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+    
+    input[type=text] //Modifies input boxes
+    {   
+        display: inline-block;
+        width: 100%;
+        padding: 12px 20px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+ }
+
+.changePass{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.changeName{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.del{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.settingsNavLink {
+    display: flex;
+    flex: 33%;
+    align-items: center;
+    gap: 1rem;
+    
+    hr{
+        width: 100%;
+        min-width: 70px;
+        max-width: 204.53px;
+        height: 1px;
+        background-color: #37433A;
+    }
+}

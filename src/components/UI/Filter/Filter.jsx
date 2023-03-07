@@ -29,6 +29,8 @@ const Filter = () => {
       </div>
       <div className={styles.settings}>
         <Settings />
+        {/* <Settings /> */}
+        {/* <Settings /> */}
       </div>
     </div>
   );

@@ -62,13 +62,6 @@
 }
 
 .filter {
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $gap: 1rem,
-  //   $justifyContent: space-evenly,
-  //   $wrap: wrap,
-  //   $flex-basis: 10%
-  // );
   display: flex;
   gap: 1rem;
   justify-content: space-evenly;

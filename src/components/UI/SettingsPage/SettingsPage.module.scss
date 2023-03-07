@@ -1,0 +1,33 @@
+@use "../../../styles//variables.scss";
+@use "../../../styles/mixins.scss";
+
+.container {
+  @include mixins.flexbox(
+    $display: flex,
+    $justifyContent: left,
+    $alignItems: center
+  );
+  box-sizing: border-box; //box-sizing property allows us to include the padding and border in an element's total width and height.
+  background: #ffffff;
+  border: 1px solid #32543a;
+  border-radius: 25px;
+
+  min-width: 80%; //Temp Value for now
+  padding: 0.9rem;
+}
+
+//Styling for the Search Bar Text
+input {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  width: 100%;
+  padding-left: 2rem;
+}
+
+.settingsPage {
+  background: url(../../../assets/icons/search-icon.svg) no-repeat left; //Search Icon
+  height: 30px;
+  //   padding: 20px 0px 20px 25px;
+}

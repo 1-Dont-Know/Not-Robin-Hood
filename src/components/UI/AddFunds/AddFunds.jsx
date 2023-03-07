@@ -9,7 +9,7 @@ const AddFunds = () => {
     <div className={styles.gridContainerAppFunds}>
       {/* 1 - title and subtitle */}
       <div style={{ textAlign: "center" }}>
-        <h1>✖</h1>
+        {/* <h1>✖</h1> */}
         <h2 className={styles.modalHeader}>Add funds</h2>
         <p>Select payments option to add balance to your funds for trading</p>
       </div>

@@ -2,16 +2,16 @@
 @use "../../../styles/mixins.scss";
 
 .gridContainerAppFunds {
+  height: 100%;
   display: grid;
   // 4 column layout
   grid-template-columns: repeat(4, 1fr);
-  grid-template-areas: 
-  "title   title   title   title"
-  "option  option  option  option"
-  "amount1 amount2 amount3 input1"
-  ".       credit  bank     ."
-  ".       toggle  continue ."
-  ;
+  grid-template-areas:
+    "title   title   title   title"
+    "option  option  option  option"
+    "amount1 amount2 amount3 input1"
+    ".       credit  bank     ."
+    ".       toggle  continue .";
 
   gap: 1rem;
   background-color: variables.$secondary-color;
@@ -20,7 +20,8 @@
   padding: 1.5rem;
   max-width: max-content;
 
-  h1 { // Close Button
+  h1 {
+    // Close Button
     margin-left: 95%;
     margin-bottom: 1rem;
     padding: 7px;
@@ -28,7 +29,8 @@
     font-size: 20px;
     z-index: 1;
 
-    &:hover { //Close Button hover styles
+    &:hover {
+      //Close Button hover styles
       background: rgb(119, 199, 245);
       transition: 0.3s ease-in-out;
     }
@@ -37,42 +39,42 @@
   > :nth-child(1) {
     grid-area: title;
   }
-  
-  > :nth-child(2){
+
+  > :nth-child(2) {
     grid-area: option;
     gap: 15px;
   }
-  
-  > :nth-child(3){
+
+  > :nth-child(3) {
     grid-area: amount1;
   }
-  
-  > :nth-child(4){
+
+  > :nth-child(4) {
     grid-area: amount2;
   }
-  
-  > :nth-child(5){
+
+  > :nth-child(5) {
     grid-area: amount3;
     // background-color: pink;
   }
-  
-  > :nth-child(6){
+
+  > :nth-child(6) {
     grid-area: input1;
   }
-  
-  > :nth-child(7){
+
+  > :nth-child(7) {
     grid-area: credit;
   }
-  
-  > :nth-child(8){
+
+  > :nth-child(8) {
     grid-area: bank;
   }
-  
-  > :nth-child(9){
+
+  > :nth-child(9) {
     grid-area: toggle;
   }
-  
-  > :nth-child(10){
+
+  > :nth-child(10) {
     grid-column: continue;
   }
 }
@@ -81,14 +83,13 @@
   .gridContainerAppFunds {
     // 2 column layout
     grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: 
-    "title    title"
-    "option   option"
-    "amount1  amount2"
-    "amount3  input1"
-    "credit   bank"
-    "toggle   continue"
-    ;
+    grid-template-areas:
+      "title    title"
+      "option   option"
+      "amount1  amount2"
+      "amount3  input1"
+      "credit   bank"
+      "toggle   continue";
   }
 }
 
@@ -97,28 +98,27 @@
     // single column layout
     grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
-    grid-template-areas: 
-    "title"
-    "option"
-    "amount1"
-    "amount2"
-    "amount3"
-    "input1"
-    "credit"
-    "bank"
-    "toggle"
-    "continue"
-    ;
-}
-
-.addFunds {
-  font-size: 150px;
-
-  &:nth-child(10) {
-    font-size: 15px;
+    grid-template-areas:
+      "title"
+      "option"
+      "amount1"
+      "amount2"
+      "amount3"
+      "input1"
+      "credit"
+      "bank"
+      "toggle"
+      "continue";
   }
-}
-  .currencyInput{
+
+  .addFunds {
+    font-size: 150px;
+
+    &:nth-child(10) {
+      font-size: 15px;
+    }
+  }
+  .currencyInput {
     // Same as buttons
     min-height: 60px;
   }
@@ -133,14 +133,14 @@
 
 .currencyContainer {
   font-size: 1.5rem;
-  display:flex;
+  display: flex;
   align-items: center;
 
   select:hover {
     color: variables.$secondary-color;
     background: #aeedff;
     transition: 0.3s ease-in-out;
-    }
+  }
 }
 
 select {
@@ -158,24 +158,23 @@ option {
   color: variables.$secondary-color;
 }
 
-.currencyInput{
+.currencyInput {
   font-size: 1.5rem;
   border-radius: 25px;
 }
 
 .toggleContainer {
-  display:flex;
+  display: flex;
   justify-content: space-evenly;
   align-items: center;
-  
+
   input {
     margin-right: -6rem;
   }
 }
 
-
 //SCSS for Toggle Slider
-input[type=checkbox]{
+input[type="checkbox"] {
   height: 0;
   width: 0;
   visibility: hidden;
@@ -193,7 +192,7 @@ label {
 }
 
 label:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 5px;
   left: 5px;

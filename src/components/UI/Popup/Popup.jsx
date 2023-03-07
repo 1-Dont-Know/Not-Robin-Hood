@@ -1,13 +1,21 @@
 import React from "react";
 import styles from "./Popup.module.scss";
-import globalStyles from "../../../styles/main.module.scss";
 
-const Popup = ({ toggle, children }) => {
+const Popup = ({ name, toggle, children }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.popup}>
-        <button onClick={toggle} className={styles.closePopupButton}>
-          X
+      <div
+        className={name === "notifications" ? styles.popup : styles.popUpFunds}
+      >
+        <button
+          onClick={toggle}
+          className={
+            name === "notifications"
+              ? styles.closePopupButton
+              : styles.closePopupButtonFunds
+          }
+        >
+          ✖
         </button>
         {children}
       </div>

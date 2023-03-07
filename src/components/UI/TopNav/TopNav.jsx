@@ -9,12 +9,40 @@ import Search from "../Search/Search";
 import portfolio from "../../../assets/icons/portfolio-icon.svg";
 import Popup from "../Popup/Popup";
 import NotificationPopUp from "../NotificationPopUp/NotificationPopUp";
+import AddIcon from "../../../assets/icons/plus-icon.svg";
+import ShareIcon from "../../../assets/icons/share.svg";
+import AddFunds from "../AddFunds/AddFunds";
 
 const TopNav = () => {
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+  const [showFundsPopup, setShowFundsPopup] = useState(false);
+
+  // PROFILE HANDLER
+  const profileHandler = () => {
+    setShowProfile((showProfile) => !showProfile);
+  };
+
+  //POPUP HANDLER
 
   const popUpHandler = () => {
-    setShowNotifications(!showNotifications);
+    if (!showFundsPopup) {
+      notificationsHandler();
+    }
+    if (!showNotifications) {
+      addFundsHandler();
+    }
+  };
+
+  // NOTIFICATIONS HANDLER
+
+  const notificationsHandler = () => {
+    setShowNotifications((showNotifications) => !showNotifications);
+  };
+
+  // ADD FUNDS POPUP HANDLER
+  const addFundsHandler = () => {
+    setShowFundsPopup((showFundsPopup) => !showFundsPopup);
   };
 
   return (
@@ -38,21 +66,57 @@ const TopNav = () => {
         </section>
         {/* NOTIFICATIONS / PROFILE SECTION */}
         <section className={styles.profile}>
-          <button
-            onClick={popUpHandler}
-            className={globalStyles.notificationButton}
-          >
-            <img src={notification} alt="notification" />
-            <span className={styles.notifications}>3</span>
-          </button>
-          <button className={globalStyles.profileButton}>
-            <img src={profile} alt="profile" />
-          </button>
+          {!showProfile && (
+            <>
+              {" "}
+              <button
+                onClick={notificationsHandler}
+                className={globalStyles.notificationButton}
+                id="notifications"
+              >
+                <img src={notification} alt="notification" />
+                <span className={styles.notifications}>6</span>
+              </button>
+              <button
+                onClick={profileHandler}
+                className={globalStyles.profileButton}
+                id="profile"
+              >
+                <img src={profile} alt="profile" />
+              </button>
+            </>
+          )}
+          {showProfile && (
+            <div onClick={profileHandler} className={styles.profileMenu}>
+              <div className={styles.info}>
+                <h4>Aaron Smith</h4>
+                <img src={profile} alt="profile" />
+              </div>
+              <div className={styles.profileCta}>
+                <button className={globalStyles.ShareButton}>
+                  <img src={ShareIcon} alt="Share" />
+                  Share Profile
+                </button>
+                <button
+                  onClick={addFundsHandler}
+                  className={globalStyles.AddFundsProfileButton}
+                >
+                  <img src={AddIcon} alt="Add" />
+                  Add Funds
+                </button>
+              </div>
+            </div>
+          )}
         </section>
       </div>
       {showNotifications && (
-        <Popup toggle={popUpHandler}>
+        <Popup name="notifications" toggle={popUpHandler}>
           <NotificationPopUp name="Aaron" notifications="6" />
+        </Popup>
+      )}
+      {showFundsPopup && (
+        <Popup name="addfunds" toggle={popUpHandler}>
+          <AddFunds />
         </Popup>
       )}
     </>

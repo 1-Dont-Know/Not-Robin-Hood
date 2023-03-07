@@ -7,6 +7,8 @@ import notification from "../../../assets/icons/bell-icon.svg";
 import profile from "../../../assets/icons/profile.svg";
 import Search from "../Search/Search";
 import portfolio from "../../../assets/icons/portfolio-icon.svg";
+import Popup from "../Popup/Popup";
+import NotificationPopUp from "../NotificationPopUp/NotificationPopUp";
 
 const TopNav = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -14,7 +16,7 @@ const TopNav = () => {
   const popUpHandler = () => {
     setShowNotifications(!showNotifications);
   };
-  console.log(showNotifications);
+
   return (
     <>
       <div className={styles.container}>
@@ -48,6 +50,11 @@ const TopNav = () => {
           </button>
         </section>
       </div>
+      {showNotifications && (
+        <Popup toggle={popUpHandler}>
+          <NotificationPopUp name="Aaron" notifications="6" />
+        </Popup>
+      )}
     </>
   );
 };

@@ -2,7 +2,7 @@
 @use "../../../styles/mixins.scss";
 
 .container {
-  min-height: 7rem;
+  height:fit-content;
   padding: 1rem 2rem;
   display: flex;
   align-items: center;

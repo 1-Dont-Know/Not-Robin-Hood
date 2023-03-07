@@ -1,24 +1,8 @@
 @use "../../../styles/mixins.scss";
 @use "../../../styles/variables.scss";
 
-// WRAPPER
 
-.wrapper {
-  display: flex;
-  flex-grow: 1;
-  height: 100vh;
-}
 
-// MAIN SECTION
-
-.mainSection {
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  //Fix for the graph not resizing correctly
-  //Using flex-grow here won't work. 400px is the size of the sidebar.
-  width: calc(100% - 400px);
-}
 
 // FEATURED SECTION
 .featured {
@@ -48,4 +32,7 @@
 .graph {
   display: flex;
   flex-grow: 1;
+  margin: 10px 0 10px 0;
+  min-height: 400px;
+  min-width: 350px;
 }

@@ -22,7 +22,7 @@ const Account = () => {
 
   return (
     <>
-      <Hero>
+      <Hero style={{gap: "1rem"}}>
         {/* //! FEATURED STOCKS */}
         <section className={styles.featured}>
           <FeaturedStock status="up" />

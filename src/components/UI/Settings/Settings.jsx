@@ -5,6 +5,7 @@ import SettingIcon from "../../../assets/icons/settings.svg";
 import globalStyles from "../../../styles/main.module.scss";
 
 const Settings = () => {
+
   return (
     <>
       <button className={globalStyles.settingsButton}>

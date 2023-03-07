@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import globalStyles from "../../../styles/main.module.scss";
-import Sidebar from "../../UI/Sidebar/Sidebar";
-import TopNav from "../../UI/TopNav/TopNav";
 import styles from "./Markets.module.scss";
 import Hero from "../../UI/Hero/Hero";
 import StockItem from "../../UI/StockItem/StockItem";
@@ -39,15 +37,9 @@ const Markets = () => {
 
   return (
     <>
-      <div className={styles.wrapper}>
-        {/* Sidebar Section */}
-        <Sidebar />
-        {/* Nav/Hero Section */}
+     {/* Hero Section */}
+      <Hero />
         <main className={styles.mainSection}>
-          {/* Top Navigation */}
-          <TopNav />
-          {/* Hero Section */}
-          <Hero />
           <div>
             {/* Create a button to trigger toggleSort function when clicked */}
             <button className={globalStyles.sortButton} onClick={toggleSort}>
@@ -72,7 +64,7 @@ const Markets = () => {
               ))}
           </div>
         </main>
-      </div>
+      <Hero />
     </>
   );
 };

@@ -1,9 +1,6 @@
 @use "../../../styles/mixins.scss";
 @use "../../../styles/variables.scss";
 
-
-
-
 // FEATURED SECTION
 .featured {
   display: flex;
@@ -24,7 +21,6 @@
   flex-wrap: wrap;
   flex-shrink: 1;
   flex-basis: 10%;
-  margin: 1rem 0rem;
 }
 
 // GRAPH SECTION
@@ -32,7 +28,6 @@
 .graph {
   display: flex;
   flex-grow: 1;
-  margin: 10px 0 10px 0;
   min-height: 400px;
   min-width: 350px;
 }

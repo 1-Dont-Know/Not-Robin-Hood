@@ -10,6 +10,7 @@
   margin: 0;
   border: 0;
 }
+
 *,
 *:before,
 *:after {
@@ -17,10 +18,12 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 :focus,
 :active {
   outline: none;
 }
+
 a:focus,
 a:active {
   outline: none;
@@ -45,6 +48,7 @@ body {
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+
 input,
 button,
 textarea {
@@ -54,23 +58,29 @@ textarea {
 input::-ms-clear {
   display: none;
 }
+
 button {
   cursor: pointer;
 }
+
 button::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
+
 a,
 a:visited {
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: none;
 }
+
 ul li {
   list-style: none;
 }
+
 img {
   vertical-align: top;
 }
@@ -116,9 +126,11 @@ body {
   @include mixins.button;
   background-color: #fff;
   color: #000;
+
   @include mixins.breakpoint-down(large) {
     font-size: 1.2rem;
   }
+
   img {
     max-width: 1.5rem;
     max-height: 1.5rem;
@@ -137,6 +149,7 @@ body {
   @include mixins.button;
   background-color: variables.$golden;
   min-width: 14rem;
+
   img {
     max-width: 41.79px;
     max-height: 40.25px;
@@ -149,10 +162,12 @@ body {
 .buyBoxButton {
   background-color: variables.$secondary-color;
   @include mixins.button;
+
   &:hover {
     color: variables.$secondary-color;
     background-color: #fff;
   }
+
   img {
     max-width: 41.79px;
     max-height: 40.25px;
@@ -166,6 +181,7 @@ body {
   background-color: #e1c5c1;
   @include mixins.button;
   color: #ae2424;
+
   img {
     max-width: 41.79px;
     max-height: 40.25px;
@@ -180,28 +196,31 @@ body {
   @include mixins.button;
   color: variables.$secondary-color;
   gap: 0.5rem;
-  svg {
-    transition: 0.3s ease-in-out;
-  }
-  &:hover {
-    color: #fff;
-    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
-    &:hover {
-      svg {
-        fill: #fff;
-      }
-    }
-  }
+  transition: 0.3s ease-in-out;
+
   img {
+    transition: 0.3s ease-in-out;
     max-width: 41.79px;
     max-height: 40.25px;
     margin-right: 0.5rem;
+  }
+
+  &:hover {
+    color: #fff;
+
+    // box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(1) contrast(200%) //hue-rotate(100deg)
+        saturate(0);
+    }
   }
 }
 
 // Notifications type button
 
 .notificationButton {
+  visibility: visible;
   position: relative;
   max-width: 3.75rem;
   width: 100%;
@@ -215,9 +234,11 @@ body {
   border-radius: 50%;
   color: #37433a;
   transition: 0.3s ease-in-out;
+
   &:hover {
     transform: scale(1.1);
   }
+
   img {
     max-width: 1.3rem;
     width: 100%;
@@ -233,13 +254,22 @@ body {
   font-size: 1rem;
   background: #d5e3e1;
   color: variables.$secondary-color;
+
+  img {
+    transition: 0.3s ease-in-out;
+    max-width: 20px;
+    max-height: 20.25px;
+  }
+
   &:hover {
-    background-color: variables.$secondary-color;
     color: #fff;
-    &:hover {
-      svg {
-        fill: #fff;
-      }
+    background-color: variables.$secondary-color;
+
+    // box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(1) contrast(200%) //hue-rotate(100deg)
+        saturate(0);
     }
   }
 }
@@ -251,6 +281,7 @@ body {
   padding: 0.7rem 0rem;
   color: variables.$secondary-color;
   background: #fff;
+
   &:hover {
     background-color: variables.$secondary-color;
     color: #fff;
@@ -273,6 +304,7 @@ body {
   border-radius: 50%;
   color: variables.$secondary-color;
   transition: 0.3s ease-in-out;
+
   &:hover {
     transform: scale(1.1);
   }
@@ -281,6 +313,10 @@ body {
     max-width: 1.3rem;
     width: 100%;
     max-height: 41px;
+  }
+
+  .name {
+    display: none;
   }
 }
 
@@ -295,22 +331,33 @@ body {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+
+  img {
+    transition: 0.3s ease-in-out;
+    max-width: 21.79px;
+    max-height: 40.25px;
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: variables.$secondary-color;
+
+    // box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(1) contrast(200%) //hue-rotate(100deg)
+        saturate(0);
+    }
+  }
+
   &:first-child {
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
   }
+
   &:last-child {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
-  }
-  &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
-    &:hover {
-      svg {
-        fill: #fff;
-      }
-    }
   }
 }
 
@@ -332,11 +379,16 @@ body {
   color: variables.$secondary-color;
   border-radius: 25px;
   transition: 0.3s ease-in-out;
+  &:focus {
+    background-color: #ffe0c5;
+    outline: 4px solid #ebb485;
+  }
 
   &:hover {
     outline: 4px solid #d5e3e1;
     background-color: variables.$secondary-color;
     color: #000000;
+
     img {
       //Modifies the credit/bank icon colors on hover
       filter: invert(0.35) sepia(1) //hue-rotate(100deg)
@@ -345,7 +397,8 @@ body {
     }
 
     &:nth-child(n) // Colors the buttons
-    {
+
+      {
       background-color: #ffe0c5;
       outline: 4px solid #ebb485;
     }
@@ -358,46 +411,95 @@ body {
   }
 }
 
-.whiteBuyButton {
+.settingsPageButton // Modifies nav bar buttons
+
+  {
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-grow: 1;
-  background: #ffffff;
+  justify-content: center;
+
+  font-family: "Roboto";
+  //font-weight: 600;
+  font-size: 24px;
+  padding-right: 1.5rem;
+  //padding: 0.25rem 0.05rem;
+
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  background: white;
+  color: variables.$secondary-color;
   border-radius: 25px;
-  width: 150px;
-  height: 54px;
-  left: 1693px;
-  top: 291px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  padding: 1rem 1.5rem;
-  margin-left: 7rem;
-  margin-right: 1.5rem;
   transition: 0.3s ease-in-out;
 
   &:hover {
+    outline: 4px solid #d5e3e1;
     background-color: variables.$secondary-color;
+    color: #000000;
+
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(0) sepia(0) //hue-rotate(100deg)
+        saturate(0);
+      transition: 0.3s ease-in-out;
+    }
+
+    &:nth-child(n) // Colors the buttons
+
+      {
+      background-color: #91cae0;
+      outline: 4px solid #5999b3;
+    }
   }
-  // since the svg path fill="white" we need to apply filter:invert(100%)
-  // In this case, filter: invert(100%) in the :hover pseudo-class inverts the color of the <img> element to black
+
   img {
-    padding-right: 0.5rem;
-    filter: invert(100%);
-    transition: 0.3s ease-in-out;
-  }
-  //filter: none removes the invert effect applied to the image on hover,
-  // causing it to return to its original color fill="white"
-  &:hover img {
-    filter: none;
+    // Icon nav-bar adjustments
+    display: flex;
+    margin-right: 0.55rem;
+    margin-left: 1.55rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 35px;
   }
 }
 
-.stockInfoButton 
-{
+.saveChangesButton {
   display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eaeaea;
+  border-radius: 35px;
+  outline: 1.5px solid black;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  width: 11rem;
+  height: 55px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  font-family: "Inter", "Roboto", "arial";
+  line-height: 24px;
+
+  padding: 2rem 1.5rem;
+  //margin-left: 5rem;
+
+  &:hover {
+    background-color: #cecece;
+    outline: 1.5px solid rgb(87, 87, 87);
+    transition: 0.15s ease-in-out;
+
+    svg {
+      fill: #fff;
+    }
+  }
+
+  svg {
+    padding-right: 0.5rem;
+  }
+}
+
+
+.stockInfoButton {
+  display: flex;
+  align-items: center;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
@@ -405,24 +507,30 @@ body {
   margin-left: 7.25rem;
   width: 615px;
   height: 54px;
-  left: 1003px;
-  top: 291px;
   background: #ffffff;
+  color: #000;
   border-radius: 25px;
-  font-style: normal;
   font-weight: 600;
   font-size: 20px;
-  line-height: 24px;
 
   &:hover {
     background-color: variables.$secondary-color;
     transition: 0.3s ease-in-out;
+    color: #ffffff;
   }
 
   img {
     padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    filter: invert(100%);
+    transition: 0.3s ease-in-out;
+  }
+
+  &:hover img {
+    filter: none;
   }
 }
+
 
 .sortButton {
   margin: 0rem 0.5rem 0rem 2rem;
@@ -448,115 +556,7 @@ body {
     margin-left: 1rem;
     margin-top: 0.7rem;
   }
-}
-
-
-.settingsPageButton // Modifies nav bar buttons
-{
-display: flex;
-align-items: center;
-justify-content: center;
-
-font-family: 'Roboto';
-//font-weight: 600;
-font-size: 24px;
-padding-right: 1.5rem;
-//padding: 0.25rem 0.05rem;
-
-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
-background: white;
-color: variables.$secondary-color;
-border-radius: 25px;
-transition: 0.3s ease-in-out;
-
-&:hover {
-  outline: 4px solid #D5E3E1;
-  background-color: variables.$secondary-color;
-  color: #000000;
-  img { //Modifies the credit/bank icon colors on hover
-    filter:     
-    invert(0)
-    sepia(0)
-    //hue-rotate(100deg)
-    saturate(0);
-    transition: 0.3s ease-in-out;
-  }
-
-  &:nth-child(n) // Colors the buttons
-  {
-    background-color: #91cae0;
-    outline: 4px solid #5999b3;
-  }
-}
-
-  img { // Icon nav-bar adjustments
-    display: flex;
-    margin-right: 0.55rem;
-    margin-left: 1.55rem;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 35px;
-  }
-}
-
-.saveChangesButton
-{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: #EAEAEA;
-  border-radius: 35px;
-  outline: 1.5px solid black;
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
-  width: 11rem;
-  height: 55px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  font-family: 'Inter', 'Roboto', 'arial';
-  line-height: 24px;
   
-  padding: 2rem 1.5rem;
-  //margin-left: 5rem;
-
-  &:hover 
-  {
-    background-color: #cecece;
-    outline: 1.5px solid rgb(87, 87, 87);
-    transition: 0.15s ease-in-out;
-  
-    svg {
-      fill: #fff;
-    }
-  }
-    
-  svg {
-      padding-right: 0.5rem;
-  }
-}
-
-
-.stockSymbolButton {
-  padding: 1rem 1.5rem;
-  margin-left: 1.313rem;
-  width: 150px;
-  height: 54px;
-  left: 491px;
-  top: 291px;
-  background: #ffffff;
-  border-radius: 25px;
-
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-
-  transition: 0.3s ease-in-out;
-
-  &:hover {
-    background-color: variables.$secondary-color;
-  }
 }
 
 .stockValueButton {
@@ -564,16 +564,12 @@ transition: 0.3s ease-in-out;
   margin-left: 6rem;
   width: 150px;
   height: 54px;
-  left: 737px;
-  top: 291px;
   background: #ffffff;
   border-radius: 25px;
-  
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
-
   transition: 0.3s ease-in-out;
 
   &:hover {
@@ -581,84 +577,188 @@ transition: 0.3s ease-in-out;
   }
 }
 
-//* ======================== Input styles ========================
+.stockSymbolButton {
+  padding: 1rem 1.5rem;
+  margin-left: 1.313rem;
+  width: 150px;
+  height: 54px;
+  background: #ffffff;
+  font-weight: 600;
+  font-size: 20px;
+  border-radius: 25px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  transition: 0.3s ease-in-out;
 
-.input {
-  padding: 2rem 2rem 1rem 0rem;
-  margin: 1rem 0rem;
-  border-bottom: 1px solid variables.$default;
-  background: none;
-  font-size: 1.25rem;
-  color: #32543a;
-  &::placeholder {
-    font-size: 1.125rem;
-    color: #32543a;
-    font-weight: variables.$font-medium;
+  &:hover {
+    background-color: variables.$secondary-color;
+    color: #fff;
   }
+
+  @media (max-width: 1600px) {
+    width: 8.375rem;
+
+  }
+
+  @media (max-width: 1500px) {
+    width: 7.375rem;
+  }
+
+  @media (max-width: 1370px) {
+    width: 6.375rem;
+  }
+}
+
+//White buy button
+.whiteBuyButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // W:150px H: 54px
+  width: 9.375rem;
+  height: 3.375rem;
+  width: 100%;
+  max-width: 9.375rem;
+  color: #000;
+  background: #ffffff;
+  border-radius: 1.563rem;
+  font-weight: 600;
+  font-size: 20px;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background-color: variables.$secondary-color;
+    color: #ffffff;
+  }
+
+  // since the svg path fill="white" we need to apply filter:invert(100%)
+  // In this case, filter: invert(100%) in the :hover pseudo-class inverts the color of the <img> element to black
+  img {
+    padding-right: 0.5rem;
+    filter: invert(100%);
+    transition: 0.3s ease-in-out;
+  }
+
+  //filter: none removes the invert effect applied to the image on hover,
+  // causing it to return to its original color fill="white"
+  &:hover img {
+    filter: none;
+  }
+}
+
+
+// ADD FUNDS PROFILE BUTTON
+
+.AddFundsProfileButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.5rem;
+  border-radius: 25px;
+  background-color: variables.$secondary-color;
+  color: #fff;
+  font-weight: variables.$font-bold;
+  transition: 0.3s ease-in-out;
+
+  img {
+    filter: invert(1) contrast(200%) //hue-rotate(100deg)
+      saturate(0);
+  }
+
+  &:hover {
+    background-color: variables.$golden;
+  }
+}
+
+// SHARE PROFILE BUTTON
+
+.ShareButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border-radius: 25px;
+  padding: 1rem 0.5rem;
+  color: variables.$secondary-color;
+  font-weight: variables.$font-bold;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+    color: variables.$secondary-color;
+  }
+
   @include mixins.breakpoint-down(large) {
     padding: 1rem 2rem 1rem 0rem;
   }
+
   @include mixins.breakpoint-down(medium) {
     background-color: #fff;
     border-radius: 15px;
     border: none;
     padding-left: 1.5rem;
+
     &::placeholder {
       font-weight: variables.$font-regular;
     }
+  }
+}
 
+.toggleButton {
+
+  //Toggle
+  input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
   }
 
-}
+  label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 200px;
+    height: 100px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+  }
 
-.toggleButton {//Toggle
-input[type=checkbox]{
-	height: 0;
-	width: 0;
-	visibility: hidden;
-}
+  label:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 90px;
+    height: 90px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+  }
 
-label {
-	cursor: pointer;
-	text-indent: -9999px;
-	width: 200px;
-	height: 100px;
-	background: grey;
-	display: block;
-	border-radius: 100px;
-	position: relative;
-}
+  input:checked+label {
+    background: #bada55;
+  }
 
-label:after {
-	content: '';
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	width: 90px;
-	height: 90px;
-	background: #fff;
-	border-radius: 90px;
-	transition: 0.3s;
-}
+  input:checked+label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+  }
 
-input:checked + label {
-	background: #bada55;
-}
+  label:active:after {
+    width: 130px;
+  }
 
-input:checked + label:after {
-	left: calc(100% - 5px);
-	transform: translateX(-100%);
-}
+  // centering
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
-label:active:after {
-	width: 130px;
-}
-
-// centering
-body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-} //End Toggle
+  //End Toggle
 }

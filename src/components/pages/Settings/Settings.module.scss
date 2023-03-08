@@ -3,14 +3,14 @@
 
 .logo {
     display: flex;
-    margin-left: 40px;
+    margin-left: 100px;
 }
 
 .image { //Bull in the background
     position: absolute;
     width: 65rem;
     margin-left: -65px;
-    opacity: calc(3%);
+    opacity: calc(4%);
     background-size: cover;
     height: 55rem;
     background-image: url(../../../assets/bull.png);
@@ -22,13 +22,13 @@
     //display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 40px;
+    margin-left: 100px;
     width: calc(100% - 85px);
 
     .settingsNavBar { 
         display: flex;
         margin-right: 25px;
-        margin-bottom: 25px;
+        margin-bottom: 40px;
         gap: 25px;
         background-color: transparent;
     }
@@ -48,7 +48,7 @@
     button[id="mainSaveChanges"] //Save Changes button that exists on all tabs
     { 
         margin-top: -5.5rem;
-        margin-left: 4rem;
+        margin-left: 8.5rem;
     }    
     
     .logoutButton { //Logout button
@@ -57,7 +57,7 @@
     font-size: 2rem;
     font-weight: bold;
     color: variables.$secondary-color;
-    margin-left: 25px;
+    margin-left: 40px;
     margin-top: 15px;
     padding-top: 5px;
     border-radius: 25px;
@@ -106,7 +106,7 @@
 }
 
 
-.settingsContainer 
+.settingsContainer //The settings box where the options are displayed
 { 
     display: wrap;
     justify-content: space-between;
@@ -116,9 +116,9 @@
     border-radius: 25px;
     padding-left: 2rem;
     padding-right: 2rem;
-    margin-left: 40px;
+    margin-left: 100px;
     padding-top: 25px;
-    width: calc(100% - 85px);
+    width: calc(100% - 13rem);
     height: 35rem;
 
     h1 { //Modifies settings options text
@@ -142,13 +142,10 @@
 
 .accountInfo { //Modifies the account settings options
     display: flex;
-    //flex-wrap:unset;
-    width: 100%;
-
     flex-direction: row;
-    //padding: 2rem;
-    
-    gap: 2rem;
+    //width: 100%;
+    //min-width: 100%;
+    //gap: 2rem;
 
     h1 { //Modifies the h1 text in the accountInfo class
         font-size: 25px;
@@ -158,16 +155,16 @@
     input[type=text] //Modifies input boxes
     {   
         display: inline-block;
-        width: 100%;
-        padding: 12px 20px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        max-width: 105%;
+        padding: 18px 20px;
+        margin-bottom: 28px;
+        border: 1px solid #32543A;
+        border-radius: 20px;
         box-sizing: border-box;
     }
  }
 
-.changePass{
+.changePass{ 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -181,6 +178,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+@media only screen and (max-width: 770px) 
+{ //Adds scrollbar when window screen is at a certain amount
+    .accountInfo, .settingsNavBar {
+        overflow: auto;
+    }
 }
 
 

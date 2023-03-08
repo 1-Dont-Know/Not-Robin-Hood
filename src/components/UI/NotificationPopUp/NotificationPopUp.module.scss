@@ -1,38 +1,52 @@
 @use "../../../styles//variables.scss";
 @use "../../../styles/mixins.scss";
 
-.popUp {
-  max-width: 80%;
-  height: 90svh;
-  border-radius: 25px;
+.container {
   display: flex;
   flex-direction: column;
-  background-color: variables.$secondary-color;
-  padding: 2rem;
-  margin: 1rem 0rem;
-  font-weight: bold;
-  @include mixins.boxShadow();
-  color: variables.$primary-color;
-}
-
-.notification {
-  top: 342px;
-  left: 521px;
-  border-radius: 25px;
-  background-color: #ffffff;
-  padding: 2rem;
-  margin: 1rem 0rem;
-  font-size: 25px;
-  font-weight: variables.$font-regular;
-  outline: auto;
+  text-align: left;
   color: variables.$secondary-color;
 }
 
-.greeting {
-  font-weight: bold;
-  font-size: 35px;
+.notificationsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+.greetingTitle,
+.subTitle {
+  font-size: 2.25rem;
+  font-weight: variables.$font-medium;
 }
 
 .subTitle {
-  font-size: 25px;
+  font-size: 2rem;
+  margin: 2rem 0rem;
+}
+
+.date {
+  font-weight: variables.$font-bold;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+.notificationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.notificationContainer {
+  display: flex;
+  flex-direction: column;
+}
+.notificationListItem {
+  padding: 1.5rem;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 25px;
+  border: 1px solid #000;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    background-color: variables.$primary-color;
+  }
 }

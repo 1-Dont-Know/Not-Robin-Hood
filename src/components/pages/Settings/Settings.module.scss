@@ -43,7 +43,7 @@
     display: flex;
     flex-direction: column;
     background-color: #d5e3e1;
-    height: calc(100% - 15rem);
+    height: 100vh;
 
     button[id="mainSaveChanges"] //Save Changes button that exists on all tabs
     { 
@@ -116,10 +116,11 @@
     border-radius: 25px;
     padding-left: 2rem;
     padding-right: 2rem;
-    margin-left: 100px;
+    //margin-left: 100px;
     padding-top: 25px;
     width: calc(100% - 13rem);
     height: 35rem;
+    margin: 0 auto;
 
     h1 { //Modifies settings options text
         display: flex;

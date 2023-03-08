@@ -348,6 +348,10 @@ body {
   color: variables.$secondary-color;
   border-radius: 25px;
   transition: 0.3s ease-in-out;
+  &:focus {
+    background-color: #ffe0c5;
+    outline: 4px solid #ebb485;
+  }
 
   &:hover {
     outline: 4px solid #d5e3e1;

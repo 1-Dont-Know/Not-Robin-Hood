@@ -714,3 +714,15 @@ body {
 
   //End Toggle
 }
+
+// BACK HOME BUTTON SECTION
+
+.backHomeButton {
+  @include mixins.button();
+  background-color: variables.$golden;
+  flex: 0;
+  margin: 2rem 0rem;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}

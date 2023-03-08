@@ -7,6 +7,7 @@ import {
   Routes,
   Navigate,
   Outlet,
+  useLocation,
 } from "react-router-dom";
 
 // IMPORTING OUR APP COMPONENTS / PRIVATE ROUTES / PUBLIC ROUTES
@@ -20,12 +21,14 @@ import { publicRoutes } from "../../routes/routes";
 
 // IMPORTING STYLES FROM APP ROUTER STYLES
 import styles from "./AppRouter.module.scss";
+import NotificationPopUp from "../UI/NotificationPopUp/NotificationPopUp";
 
 const AppRouter = () => {
   // TEMPORARY VARIABLE TO HANDLE AUTHORIZATION, FOR PRIVATE ROUTES PURPOSE ONLY
   const auth = {
     token: true,
   };
+
   return (
     <>
       <Router>
@@ -55,6 +58,7 @@ const AppRouter = () => {
                     element={<route.element />}
                   />
                 ))}
+                <Route path="/notifications" element={<NotificationPopUp />} />
               </Route>
               <Route path="/settings" element={<Settings />} />
               <Route path="*" element={<NotFound />} />

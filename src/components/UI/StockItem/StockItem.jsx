@@ -38,16 +38,15 @@ const StockItem = ({ symbol, value }) => {
   return (
     <div>
       <div className={styles.stockSection}>
-        <div className={styles.stockBody}>
-
+        <div className={styles.buttonContainer}>
           <button className={globalStyles.stockSymbolButton}>
             {symbol}
           </button>
-
+  
           <button className={globalStyles.stockValueButton}>
             ${value}
           </button>
-
+    
           <Accordion title="Stock Information">
             <p>This is the content for Stock Information.</p>
           </Accordion>
@@ -56,7 +55,6 @@ const StockItem = ({ symbol, value }) => {
             <img src={cart} alt="cart"/>
             Buy
           </button>
-          
         </div>
       </div>
     </div>

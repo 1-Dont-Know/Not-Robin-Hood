@@ -379,6 +379,10 @@ body {
   color: variables.$secondary-color;
   border-radius: 25px;
   transition: 0.3s ease-in-out;
+  &:focus {
+    background-color: #ffe0c5;
+    outline: 4px solid #ebb485;
+  }
 
   &:hover {
     outline: 4px solid #d5e3e1;
@@ -393,8 +397,7 @@ body {
     }
 
     &:nth-child(n) // Colors the buttons
-
-      {
+    {
       background-color: #ffe0c5;
       outline: 4px solid #ebb485;
     }
@@ -408,8 +411,7 @@ body {
 }
 
 .settingsPageButton // Modifies nav bar buttons
-
-  {
+{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -439,8 +441,7 @@ body {
     }
 
     &:nth-child(n) // Colors the buttons
-
-      {
+    {
       background-color: #91cae0;
       outline: 4px solid #5999b3;
     }
@@ -492,22 +493,18 @@ body {
   }
 }
 
-
 .stockInfoButton {
   display: flex;
   align-items: center;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   padding: 1rem 1.5rem;
-  margin-left: 7.25rem;
-  width: 615px;
-  height: 54px;
   background: #ffffff;
   color: #000;
   border-radius: 25px;
   font-weight: 600;
   font-size: 20px;
+  width: 100%;
 
   &:hover {
     background-color: variables.$secondary-color;
@@ -527,39 +524,21 @@ body {
   }
 }
 
-
 .sortButton {
-  margin: 0rem 0.5rem 0rem 2rem;
-  width: 159px;
-  height: 67px;
-  left: 470px;
-  top: 166px;
-
-  font-style: normal;
-  font-weight: 400;
-  line-height: 29px;
-  font-size: 20px;
-  color: #ffffff;
-  background: #37433a;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background-color: variables.$secondary-color;
   border-radius: 25px;
-  box-shadow: 0px 3px 5px 0px rgba(0, 4, 4, 0.25);
-
+  color: #fff;
+  transition: 0.3s ease-in-out;
   &:hover {
-    outline: 3px solid variables.$green;
+    box-shadow: 0px 0px 0px 2px rgba(193, 142, 96, 1);
   }
-
-  img {
-    margin-left: 1rem;
-    margin-top: 0.7rem;
-  }
-  
 }
 
 .stockValueButton {
-  padding: 1rem 1.5rem;
-  margin-left: 6rem;
-  width: 150px;
-  height: 54px;
   background: #ffffff;
   border-radius: 25px;
   font-style: normal;
@@ -567,43 +546,22 @@ body {
   font-size: 20px;
   line-height: 24px;
   transition: 0.3s ease-in-out;
-
-  &:hover {
-    background-color: variables.$secondary-color;
-  }
+  padding: 1rem 2rem;
+  max-width: 9.375rem;
+  width: 100%;
 }
 
 .stockSymbolButton {
-  padding: 1rem 1.5rem;
-  margin-left: 1.313rem;
-  width: 150px;
-  height: 54px;
   background: #ffffff;
   font-weight: 600;
   font-size: 20px;
   border-radius: 25px;
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
   transition: 0.3s ease-in-out;
-
-  &:hover {
-    background-color: variables.$secondary-color;
-    color: #fff;
-  }
-
-  @media (max-width: 1600px) {
-    width: 8.375rem;
-
-  }
-
-  @media (max-width: 1500px) {
-    width: 7.375rem;
-  }
-
-  @media (max-width: 1370px) {
-    width: 6.375rem;
-  }
+  padding: 1rem 2rem;
+  max-width: 9.375rem;
+  width: 100%;
 }
 
 //White buy button
@@ -642,7 +600,6 @@ body {
     filter: none;
   }
 }
-
 
 // ADD FUNDS PROFILE BUTTON
 
@@ -704,7 +661,6 @@ body {
 }
 
 .toggleButton {
-
   //Toggle
   input[type="checkbox"] {
     height: 0;
@@ -735,11 +691,11 @@ body {
     transition: 0.3s;
   }
 
-  input:checked+label {
+  input:checked + label {
     background: #bada55;
   }
 
-  input:checked+label:after {
+  input:checked + label:after {
     left: calc(100% - 5px);
     transform: translateX(-100%);
   }

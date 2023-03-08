@@ -55,10 +55,10 @@ const TopNav = () => {
         </section>
         {/* BUY / PORTFOLIO BUTTON SECTION */}
         <section className={styles.cta}>
-          <button className={globalStyles.buyButton}>
+          <Link to="/markets" className={globalStyles.buyButton}>
             <img src={cart} alt="cart" />
             Buy
-          </button>
+          </Link>
           <Link to="/portfolio" className={globalStyles.portfolioButton}>
             <img src={portfolio} alt="Portfolio" />
             Portfolio

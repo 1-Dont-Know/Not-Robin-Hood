@@ -21,9 +21,9 @@
   flex-grow: 1;
   flex-shrink: 1;
   justify-content: center;
-  overflow: hidden;
-  position: relative;
-  left: 8%;
+  // overflow: hidden;
+  // position: relative;
+  // left: 8%;
   /* to prevent content from overflowing during animation */
   transition: height 0.25s ease-in-out;
   /* add a transition to animate height changes */

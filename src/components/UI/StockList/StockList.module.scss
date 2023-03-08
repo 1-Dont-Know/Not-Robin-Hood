@@ -1,4 +1,4 @@
-.listItem {
+.stockList {
     display: flex;
     flex: 1;
     align-items: center;
@@ -6,24 +6,14 @@
     margin: 0 40px;
 }
 
-.stockName{
+.item{
     flex: 1 1 14.3%;
 }
-.stockSymbol{
-    flex: 1 1 14.3%;
-}
-.stockShares{
-    flex: 1 1 14.3%;
-}
-.stockPrice{
-    flex: 1 1 14.3%;
-}
-.stockAvgCost{
-    flex: 1 1 14.3%;
-}
-.stockTotalReturn{
-    flex: 1 1 14.3%;
-}
-.stockEquity{
-    flex: 1 1 14.3%;
+
+.stockList{
+        background: #D9D9D9;
+        border-radius: 25px;
+        padding: 20px;
+        margin-bottom: 10px;
+        color: #000;
 }

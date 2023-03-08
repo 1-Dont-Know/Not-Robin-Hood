@@ -112,7 +112,7 @@ const Portfolio = () => {
                   <h1 className={styles.sectionValue} id={styles.stockValue}>$600</h1>
                 </section>
 
-                <div className={styles.line}></div>
+                <hr className={styles.overviewLine} />
 
 
 
@@ -122,7 +122,7 @@ const Portfolio = () => {
                   <h1 className={styles.sectionValue} id={styles.buyingPowerValue}>$600</h1>
                 </section>
 
-                <div className={styles.line}></div>
+                <hr className={styles.overviewLine} />
 
               </div>
 
@@ -137,35 +137,36 @@ const Portfolio = () => {
             </>}
 
           {(activeTab === tabFlags.stocksList) &&
-            <div style={{width: "100%"}}>
+            <div style={{ width: "100%" }}>
               <section className={styles.transactions}>
-              <StockList
-                        key = {"Name"}
-                        name = {"Name"}
-                        symbol = {"Symbol"}
-                        shares = {"Shares"}
-                        price = {"Price"}
-                        avgCost = {"Average Cost"}
-                        totalReturn = {"Total Return"}
-                        equity = {"Equity"}
 
-                        className={styles.titleBar}
-              />
+                <div className={styles.stocksTitleBar}>
+                  <h1 className={styles.title}>Name</h1>
+                  <h1 className={styles.title}>Symbol</h1>
+                  <h1 className={styles.title}>Shares</h1>
+                  <h1 className={styles.title}>Price</h1>
+                  <h1 className={styles.title}>Average Cost</h1>
+                  <h1 className={styles.title}>Total Return</h1>
+                  <h1 className={styles.title}>Equity</h1>
+                </div>
+
+                
+                <hr className={styles.stocksLine} />
+                
+
                 <ul className={styles.transactionsList}>
                   {stockData.map((item) => {
                     return (
-                        <StockList
-                          key = {item.name}
-                          name = {item.name}
-                          symbol = {item.symbol}
-                          shares = {item.shares}
-                          price = {item.price}
-                          avgCost = {item.avgCost}
-                          totalReturn = {item.totalReturn}
-                          equity = {item.equity}
-
-                          className={styles.titleBar}
-                        />
+                      <StockList
+                        key={item.name}
+                        name={item.name}
+                        symbol={item.symbol}
+                        shares={item.shares}
+                        price={item.price}
+                        avgCost={item.avgCost}
+                        totalReturn={item.totalReturn}
+                        equity={item.equity}
+                      />
                     );
                   })}
                 </ul>

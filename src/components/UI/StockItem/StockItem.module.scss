@@ -2,31 +2,41 @@
 @use "../../../styles/mixins.scss";
 
 .stockSection {
-  padding-top: 2rem;
-  margin-left: 2rem;
+  padding-top: 1.5rem;
+  margin-left: .5rem;
 }
 
-.stockBody {
+.buttonContainer {
   display: flex;
+  justify-content: space-evenly;
+  align-content: center;
   align-items: center;
-  width: 1450px;
-  height: 89px;
-  left: 470px;
-  top: 274px;
+  flex-wrap: wrap;
+  margin: 1rem 1.5rem;
+  max-width: 91rem; 
+  height: 5.563rem;
   background: #d5e3e1;
-  border-radius: 25px;
-}
+  border-radius: 1.563rem;
 
+  @media (max-width: 1500px) {
+    height: 6rem;
+  }
+  @media (max-width: 1250px) {
+    height: 6.5rem;
+  }
+    
+}
+  
+// vector svg icon to rotate on click
 .rotated {
   transform: rotate(180deg);
 }
 
+// accordion 
 .stockInfoContent {
-  top: 100%;
-  left: 50%;
-  transform: translateX(8%);
-  z-index: 0;
   display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
   justify-content: center;
 }
 
@@ -40,19 +50,8 @@
   font-size: 14px;
   width: 615px;
   height: 185px;
-  left: 1003px;
-  top: 539px;
   border-radius: 25px;
-  font-style: normal;
   font-weight: 600;
   font-size: 20px;
-}
-
-.buyButton {
-  width: 150px;
-  height: 54px;
-  left: 1693px;
-  top: 291px;
-  background: #ffffff;
 }
 

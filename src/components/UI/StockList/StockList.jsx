@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const StockList = ({ name, symbol, shares, price, avgCost, totalReturn, equity }) => {
   return (
-    <div className="listItem">
+    <div className={styles.listItem}>
       <p className={styles.stockName}>{name}</p>
       <p className={styles.stockSymbol}>{symbol}</p>
       <p className={styles.stockShares}>{shares}</p>

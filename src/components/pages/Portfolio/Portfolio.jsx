@@ -16,7 +16,7 @@ const Portfolio = () => {
     stocksList: 2,
   };
 
-  const [activeTab, setActiveTab] = useState(tabFlags.stocksList);
+  const [activeTab, setActiveTab] = useState(tabFlags.overview);
 
   function handleTabSelect(selectedTab) {
 
@@ -45,18 +45,18 @@ const Portfolio = () => {
       symbol: "BVT",
       shares: "220",
       price: "$2.20",
-      avgCost: "$10",
+      avgCost: "$10.00",
       totalReturn: "$543.00",
       equity: "$543.00",
     },
     {
-      name: "Bay Valley Tech",
-      symbol: "BVT",
-      shares: "220",
-      price: "$2.20",
-      avgCost: "$10",
-      totalReturn: "$543.00",
-      equity: "$543.00",
+      name: "TESLA",
+      symbol: "TSLA",
+      shares: "2",
+      price: "$200.00",
+      avgCost: "$130.00",
+      totalReturn: "$140.00",
+      equity: "$140.00",
     },
   ];
 
@@ -137,7 +137,7 @@ const Portfolio = () => {
             </>}
 
           {(activeTab === tabFlags.stocksList) &&
-            <>
+            <div style={{width: "100%"}}>
               <section className={styles.transactions}>
               <StockList
                         key = {"Name"}
@@ -154,12 +154,23 @@ const Portfolio = () => {
                 <ul className={styles.transactionsList}>
                   {stockData.map((item) => {
                     return (
-                      <></>
+                        <StockList
+                          key = {item.name}
+                          name = {item.name}
+                          symbol = {item.symbol}
+                          shares = {item.shares}
+                          price = {item.price}
+                          avgCost = {item.avgCost}
+                          totalReturn = {item.totalReturn}
+                          equity = {item.equity}
+
+                          className={styles.titleBar}
+                        />
                     );
                   })}
                 </ul>
               </section>
-            </>}
+            </div>}
 
         </div>
       </Hero>

@@ -3,7 +3,35 @@
 
 .logo {
     display: flex;
-    margin-left: 100px;
+    margin-left: 104px;
+    //margin: 0 auto;
+    width: calc(100% - 13rem);
+
+    .stockCloseButton {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        position: absolute;
+
+        background: #aaaaaa;
+        border-radius: 35px;
+        //outline: 1.5px solid black;
+        //box-shadow: 1px 5px 5px 0px rgba(0, 0, 0, 0.15);
+        margin-left: calc(100% - 11rem);
+        margin-top: 1rem;
+        padding: 15px 15px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 25px;
+        line-height: 24px;
+
+        &:hover {
+            background-color: #cecece;
+            outline: 1.5px solid rgb(87, 87, 87);
+            transition: 0.15s ease-in-out;
+        }
+
+    }
 }
 
 .image { //Bull in the background
@@ -20,16 +48,19 @@
 
 .headerSection { //Contains featured bar, navigation bar
     //display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    position: relative;
     margin-left: 100px;
-    width: calc(100% - 85px);
+    margin: 0 auto;
+    width: calc(100% - 13em);
 
     .settingsNavBar { 
         display: flex;
-        margin-right: 25px;
+        //margin-right: 25px;
         margin-bottom: 40px;
         gap: 25px;
+        width: 100%;
         background-color: transparent;
     }
     .featured {
@@ -43,7 +74,7 @@
     display: flex;
     flex-direction: column;
     background-color: #d5e3e1;
-    height: calc(100% - 15rem);
+    height: 100vh;
 
     button[id="mainSaveChanges"] //Save Changes button that exists on all tabs
     { 
@@ -116,10 +147,11 @@
     border-radius: 25px;
     padding-left: 2rem;
     padding-right: 2rem;
-    margin-left: 100px;
+    //margin-left: 100px;
     padding-top: 25px;
     width: calc(100% - 13rem);
     height: 35rem;
+    margin: 0 auto;
 
     h1 { //Modifies settings options text
         display: flex;
@@ -193,13 +225,52 @@
     display: flex;
     flex: 33%;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
     
     hr{
         width: 100%;
-        min-width: 70px;
-        max-width: 204.53px;
+        min-width: 80px;
+        max-width: 285px;
         height: 1px;
         background-color: #37433A;
     }
 }
+
+.amountContainer {
+    display: flex;
+}
+
+//SCSS for Toggle Slider
+.switchLabel {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 65px;
+    height: 36px;
+    background: variables.$secondary-color;
+    border: 3px solid #fff;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+  }
+  
+  .switchLabel:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 21px;
+    height: 21px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+  }
+  
+  input:checked + .switchLabel {
+    background-color: variables.$golden;
+    transition: 0.3s ease-in-out;
+  }
+  
+  input:checked + .switchLabel:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+  } //end toggle scss

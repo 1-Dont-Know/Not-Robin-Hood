@@ -35,15 +35,16 @@ const Settings = () => {
       <div className={styles.container}>
         <div className={styles.logo}>
           <Logo></Logo>  
+          <button className={styles.stockCloseButton}>✖</button>
         </div>
 
         <main className={styles.headerSection}>
+          
             <section className={styles.featured}>
               Modify your settings.
             </section>
 
         <div className={styles.settingsNavBar}>
-
           <div className={styles.settingsNavLink}>
           <button className={globalStyles.settingsPageButton} onClick={(e) =>{ handleTabSelect(tabFlags.settings)} }>
             <img src={settings} alt="settings" className={styles.settingsPageButton}/>
@@ -84,7 +85,8 @@ const Settings = () => {
           {(activeTab === tabFlags.settings) &&
             <div className={styles.settings}>
               <h1 id="settingsOption">Dark Mode</h1>
-              <input type="checkbox" id="switch" /><label htmlFor="switch">Toggle</label>
+                <input type="checkbox" id="switch" />
+                  <label className={styles.switchLabel} htmlFor="switch">Toggle</label>
             </div>
           }
         
@@ -93,16 +95,17 @@ const Settings = () => {
             {/* notifications */}
             <div className={styles.notifications}>
               <h1 id="settingsOption">Receive Notifications</h1>
-              <input type="checkbox" id="switch_1" /><label htmlFor="switch_1">Receive Notifications</label>
+                <input type="checkbox" id="switch1" />
+                  <label className={styles.switchLabel} htmlFor="switch1">Receive Notifications</label>
             </div>
             <div className={styles.notifications}>
               <h1 id="textOptions">Text Notifications</h1>
-              <input type="checkbox" id="switch_2" />
-              <label htmlFor="switch_2">Text Notifications</label>
+                <input type="checkbox" id="switch2" />
+                  <label className={styles.switchLabel} htmlFor="switch2">Text Notifications</label>
             </div>
             <div className={styles.notifications}>
               <h2 id="textNumber">Text Number</h2>
-              <input type="text" id="phoneNumber" placeholder="(___)---___---____"/>
+                <input type="text" id="phoneNumber" placeholder="(___)---___---____"/>
             </div>
           </>
           }
@@ -135,6 +138,7 @@ const Settings = () => {
             
 
         </section>
+
 
         {/*Save Changes Button*/}
         <div>

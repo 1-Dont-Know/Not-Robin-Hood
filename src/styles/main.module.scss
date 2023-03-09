@@ -414,14 +414,14 @@ body {
 {
   display: flex;
   align-items: center;
-  justify-content: center;
+  //justify-content: center;
 
   font-family: "Roboto";
   //font-weight: 600;
-  font-size: 24px;
-  padding-right: 1.5rem;
+  font-size: 22px;
+  padding-right: 3.5rem;
   //padding: 0.25rem 0.05rem;
-
+  width: 245px;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
   background: white;
   color: variables.$secondary-color;
@@ -433,19 +433,19 @@ body {
     background-color: variables.$secondary-color;
     color: #000000;
 
-    img {
-      //Modifies the credit/bank icon colors on hover
-      filter: invert(0) sepia(0) //hue-rotate(100deg)
-        saturate(0);
-      transition: 0.3s ease-in-out;
-    }
-
-    &:nth-child(n) // Colors the buttons
-    {
-      background-color: #91cae0;
-      outline: 4px solid #5999b3;
-    }
+  &:focus {
+    outline: 4px solid #d5e3e1;
+    background-color: variables.$secondary-color;
+    color: #000000; 
   }
+
+  &:nth-child(n) // Colors the buttons
+  {
+    background-color: #91cae0;
+    outline: 4px solid #5999b3;
+  }
+  
+}
 
   img {
     // Icon nav-bar adjustments

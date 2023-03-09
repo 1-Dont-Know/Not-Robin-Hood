@@ -46,29 +46,77 @@ const Settings = () => {
 
         <div className={styles.settingsNavBar}>
           <div className={styles.settingsNavLink}>
-          <button className={globalStyles.settingsPageButton} onClick={(e) =>{ handleTabSelect(tabFlags.settings)} }>
-            <img src={settings} alt="settings" className={styles.settingsPageButton}/>
-            Settings
-          </button>
+          <button className={globalStyles.settingsPageButton} 
+            onClick={(e) =>{ handleTabSelect(tabFlags.settings)}}
+            
+            style={{
+              backgroundColor:  (activeTab === tabFlags.settings ?
+                "#37433a": "#ffff"
+              ),
+
+              color: (activeTab === tabFlags.settings ?
+                "#d5e3e1" : "#37433a"
+              ),
+          }}>
+            <img src={settings} alt="settings" className={styles.settingsPageButton}
+              onClick={(e) =>{ handleTabSelect(tabFlags.settings)}}
+              style={{
+                filter: (activeTab === tabFlags.settings ?
+                  "invert(1) contrast(200%) saturate(0)" 
+                  : "invert(0) contrast(200%) saturate(0)"
+                  )}}/>
+            Settings</button>
           <hr></hr>
           </div>
           {/* <img src={divider} alt="divider" id="divider"/> */}
           
           <div className={styles.settingsNavLink}>
-          <button className={globalStyles.settingsPageButton} onClick={(e) => {handleTabSelect(tabFlags.notifications)}}>
-            <img src={alert} alt="alert"/>
-            Notifications
-          </button>
+          <button className={globalStyles.settingsPageButton} 
+            onClick={(e) =>{ handleTabSelect(tabFlags.notifications)}}
+          
+            style={{
+              backgroundColor:  (activeTab === tabFlags.notifications ?
+                "#37433a": "#ffff"
+              ),
+
+              color: (activeTab === tabFlags.notifications ?
+                "#d5e3e1" : "#37433a"
+              )              
+          }}>
+            <img src={alert} alt="alert" className={styles.settingsPageButton}
+            onClick={(e) =>{ handleTabSelect(tabFlags.notifications)}}
+            style={{
+              filter: (activeTab === tabFlags.notifications ?
+                "invert(1) contrast(200%) saturate(0)" 
+                : "invert(0) contrast(200%) saturate(0)"
+                )}} />
+            Notifications</button>
           <hr></hr>
           </div>
           
           {/* <img src={divider} alt="divider" id="divider"/> */}
           
           <div className={styles.settingsNavLink}>
-          <button className={globalStyles.settingsPageButton} onClick={(e) => {handleTabSelect(tabFlags.accountInfo)}}>
-            <img src={person} alt="person"/>
-            Account Info
-          </button>
+          <button className={globalStyles.settingsPageButton} 
+            onClick={(e) =>{ handleTabSelect(tabFlags.accountInfo)}}
+
+            style={{
+              backgroundColor:  (activeTab === tabFlags.accountInfo ?
+                "#37433a": "#ffff"
+              ),
+
+              color: (activeTab === tabFlags.accountInfo ?
+                "#d5e3e1" : "#37433a"
+              )
+          }}>
+            <img src={person} alt="person" className={styles.settingsPageButton} 
+            onClick={(e) =>{ handleTabSelect(tabFlags.accountInfo)}}
+            style={{
+              filter: (activeTab === tabFlags.accountInfo ?
+                "invert(1) contrast(200%) saturate(0)" 
+                : "invert(0) contrast(200%) saturate(0)"
+              )}} />
+            Account Info</button>
           <hr></hr>
           </div>
           {/* <img src={divider} alt="divider" id="divider"/>    */}
@@ -82,7 +130,7 @@ const Settings = () => {
         {/*Settings Tab*/}
         <section className={styles.settingsContainer}>
           {/* General settings */}
-          {(activeTab === tabFlags.settings) &&
+          {(activeTab === tabFlags.settings) && 
             <div className={styles.settings}>
               <h1 id="settingsOption">Dark Mode</h1>
                 <input type="checkbox" id="switch" />

@@ -16,33 +16,6 @@
   transform: rotate(180deg);
 }
 
-// accordion
-.stockInfoContent {
-  flex-grow: 1;
-  flex-shrink: 1;
-  justify-content: center;
-  /* to prevent content from overflowing during animation */
-  transition: height 0.30s ease-in-out; //currently its only ease-in but not out
-  /* add a transition to animate height changes */
-  margin-top: 0.5rem;
-}
-
-
-.stockInfoText {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: #ffffff;
-  padding: 2rem;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
-  border-radius: 25px;
-  font-size: 14px;
-  line-height: 1.5rem;
-  text-align: justify;
-}
-
 .stockSymbol {
   flex: 20%;
 }

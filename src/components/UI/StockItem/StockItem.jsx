@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 function Accordion(props) {
   const [isOpen, setIsOpen] = useState(false);
   // to animated height for smoother transition
-  // this is to keep track of the height property in the content 
+  // this is to keep track of the height property in the content
   const [height, setHeight] = React.useState(0);
 
   const contentRef = React.useRef(null);
@@ -23,7 +23,6 @@ function Accordion(props) {
   React.useEffect(() => {
     setHeight(isOpen ? contentRef.current.scrollHeight : 0);
   }, [isOpen]);
-
 
   return (
     <div className={styles.stockInfo}>
@@ -42,14 +41,17 @@ function Accordion(props) {
       </button>
       {/* Check if the accordion should be open and show the content if true */}
       {isOpen && (
-        <div className={styles.stockInfoContent} style={{height: `${height}px`}}>
+        <div
+          className={styles.stockInfoContent}
+          style={{ height: `${height}px` }}
+        >
           {/*  style={{height: ${height}px}} code is setting the height of the stockInfoContent div element based on the value of the height state variable */}
           {/* ref={contentRef} to get the height of stockInfoContent and 
           then animate to opening and close and open accordion */}
           <div className={styles.stockInfoText} ref={contentRef}>
             {props.children}
           </div>
-            {/* props.children is calling the <p> inside the accordion */}
+          {/* props.children is calling the <p> inside the accordion */}
         </div>
       )}
     </div>
@@ -77,12 +79,12 @@ const StockItem = ({ symbol, value }) => {
             </p>
           </Accordion>
         </div>
-        <Link to="/stock-viewer" className={styles.buyStock}>
-          <button className={globalStyles.whiteBuyButton}>
+        <div className={styles.buyStock}>
+          <Link to="/stock-viewer" className={globalStyles.whiteBuyButton}>
             <img src={cart} alt="cart" />
             Buy
-          </button>
-        </Link>
+          </Link>
+        </div>
       </div>
     </div>
   );

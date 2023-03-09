@@ -1,12 +1,18 @@
 @use "../../../styles/variables.scss";
 @use "../../../styles/mixins.scss";
 
-// .sortSection {
-//   display: flex;
-//   flex-grow: 1;
-// }
-
-.stockSection {
-  overflow-y: auto;
+.sortSection {
+  display: flex;
+  align-items: center;
+  flex: 10%;
+  gap: 1rem;
 }
 
+.stocksSection {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex: 90%;
+  margin-top: 1rem;
+  gap: 2rem;
+}

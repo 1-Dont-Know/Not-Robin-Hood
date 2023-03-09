@@ -10,7 +10,6 @@ import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Portfolio = () => {
-
   const tabFlags = {
     overview: 1,
     stocksList: 2,
@@ -19,12 +18,10 @@ const Portfolio = () => {
   const [activeTab, setActiveTab] = useState(tabFlags.overview);
 
   function handleTabSelect(selectedTab) {
-
-    setActiveTab(curr => {
-      return curr = selectedTab;
+    setActiveTab((curr) => {
+      return (curr = selectedTab);
     });
   }
-
 
   //Fake data for pie chart
   const data = {
@@ -60,86 +57,107 @@ const Portfolio = () => {
     },
   ];
 
-
-
   const options = {
     maintainAspectRatio: false,
     responsive: true,
   };
-
-
-
 
   const textCenter = {
     id: "textCenter",
     beforeDatasetsDraw(chart, args, pluginOptions) {
       const { ctx, data } = chart;
       ctx.save();
-      ctx.font = 'bolder sans-serif';
-      ctx.fillStyle = 'black';
-      ctx.textAlign = 'center';
-      ctx.fillText(`Total Portfolio Value: $1200`,
+      ctx.font = "bolder sans-serif";
+      ctx.fillStyle = "black";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        `Total Portfolio Value: $1200`,
         chart.getDatasetMeta(0).data[0].x,
-        chart.getDatasetMeta(0).data[0].y);
-    }
-  }
+        chart.getDatasetMeta(0).data[0].y
+      );
+    },
+  };
 
   return (
     <>
       {/* Hero Section */}
       <Hero>
         <div className={styles.tabs}>
-          <button className={styles.tabButton} onClick={(e) => { handleTabSelect(tabFlags.overview) }}>Overview</button>
+          <button 
+            className={styles.tabButton} 
+            onClick={(e) => { 
+              handleTabSelect(tabFlags.overview) 
+            }} 
+            
+            style={{
+              backgroundColor:  (activeTab === tabFlags.overview ?
+                "#37433a": "#d5e3e1"
+              ),
+
+              color: (activeTab === tabFlags.overview ?
+                "#d5e3e1" : "#37433a"
+              )
+          }}>Overview</button>
+
           <h1 style={{ color: "gray" }}>|</h1>
-          <button className={styles.tabButton} onClick={(e) => { handleTabSelect(tabFlags.stocksList) }}>Stocks List</button>
+          <button
+            className={styles.tabButton}
+            onClick={(e) => {
+              handleTabSelect(tabFlags.stocksList);
+            }}
+          >
+            Stocks List
+          </button>
         </div>
 
-
         <div className={styles.tanSquare}>
-          {(activeTab === tabFlags.overview) &&
+          {activeTab === tabFlags.overview && (
             <>
               <div className={styles.details}>
-
-
                 <section className={styles.totalPortfolio}>
-                  <h1 className={styles.totalPortfolioTitle}>Total Portfolio Value</h1>
+                  <h1 className={styles.totalPortfolioTitle}>
+                    Total Portfolio Value
+                  </h1>
                   <h1 className={styles.totalPortfolioValue}>$1200.00</h1>
                 </section>
 
                 <section className={styles.stocks}>
                   <h1 className={styles.sectionTitle}>Stocks</h1>
                   <h1 className={styles.sectionPercent}>50%</h1>
-                  <h1 className={styles.sectionValue} id={styles.stockValue}>$600</h1>
+                  <h1 className={styles.sectionValue} id={styles.stockValue}>
+                    $600
+                  </h1>
                 </section>
 
                 <hr className={styles.overviewLine} />
-
-
 
                 <section className={styles.buyingPower}>
                   <h1 className={styles.sectionTitle}>Buying Power</h1>
                   <h1 className={styles.sectionPercent}>50%</h1>
-                  <h1 className={styles.sectionValue} id={styles.buyingPowerValue}>$600</h1>
+                  <h1
+                    className={styles.sectionValue}
+                    id={styles.buyingPowerValue}
+                  >
+                    $600
+                  </h1>
                 </section>
 
                 <hr className={styles.overviewLine} />
-
               </div>
 
               <div className={styles.doughnutGraph}>
                 <Doughnut
                   data={data}
                   options={options}
-                // plugins={[textCenter]}
+                  // plugins={[textCenter]}
                 ></Doughnut>
               </div>
+            </>
+          )}
 
-            </>}
-
-          {(activeTab === tabFlags.stocksList) &&
+          {activeTab === tabFlags.stocksList && (
             <div style={{ width: "100%" }}>
               <section className={styles.transactions}>
-
                 <div className={styles.stocksTitleBar}>
                   <h1 className={styles.title}>Name</h1>
                   <h1 className={styles.title}>Symbol</h1>
@@ -150,9 +168,7 @@ const Portfolio = () => {
                   <h1 className={styles.title}>Equity</h1>
                 </div>
 
-                
                 <hr className={styles.stocksLine} />
-                
 
                 <ul className={styles.transactionsList}>
                   {stockData.map((item) => {
@@ -171,8 +187,8 @@ const Portfolio = () => {
                   })}
                 </ul>
               </section>
-            </div>}
-
+            </div>
+          )}
         </div>
       </Hero>
     </>
@@ -180,9 +196,3 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
-
-
-
-
-
-

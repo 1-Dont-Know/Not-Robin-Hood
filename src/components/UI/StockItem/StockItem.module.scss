@@ -21,27 +21,17 @@
   flex-grow: 1;
   flex-shrink: 1;
   justify-content: center;
-  // overflow: hidden;
-  // position: relative;
-  // left: 8%;
   /* to prevent content from overflowing during animation */
-  transition: height 0.25s ease-in-out;
+  transition: height 0.30s ease-in-out; //currently its only ease-in but not out
   /* add a transition to animate height changes */
   margin-top: 0.5rem;
-
 }
+
 
 .stockInfoText {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  // background-color: #000;
-  // padding: 10px;
-  // border-radius: 5px;
-  // font-size: 14px;
-  // width: 615px;
-
   width: 100%;
   background-color: #ffffff;
   padding: 2rem;

@@ -35,6 +35,11 @@
       background-color: variables.$secondary-color;
       color: variables.$primary-color;
     }
+
+    &:focus {
+        background-color: variables.$secondary-color;
+        color: variables.$primary-color;
+    }
 }
 
 .tanSquare {

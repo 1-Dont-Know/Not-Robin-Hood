@@ -97,6 +97,7 @@ const Portfolio = () => {
               color: (activeTab === tabFlags.overview ?
                 "#d5e3e1" : "#37433a"
               )
+
           }}>Overview</button>
 
           <h1 style={{ color: "gray" }}>|</h1>
@@ -105,9 +106,18 @@ const Portfolio = () => {
             onClick={(e) => {
               handleTabSelect(tabFlags.stocksList);
             }}
-          >
-            Stocks List
-          </button>
+          
+            style={{
+              backgroundColor:  (activeTab === tabFlags.stocksList ?
+                "#37433a": "#d5e3e1"
+              ),
+
+              color: (activeTab === tabFlags.stocksList ?
+                "#d5e3e1" : "#37433a"
+              )
+
+          }}>Stocks List</button>
+
         </div>
 
         <div className={styles.tanSquare}>

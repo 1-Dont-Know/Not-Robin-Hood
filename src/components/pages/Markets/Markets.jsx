@@ -4,7 +4,7 @@ import styles from "./Markets.module.scss";
 import Hero from "../../UI/Hero/Hero";
 import StockItem from "../../UI/StockItem/StockItem";
 import DownVectorIcon from "../../../assets/icons/down-vector.svg";
-import { stockData } from "../../UI/StockItem/StockData";
+import { stockData } from "../../../utils/fakeData";
 
 const Markets = () => {
   // declares a new state variable setSortedStocks and initializes it with the value false
@@ -37,8 +37,9 @@ const Markets = () => {
 
   return (
     <>
-     {/* Hero Section */}
-      <Hero />
+      {/* Hero Section */}
+      <Hero>
+        {/* SORT SECTION */}
         <section className={styles.sortSection}>
           {/* Create a button to trigger toggleSort function when clicked */}
           <button className={globalStyles.sortButton} onClick={toggleSort}>
@@ -48,7 +49,8 @@ const Markets = () => {
           </button>
         </section>
 
-        <section className={styles.stockSection}>
+        {/* STOCKS SECTIONS */}
+        <section className={styles.stocksSection}>
           {/* Call the getStockData function to sort the stockData array.
           Slice the sorted stockData array to display only the first numStocks stocks.
           Create a StockItem component for each stock and pass the symbol and value props */}
@@ -62,7 +64,7 @@ const Markets = () => {
               />
             ))}
         </section>
-      <Hero />
+      </Hero>
     </>
   );
 };

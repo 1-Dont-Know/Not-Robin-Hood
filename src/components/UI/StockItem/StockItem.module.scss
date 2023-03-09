@@ -1,57 +1,56 @@
 @use "../../../styles/variables.scss";
 @use "../../../styles/mixins.scss";
 
-.stockSection {
-  padding-top: 1.5rem;
-  margin-left: .5rem;
-}
-
 .buttonContainer {
   display: flex;
-  justify-content: space-evenly;
   align-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  margin: 1rem 1.5rem;
-  max-width: 91rem; 
-  height: 5.563rem;
+  padding: 1rem;
   background: #d5e3e1;
   border-radius: 1.563rem;
-
-  @media (max-width: 1500px) {
-    height: 6rem;
-  }
-  @media (max-width: 1250px) {
-    height: 6.5rem;
-  }
-    
+  gap: 1rem;
 }
-  
+
 // vector svg icon to rotate on click
 .rotated {
   transform: rotate(180deg);
 }
 
-// accordion 
+// accordion
 .stockInfoContent {
-  display: flex;
   flex-grow: 1;
   flex-shrink: 1;
   justify-content: center;
+  margin-top: 0.5rem;
 }
 
 .stockInfoText {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   background-color: #ffffff;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 14px;
-  width: 615px;
-  height: 185px;
+  padding: 2rem;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
   border-radius: 25px;
-  font-weight: 600;
-  font-size: 20px;
+  font-size: 14px;
+  line-height: 1.5rem;
+  text-align: justify;
 }
 
+.stockSymbol {
+  flex: 20%;
+}
+.stockValue {
+  flex: 20%;
+}
+.stockInfoAccordion {
+  flex: 40%;
+}
+
+.buyStock {
+  flex: 20%;
+  display: flex;
+  justify-content: flex-end;
+}

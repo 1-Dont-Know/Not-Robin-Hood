@@ -54,8 +54,9 @@ const BuyBox = ({ type, placeholder }) => {
             Sell
           </button>
         </div>
-        <input type="select" className={styles.dropdown} value="QTR" />
-        <input type="select" className={styles.dropdown} value="MM/DD" />
+        <input type="number" id= "Quantity" className={styles.dropdown} placeholder="QTR" />
+        <input type="date" id="userDate" className={styles.dropdown} placeholder="MM/DD" />
+        <div className={styles.dropdown}> Total </div>
 
         <h1>Queue Order</h1>
         <div className={styles.orders}>

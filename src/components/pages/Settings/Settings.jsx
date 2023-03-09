@@ -35,15 +35,16 @@ const Settings = () => {
       <div className={styles.container}>
         <div className={styles.logo}>
           <Logo></Logo>  
+          <button className={styles.stockCloseButton}>✖</button>
         </div>
 
         <main className={styles.headerSection}>
+          
             <section className={styles.featured}>
               Modify your settings.
             </section>
 
         <div className={styles.settingsNavBar}>
-
           <div className={styles.settingsNavLink}>
           <button className={globalStyles.settingsPageButton} onClick={(e) =>{ handleTabSelect(tabFlags.settings)} }>
             <img src={settings} alt="settings" className={styles.settingsPageButton}/>
@@ -135,6 +136,7 @@ const Settings = () => {
             
 
         </section>
+
 
         {/*Save Changes Button*/}
         <div>

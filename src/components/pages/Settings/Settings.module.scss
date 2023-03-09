@@ -3,7 +3,42 @@
 
 .logo {
     display: flex;
-    margin-left: 100px;
+    margin-left: 104px;
+    //margin: 0 auto;
+    width: 94%;
+
+    .stockCloseButton {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        position: absolute;
+
+        background: #aaaaaa;
+        border-radius: 35px;
+        //outline: 1.5px solid black;
+        //box-shadow: 1px 5px 5px 0px rgba(0, 0, 0, 0.15);
+        margin-left: 80vw;
+        //margin-top: -8rem;
+        padding: 15px 15px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 25px;
+        line-height: 24px;
+
+        &:hover {
+          background-color: #cecece;
+          outline: 1.5px solid rgb(87, 87, 87);
+          transition: 0.15s ease-in-out;
+
+          svg {
+            fill: #fff;
+          }
+        }
+      
+        svg {
+          padding-right: 0.5rem;
+        }
+      }
 }
 
 .image { //Bull in the background
@@ -22,14 +57,16 @@
     //display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     margin-left: 100px;
-    width: calc(100% - 85px);
+    margin: 0 auto;
+    width: calc(100% - 13em);
 
     .settingsNavBar { 
         display: flex;
-        margin-right: 25px;
+        //margin-right: 25px;
         margin-bottom: 40px;
-        gap: 25px;
+        //gap: 25px;
         background-color: transparent;
     }
     .featured {
@@ -204,3 +241,69 @@
         background-color: #37433A;
     }
 }
+
+//SCSS for Toggle Slider
+input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+label {
+    display: inline-block;
+    font-family: sans-serif, Arial;
+    font-size: 16px;
+    border: 2px solid #444;
+    border-radius: 4px;
+}
+label:hover {
+    background-color: variables.$primary-color;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+    background-color: #ffe0c5;
+    outline: 4px solid #ebb485;
+}
+
+.amountContainer {
+    display: flex;
+}
+
+.switchLabel {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 65px;
+    height: 36px;
+    background: variables.$secondary-color;
+    border: 3px solid #fff;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+
+.switchLabel:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 21px;
+    height: 21px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+  }
+  
+  input:checked + .switchLabel {
+    background-color: variables.$golden;
+    transition: 0.3s ease-in-out;
+  }
+  
+  input:checked + .switchLabel:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+  } //end toggle scss

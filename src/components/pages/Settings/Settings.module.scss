@@ -35,15 +35,15 @@
 }
 
 .image { //Bull in the background
-    position: absolute;
-    width: 65rem;
-    margin-left: -65px;
+    position: fixed;
+    width: 85vh;
+    //margin-left: -35px;
     opacity: calc(4%);
     background-size: cover;
-    height: 55rem;
+    height: 115vh;
     background-image: url(../../../assets/bull.png);
     background-repeat: no-repeat;
-    pointer-events: none
+    pointer-events: none;
     }
 
 .headerSection { //Contains featured bar, navigation bar
@@ -135,7 +135,11 @@
     }
 
 }
-
+.settingsPageButton:active {
+    filter:
+    invert(0)
+    sepia(1);
+}
 
 .settingsContainer //The settings box where the options are displayed
 { 
@@ -233,6 +237,10 @@
         max-width: 285px;
         height: 1px;
         background-color: #37433A;
+    }
+
+    img { //Changes the little icons in the nav bar tabs
+        width: 30px;
     }
 }
 

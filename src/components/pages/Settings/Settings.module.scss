@@ -5,7 +5,7 @@
     display: flex;
     margin-left: 104px;
     //margin: 0 auto;
-    width: 94%;
+    width: calc(100% - 13rem);
 
     .stockCloseButton {
         display: flex;
@@ -17,8 +17,8 @@
         border-radius: 35px;
         //outline: 1.5px solid black;
         //box-shadow: 1px 5px 5px 0px rgba(0, 0, 0, 0.15);
-        margin-left: 80vw;
-        //margin-top: -8rem;
+        margin-left: calc(100% - 11rem);
+        margin-top: 1rem;
         padding: 15px 15px;
         font-style: normal;
         font-weight: 400;
@@ -26,19 +26,12 @@
         line-height: 24px;
 
         &:hover {
-          background-color: #cecece;
-          outline: 1.5px solid rgb(87, 87, 87);
-          transition: 0.15s ease-in-out;
+            background-color: #cecece;
+            outline: 1.5px solid rgb(87, 87, 87);
+            transition: 0.15s ease-in-out;
+        }
 
-          svg {
-            fill: #fff;
-          }
-        }
-      
-        svg {
-          padding-right: 0.5rem;
-        }
-      }
+    }
 }
 
 .image { //Bull in the background
@@ -55,7 +48,7 @@
 
 .headerSection { //Contains featured bar, navigation bar
     //display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     position: relative;
     margin-left: 100px;
@@ -66,7 +59,8 @@
         display: flex;
         //margin-right: 25px;
         margin-bottom: 40px;
-        //gap: 25px;
+        gap: 25px;
+        width: 100%;
         background-color: transparent;
     }
     .featured {
@@ -231,12 +225,12 @@
     display: flex;
     flex: 33%;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
     
     hr{
         width: 100%;
-        min-width: 70px;
-        max-width: 204.53px;
+        min-width: 80px;
+        max-width: 285px;
         height: 1px;
         background-color: #37433A;
     }

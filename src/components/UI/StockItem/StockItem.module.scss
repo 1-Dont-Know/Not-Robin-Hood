@@ -21,8 +21,12 @@
   flex-grow: 1;
   flex-shrink: 1;
   justify-content: center;
+  /* to prevent content from overflowing during animation */
+  transition: height 0.30s ease-in-out; //currently its only ease-in but not out
+  /* add a transition to animate height changes */
   margin-top: 0.5rem;
 }
+
 
 .stockInfoText {
   display: flex;

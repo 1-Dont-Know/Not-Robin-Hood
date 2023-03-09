@@ -9,11 +9,21 @@ import { Link } from "react-router-dom";
 // manages its open/closed state with the isOpen state variable
 function Accordion(props) {
   const [isOpen, setIsOpen] = useState(false);
+  // to animated height for smoother transition
+  // this is to keep track of the height property in the content 
+  const [height, setHeight] = React.useState(0);
+
+  const contentRef = React.useRef(null);
 
   // When the user clicks on the accordion, the toggleAccordion function is called to toggle the state of isOpen.
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
+
+  React.useEffect(() => {
+    setHeight(isOpen ? contentRef.current.scrollHeight : 0);
+  }, [isOpen]);
+
 
   return (
     <div className={styles.stockInfo}>
@@ -31,11 +41,17 @@ function Accordion(props) {
         />
       </button>
       {/* Check if the accordion should be open and show the content if true */}
-
-      <div className={styles.stockInfoContent}>
-        {/* props.children is calling the <p> inside the accordion */}
-        <div className={styles.stockInfoText}>{props.children}</div>
-      </div>
+      {isOpen && (
+        <div className={styles.stockInfoContent} style={{height: `${height}px`}}>
+          {/*  style={{height: ${height}px}} code is setting the height of the stockInfoContent div element based on the value of the height state variable */}
+          {/* ref={contentRef} to get the height of stockInfoContent and 
+          then animate to opening and close and open accordion */}
+          <div className={styles.stockInfoText} ref={contentRef}>
+            {props.children}
+          </div>
+            {/* props.children is calling the <p> inside the accordion */}
+        </div>
+      )}
     </div>
   );
 }

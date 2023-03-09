@@ -83,14 +83,22 @@ const Portfolio = () => {
       {/* Hero Section */}
       <Hero>
         <div className={styles.tabs}>
-          <button
-            className={styles.tabButton}
-            onClick={(e) => {
-              handleTabSelect(tabFlags.overview);
-            }}
-          >
-            Overview
-          </button>
+          <button 
+            className={styles.tabButton} 
+            onClick={(e) => { 
+              handleTabSelect(tabFlags.overview) 
+            }} 
+            
+            style={{
+              backgroundColor:  (activeTab === tabFlags.overview ?
+                "#37433a": "#d5e3e1"
+              ),
+
+              color: (activeTab === tabFlags.overview ?
+                "#d5e3e1" : "#37433a"
+              )
+          }}>Overview</button>
+
           <h1 style={{ color: "gray" }}>|</h1>
           <button
             className={styles.tabButton}

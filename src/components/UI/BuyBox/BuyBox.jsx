@@ -1,8 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./BuyBox.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 
-const BuyBox = ({ type, placeholder }) => {
+const BuyBox = ({ type, placeholder, price }) => {
+
+  const [qty, setQty] = useState("QTR")
+
+  function totalHandler(price) {
+    return price * qty
+  }
+
+  const qtyHandler = (e) => {
+    setQty(e.target.value)
+  }
+
+
   return (
     <div className={styles.BuyBody}>
       <div className={styles.wrapper}>
@@ -54,9 +66,12 @@ const BuyBox = ({ type, placeholder }) => {
             Sell
           </button>
         </div>
-        <input type="number" id= "Quantity" className={styles.dropdown} placeholder="QTR" />
-        <input type="date" id="userDate" className={styles.dropdown} placeholder="MM/DD" />
-        <div className={styles.dropdown}> Total </div>
+        <input value={qty} onChange={qtyHandler} type="number" id= "Quantity" className={styles.inputBoxes} placeholder="QTR" />
+        <input type="date" id="userDate" className={styles.inputBoxes} placeholder="MM/DD" />
+        <div 
+        type="number"
+        className={styles.inputBoxes}
+        >Total: ${qty == "QTR" ? 0 : totalHandler(price)}</div>
 
         <h1>Queue Order</h1>
         <div className={styles.orders}>

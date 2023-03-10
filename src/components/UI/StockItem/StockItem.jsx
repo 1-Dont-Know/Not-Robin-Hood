@@ -26,16 +26,15 @@ const StockItem = ({ symbol, value }) => {
             </p>
           </Accordion>
         </div>
-        <Link to="/stock-viewer" className={styles.buyStock}>
-          <button className={globalStyles.whiteBuyButton}>
+        <div className={styles.buyStock}>
+          <Link to="/stock-viewer" className={globalStyles.whiteBuyButton}>
             <img src={cart} alt="cart" />
             Buy
-          </button>
-        </Link>
+          </Link>
+        </div>
       </div>
     </div>
   );
 };
 
 export default StockItem;
-

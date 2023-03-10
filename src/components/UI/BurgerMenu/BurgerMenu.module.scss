@@ -1,42 +1,76 @@
 @use "../../../styles/variables.scss";
 @use "../../../styles/mixins.scss";
 
-.container {
-  height: fit-content;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.wrapper {
+  cursor: pointer;
+  flex: 10%;
+  display: none;
   @include mixins.breakpoint-down(xlarge) {
-    .cta,
-    .profile {
-      display: none;
-    }
+    display: flex;
+
+    justify-content: flex-end;
   }
 }
 
-.search {
+.burgerMenuList {
+  position: absolute;
+  right: 0;
+  top: 0;
+  flex: 30%;
+  min-width: 300px;
+  height: 100vh;
+  padding: 1rem;
+  background-color: variables.$primary-color;
+  z-index: 1;
   display: flex;
-  flex-basis: 40%;
-  flex-grow: 1;
-  flex-shrink: 1;
-  @include mixins.breakpoint-down(xlarge) {
-    flex-grow: 0;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+
+  @include mixins.breakpoint-up(xlarge) {
+    display: none;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  h4 {
+    font-size: 2rem;
+  }
+  img {
+    width: 5rem;
+  }
+  gap: 1rem;
+}
+
+.closeBtn {
+  display: block;
+  background: none;
+  position: absolute;
+  right: 7%;
+  top: 2%;
+  color: variables.$secondary-color;
+  font-size: 1.5rem;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    color: variables.$golden;
   }
 }
 
 .cta {
   display: flex;
-  flex-basis: 40%;
-  flex-grow: 1;
   flex-shrink: 1;
   gap: 1rem;
+  flex-direction: column;
 }
 
 .profile {
   display: flex;
-  flex-basis: 20%;
-  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
   flex-shrink: 1;
   gap: 2rem;
   justify-content: flex-end;
@@ -56,6 +90,7 @@
 }
 
 .profileMenu {
+  left: -20rem;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -81,6 +116,7 @@
   }
 
   .profileCta {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;

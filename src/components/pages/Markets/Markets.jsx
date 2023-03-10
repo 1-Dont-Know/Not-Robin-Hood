@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import globalStyles from "../../../styles/main.module.scss";
 import styles from "./Markets.module.scss";
 import Hero from "../../UI/Hero/Hero";
@@ -8,10 +8,13 @@ import { stockData } from "../../../utils/fakeData";
 
 const Markets = () => {
   // declares a new state variable setSortedStocks and initializes it with the value false
-  const [setSortedStocks] = useState(false);
+  const [sortedStocks, setSortedStocks] = useState(false);
   // declares a new state variable sortOrder and initializes it with the value "asc".
   // Also declares a setter function setSortOrder that will be used to update the sortOrder state variable
   const [sortOrder, setSortOrder] = useState("asc");
+  const [buttonText, setButtonText] = useState(
+    sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A"
+  );
   // This variable will display only 5 stockItem on the screen
   const numStocks = 5;
 
@@ -20,6 +23,13 @@ const Markets = () => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     setSortedStocks((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    // Set the button text to the new value with a 300ms delay
+    setTimeout(() => {
+      setButtonText(sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A");
+    }, 200);
+  }, [sortOrder]);
 
   // This function gets the stock data and sorts it in alphabetical order based on the stock symbol
   const getStockData = () => {
@@ -44,8 +54,15 @@ const Markets = () => {
           {/* Create a button to trigger toggleSort function when clicked */}
           <button className={globalStyles.sortButton} onClick={toggleSort}>
             {/* Change button text depending on the sortOrder state */}
-            {sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A"}
-            <img src={DownVectorIcon} alt="Vector" />
+            {/* {sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A"} */}
+            <span className={styles.buttonText}>
+              {buttonText}
+            </span>
+            <img 
+              src={DownVectorIcon} 
+              alt="Vector" 
+              className={sortedStocks ? styles.rotated : ""}
+            />
           </button>
         </section>
 

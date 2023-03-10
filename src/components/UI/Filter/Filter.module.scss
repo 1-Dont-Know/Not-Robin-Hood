@@ -9,6 +9,22 @@
   flex-grow: 1;
   flex-shrink: 1;
   align-items: center;
+
+  @include mixins.breakpoint-down(large) {
+    .tools,
+    .settings,
+    .timeBar {
+      display: none;
+    }
+    .commonFilter {
+      display: flex;
+      margin: 1rem 0rem;
+      width: 100%;
+      background-color: variables.$primary-color;
+      padding: 1rem 2rem;
+      border-radius: 25px;
+    }
+  }
 }
 
 .tools,
@@ -29,4 +45,7 @@
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 80%;
+}
+.commonFilter {
+  display: none;
 }

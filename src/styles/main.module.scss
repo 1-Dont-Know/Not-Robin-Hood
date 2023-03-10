@@ -281,6 +281,10 @@ body {
         saturate(0);
     }
   }
+  @include mixins.breakpoint-down(medium) {
+    flex: 40%;
+    padding: 1rem 1.5rem;
+  }
 }
 
 .timeBarButton {
@@ -367,6 +371,9 @@ body {
   &:last-child {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
+  }
+  @include mixins.breakpoint-down(medium) {
+    padding: 1rem;
   }
 }
 
@@ -544,9 +551,9 @@ body {
   &:hover {
     box-shadow: 0px 0px 0px 2px rgba(193, 142, 96, 1);
   }
-  
+
   img {
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
   }
 }
 
@@ -635,6 +642,10 @@ body {
   &:hover {
     background-color: variables.$golden;
   }
+  @include mixins.breakpoint-down(xlarge) {
+    width: 100%;
+    min-width: 14rem;
+  }
 }
 
 // SHARE PROFILE BUTTON
@@ -667,6 +678,8 @@ body {
     color: variables.$secondary-color;
     font-weight: variables.$font-bold;
     transition: 0.3s ease-in-out;
+    width: 100%;
+    min-width: 14rem;
 
     &:hover {
       box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
@@ -676,9 +689,8 @@ body {
 
   @include mixins.breakpoint-down(medium) {
     background-color: #fff;
-    border-radius: 15px;
+    border-radius: 25px;
     border: none;
-    padding-left: 1.5rem;
 
     &::placeholder {
       font-weight: variables.$font-regular;

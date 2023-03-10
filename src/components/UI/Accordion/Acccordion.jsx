@@ -31,7 +31,7 @@ function Accordion(props) {
 // if the isOpen state is false when accordion is closed then set the max height to 0. To hide the accordion.
   const contentStyle = {
     maxHeight: isOpen ? `${height}px` : "0",
-    transition: "max-height 0.4s ease-in-out",
+    transition: "max-height 0.45s ease-in-out",
     overflow: "hidden",
   };
 

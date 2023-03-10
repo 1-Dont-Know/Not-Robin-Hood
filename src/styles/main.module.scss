@@ -197,6 +197,15 @@ body {
   color: variables.$secondary-color;
   gap: 0.5rem;
   transition: 0.3s ease-in-out;
+  @include mixins.breakpoint-down(xlarge) {
+    background-color: variables.$secondary-color;
+    color: #fff;
+    img {
+      //Modifies the credit/bank icon colors on hover
+      filter: invert(1) contrast(200%) //hue-rotate(100deg)
+        saturate(0);
+    }
+  }
 
   img {
     transition: 0.3s ease-in-out;
@@ -433,19 +442,18 @@ body {
     background-color: variables.$secondary-color;
     color: #000000;
 
-  &:focus {
-    outline: 4px solid #d5e3e1;
-    background-color: variables.$secondary-color;
-    color: #000000; 
-  }
+    &:focus {
+      outline: 4px solid #d5e3e1;
+      background-color: variables.$secondary-color;
+      color: #000000;
+    }
 
-  &:nth-child(n) // Colors the buttons
-  {
-    background-color: #91cae0;
-    outline: 4px solid #5999b3;
+    &:nth-child(n) // Colors the buttons
+    {
+      background-color: #91cae0;
+      outline: 4px solid #5999b3;
+    }
   }
-  
-}
 
   img {
     // Icon nav-bar adjustments
@@ -627,7 +635,7 @@ body {
 
 // SHARE PROFILE BUTTON
 
-.ShareButton {
+.shareButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -644,8 +652,22 @@ body {
     color: variables.$secondary-color;
   }
 
-  @include mixins.breakpoint-down(large) {
-    padding: 1rem 2rem 1rem 0rem;
+  @include mixins.breakpoint-down(xlarge) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border-radius: 25px;
+    padding: 1rem 0.5rem;
+    color: variables.$secondary-color;
+    font-weight: variables.$font-bold;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+      color: variables.$secondary-color;
+    }
   }
 
   @include mixins.breakpoint-down(medium) {

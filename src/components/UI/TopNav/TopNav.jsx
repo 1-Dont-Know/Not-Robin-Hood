@@ -12,6 +12,7 @@ import NotificationPopUp from "../NotificationPopUp/NotificationPopUp";
 import AddIcon from "../../../assets/icons/plus-icon.svg";
 import ShareIcon from "../../../assets/icons/share.svg";
 import AddFunds from "../AddFunds/AddFunds";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
 const TopNav = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -93,7 +94,7 @@ const TopNav = () => {
                 <img src={profile} alt="profile" />
               </div>
               <div className={styles.profileCta}>
-                <button className={globalStyles.ShareButton}>
+                <button className={globalStyles.shareButton}>
                   <img src={ShareIcon} alt="Share" />
                   Share Profile
                 </button>
@@ -108,6 +109,13 @@ const TopNav = () => {
             </div>
           )}
         </section>
+        {/* BURGER MENU SECTION */}
+        <BurgerMenu
+          showProfile={showProfile}
+          notificationsHandler={notificationsHandler}
+          profileHandler={profileHandler}
+          addFundsHandler={addFundsHandler}
+        />
       </div>
       {showNotifications && (
         <Popup name="notifications" toggle={popUpHandler}>

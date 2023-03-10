@@ -13,6 +13,7 @@ import Hero from "../../UI/Hero/Hero";
 import AddFunds from "../../UI/AddFunds/AddFunds";
 
 const AppFundsPopup = () => {
+  const stockPrice = "59.71"
   const [stockData, setStockData] = useState({
     labels: fakeData.map((data) => data.day),
     datasets: [
@@ -37,7 +38,7 @@ const AppFundsPopup = () => {
         <div className={styles.stockNameWrapper}>
           <h1 className={styles.stockName}>BINANCE (BNB-USD)</h1>
           <p className={styles.stockPrice}>
-            $59.71
+            ${stockPrice}
             <span className={styles.growth}>$51.29(4.78%)</span>
           </p>
         </div>
@@ -48,7 +49,7 @@ const AppFundsPopup = () => {
             <Graph chartData={stockData} />
           </section>
           <section className={styles.buybox}>
-            <BuyBox />
+            <BuyBox price={stockPrice} />
           </section>
         </div>
         {/* //! FILTER SECTION */}

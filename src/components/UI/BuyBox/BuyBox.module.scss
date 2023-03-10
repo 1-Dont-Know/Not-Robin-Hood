@@ -13,7 +13,7 @@
     font-weight: variables.$font-regular;
 }
 
-.dropdown{
+.inputBoxes{
     padding: 1.5rem 7rem;
     width: 100%;
     background: #FFFFFF;
@@ -22,6 +22,15 @@
     font-size: 25px;
     font-weight: variables.$font-regular;
 }
+
+// .boxes{
+//     width: 100%;
+//     background: #FFFFFF;
+//     border-radius: 25px;
+//     // margin: 1rem 0rem;
+//     font-size: 25px;
+//     font-weight: variables.$font-regular;
+// }
 
 .button{
     display: flex;
@@ -46,4 +55,3 @@
 //     font-size: 30px;
 //     font-weight: variables.$font-regular;
 // }
-

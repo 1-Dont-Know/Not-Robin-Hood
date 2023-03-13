@@ -162,6 +162,9 @@ body {
 .buyBoxButton {
   background-color: variables.$secondary-color;
   @include mixins.button;
+  @include mixins.breakpoint-down(small){
+    font-size: 1rem;
+  }
 
   &:hover {
     color: variables.$secondary-color;
@@ -180,6 +183,9 @@ body {
 .sellButton {
   background-color: #e1c5c1;
   @include mixins.button;
+  @include mixins.breakpoint-down(small){
+    font-size: 1rem;
+  }
   color: #ae2424;
 
   img {

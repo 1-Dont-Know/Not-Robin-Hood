@@ -5,6 +5,7 @@
   display: flex;
   align-content: center;
   align-items: center;
+  justify-content: center; 
   padding: 1rem;
   background: #d5e3e1;
   border-radius: 1.563rem;
@@ -19,6 +20,7 @@
 }
 .stockInfoAccordion {
   flex: 40%;
+  margin-top: 1em;
 }
 
 .buyStock {
@@ -26,3 +28,66 @@
   display: flex;
   justify-content: flex-end;
 }
+
+@media screen and (max-width: 767px) {
+  .buttonContainer {
+    flex-wrap: wrap;
+    display: flex;
+    align-content: center;
+
+  }
+
+  .buttonContainer > * {
+    flex: 1 1 100%;
+    margin-bottom: 1em;
+  }
+
+  .stockSymbol {
+    flex: 20%;
+  }
+  .stockValue {
+    flex: 20%;
+  }
+  .buyStock {
+    flex: 20%;
+  }
+
+  .stockInfoAccordion {
+    flex: 1 1 100%;
+    order: 4;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .buttonContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttonContainer > * {
+    flex: 1 1 100%;
+    }
+
+  .stockSymbol {
+    flex: 1 1 40%;
+  }
+
+  .stockValue {
+    flex: 1 1 30%;
+  }
+
+  .stockInfoAccordion {
+    flex: 1 1 100%;
+  }
+
+  .buyStock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 50%;
+    order: 4;
+  }
+}
+

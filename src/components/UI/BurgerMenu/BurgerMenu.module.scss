@@ -31,6 +31,9 @@
   @include mixins.breakpoint-up(xlarge) {
     display: none;
   }
+  @include mixins.breakpoint-down(medium) {
+    min-width: 100%;
+  }
 }
 
 .info {

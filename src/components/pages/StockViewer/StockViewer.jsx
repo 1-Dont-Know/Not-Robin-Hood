@@ -6,14 +6,12 @@ import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used f
 import Graph from "../../UI/Graph/Graph";
 import BuyBox from "../../UI/BuyBox/BuyBox";
 import Filter from "../../UI/Filter/Filter";
-import Sidebar from "../../UI/Sidebar/Sidebar";
-import TopNav from "../../UI/TopNav/TopNav";
+
 // import styles from "./Account.module.scss";
 import Hero from "../../UI/Hero/Hero";
-import AddFunds from "../../UI/AddFunds/AddFunds";
 
 const AppFundsPopup = () => {
-  const stockPrice = "59.71"
+  const stockPrice = "59.71";
   const [stockData, setStockData] = useState({
     labels: fakeData.map((data) => data.day),
     datasets: [
@@ -26,14 +24,6 @@ const AppFundsPopup = () => {
 
   return (
     <>
-      {/* <div className={styles.wrapper}> */}
-      {/* Sidebar Section */}
-      {/* <Sidebar /> */}
-      {/* Nav/Hero Section */}
-      {/* <main className={styles.mainSection}> */}
-      {/* Top Navigation */}
-      {/* <TopNav /> */}
-      {/* Hero Section */}
       <Hero>
         <div className={styles.stockNameWrapper}>
           <h1 className={styles.stockName}>BINANCE (BNB-USD)</h1>

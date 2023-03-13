@@ -162,19 +162,25 @@ body {
 .buyBoxButton {
   background-color: variables.$secondary-color;
   @include mixins.button;
-  @include mixins.breakpoint-down(small){
-    font-size: 1rem;
-  }
-
-  &:hover {
-    color: variables.$secondary-color;
-    background-color: #fff;
+  color: #fff;
+  gap: 0.5rem;
+  transition: 0.3s ease-in-out;
+  @include mixins.breakpoint-down(xlarge) {
+    background-color: variables.$secondary-color;
+    color: #fff;
   }
 
   img {
+    transition: 0.3s ease-in-out;
+    // filter: invert(1) contrast(200%) //hue-rotate(100deg)
+    //   saturate(0);
     max-width: 41.79px;
     max-height: 40.25px;
-    margin-right: 0.5rem;
+  }
+
+  &:hover {
+    color: #fff;
+    box-shadow: 0px 0px 0px 2px rgb(255, 255, 255);
   }
 }
 
@@ -182,8 +188,9 @@ body {
 
 .sellButton {
   background-color: #e1c5c1;
+  gap: 0.5rem;
   @include mixins.button;
-  @include mixins.breakpoint-down(small){
+  @include mixins.breakpoint-down(small) {
     font-size: 1rem;
   }
   color: #ae2424;
@@ -191,7 +198,10 @@ body {
   img {
     max-width: 41.79px;
     max-height: 40.25px;
-    margin-right: 0.5rem;
+  }
+  &:hover {
+    background-color: #781515;
+    color: #fff;
   }
 }
 

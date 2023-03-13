@@ -23,6 +23,168 @@
       background-color: variables.$primary-color;
       padding: 1rem 2rem;
       border-radius: 25px;
+      align-items: center;
+      gap: 1rem;
+
+      @include mixins.breakpoint-down(medium) {
+        .commonFilterRange {
+          display: none;
+        }
+      }
+      @include mixins.breakpoint-down(large) {
+        .commonFilterRange {
+          display: flex;
+          gap: 0.5rem;
+          flex: 80%;
+        }
+        .timeRange {
+          display: none;
+        }
+      }
+      @include mixins.breakpoint-down(small) {
+        padding: 1rem;
+        gap: 0.4rem;
+        justify-content: space-between;
+        .commonFilterRange {
+          display: none;
+        }
+        .timeRange {
+          display: flex;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            background-color: #fbf2ea;
+          }
+        }
+      }
+
+      .commonFilterTools {
+        flex: 10%;
+        img {
+          max-width: 1.5rem;
+        }
+        @include mixins.breakpoint-down(large) {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #fff;
+          padding: 0.4rem;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            background-color: #fbf2ea;
+          }
+        }
+        @include mixins.breakpoint-down(small) {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #fff;
+          padding: 0.4rem 0rem;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            background-color: #fbf2ea;
+          }
+          img {
+            max-width: 2rem;
+          }
+        }
+        @include mixins.breakpoint-down(xs) {
+          padding: 1rem;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            background-color: #fbf2ea;
+          }
+          img {
+            max-width: 1rem;
+          }
+        }
+      }
+      .commonFilterSettings {
+        display: flex;
+        align-items: center;
+        flex: 10%;
+        flex-grow: 1;
+        flex-shrink: 1;
+        gap: 0.5rem;
+        img {
+          max-width: 1.5rem;
+        }
+        @include mixins.breakpoint-down(large) {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #fff;
+          padding: 0.4rem;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            background-color: #fbf2ea;
+          }
+        }
+        @include mixins.breakpoint-down(small) {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #fff;
+          padding: 0.4rem 0rem;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            background-color: #fbf2ea;
+          }
+          img {
+            max-width: 2rem;
+          }
+        }
+        @include mixins.breakpoint-down(xs) {
+          justify-content: space-evenly;
+          padding: 1rem;
+          cursor: pointer;
+          transition: 0.3s ease-in-out;
+          &:hover {
+            background-color: #fbf2ea;
+          }
+          img {
+            max-width: 1rem;
+          }
+        }
+      }
+      .timeBarButton {
+        padding: 1rem 2rem;
+      }
+    }
+  }
+  @include mixins.breakpoint-down(medium) {
+    .commonFilterTools {
+      img {
+        max-width: 1.5rem;
+      }
+    }
+  }
+}
+
+.timeRange {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 0.5rem 4rem;
+  border-radius: 25px;
+  @include mixins.breakpoint-down(xs) {
+    padding: 1rem;
+    img {
+      max-width: 1rem;
     }
   }
 }

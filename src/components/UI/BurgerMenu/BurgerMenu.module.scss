@@ -28,7 +28,7 @@
   align-items: center;
   gap: 2rem;
 
-  @include mixins.breakpoint-up(xlarge) {
+  @include mixins.breakpoint-up(xxlarge) {
     display: none;
   }
   @include mixins.breakpoint-down(medium) {

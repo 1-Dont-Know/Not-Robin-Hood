@@ -10,9 +10,6 @@
 .mainSection {
   display: flex;
   flex-direction: column;
-
-  //Fix for the graph not resizing correctly
-  //Using flex-grow here won't work. 400px is the size of the sidebar.
   width: 100%;
 }
 
@@ -20,7 +17,6 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin: 2rem 0rem;
   flex: 10%;
 }
 
@@ -42,11 +38,10 @@
 
 .preview {
   display: flex;
-  // width: 100%;
-  margin: 1rem 0rem;
+  margin-top: 1rem;
   gap: 2rem;
   flex: 80%;
-  @include mixins.breakpoint-down(medium) {
+  @include mixins.breakpoint-down(xlarge) {
     display: flex;
     flex-wrap: wrap;
     .graph {
@@ -72,15 +67,15 @@
 .graph {
   display: flex;
   height: 100%;
-
-  //Fix for the graph not shrinking correctly. You cannot use
-  //flex-grow for the graph component container. Width property used instead.
-  width: 70%;
+  width: 60%;
+  @include mixins.breakpoint-down(xlarge) {
+    width: 100%;
+  }
 }
 
 .buybox {
   display: flex;
-  flex: 1;
+  flex: 40%;
 }
 
 .filter {
@@ -89,6 +84,5 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   flex-basis: 10%;
-
   margin-top: 10px;
 }

@@ -41,11 +41,12 @@ $breakpoints-up: (
 
 //! ===== 639px, 1023px, 1399px, 1430px ======
 $breakpoints-down: (
+  "xs": "33.75em",
   "small": "39.9375em", //639px
   "medium": "63.9375em", //1,023px
   "large": "75.4375em", //1,207px
   "xlarge": "89.375em", //1,430px
-  "xxxl": "95rem", // 1,520px
+  "xxxl": "95rem",  // 1,520px
 );
 
 //?  apply breakpoint for an element with min-width, where size mentioned about in the MIN-WIDTH COMMENT

@@ -306,6 +306,9 @@ body {
     color: #fff;
     border-radius: 25px;
   }
+  @include mixins.breakpoint-down(large) {
+    padding: 0.5rem;
+  }
 }
 
 // Profile type button

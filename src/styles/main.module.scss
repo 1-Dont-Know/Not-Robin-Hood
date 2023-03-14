@@ -448,17 +448,15 @@ body {
 .settingsPageButton // Modifies nav bar buttons
 {
   display: flex;
+  justify-content: center;
+  padding: 0.5rem 1.5rem;
   align-items: center;
-  //justify-content: center;
-
+  gap: 0.5rem;
+  width: 100%;
   font-family: "Roboto";
-  //font-weight: 600;
   font-size: 22px;
-  padding-right: 3.5rem;
-  //padding: 0.25rem 0.05rem;
-  width: 245px;
+  white-space: nowrap;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
-  background: white;
   color: variables.$secondary-color;
   border-radius: 25px;
   transition: 0.3s ease-in-out;
@@ -484,11 +482,8 @@ body {
   img {
     // Icon nav-bar adjustments
     display: flex;
-    margin-right: 0.55rem;
-    margin-left: 1.55rem;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 35px;
+    max-width: 1.5rem;
+    width: 100%;
   }
 }
 
@@ -496,8 +491,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #eaeaea;
+  background: variables.$golden;
   border-radius: 35px;
   outline: 1.5px solid black;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
@@ -508,12 +502,12 @@ body {
   font-size: 20px;
   font-family: "Inter", "Roboto", "arial";
   line-height: 24px;
-
-  padding: 2rem 1.5rem;
-  //margin-left: 5rem;
+  white-space: nowrap;
+  transition: 0.3s ease-in-out;
 
   &:hover {
-    background-color: #cecece;
+    background-color: variables.$secondary-color;
+    color: #fff;
     outline: 1.5px solid rgb(87, 87, 87);
     transition: 0.15s ease-in-out;
 

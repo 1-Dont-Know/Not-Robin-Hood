@@ -8,7 +8,7 @@ import ChevronIcon from "../../../assets/icons/chevron.png";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
+
   const sideBarHandler = () => {
     setIsOpen((isOpen) => !isOpen);
   };

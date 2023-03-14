@@ -7,7 +7,7 @@ const Asset = () => {
     <div className={styles.container}>
       <h3 className={styles.title}>Asset Value</h3>
       <p className={styles.amount}>
-        $12,345,67 <span>USD</span>
+        $1200,00 <span>USD</span>
       </p>
       <div className={styles.results}>
         <img src={assetUp} alt="up" />

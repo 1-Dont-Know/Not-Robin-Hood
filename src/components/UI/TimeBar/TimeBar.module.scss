@@ -2,6 +2,7 @@
 @use "../../../styles/mixins.scss";
 
 .timeBar {
+  position: relative;
   background-color: #d5e3e1;
   display: flex;
   justify-content: center;
@@ -11,4 +12,18 @@
   padding: 0.5rem 0.75rem;
   width: 100%;
   border-radius: 25px;
+
+  @include mixins.breakpoint-down(xlarge) {
+    // display: none;
+    margin: 1rem 0rem;
+  }
+  @include mixins.breakpoint-down(large) {
+    margin: 1rem 0rem;
+  }
+  @include mixins.breakpoint-down(medium) {
+    margin: 1rem 0rem;
+  }
+  @include mixins.breakpoint-down(small) {
+    margin: 1rem 0rem;
+  }
 }

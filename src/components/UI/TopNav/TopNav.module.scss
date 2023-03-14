@@ -22,6 +22,10 @@
   flex-shrink: 1;
   @include mixins.breakpoint-down(xlarge) {
     flex-grow: 0;
+    flex-basis: 50%;
+  }
+  @include mixins.breakpoint-down(small) {
+    flex-grow: 1;
   }
 }
 

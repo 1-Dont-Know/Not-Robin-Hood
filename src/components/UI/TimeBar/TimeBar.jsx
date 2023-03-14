@@ -3,18 +3,17 @@ import styles from "./TimeBar.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 
 const TimeBar = () => {
+  const range = ["1d", "5d", "2w", "1m", "6m", "1y", "5y", "7y", "Max"];
   return (
     <>
       <div className={styles.timeBar}>
-        <button className={globalStyles.timeBarButton}>1d</button>
-        <button className={globalStyles.timeBarButton}>5d</button>
-        <button className={globalStyles.timeBarButton}>2w</button>
-        <button className={globalStyles.timeBarButton}>1m</button>
-        <button className={globalStyles.timeBarButton}>6m</button>
-        <button className={globalStyles.timeBarButton}>1y</button>
-        <button className={globalStyles.timeBarButton}>5y</button>
-        <button className={globalStyles.timeBarButton}>7y</button>
-        <button className={globalStyles.timeBarButton}>Max</button>
+        {range.map((item) => {
+          return (
+            <button key={item} className={globalStyles.timeBarButton}>
+              {item}
+            </button>
+          );
+        })}
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./SidebarNav.module.scss";
 import overview from "../../../assets/icons/overview.svg";
 import markets from "../../../assets/icons/markets.svg";

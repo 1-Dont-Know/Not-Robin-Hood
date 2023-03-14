@@ -7,7 +7,6 @@ import {
   Routes,
   Navigate,
   Outlet,
-  useLocation,
 } from "react-router-dom";
 
 // IMPORTING OUR APP COMPONENTS / PRIVATE ROUTES / PUBLIC ROUTES

@@ -124,7 +124,7 @@ const TopNav = () => {
       )}
       {showFundsPopup && (
         <Popup name="addfunds" toggle={popUpHandler}>
-          <AddFunds />
+          <AddFunds toggle={popUpHandler} />
         </Popup>
       )}
     </>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./BuyBox.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 import buyIcon from "../../../assets/icons/shopping-cart.svg";
+import { checkIfNumber } from "../../../utils/helpers";
 
 const BuyBox = ({ type, placeholder, price }) => {
   const [qty, setQty] = useState("QTR");
@@ -37,6 +38,7 @@ const BuyBox = ({ type, placeholder, price }) => {
           id="Quantity"
           className={styles.inputBoxes}
           placeholder="QTR"
+          onKeyDown={(event) => checkIfNumber(event)}
         />
         {/* Date Input */}
         <input
@@ -46,7 +48,7 @@ const BuyBox = ({ type, placeholder, price }) => {
           placeholder="MM/DD"
         />
         {/* Total Amount  */}
-        <div type="number" className={styles.inputBoxes}>
+        <div className={styles.inputBoxes}>
           Total: ${qty === "QTR" ? 0 : totalHandler(price)}
         </div>
       </section>

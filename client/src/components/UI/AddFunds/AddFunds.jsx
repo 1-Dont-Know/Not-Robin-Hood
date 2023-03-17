@@ -3,13 +3,16 @@ import styles from "./AddFunds.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 import people from "../../../assets/icons/people-icon.svg";
 import creditCard from "../../../assets/icons/credit-card-icon.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { increment } from "../../../redux/slices/balanceSlice";
+import { checkIfNumber } from "../../../utils/helpers";
 
-const AddFunds = () => {
+const AddFunds = ({ toggle }) => {
   // Currency State
   const [currency, setCurrency] = useState("usd");
 
   // Amount State
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
 
   // List of currencies
   const currencyList = {
@@ -19,14 +22,22 @@ const AddFunds = () => {
     cad: "C$",
   };
 
-  // Currency Handler
+  const dispatch = useDispatch();
+
+  // Currency Input Handler
   const currencyHandler = (e) => {
     setCurrency(e.target.value);
   };
 
-  // Amount Handler
+  // Amount Input  Handler
   const amountHandler = (e) => {
     setAmount(e.target.value);
+  };
+
+  // HANDLE PAYMENTS
+  const paymentHandler = () => {
+    dispatch(increment(amount));
+    toggle();
   };
 
   return (
@@ -103,6 +114,7 @@ const AddFunds = () => {
         value={amount}
         onChange={amountHandler}
         placeholder="Enter amount"
+        onKeyDown={(event) => checkIfNumber(event)}
       />
       {/* 7 - credit/debit button */}
       <div className={styles.amountContainer}>
@@ -129,7 +141,7 @@ const AddFunds = () => {
         </label>
       </div>
       {/* 10 - select payment and continue button */}
-      <button className={globalStyles.addFundsButton}>
+      <button onClick={paymentHandler} className={globalStyles.addFundsButton}>
         SELECT PAYMENT AND CONTINUE
       </button>
     </div>

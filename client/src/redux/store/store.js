@@ -6,7 +6,3 @@ export const store = configureStore({
     balance: balanceReducer,
   },
 });
-
-const newState = store.getState();
-
-console.log(newState);

@@ -4,17 +4,12 @@ import { useGetStockTickerQuery } from "../../../redux/slices/apiSlice";
 
 // Search Bar component receives a placeholder prop for the search default message
 const Search = ({ placeholder }) => {
+  const { data, isLoading } = useGetStockTickerQuery("APPL");
 
-  
-  const {data, isLoading} = useGetStockTickerQuery("APPL");
-
-  if (isLoading){
-    
+  if (isLoading) {
+  } else {
+    // console.log(data.result);
   }
-  else {
-    console.log(data.result);
-  }
-
 
   return (
     <div className={styles.container}>

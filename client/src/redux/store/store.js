@@ -11,17 +11,10 @@ export const store = configureStore({
     [stocksApi.reducerPath]: stocksApi.reducer,
     balance: balanceReducer,
     stocksItem: StocksItemReducer,
-  },
-
-  reducer: {
     darkMode: darkModeReducer,
-  },
-  reducer: {
     changePassword: changePasswordReducer,
-  },
-  reducer: {
     changeName: changeNameReducer,
   },
-
+  
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(stocksApi.middleware),
 });

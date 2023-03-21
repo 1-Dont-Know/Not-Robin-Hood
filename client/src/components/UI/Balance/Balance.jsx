@@ -1,10 +1,9 @@
 import React from "react";
 import styles from "./Balance.module.scss";
-import { useSelector } from "react-redux";
-
+import { useGetBalanceQuery } from "../../../redux/slices/userApiSlice";
 const Balance = () => {
-  const balance = useSelector((state) => state.balance.value);
-  return <div className={styles.container}>${balance}</div>;
+  console.log(useGetBalanceQuery());
+  return <div className={styles.container}>$0</div>;
 };
 
 export default Balance;

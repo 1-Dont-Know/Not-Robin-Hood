@@ -1,15 +1,23 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// api link
+const api_key= `${process.env.REACT_APP_API_KEY}`; // Our API Key
+
+const transformResponse = (response) => {
+    return response.result; // assuming the API response has a 'result' property that contains the data you want
+};
 
 export const stocksApi = createApi({
-  // name
-  reducerPath: "stocksApi",
-  //   source from where to fetch data from
-  baseQuery: fetchBaseQuery({ baseUrl: "stocksSource" }),
+    // name
+    reducerPath: "stocksApi",
+    //   source from where to fetch data from
+    baseQuery: fetchBaseQuery({baseUrl: "https://finnhub.io/api/v1"}),
+    // list of queries
+    endpoints: (builder) => ({
+        getStockTicker: builder.query({
+            query: (userInput) => `/search?q=${userInput}&token=${api_key}`,
+        }),
 
-  // list of queries
-  endpoints: (builder) => ({
-    getAllStocks: builder.query, // query to get a data, but if we want to update something, use "mutation"
-  }),
+    }),
 });
+
+export const { useGetStockTickerQuery } = stocksApi;

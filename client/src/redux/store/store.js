@@ -1,13 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import balanceReducer from "../slices/balanceSlice";
-import { stocksApi } from "../slices/apiSlice";
 
+import { stocksApi } from "../slices/apiSlice";
+import { balanceApi } from "../slices/userApiSlice";
 
 export const store = configureStore({
   reducer: {
     [stocksApi.reducerPath]: stocksApi.reducer,
-    balance: balanceReducer,
+    [balanceApi.reducerPath]: balanceApi.reducer,
   },
 
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(stocksApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(stocksApi.middleware, balanceApi.middleware),
 });

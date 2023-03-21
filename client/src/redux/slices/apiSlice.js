@@ -7,8 +7,11 @@ const transformResponse = (response) => {
 };
 
 export const stocksApi = createApi({
+    // name
     reducerPath: "stocksApi",
+    //   source from where to fetch data from
     baseQuery: fetchBaseQuery({baseUrl: "https://finnhub.io/api/v1"}),
+    // list of queries
     endpoints: (builder) => ({
         getStockTicker: builder.query({
             query: (userInput) => `/search?q=${userInput}&token=${api_key}`,

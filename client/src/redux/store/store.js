@@ -11,6 +11,3 @@ export const store = configureStore({
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(stocksApi.middleware),
 });
-
-// const newState = store.getState();
-// console.log(newState);

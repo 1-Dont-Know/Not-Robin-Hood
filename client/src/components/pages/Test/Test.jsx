@@ -14,13 +14,13 @@ import axios from "axios"
 
 
 const Test = () =>{
-    const url = "https://finnhub.io/api/v1/search?q=&token=cgal7v9r01qkpvoj1i80cgal7v9r01qkpvoj1i8g";
+    const url = "https://finnhub.io/api/v1/search?q=apple&token=cgal7v9r01qkpvoj1i80cgal7v9r01qkpvoj1i8g";
     // fetch(url)
     //     .then(res => res.json())
     //     .then(data => console.log(data));
 
-    const [getResults, setResults] = useState(null);
-    const[count, setCount] = useState();
+    // const [getResults, setResults] = useState(null);
+    // const[count, setCount] = useState();
     // useEffect(() => {
     //     axios.get(url).then((resp)=> {
     //         setCount(resp.data.count);

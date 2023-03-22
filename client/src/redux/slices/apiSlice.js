@@ -16,7 +16,11 @@ export const stocksApi = createApi({
     getStockTicker: builder.query({
       query: (userInput) => `/search?q=${userInput}&token=${api_key}`,
     }),
+    getPrice: builder.query({
+      query: (userInput) => `/search?q=${userInput}&token=${api_key}`,
+    }),
+
   }),
 });
 
-export const { useGetStockTickerQuery } = stocksApi;
+export const { useGetStockTickerQuery, useGetPriceQuery } = stocksApi;

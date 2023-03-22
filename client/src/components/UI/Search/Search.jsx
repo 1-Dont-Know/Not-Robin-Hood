@@ -8,7 +8,7 @@ const Search = ({ placeholder }) => {
 
   if (isLoading) {
   } else {
-    // console.log(data.result);
+    console.log(data.result);
   }
 
   return (

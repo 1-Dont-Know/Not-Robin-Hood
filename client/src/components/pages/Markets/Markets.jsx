@@ -46,40 +46,6 @@ const Markets = () => {
     }
   };
 
-  const url =
-    "https://finnhub.io/api/v1/search?q=apple&token=cgal7v9r01qkpvoj1i80cgal7v9r01qkpvoj1i8g";
-  const [getResults, setResults] = useState(null);
-  const [count, setCount] = useState();
-  useEffect(() => {
-    // axios.get(url).then((resp) => {
-    //   setCount(resp.data.count);
-    //   setResults(resp.data.result);
-    // });
-  }, []);
-  // console.log(getResults)
-  // console.log(count)
-
-  // const getStockData = async () => {
-  //   const url = "https://finnhub.io/api/v1/search?q=apple&token=cgal7v9r01qkpvoj1i80cgal7v9r01qkpvoj1i8g";
-  //   try {
-  //     const response = await fetch("url");
-  //     const data = await response.json();
-
-  //     const sortedData = data.slice().sort((a, b) => {
-  //       return a.symbol.localeCompare(b.symbol);
-  //     });
-
-  //     // Rearrange the data to match the desired sort order
-  //     if (sortOrder === "asc") {
-  //       return sortedData;
-  //     } else {
-  //       return sortedData.reverse();
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
   return (
     <>
       {/* Hero Section */}

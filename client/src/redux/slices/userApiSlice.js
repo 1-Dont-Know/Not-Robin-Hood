@@ -15,7 +15,7 @@ export const balanceApi = createApi({
     addBalance: builder.mutation({
       query: (amount) => ({
         url: "balance",
-        method: "POST",
+        method: "PUT",
         body: { amount },
       }),
     }),

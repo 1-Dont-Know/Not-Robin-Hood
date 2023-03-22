@@ -8,6 +8,18 @@ import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used f
 import Graph from "../../UI/Graph/Graph";
 import Filter from "../../UI/Filter/Filter";
 
+// const finnhub = require('finnhub');
+// console.log(finnhub);
+
+// const api_key = finnhub.ApiClient.instance.authentications['api_key'];
+// api_key.apiKey = "cg7p8s9r01qgl488qnh0cg7p8s9r01qgl488qnhg" // Replace this
+// const finnhubClient = new finnhub.DefaultApi()
+
+// // Stock candles
+// finnhubClient.stockCandles("AAPL", "D", 1590988249, 1591852249, (error, data, response) => {
+//     console.log(data)
+// });
+
 const Account = () => {
   //State Hook for Graph Component
   const [stockData, setStockData] = useState({

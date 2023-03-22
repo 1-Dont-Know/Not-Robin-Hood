@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 //  GET REQUEST TO DISPLAY BALANCE
 app.get("/balance", async (req, res) => {
   try {
-    const query = "SELECT Balance FROM User;";
+    const query = "SELECT balance FROM Users;";
     const [rows] = await connection.query(query);
     res.json(rows);
   } catch (err) {
@@ -33,18 +33,31 @@ app.get("/balance", async (req, res) => {
   }
 });
 
-// POST REQUEST TO MODIFY OUR USER TABLE
+app.get("/users", async (req, res) => {
+  try {
+    const query = "SELECT * FROM Users";
+    const [rows] = await connection.query(query);
+    res.json(rows);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
-const stocks = [
-  { id: 1, type: "APPLE" },
-  { id: 2, type: "TESLA" },
-  { id: 3, type: "DARSHWAK" },
-];
+// PUT REQUEST TO MODIFY OUR USER TABLE
 
-app.post("/stocks", (req, res) => {
-  const stock = { id: stocks.length + 1, type: req.body.type };
-  stocks.push(stock);
-  res.send(stock);
+app.put("/update", (req, res) => {
+  const data = [10, "Neil", 1];
+  connection.query(
+    "UPDATE Users SET Balance = ?, Name=? WHERE id=?",
+    data,
+    (err, res) => {
+      if (err) {
+        res.send("ERROR");
+      } else {
+        res.send(res);
+      }
+    }
+  );
 });
 
 // TO CHECK IF OUR APP US RUNNING AND ON WHICH PORT

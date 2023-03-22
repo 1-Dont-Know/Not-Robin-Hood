@@ -6,7 +6,7 @@ import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used f
 import Graph from "../../UI/Graph/Graph";
 import BuyBox from "../../UI/BuyBox/BuyBox";
 import Filter from "../../UI/Filter/Filter";
-import axios from "axios"
+// import axios from "axios"
 
 // import styles from "./Account.module.scss";
 import Hero from "../../UI/Hero/Hero";
@@ -14,14 +14,14 @@ import Hero from "../../UI/Hero/Hero";
 const StockViewer = () => {
   const stockPrice = "59.71";
 
-
   // const priceStock = fetch("https://finnhub.io/api/v1/quote?symbol=AAPL&token=cg7p8s9r01qgl488qnh0cg7p8s9r01qgl488qnhg")
   //       .then(res => res.json())
   //       .then(data => console.log(data.c))
   //       // .then(stockPrice = data.c);
   // // console.log(priceStock)
 
-  const url = "https://finnhub.io/api/v1/quote?symbol=AAPL&token=cgal7v9r01qkpvoj1i80cgal7v9r01qkpvoj1i8g"
+  const url =
+    "https://finnhub.io/api/v1/quote?symbol=AAPL&token=cgal7v9r01qkpvoj1i80cgal7v9r01qkpvoj1i8g";
   // const getPrice = async () => {
   //   try {
   //     const response = await fetch(url);
@@ -34,7 +34,6 @@ const StockViewer = () => {
   //   }
   // };
 
-
   // async function getPrice1(url){
   //   const response = await fetch(url);
   //   return response.json();
@@ -42,8 +41,7 @@ const StockViewer = () => {
 
   // const data1 = await getPrice1(url);
   // console.log({ data1 })
-  
-  
+
   // var jsonData;
   // fetch(url).then(response=> response.json()).then(data=>{jsonData=data;});
   // console.log(jsonData);
@@ -79,12 +77,12 @@ const StockViewer = () => {
   //   // console.log(users)
   //   return users;
   // }
-  
+
   // const answ = githubUsers()
 
   // console.log(answ)
 
-  // let jsondata;    
+  // let jsondata;
   // fetch(url).then(
   //       function(u){ return u.json();}
   //     ).then(
@@ -92,7 +90,7 @@ const StockViewer = () => {
   //         jsondata = json;
   //       }
   //     )
-  
+
   //     console.log(jsondata)
 
   // function getData(url, cb) {
@@ -100,10 +98,9 @@ const StockViewer = () => {
   //     .then(response => response.json())
   //     .then(result => cb(result));
   // }
-  
+
   // getData(url, (data) => console.log({ data }))
 
-  
   const [stockData, setStockData] = useState({
     labels: fakeData.map((data) => data.day),
     datasets: [
@@ -125,10 +122,10 @@ const StockViewer = () => {
 
   const [priceStock, setPriceStock] = useState(null);
   useEffect(() => {
-    axios.get(url).then((resp)=> {
-      setPriceStock(resp.data.c);
-    })
-  }, [])
+    // axios.get(url).then((resp)=> {
+    //   setPriceStock(resp.data.c);
+    // })
+  }, []);
 
   return (
     <>

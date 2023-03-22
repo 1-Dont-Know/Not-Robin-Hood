@@ -18,5 +18,5 @@ export const store = configureStore({
   },
   
   middleware: (getDefaultMiddleware) => 
-    getDefaultMiddleware().concat(stocksApi.middleware),
+    getDefaultMiddleware().concat(stocksApi.middleware, balanceApi.middleware),
 });

@@ -7,7 +7,6 @@ import {
   MARKETS_ROUTE,
   STOCK_TRANSACTIONS_ROUTE,
   NOT_FOUND,
-  Testing,
 } from "../utils/consts";
 import Signup from "../components/pages/Signup/Signup";
 import Portfolio from "../components/pages/Portfolio/Portfolio";
@@ -17,7 +16,6 @@ import Markets from "../components/pages/Markets/Markets";
 import StockViewer from "../components/pages/StockViewer/StockViewer";
 import StockTransactions from "../components/pages/StockTransactions/StockTransactions";
 import NotFound from "../components/pages/NotFound/NotFound";
-import Test from "../components/pages/Test/Test"
 
 //? PUBLIC ROUTES
 
@@ -33,10 +31,6 @@ export const publicRoutes = [
   {
     path: NOT_FOUND,
     element: NotFound,
-  },
-  {
-    path: Testing,
-    element: Test,
   },
 ];
 
@@ -69,9 +63,5 @@ export const privateRoutes = [
   {
     path: NOT_FOUND,
     element: NotFound,
-  },
-  {
-    path: Testing,
-    element: Test,
   },
 ];

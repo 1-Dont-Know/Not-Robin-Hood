@@ -45,8 +45,8 @@ app.get("/users", async (req, res) => {
 
 // PUT REQUEST TO MODIFY OUR USER TABLE
 
-app.put("/update", (req, res) => {
-  const data = [10, "Neil", 1];
+app.patch("/update/", (req, res) => {
+  const data = [1000000, "Neil", 1];
   connection.query(
     "UPDATE Users SET Balance = ?, Name=? WHERE id=?",
     data,

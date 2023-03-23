@@ -5,21 +5,21 @@ export const balanceApi = createApi({
   reducerPath: "balanceApi",
   //   source from where to fetch data from
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:7700/",
+    baseUrl: "http://localhost:7700",
   }),
   // list of queries
   endpoints: (builder) => ({
     getBalance: builder.query({
-      query: () => "balance",
+      query: () => "/balance",
     }),
-    addBalance: builder.mutation({
-      query: (amount) => ({
-        url: "update",
-        method: "PUT",
-        body: { amount },
+    updateBalance: builder.mutation({
+      query: (user) => ({
+        url: `/update/${user.id}`,
+        method: "PATCH",
+        body: user,
       }),
     }),
   }),
 });
 
-export const { useGetBalanceQuery, useAddBalanceMutation } = balanceApi;
+export const { useGetBalanceQuery, useUpdateBalanceMutation } = balanceApi;

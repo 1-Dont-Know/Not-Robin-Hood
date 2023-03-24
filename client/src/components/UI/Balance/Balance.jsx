@@ -14,7 +14,7 @@ const Balance = () => {
 
   return (
     <div className={styles.container}>
-      {isLoading ? "Loading..." : `$${data.map((item) => item.Balance)}`}
+      {isLoading ? "Loading..." : `$${data.map((item) => item.balance)}`}
     </div>
   );
 };

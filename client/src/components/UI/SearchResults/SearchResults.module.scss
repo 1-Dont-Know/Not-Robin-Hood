@@ -1,0 +1,26 @@
+@use "../../../styles//variables.scss";
+@use "../../../styles/mixins.scss";
+
+.searchResults {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 85px;
+  z-index: 1;
+  width: 30%;
+  min-width: 250px;
+  max-height: 500px;
+  padding: 20px;
+  overflow-y: auto;
+
+  background: #ffffff;
+  border: 1px solid #32543a;
+  border-radius: 25px;
+}
+
+.listResult {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  padding: 5px;
+}

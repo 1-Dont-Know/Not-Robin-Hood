@@ -6,6 +6,7 @@ import SearchResults from '../SearchResults/SearchResults';
 const Search = ({ placeholder }) => {
   const [searchValue, setSearchValue] = useState("");
   const [timer, setTimer] = useState(null);
+  let searchOutput;
 
   //Logic for waiting until a user is done typing to query the Finnhub API
   const inputChanged = e => {
@@ -13,7 +14,8 @@ const Search = ({ placeholder }) => {
     clearTimeout(timer);
 
     const newTimer = setTimeout(() => {
-      // console.log("SearchValue Updated");
+      searchOutput = <SearchResults searchValue={searchValue} />
+      console.log(searchOutput);
     }, 500); //0.5 second wait after a user stops typing
     setTimer(newTimer);
   };
@@ -25,10 +27,10 @@ const Search = ({ placeholder }) => {
       </div>
 
       { searchValue ==="" ?
-        <></> :
-        <SearchResults searchValue={searchValue} />
+        <></> : 
+        <></>
       }
-      
+
     </>
   );
 };

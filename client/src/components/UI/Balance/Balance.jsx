@@ -1,20 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Balance.module.scss";
-import { useGetBalanceQuery } from "../../../redux/slices/userApiSlice";
+import { useGetBalanceQuery } from "../../../redux/slices/user/userApiSlice";
+
 const Balance = () => {
-  const {
-    data = 0,
-    isLoading,
-    isError,
-    isFetching,
-    error,
-  } = useGetBalanceQuery();
+  const { data: balance = 0, isLoading, error } = useGetBalanceQuery(1);
 
-  console.log(data, isLoading, isError, isFetching, error);
-
+  if (error) return <p>Error: {error.message}</p>;
   return (
     <div className={styles.container}>
-      {isLoading ? "Loading..." : `$${data.map((item) => item.balance)}`}
+      {isLoading ? <div className={styles.loader}></div> : `$${balance}`}
     </div>
   );
 };

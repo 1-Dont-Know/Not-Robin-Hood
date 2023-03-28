@@ -13,11 +13,24 @@ import AddIcon from "../../../assets/icons/plus-icon.svg";
 import ShareIcon from "../../../assets/icons/share.svg";
 import AddFunds from "../AddFunds/AddFunds";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import {
+  useGetUserByIdQuery,
+  useGetNotificationsQuery,
+} from "../../../redux/slices/user/userApiSlice";
 
 const TopNav = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showFundsPopup, setShowFundsPopup] = useState(false);
+
+  //* Getting User's Name
+
+  const { data: user, isLoading, isSuccess } = useGetUserByIdQuery(1);
+  const { data: messages } = useGetNotificationsQuery(1);
+
+  console.log(messages);
+
+  const username = isLoading ? "LOADING" : user.map((item) => item.name);
 
   // PROFILE HANDLER
   const profileHandler = () => {
@@ -76,7 +89,9 @@ const TopNav = () => {
                 id="notifications"
               >
                 <img src={notification} alt="notification" />
-                <span className={styles.notifications}>6</span>
+                <span className={styles.notifications}>
+                  {messages && messages.length}
+                </span>
               </button>
               <button
                 onClick={profileHandler}
@@ -90,7 +105,7 @@ const TopNav = () => {
           {showProfile && (
             <div onClick={profileHandler} className={styles.profileMenu}>
               <div className={styles.info}>
-                <h4>Aaron Smith</h4>
+                <h4>{username}</h4>
                 <img src={profile} alt="profile" />
               </div>
               <div className={styles.profileCta}>

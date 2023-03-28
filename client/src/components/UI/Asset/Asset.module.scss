@@ -22,7 +22,6 @@
   }
   .results {
     margin-top: 1rem;
-    color: #2ab795;
     font-size: 18px;
     img {
       max-width: 3rem;
@@ -38,4 +37,34 @@
 
 .title {
   font-size: 1.125rem;
+}
+
+// LOADER FOR ASSET
+
+.loader {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+  background: variables.$golden;
+  box-shadow: -24px 0 #fff, 24px 0 #fff;
+  box-sizing: border-box;
+  animation: shadowPulse 2s linear infinite;
+}
+
+@keyframes shadowPulse {
+  33% {
+    background: #fff;
+    box-shadow: -24px 0 variables.$secondary-color, 24px 0 #fff;
+  }
+  66% {
+    background: variables.$secondary-color;
+    box-shadow: -24px 0 #fff, 24px 0 #fff;
+  }
+  100% {
+    background: #fff;
+    box-shadow: -24px 0 #fff, 24px 0 variables.$golden;
+  }
 }

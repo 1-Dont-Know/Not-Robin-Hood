@@ -34,6 +34,13 @@ const Markets = () => {
   }, [sortOrder]);
 
   // ---------------------------------------------------------------------
+
+  const { data, isLoading, isError, isSuccess } = useGetCompaniesQuery();
+
+  const output = data && data.slice(0,100).map(item => item).filter(stock => stock.type === "Common Stock");
+
+
+
   // const [companyList, setCompanyList] = useState();
   // const { data, isLoading } = useGetCompaniesQuery();
   //   useEffect(() => {
@@ -111,7 +118,7 @@ const Markets = () => {
           Slice the sorted stockData array to display only the first numStocks stocks.
           Create a StockItem component for each stock and pass the symbol and value props */}
           
-          {getStockData()
+          {/* {getStockData()
             .slice(0, numStocks)
             .map((stock) => (
               <StockItem
@@ -119,7 +126,7 @@ const Markets = () => {
                 symbol={stock.symbol}
                 value={stock.value}
               />
-            ))}
+            ))} */}
           
           
           {/* {companyList && companyList.slice(0,10).map((data, idx) => (
@@ -133,6 +140,22 @@ const Markets = () => {
             {/* {data.result.map((data, idx) => (
               <p> {data.displaySymbol}</p>
             ))} */}
+          
+          {isLoading && <h2> ...Loading... </h2>}
+          {isError && <h2>ERROR!!!</h2>}
+          {isSuccess && (
+            <div>
+                {output.slice(0,5).map((item,idx) => (
+                    <StockItem
+                      key = {item.displaySymbol}
+                      symbol = {item.displaySymbol}
+                      value = {idx}
+                      des = {item.description}
+                    />
+                    // <p key={idx}>{item.displaySymbol} ------------- {item.description} -----  </p>
+                ))}
+            </div>
+          )}
 
 
         </section>

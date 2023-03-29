@@ -5,7 +5,7 @@ import cart from "../../../assets/icons/shopping-cart.svg";
 import { Link } from "react-router-dom";
 import Accordion from "../../UI/Accordion/Acccordion";
 
-const StockItem = ({ symbol, value }) => {
+const StockItem = ({ symbol, value, des }) => {
   return (
     <div className={styles.stockItem}>
       <div className={styles.buttonContainer}>
@@ -21,10 +21,7 @@ const StockItem = ({ symbol, value }) => {
         <div className={styles.stockInfoAccordion}>
           <Accordion title="Stock Information">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-              mollitia cum consequatur nisi sit eligendi blanditiis, itaque,
-              dolore dolores quia quisquam earum voluptates. Quo accusamus
-              cumque consectetur minima quibusdam atque!
+              {des}
             </p>
           </Accordion>
         </div>

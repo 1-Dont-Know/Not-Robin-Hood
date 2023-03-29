@@ -6,6 +6,7 @@ import StockItem from "../../UI/StockItem/StockItem";
 import DownVectorIcon from "../../../assets/icons/down-vector.svg";
 import { stockData } from "../../../utils/fakeData";
 // import axios from "axios"
+import { useGetPriceQuery, useGetCompaniesQuery } from "../../../redux/slices/apiSlice";
 
 const Markets = () => {
   // declares a new state variable setSortedStocks and initializes it with the value false
@@ -31,6 +32,45 @@ const Markets = () => {
       setButtonText(sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A");
     }, 200);
   }, [sortOrder]);
+
+  // ---------------------------------------------------------------------
+  // const [companyList, setCompanyList] = useState();
+  // const { data, isLoading } = useGetCompaniesQuery();
+  //   useEffect(() => {
+  //       // const test = "";
+  //       let companies;
+  //       if (isLoading) {
+  //       } else { 
+  //           // console.log(data);
+  //           companies = data.result;
+  //           setCompanyList(companies)
+  //       };
+  //   }, []);
+  
+  
+  // const { data, isLoading } = useGetCompaniesQuery();
+  //   // const test = "";
+  // let companies;
+  // if (isLoading) {
+  // } else {
+  //     console.log(data);
+  //     companies = data.result;
+  // };
+
+  // const GetThisPrice = (thisSymbol) => {
+  //   let test = JSON.stringify(thisSymbol);
+  //   const { data: price, isLoading: priceLoder } = useGetPriceQuery("AAPL");
+  //   // console.log("this symbol is ", thisSymbol)
+  //   let stockPrice;
+  //   if (priceLoder) {
+  //   } else {
+  //       stockPrice = price.c;
+  //       // console.log("price is ", stockPrice)
+  //   } 
+  //   return stockPrice;
+  // }
+
+  // ---------------------------------------------------------------------
 
   // This function gets the stock data and sorts it in alphabetical order based on the stock symbol
   const getStockData = () => {
@@ -70,6 +110,7 @@ const Markets = () => {
           {/* Call the getStockData function to sort the stockData array.
           Slice the sorted stockData array to display only the first numStocks stocks.
           Create a StockItem component for each stock and pass the symbol and value props */}
+          
           {getStockData()
             .slice(0, numStocks)
             .map((stock) => (
@@ -79,9 +120,24 @@ const Markets = () => {
                 value={stock.value}
               />
             ))}
+          
+          
+          {/* {companyList && companyList.slice(0,10).map((data, idx) => (
+            <StockItem
+              key={idx}
+              symbol={data.displaySymbol}
+              value= {idx}
+            /> 
+          ))} */}
+
+            {/* {data.result.map((data, idx) => (
+              <p> {data.displaySymbol}</p>
+            ))} */}
+
+
         </section>
       </Hero>
-    </>
+    </> 
   );
 };
 

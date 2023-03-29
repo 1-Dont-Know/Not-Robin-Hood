@@ -1,25 +1,38 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"
-
-// const finnhub = require('finnhub');
-
-// const api_key = finnhub.ApiClient.instance.authentications['api_key'];
-// api_key.apiKey = "cg7p8s9r01qgl488qnh0cg7p8s9r01qgl488qnhg"
-// const finnhubClient = new finnhub.DefaultApi()
-
-// finnhubClient.symbolSearch('AAPL', (error, data, response) => {
-//   console.log(data)
-// });
-
+import { useGetPriceQuery, useGetCompaniesQuery } from "../../../redux/slices/apiSlice";
 
 
 const Test = () =>{
-    
+    const { data, isLoading, isError, isSuccess } = useGetCompaniesQuery();
+
+    const output = data && data.slice(0,100).map(item => item).filter(stock => stock.type === "Common Stock");
+
+    const { data: priceData, isLoading: priceLoading } = useGetPriceQuery();
+
+    console.log(output);
+
+    const [stockPrice, setStockPrice] = useState(); 
+
+    useEffect(() => {
+        
+    }, [])
+
+    // console.log(stockPrice);
+
     return(
         <div> 
-            <h1>Helloi</h1>
-        </div>
-    )
+            <h1>Hello</h1>
+             {isLoading && <h2> ...Loading... </h2>}
+             {isError && <h2>ERROR!!!</h2>}
+             {isSuccess && (
+                <div>
+                    {output.map((item,idx) => (
+                        <p key={idx}>{item.displaySymbol} ------------- {item.description}  </p>
+                    ))}
+                </div>
+            )}
+        </div> 
+    ) 
 }
-
-export default Test
+ 
+export default Test;

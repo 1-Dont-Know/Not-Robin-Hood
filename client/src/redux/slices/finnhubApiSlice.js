@@ -10,7 +10,7 @@ export const finnhubApiSlice = createApi({
   // list of queries
   endpoints: (builder) => ({
     getStockTicker: builder.query({
-      query: (userInput) => `/search?q=${userInput}&token=${api_key}`,
+      query: () => `/stock/symbol?exchange=US&token=${api_key}`,
     }),
 
     getStockDetails: builder.query({

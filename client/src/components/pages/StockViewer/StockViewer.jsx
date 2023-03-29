@@ -6,6 +6,8 @@ import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used f
 import Graph from "../../UI/Graph/Graph";
 import BuyBox from "../../UI/BuyBox/BuyBox";
 import Filter from "../../UI/Filter/Filter";
+import { useLocation } from "react-router-dom";
+import { useGetPriceQuery } from "../../../redux/slices/apiSlice";
 // import axios from "axios"
 
 // import styles from "./Account.module.scss";
@@ -13,6 +15,35 @@ import Hero from "../../UI/Hero/Hero";
 
 const StockViewer = () => {
   const stockPrice = "59.71";
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const symbol = searchParams.get("symbol");
+  const description = searchParams.get("description");
+
+  console.log(symbol)
+  console.log(description)
+
+  const { data: priceData, isLoading: priceLoading } = useGetPriceQuery(symbol);
+
+  if(priceLoading){}
+  else{ console.log(priceData) }
+
+  const getPriceStock = (symbol) => {
+    if(priceLoading){}
+    else{ 
+      if(symbol == 'c'){
+        return priceData.c 
+      }
+      if(symbol == 'd'){
+        return priceData.d 
+      }
+      if(symbol == 'dp'){
+        return priceData.dp 
+      } 
+    }
+  }
 
   const [stockData, setStockData] = useState({
     labels: fakeData.map((data) => data.day),
@@ -28,10 +59,10 @@ const StockViewer = () => {
     <>
       <Hero>
         <div className={styles.stockNameWrapper}>
-          <h1 className={styles.stockName}>BINANCE (BNB-USD)</h1>
+          <h1 className={styles.stockName}>{description} ({symbol})</h1>
           <p className={styles.stockPrice}>
-            ${stockPrice}
-            <span className={styles.growth}>$51.29(4.78%)</span>
+            ${getPriceStock('c')}
+            <span className={styles.growth}>${getPriceStock('d')}({getPriceStock('dp')}%)</span>
           </p>
         </div>
         {/* <AddFunds></AddFunds> */}

@@ -37,7 +37,21 @@ const Markets = () => {
 
   const { data, isLoading, isError, isSuccess } = useGetCompaniesQuery();
 
-  const output = data && data.slice(0,100).map(item => item).filter(stock => stock.type === "Common Stock");
+  const output = data && data.map(item => item).filter(stock => stock.type === "Common Stock");
+  console.log(output)
+
+  const getStockData = () => {
+    const sortedData = output.slice().sort((a, b) => {
+      return a.displaySymbol.localeCompare(b.displaySymbol);
+    });
+
+    // Rearrange the data to match the desired sort order
+    if (sortOrder === "asc") {
+      return sortedData;
+    } else {
+      return sortedData.reverse();
+    }
+  };
 
 
 
@@ -80,18 +94,18 @@ const Markets = () => {
   // ---------------------------------------------------------------------
 
   // This function gets the stock data and sorts it in alphabetical order based on the stock symbol
-  const getStockData = () => {
-    const sortedData = stockData.slice().sort((a, b) => {
-      return a.symbol.localeCompare(b.symbol);
-    });
+  // const getStockData = () => {
+  //   const sortedData = stockData.slice().sort((a, b) => {
+  //     return a.symbol.localeCompare(b.symbol);
+  //   });
 
-    // Rearrange the data to match the desired sort order
-    if (sortOrder === "asc") {
-      return sortedData;
-    } else {
-      return sortedData.reverse();
-    }
-  };
+  //   // Rearrange the data to match the desired sort order
+  //   if (sortOrder === "asc") {
+  //     return sortedData;
+  //   } else {
+  //     return sortedData.reverse();
+  //   }
+  // };
 
   return (
     <>
@@ -113,7 +127,7 @@ const Markets = () => {
         </section>
 
         {/* STOCKS SECTIONS */}
-        <section className={styles.stocksSection}>
+        {/* <section > */}
           {/* Call the getStockData function to sort the stockData array.
           Slice the sorted stockData array to display only the first numStocks stocks.
           Create a StockItem component for each stock and pass the symbol and value props */}
@@ -128,37 +142,23 @@ const Markets = () => {
               />
             ))} */}
           
-          
-          {/* {companyList && companyList.slice(0,10).map((data, idx) => (
-            <StockItem
-              key={idx}
-              symbol={data.displaySymbol}
-              value= {idx}
-            /> 
-          ))} */}
-
-            {/* {data.result.map((data, idx) => (
-              <p> {data.displaySymbol}</p>
-            ))} */}
-          
           {isLoading && <h2> ...Loading... </h2>}
           {isError && <h2>ERROR!!!</h2>}
           {isSuccess && (
-            <div>
-                {output.slice(0,5).map((item,idx) => (
+            <div className={styles.stocksSection}>
+                {getStockData().slice(0,100).map((item,idx) => (
                     <StockItem
                       key = {item.displaySymbol}
                       symbol = {item.displaySymbol}
-                      value = {idx}
+                      value = {item.currency}
                       des = {item.description}
                     />
-                    // <p key={idx}>{item.displaySymbol} ------------- {item.description} -----  </p>
                 ))}
             </div>
           )}
 
 
-        </section>
+        {/* </section> */}
       </Hero>
     </> 
   );

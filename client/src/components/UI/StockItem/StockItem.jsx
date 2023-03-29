@@ -15,7 +15,7 @@ const StockItem = ({ symbol, value, des }) => {
         </div>
         {/* stock value button */}
         <div className={styles.stockValue}>
-          <button className={globalStyles.stockValueButton}>${value}</button>
+          <button className={globalStyles.stockValueButton}>{value}</button>
         </div>
         {/* stock symbol button */}
         <div className={styles.stockInfoAccordion}>
@@ -27,7 +27,12 @@ const StockItem = ({ symbol, value, des }) => {
         </div>
            {/* buy button */}
         <div className={styles.buyStock}>
-          <Link to="/stock-viewer" className={globalStyles.whiteBuyButton}>
+          <Link  to={{ 
+            pathname: "/stock-viewer", 
+            search: `?symbol=${symbol}&description=${des}`
+            }}  
+            className={globalStyles.whiteBuyButton}
+          >
             <img src={cart} alt="cart" />
             Buy
           </Link>

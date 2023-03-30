@@ -90,32 +90,56 @@ const Search = ({ placeholder }) => {
 
 
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [timer, setTimer] = useState(null);
+  const { data, isLoading } = useGetStockTickerQuery();
 
-   const {
-    data,
-    isSuccess,
-    isLoading,
-    isError,
-  } = useGetStockTickerQuery();
-  console.log(data);
+  const inputChanged = e => {
+    setSearchQuery(e.target.value);
+    clearTimeout(timer);
+
+    const newTimer = setTimeout(() => {
+    
+      if (data && searchQuery!==""){
+        const newData = data.filter((item) => {
+          return item.description.toLowerCase().includes(searchQuery.toLocaleLowerCase());
+        })
+        setSearchResults(newData);
+      }else if(searchQuery===""){
+        setSearchResults([]);
+      }
+      
+      console.log(searchResults);
+    }, 500)
+
+    setTimer(newTimer);
+  }
+
+  console.log(searchResults);
+  
+  
+
+  
+  
 
   return (
     <>
       <div className={styles.container}>
         <input 
           className={styles.search} 
-          type="text" 
+          type="text"
           placeholder={placeholder}
           value={searchQuery}
-          onChange={inputChanged} 
+          onChange={inputChanged}
         />
       </div>
       
-      { !data ? 
+      {/* { isLoading && searchQuery==="" ? 
         <></> :
           <ul className={styles.searchResults}>
-              {data.result.map((item) => {
-                if (item.description.includes(Apple)){
+              {data.map((item) => {
+                if (item.description.includes(searchQuery)){
                   return (
                     <li
                       key={item.symbol}
@@ -128,7 +152,7 @@ const Search = ({ placeholder }) => {
                 }
               })}
             </ul>
-      }
+      } */}
 
     </>
   );

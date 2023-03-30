@@ -26,9 +26,6 @@ const TopNav = () => {
   //* Getting User's Name
 
   const { data: user, isLoading, isSuccess } = useGetUserByIdQuery(1);
-  const { data: messages } = useGetNotificationsQuery(1);
-
-  console.log(messages);
 
   const username = isLoading ? "LOADING" : user.map((item) => item.name);
 
@@ -89,9 +86,7 @@ const TopNav = () => {
                 id="notifications"
               >
                 <img src={notification} alt="notification" />
-                <span className={styles.notifications}>
-                  {messages && messages.length}
-                </span>
+                <span className={styles.notifications}>6</span>
               </button>
               <button
                 onClick={profileHandler}

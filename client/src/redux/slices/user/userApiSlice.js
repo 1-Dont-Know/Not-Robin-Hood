@@ -1,12 +1,49 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { logOut, setCredentials } from "../auth/authSlice";
+
+const baseQuery = fetchBaseQuery({
+  //? our base url, will be changed to our server url in production mode
+  baseUrl: "http://localhost:7700",
+
+  //? to include cookies
+  credentials: "include",
+
+  //? once we have a token we will set authorization header, and returning headers from prepareHeaders function
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState().auth.token;
+
+    if (token) {
+      headers.set("authorization", `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
+
+const baseQueryWithReauth = async (args, api, extraOptions) => {
+  let result = await baseQuery(args, api, extraOptions);
+  if (result?.error?.originalStatus === 403) {
+    console.log("sending refresh token");
+    //* send the refresh token to get new access token
+    const refreshResult = await baseQuery("/refresh", api, extraOptions);
+    console.log(refreshResult);
+    if (refreshResult?.data) {
+      const user = api.getState().auth.user;
+      //* store the new token
+      api.dispatch(setCredentials({ ...refreshResult.data, user }));
+      //* retry the original query with new access token
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      api.dispatch(logOut());
+    }
+  }
+  return result;
+};
 
 export const userApi = createApi({
-  // name
-  reducerPath: "balanceApi",
-  //   source from where to fetch data from
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:7700",
-  }),
+  //? name
+  reducerPath: "userApi",
+  //?   source from where to fetch data from (temporary localhost) to be changed to our server url
+  baseQuery: baseQueryWithReauth,
   tagTypes: [
     "Balance",
     "Stocks",
@@ -17,6 +54,15 @@ export const userApi = createApi({
   ],
 
   endpoints: (builder) => ({
+    // ! REGISTER USER
+
+    registerUser: builder.mutation({
+      query: (user) => ({
+        url: "/register",
+        method: "POST",
+        body: user,
+      }),
+    }),
     //* Get "CURRENT USER"
     getUserById: builder.query({
       query: (id) => `users/${id}`,
@@ -93,4 +139,5 @@ export const {
   useGetPortfolioStocksQuery,
   useGetNotificationsQuery,
   useUpdatePortfolioStocksMutation,
+  useRegisterUserMutation,
 } = userApi;

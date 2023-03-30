@@ -3,6 +3,11 @@ import path from "path";
 import dotenv from "dotenv";
 import mysql from "mysql2/promise";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { corsOptions } from "./config/corsOptions.js";
+import { credentials } from "./middleware/credentials.js";
 
 // FOR WORKING WITH ENVIRONMENT VARIABLES
 dotenv.config();
@@ -16,11 +21,66 @@ const port = process.env.PORT || 5500;
 // FRAMEWORK WE WILL USE FOR BUILDING OUR API
 const app = express();
 
-app.use(cors());
+// Handle options credentials check - before CORS!
+// and fetch cookies credentials requirement
+app.use(credentials);
+
+app.use(cors(corsOptions));
+
+// ? To parse incoming requests with JSON payloads
 app.use(express.json());
+
+// ? To Parse Cookies
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.json("WELCOME TO HOBIN ROOD APP SERVER");
+});
+
+// ! USER REGISTRATION
+
+app.post("/register", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // // Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // // Generate a JWT token
+    // const token = jwt.sign({ id: user.id }, "secret", {
+    //   expiresIn: "1h",
+    // });
+    await connection.query(
+      "INSERT INTO users (name, email, password, isAuthorized, balance, phone) VALUES (?, ?, ?, 1, 0, 0)",
+      [name, email, hashedPassword]
+    );
+
+    // res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// * USER AUTH
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // retrieve the user's asset value from the database
+    const [rows] = await connection.query(
+      "INSERT INTO users (name, password, email, isAuthorized, balance, phone) VALUES (?, ?, ?, 1, 0, 0)",
+      [name, email, password]
+    );
+
+    // return the user's asset value
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
 // ? USER ID REQUEST
@@ -86,12 +146,12 @@ app.get("/users/:userId/percentage", async (req, res) => {
   try {
     // retrieve the user's asset condition from the database
     const [rows] = await connection.query(
-      "SELECT percentage FROM user_asset_value WHERE user_id = ?",
+      "SELECT * FROM user_asset_value WHERE user_id = ?",
       [userId]
     );
 
     // return the user's asset condition
-    res.json({ percentage: rows[0].percentage });
+    res.json({ percentage: rows });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });

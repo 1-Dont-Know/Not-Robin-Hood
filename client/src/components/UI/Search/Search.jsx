@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from "./Search.module.scss";
-import SearchResults from '../SearchResults/SearchResults';
-import { useGetStockTickerQuery } from '../../../redux/slices/finnhubApiSlice';
+import { useGetStockTickerQuery } from '../../../redux/slices/apiSlice';
+import { Link } from 'react-router-dom';
 
 // Search Bar component receives a placeholder prop for the search default message
 const Search = ({ placeholder }) => {
@@ -30,129 +30,128 @@ const Search = ({ placeholder }) => {
     // var unsubscribe = function(symbol) {
     //     socket.send(JSON.stringify({'type':'unsubscribe','symbol': symbol}))
     // }
-    /*******************************************************/
+    /**************************************************************/
   
+  // useDebounce Hook
+  function useDebounce(value, delay) {
+    // State and setters for debounced value
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(
+      () => {
+        // Update debounced value after delay
+        const handler = setTimeout(() => {
+          setDebouncedValue(value);
+          setResultsIsOpen(true);
+          console.log(searchQuery);
+        }, delay);
+
+        // Cancel the timeout if value changes (also on delay change or unmount)
+        // This is how we prevent debounced value from updating if value is changed ...
+        // .. within the delay period. Timeout gets cleared and restarted.
+        return () => {
+          clearTimeout(handler);
+        };
+      },
+      [value, delay] // Only re-call effect if value or delay changes
+    );
   
-  
-  // const [searchQuery, setSearchQuery] = useState("");
-
-  // // useDebounce Hook
-  // function useDebounce(value, delay) {
-  //   // State and setters for debounced value
-  //   const [debouncedValue, setDebouncedValue] = useState(value);
-
-  //   useEffect(
-  //     () => {
-  //       // Update debounced value after delay
-  //       const handler = setTimeout(() => {
-  //         setDebouncedValue(value);
-  //       }, delay);
-
-  //       // Cancel the timeout if value changes (also on delay change or unmount)
-  //       // This is how we prevent debounced value from updating if value is changed ...
-  //       // .. within the delay period. Timeout gets cleared and restarted.
-  //       return () => {
-  //         clearTimeout(handler);
-  //       };
-  //     },
-  //     [value, delay] // Only re-call effect if value or delay changes
-  //   );
-  
-  //   return debouncedValue;
-  // }
-
-
-  // const debouncedSearchQuery = useDebounce(searchQuery, 500);
-  
-  // const {
-  //   data,
-  //   isSuccess,
-  //   isLoading,
-  //   isError,
-  // } = useGetStockTickerQuery(debouncedSearchQuery, { skip: debouncedSearchQuery == "" });
-
-  // const inputChanged = e => {
-  //   setSearchQuery(e.target.value);
-  // }
-
-  // let newData;
-  // if(data){
-  //   newData = data.result.map(
-  //     (item) => {
-  //       if (item.type==="Common Stock"){
-  //         return item
-  //       }
-  //     }
-  //   )
-  // }
-
-  /***********************************************************/
-
+    return debouncedValue;
+  }
 
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [timer, setTimer] = useState(null);
-  const { data, isLoading } = useGetStockTickerQuery();
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
+  const [resultsIsOpen, setResultsIsOpen] = useState(false);
 
+  //Function that handles when the user changes the text in the search bar
   const inputChanged = e => {
     setSearchQuery(e.target.value);
-    clearTimeout(timer);
+  }
+  
+  //Finnhub API call to search for company/stock ticker. Only runs after set amount of time defined by useDebounce call.
+  //Skips calling the API if the search query is an empty string.
+  const {
+    data,
+    isSuccess,
+    isLoading,
+    isError,
+  } = useGetStockTickerQuery(debouncedSearchQuery, { skip: debouncedSearchQuery == "" });
 
-    const newTimer = setTimeout(() => {
-    
-      if (data && searchQuery!==""){
-        const newData = data.filter((item) => {
-          return item.description.toLowerCase().includes(searchQuery.toLocaleLowerCase());
-        })
-        setSearchResults(newData);
-      }else if(searchQuery===""){
-        setSearchResults([]);
+
+
+  /* Function to handle if user clicks outside search box or search window */
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      //Run if clicked on outside of element
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          console.log("You clicked outside of the search window");
+          setResultsIsOpen(false);
+          setSearchQuery("");
+        }
       }
-      
-      console.log(searchResults);
-    }, 500)
-
-    setTimer(newTimer);
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
   }
 
-  console.log(searchResults);
-  
-  
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+  /********************************************************************/
+
 
   
+  /*Display Search Results to Console for Testing*/
+    useEffect(
+      () => {
+        console.log(data)
+      },
+      [data] // Only re-call effect if value or delay changes
+    );
+  /***********************************************/
   
 
   return (
     <>
+      {/* Search Field */}
       <div className={styles.container}>
         <input 
           className={styles.search} 
           type="text"
           placeholder={placeholder}
-          value={searchQuery}
+          value = {searchQuery}
           onChange={inputChanged}
+          ref={wrapperRef}
         />
       </div>
       
-      {/* { isLoading && searchQuery==="" ? 
+      { !data || searchQuery ==="" || resultsIsOpen === false?
         <></> :
-          <ul className={styles.searchResults}>
-              {data.map((item) => {
-                if (item.description.includes(searchQuery)){
-                  return (
-                    <li
-                      key={item.symbol}
-                      className={styles.listResult}
+          <ul className={styles.searchResults} ref={wrapperRef}>
+              {data.result.map((item) => {
+                return (
+                  <li key={item.symbol} >
+                    <Link 
+                      className={styles.listResult} 
+                      to={{
+                        pathname: "/stock-viewer",
+                        search: `?symbol=${item.symbol}&description=${item.description}`
+                      }}
+                      onClick={()=>setResultsIsOpen(false)}
                     >
                       <span>{item.description}</span>
                       <span style={{color:"green"}}>{item.symbol}</span>
-                    </li>
-                  );
-                }
+                    </Link>
+                  </li>
+                );
               })}
             </ul>
-      } */}
+      }
 
     </>
   );

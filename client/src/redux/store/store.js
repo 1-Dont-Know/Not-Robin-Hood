@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { finnhubApiSlice } from "../slices/finnhubApiSlice";
+import { finnhubApiSlice } from "../slices/apiSlice";
 import { userApiSlice } from "../slices/userApiSlice";
 
 import StocksItemReducer from "../slices/stockItemSlice";

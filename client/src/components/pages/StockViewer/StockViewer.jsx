@@ -8,9 +8,6 @@ import BuyBox from "../../UI/BuyBox/BuyBox";
 import Filter from "../../UI/Filter/Filter";
 import { useLocation } from "react-router-dom";
 import { useGetPriceQuery } from "../../../redux/slices/apiSlice";
-// import axios from "axios"
-
-// import styles from "./Account.module.scss";
 import Hero from "../../UI/Hero/Hero";
 
 const StockViewer = () => {

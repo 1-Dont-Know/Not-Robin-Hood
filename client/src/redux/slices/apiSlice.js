@@ -21,9 +21,7 @@ export const stocksApi = createApi({
     }),
     getCompanies: builder.query({
       query: () => `/stock/symbol?exchange=US&token=${api_key}`,
-      // query: () => `/search?q=&token=${api_key}`,
     }),
-
   }),
 });
 

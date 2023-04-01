@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useGetPriceQuery, useGetCompaniesQuery, useGetDetailQuery } from "../../../redux/slices/apiSlice";
-import axios from 'axios';
+import React, { useState } from "react";
+// import React, { useState, useEffect } from "react";
+import { useGetCompaniesQuery } from "../../../redux/slices/apiSlice";
+// import { useGetPriceQuery, useGetCompaniesQuery, useGetDetailQuery } from "../../../redux/slices/apiSlice";.
+// import axios from 'axios';
 import Pagination from "./Pagination"
 import Posts from './Posts'
 
@@ -26,7 +28,7 @@ const Test = () =>{
     // const { data, isLoading, isError, isSuccess } = useGetDetailQuery('A');
     // console.log(data)
 
-    const [stockPrice, setStockPrice] = useState(); 
+    // const [stockPrice, setStockPrice] = useState(); 
     // const symbols = data && data.map(company => company.symbol);
     // console.log(symbols) 
 
@@ -38,16 +40,16 @@ const Test = () =>{
     //         })
     // }
 
-    useEffect(() => {
-        // axios.get(url)
-        //     .then(res => {
-        //         const persons = res.data;
-        //         console.log(persons)
-        //     })
-        // pleaseWork();
-        // setStockPrice(item)
+    // useEffect(() => {
+    //     // axios.get(url)
+    //     //     .then(res => {
+    //     //         const persons = res.data;
+    //     //         console.log(persons)
+    //     //     })
+    //     // pleaseWork();
+    //     // setStockPrice(item)
         
-    }, [])
+    // }, [])
 
     // console.log(stockPrice);
 

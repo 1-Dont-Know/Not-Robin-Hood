@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./StockViewer.module.scss";
-import people from "../../../assets/icons/people-icon.svg";
-import creditCard from "../../../assets/icons/credit-card-icon.svg";
+// import people from "../../../assets/icons/people-icon.svg";
+// import creditCard from "../../../assets/icons/credit-card-icon.svg";
 import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used for Testing
 import Graph from "../../UI/Graph/Graph";
 import BuyBox from "../../UI/BuyBox/BuyBox";
@@ -30,13 +30,13 @@ const StockViewer = () => {
   const getPriceStock = (symbol) => {
     if(priceLoading){}
     else{ 
-      if(symbol == 'c'){
+      if(symbol === 'c'){
         return priceData.c 
       }
-      if(symbol == 'd'){
+      if(symbol === 'd'){
         return priceData.d 
       }
-      if(symbol == 'dp'){
+      if(symbol === 'dp'){
         return priceData.dp 
       } 
     }
@@ -69,7 +69,7 @@ const StockViewer = () => {
             <Graph chartData={stockData} />
           </section>
           <section className={styles.buybox}>
-            <BuyBox price={stockPrice} />
+            <BuyBox price={getPriceStock('c')} />
           </section>
         </div>
         {/* //! FILTER SECTION */}

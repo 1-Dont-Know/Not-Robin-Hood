@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const api_key = `${process.env.REACT_APP_API_KEY}` ; // Our API Key
 
-export const finnhubApiSlice = createApi({
+export const apiSlice = createApi({
   // name
   reducerPath: "apiSlice",
   //   source from where to fetch data from

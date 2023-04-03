@@ -86,7 +86,7 @@ const Search = ({ placeholder }) => {
       //Run if clicked on outside of element
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
-          console.log("You clicked outside of the search window");
+          // console.log("You clicked outside of the search window");
           setResultsIsOpen(false);
           setSearchQuery("");
         }

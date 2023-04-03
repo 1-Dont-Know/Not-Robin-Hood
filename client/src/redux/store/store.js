@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { finnhubApiSlice } from "../slices/apiSlice";
+import { apiSlice } from "../slices/apiSlice";
 import { userApiSlice } from "../slices/userApiSlice";
 
 import StocksItemReducer from "../slices/stockItemSlice";
@@ -10,7 +10,7 @@ import changeNameReducer from "../slices/changeNameSlice";
 
 export const store = configureStore({
   reducer: {
-    [finnhubApiSlice.reducerPath]: finnhubApiSlice.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
     [userApiSlice.reducerPath]: userApiSlice.reducer,
     
     stocksItem: StocksItemReducer,
@@ -20,5 +20,5 @@ export const store = configureStore({
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(finnhubApiSlice.middleware, userApiSlice.middleware),
+    getDefaultMiddleware().concat(apiSlice.middleware, userApiSlice.middleware),
 });

@@ -17,9 +17,11 @@
 
 .search {
   display: flex;
+  flex-direction: column;
   flex-basis: 40%;
   flex-grow: 1;
   flex-shrink: 1;
+  margin-right: 16px;
   @include mixins.breakpoint-down(xlarge) {
     flex-grow: 0;
     flex-basis: 50%;

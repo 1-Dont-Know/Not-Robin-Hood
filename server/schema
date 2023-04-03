@@ -1,0 +1,68 @@
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  isAuthorized BOOLEAN NOT NULL,
+  balance INT NOT NULL,
+  phone VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE user_settings (
+  user_id INT NOT NULL,
+  darkMode BOOLEAN NOT NULL,
+  notifications BOOLEAN NOT NULL,
+  textNotifications BOOLEAN NOT NULL,
+  PRIMARY KEY (user_id)
+);
+
+CREATE TABLE user_notifications (
+  user_id INT NOT NULL,
+  date TIMESTAMP NOT NULL,
+  message TEXT NOT NULL
+);
+
+CREATE TABLE user_portfolio (
+  user_id INT NOT NULL,
+  stocksCashValue INT NOT NULL,
+  stockPercentage INT NOT NULL,
+  cashValue INT NOT NULL,
+  cashPercentage INT NOT NULL
+);
+
+CREATE TABLE user_portfolio_stocks (
+  user_id INT NOT NULL,
+  id INT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  symbol VARCHAR(255) NOT NULL,
+  amount INT NOT NULL,
+  share INT NOT NULL,
+  price INT NOT NULL,
+  averageCost INT NOT NULL,
+  totalReturn INT NOT NULL,
+  equity INT NOT NULL
+);
+
+CREATE TABLE user_portfolio_orders (
+  user_id INT NOT NULL,
+  id VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  amount INT NOT NULL,
+  date TIMESTAMP NOT NULL
+);
+
+CREATE TABLE user_asset_value (
+  user_id INT NOT NULL,
+  value INT NOT NULL,
+  condition VARCHAR(255) NOT NULL,
+  percentage INT NOT NULL
+);
+
+
+CREATE TABLE user_transactions (
+  user_id INT NOT NULL,
+  id INT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  price INT NOT NULL,
+  description TEXT NOT NULL
+);

@@ -1,17 +1,19 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const balanceApi = createApi({
+export const userApiSlice = createApi({
   // name
-  reducerPath: "balanceApi",
+  reducerPath: "userApiSlice",
   //   source from where to fetch data from
   baseQuery: fetchBaseQuery({
     baseUrl: "https://not-robin-hood-bdrk.vercel.app",
   }),
   // list of queries
   endpoints: (builder) => ({
+
     getBalance: builder.query({
       query: () => "/balance",
     }),
+
     updateBalance: builder.mutation({
       query: (user) => ({
         url: `/update/${user.id}`,
@@ -19,7 +21,9 @@ export const balanceApi = createApi({
         body: user,
       }),
     }),
+
+    
   }),
 });
 
-export const { useGetBalanceQuery, useUpdateBalanceMutation } = balanceApi;
+export const { useGetBalanceQuery, useUpdateBalanceMutation } = userApiSlice;

@@ -10,11 +10,11 @@ const Balance = () => {
     error,
   } = useGetBalanceQuery();
 
-  console.log(data, isLoading, isError, isFetching, error);
+  // console.log(data, isLoading, isError, isFetching, error);
 
   return (
     <div className={styles.container}>
-      {isLoading ? "Loading..." : `$${data.map((item) => item.balance)}`}
+      {/* {isLoading ? "Loading..." : `$${data.map((item) => item.balance)}`} */}
     </div>
   );
 };

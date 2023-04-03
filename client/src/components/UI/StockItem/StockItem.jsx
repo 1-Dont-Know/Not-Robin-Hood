@@ -5,7 +5,21 @@ import cart from "../../../assets/icons/shopping-cart.svg";
 import { Link } from "react-router-dom";
 import Accordion from "../../UI/Accordion/Acccordion";
 
-const StockItem = ({ symbol, value }) => {
+const StockItem = ({ symbol, value, des, type, figi }) => {
+
+  const description = () => {
+    return(
+      <div>
+        { des }
+        <br></br>
+        Type: { type }
+        <br></br>
+        Figi: { figi }
+        <br></br>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.stockItem}>
       <div className={styles.buttonContainer}>
@@ -15,22 +29,22 @@ const StockItem = ({ symbol, value }) => {
         </div>
         {/* stock value button */}
         <div className={styles.stockValue}>
-          <button className={globalStyles.stockValueButton}>${value}</button>
+          <button className={globalStyles.stockValueButton}>{value}</button>
         </div>
         {/* stock symbol button */}
         <div className={styles.stockInfoAccordion}>
           <Accordion title="Stock Information">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-              mollitia cum consequatur nisi sit eligendi blanditiis, itaque,
-              dolore dolores quia quisquam earum voluptates. Quo accusamus
-              cumque consectetur minima quibusdam atque!
-            </p>
+            { description() }
           </Accordion>
         </div>
            {/* buy button */}
         <div className={styles.buyStock}>
-          <Link to="/stock-viewer" className={globalStyles.whiteBuyButton}>
+          <Link  to={{ 
+            pathname: "/stock-viewer", 
+            search: `?symbol=${symbol}&description=${des}`
+            }}  
+            className={globalStyles.whiteBuyButton}
+          >
             <img src={cart} alt="cart" />
             Buy
           </Link>

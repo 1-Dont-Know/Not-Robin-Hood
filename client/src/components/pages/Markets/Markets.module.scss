@@ -28,3 +28,9 @@ button {
 .buttonText {
   transition: color 0.03s ease-in-out;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}

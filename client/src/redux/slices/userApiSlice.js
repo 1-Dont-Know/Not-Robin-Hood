@@ -5,7 +5,7 @@ export const balanceApi = createApi({
   reducerPath: "balanceApi",
   //   source from where to fetch data from
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:7700",
+    baseUrl: "https://not-robin-hood-server.vercel.app",
   }),
   // list of queries
   endpoints: (builder) => ({

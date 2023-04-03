@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import React, { useState, useEffect } from "react";
-import { useGetCompaniesQuery } from "../../../redux/slices/apiSlice";
+import { useGetCompaniesQuery, useGetMapQuery } from "../../../redux/slices/apiSlice";
 // import { useGetPriceQuery, useGetCompaniesQuery, useGetDetailQuery } from "../../../redux/slices/apiSlice";.
 // import axios from 'axios';
 import Pagination from "./Pagination"
@@ -54,9 +54,14 @@ const Test = () =>{
     // console.log(stockPrice);
 
 
-    const { data, isLoading, isError, isSuccess } = useGetCompaniesQuery();
+    const { data, isLoading, isError, isSuccess } = useGetMapQuery();
+    if(isLoading){}
+    else{
+        console.log(data)
+    }
+    // console.log(data)
 
-    const output = data && data.slice(0,100).map(item => item).filter(stock => stock.type === "Common Stock");
+    // const output = data && data.slice(0,100).map(item => item).filter(stock => stock.type === "Common Stock");
     // console.log(output)
 
     // const [companies, setCompanies] = useState([]);
@@ -73,14 +78,14 @@ const Test = () =>{
     // const currentPost = companies && companies.slice(firstPostIndex, lastPostIndex);
     // console.log(currentPost)
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(10);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [postsPerPage] = useState(10);
 
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = output && output.slice(indexOfFirstPost, indexOfLastPost);
+    // const indexOfLastPost = currentPage * postsPerPage;
+    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    // const currentPosts = output && output.slice(indexOfFirstPost, indexOfLastPost);
 
-    const paginate = pageNumber => setCurrentPage(pageNumber);
+    // const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return(
         <div> 
@@ -93,12 +98,12 @@ const Test = () =>{
                         <p key={idx}>{item.displaySymbol} ------------- {item.description} -----  </p>
                     ))} */}
 
-                    <Posts posts={currentPosts}  />
+                    {/* <Posts posts={currentPosts}  />
                     <Pagination
                         postsPerPage={postsPerPage}
                         totalPosts={ output && output.length}
                         paginate={paginate}
-                    />
+                    /> */}
                 </div>
             )}
 

@@ -11,7 +11,6 @@ import { useGetPriceQuery } from "../../../redux/slices/apiSlice";
 import Hero from "../../UI/Hero/Hero";
 
 const StockViewer = () => {
-  const stockPrice = "59.71";
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);

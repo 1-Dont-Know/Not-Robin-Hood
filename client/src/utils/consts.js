@@ -9,4 +9,3 @@ export const MARKETS_ROUTE = "/markets";
 export const STOCK_TRANSACTIONS_ROUTE = "/stock-transactions";
 export const SETTINGS_ROUTE = "/settings";
 export const NOT_FOUND = "/404";
-export const Testing123 = "/test";

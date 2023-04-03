@@ -16,8 +16,6 @@ const Signup = () => {
   const [registerUser, { isLoading, isError, isSuccess }] =
     useRegisterUserMutation();
 
-  console.log(userData);
-
   const inputsHandler = (e) => {
     setUserData((prevState) => {
       return {
@@ -28,10 +26,8 @@ const Signup = () => {
   };
 
   const registrationHandler = (e) => {
-    const { name, email, password } = userData;
     e.preventDefault();
     registerUser(userData);
-    console.log(name, email, password);
   };
   return (
     <div className={styles.container}>

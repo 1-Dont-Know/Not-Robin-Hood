@@ -33,25 +33,25 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const userData = await login({ user, pwd }).unwrap();
-      console.log(userData);
-      dispatch(setCredentials({ ...userData, user }));
-      setUser("");
-      setPwd("");
-      navigate("/account");
-    } catch (error) {
-      if (!error?.originalStatus) {
-        setErrMsg("No Server Response");
-      } else if (error.originalStatus?.status === 400) {
-        setErrMsg("Missing Username or Password");
-      } else if (error?.originalStatus?.status === 401) {
-        setErrMsg("Unauthorized");
-      } else {
-        setErrMsg("Login Failed");
-      }
-      errRef.current.focus();
-    }
+    // try {
+    //   const userData = await login({ user, pwd }).unwrap();
+    //   dispatch(setCredentials({ ...userData, user }));
+    //   setUser("");
+    //   setPwd("");
+    //   navigate("/account");
+    //   console.log(userData);
+    // } catch (error) {
+    //   if (!error?.originalStatus) {
+    //     setErrMsg("No Server Response");
+    //   } else if (error.originalStatus === 400) {
+    //     setErrMsg("Missing Username or Password");
+    //   } else if (error?.originalStatus === 401) {
+    //     setErrMsg("Unauthorized");
+    //   } else {
+    //     setErrMsg("Login Failed");
+    //   }
+    //   errRef.current.focus();
+    // }
   };
 
   const handleUserInput = (e) => setUser(e.target.value);

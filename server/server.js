@@ -34,29 +34,22 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-  res.json("WELCOME TO HOBIN ROOD APP SERVER");
+  res.json(`WELCOME TO HOBIN ROOD REST API`);
 });
 
 // ! USER REGISTRATION
-
 app.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
-    // // Hash the password
+    const query =
+      "INSERT INTO users (name, email, password, isAuthorized, balance, phone) VALUES (?, ?, ?, 1, 0, 0)";
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
-    // // Generate a JWT token
-    // const token = jwt.sign({ id: user.id }, "secret", {
-    //   expiresIn: "1h",
-    // });
-    await connection.query(
-      "INSERT INTO users (name, email, password, isAuthorized, balance, phone) VALUES (?, ?, ?, 1, 0, 0)",
-      [name, email, hashedPassword]
-    );
-
-    // res.json({ token });
+    const [rows] = await connection.query(query, [name, email, hashedPassword]);
+    res.json({
+      message: "Congratulations, user has been registered!",
+      data: rows,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
@@ -65,22 +58,8 @@ app.post("/register", async (req, res) => {
 
 // * USER AUTH
 
-app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    // retrieve the user's asset value from the database
-    const [rows] = await connection.query(
-      "INSERT INTO users (name, password, email, isAuthorized, balance, phone) VALUES (?, ?, ?, 1, 0, 0)",
-      [name, email, password]
-    );
-
-    // return the user's asset value
-    res.json(rows);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
-  }
+app.post("/auth", async (req, res) => {
+  const { user, pwd } = req.body;
 });
 
 // ? USER ID REQUEST

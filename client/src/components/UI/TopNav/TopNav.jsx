@@ -62,7 +62,7 @@ const TopNav = () => {
         {/* SEARCH SECTION */}
         <section className={styles.search}>
           {/* Search Component */}
-          <Search placeholder="Search for market" />
+          <Search placeholder="Search Market" />
         </section>
         {/* BUY / PORTFOLIO BUTTON SECTION */}
         <section className={styles.cta}>

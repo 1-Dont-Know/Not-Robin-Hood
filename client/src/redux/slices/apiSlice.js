@@ -1,22 +1,28 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const api_key = `${process.env.REACT_APP_API_KEY}`; // Our API Key
+const api_key = `${process.env.REACT_APP_API_KEY}` ; // Our API Key
 
-const transformResponse = (response) => {
-  return response.result; // assuming the API response has a 'result' property that contains the data you want
-};
-
-export const stocksApi = createApi({
+export const apiSlice = createApi({
   // name
-  reducerPath: "stocksApi",
+  reducerPath: "apiSlice",
   //   source from where to fetch data from
   baseQuery: fetchBaseQuery({ baseUrl: "https://finnhub.io/api/v1" }),
   // list of queries
   endpoints: (builder) => ({
     getStockTicker: builder.query({
-      query: (userInput) => `/search?q=${userInput}&token=${api_key}`,
+      query: (userQuery) => `/search?q=${userQuery}&token=${api_key}`,
     }),
+
+    getPrice: builder.query({
+      query: (company) => `/quote?symbol=${company}&token=${api_key}`,
+    }),
+    getCompanies: builder.query({
+      query: () => `/stock/symbol?exchange=US&token=${api_key}`,
+    }),
+    getMap: builder.query({
+      query: () => `/stock/candle?symbol=AAPL&resolution=1&from=1679476980&to=1679649780&token=${api_key}`,
+    })
   }),
 });
 
-export const { useGetStockTickerQuery } = stocksApi;
+export const { useGetStockTickerQuery, useGetPriceQuery, useGetCompaniesQuery, useGetMapQuery } = apiSlice;

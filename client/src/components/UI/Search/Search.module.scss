@@ -2,11 +2,6 @@
 @use "../../../styles/mixins.scss";
 
 .container {
-  // @include mixins.flexbox(
-  //   $display: flex,
-  //   $justifyContent: left,
-  //   $alignItems: center
-  // );
   display: flex;
   justify-content: left;
   align-items: center;
@@ -33,4 +28,36 @@ input {
   background: url(../../../assets/icons/search-icon.svg) no-repeat left; //Search Icon
   height: 30px;
   //   padding: 20px 0px 20px 25px;
+  text-transform:uppercase;
+}
+
+
+.searchResults {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 85px;
+  z-index: 1;
+  width: 30%;
+  min-width: 250px;
+  max-height: 500px;
+  padding: 20px;
+  overflow-y: auto;
+
+  background: #ffffff;
+  border: 1px solid #32543a;
+  border-radius: 25px;
+}
+
+.listResult {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  padding: 10px 5px;
+  color: inherit;
+}
+
+.listResult:hover{
+  background-color: variables.$golden;
+  border-radius: 5px;
 }

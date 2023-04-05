@@ -3,34 +3,10 @@ import styles from "./Search.module.scss";
 import { useGetStockTickerQuery } from '../../../redux/slices/apiSlice';
 import { Link } from 'react-router-dom';
 
+
+
 // Search Bar component receives a placeholder prop for the search default message
 const Search = ({ placeholder }) => {
-  
-  /*****************************  WEBSOCKET *************************/
-    // const socket = new WebSocket(`wss://ws.finnhub.io?token=${process.env.REACT_APP_API_KEY}`);
-
-    // // Connection opened -> Subscribe
-    // socket.addEventListener('open', function (event) {
-    //     socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'AAPL'}))
-
-    // });
-
-    // // Listen for messages
-    // socket.addEventListener('message', function (event) {
-    //     try{
-    //       console.log('Message from server ', JSON.parse(event.data).data[0].p);
-    //     }
-    //     catch{
-
-    //     }
-        
-    // });
-
-    // // Unsubscribe
-    // var unsubscribe = function(symbol) {
-    //     socket.send(JSON.stringify({'type':'unsubscribe','symbol': symbol}))
-    // }
-    /**************************************************************/
   
   // useDebounce Hook
   function useDebounce(value, delay) {

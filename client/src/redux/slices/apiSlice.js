@@ -16,9 +16,11 @@ export const apiSlice = createApi({
     getPrice: builder.query({
       query: (company) => `/quote?symbol=${company}&token=${api_key}`,
     }),
+
     getCompanies: builder.query({
       query: () => `/stock/symbol?exchange=US&token=${api_key}`,
     }),
+    
     getMap: builder.query({
       query: () => `/stock/candle?symbol=AAPL&resolution=1&from=1679476980&to=1679649780&token=${api_key}`,
     })

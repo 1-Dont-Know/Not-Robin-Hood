@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./TopNav.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 import cart from "../../../assets/icons/shopping-cart.svg";
@@ -13,11 +13,17 @@ import AddIcon from "../../../assets/icons/plus-icon.svg";
 import ShareIcon from "../../../assets/icons/share.svg";
 import AddFunds from "../AddFunds/AddFunds";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import { useGetCompaniesQuery } from "../../../redux/slices/apiSlice";
 
 const TopNav = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showFundsPopup, setShowFundsPopup] = useState(false);
+  const { data, isLoading} = useGetCompaniesQuery();
+
+  useEffect(() => {
+      
+  },[])
 
   // PROFILE HANDLER
   const profileHandler = () => {

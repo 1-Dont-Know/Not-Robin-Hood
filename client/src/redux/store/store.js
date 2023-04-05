@@ -1,24 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { apiSlice } from "../slices/apiSlice";
-import { userApiSlice } from "../slices/userApiSlice";
-
-import StocksItemReducer from "../slices/stockItemSlice";
-import darkModeReducer from "../slices/darkModeSlice";
-import changePasswordReducer from "../slices/changePasswordSlice";
-import changeNameReducer from "../slices/changeNameSlice";
-
+import { apiSlice } from "../slices/apiSlice.js";
+import { userApi } from "../slices/user/userApiSlice";
+import authReducer from "../slices/auth/authSlice";
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
-    [userApiSlice.reducerPath]: userApiSlice.reducer,
-    
-    stocksItem: StocksItemReducer,
-    darkMode: darkModeReducer,
-    changePassword: changePasswordReducer,
-    changeName: changeNameReducer,
+    [userApi.reducerPath]: userApi.reducer,
+    auth: authReducer,
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware, userApiSlice.middleware),
+    getDefaultMiddleware().concat(apiSlice.middleware, userApi.middleware),
+  devTools: true,
 });

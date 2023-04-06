@@ -3,7 +3,7 @@ import { logOut, setCredentials } from "../auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   //? our base url, will be changed to our server url in production mode
-  baseUrl: "http://localhost:7700",
+  baseUrl: "https://not-robin-hood-bdrk.vercel.app",
 
   //? to include cookies
   credentials: "include",

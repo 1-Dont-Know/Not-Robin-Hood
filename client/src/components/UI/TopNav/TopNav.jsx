@@ -14,6 +14,10 @@ import ShareIcon from "../../../assets/icons/share.svg";
 import AddFunds from "../AddFunds/AddFunds";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { useGetCompaniesQuery } from "../../../redux/slices/apiSlice";
+import {
+  useGetUserByIdQuery,
+  useGetNotificationsQuery,
+} from "../../../redux/slices/user/userApiSlice";
 
 const TopNav = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -24,6 +28,12 @@ const TopNav = () => {
   useEffect(() => {
       
   },[])
+
+  //* Getting User's Name
+
+  const { data: user, isLoading, isSuccess } = useGetUserByIdQuery(1);
+
+  const username = isLoading ? "LOADING" : user.map((item) => item.name);
 
   // PROFILE HANDLER
   const profileHandler = () => {
@@ -96,7 +106,7 @@ const TopNav = () => {
           {showProfile && (
             <div onClick={profileHandler} className={styles.profileMenu}>
               <div className={styles.info}>
-                <h4>Aaron Smith</h4>
+                <h4>{username}</h4>
                 <img src={profile} alt="profile" />
               </div>
               <div className={styles.profileCta}>

@@ -6,7 +6,7 @@ export const apiSlice = createApi({
   // name
   reducerPath: "apiSlice",
   //   source from where to fetch data from
-  baseQuery: fetchBaseQuery({baseUrl: "https://finnhub.io/api/v1"}),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://finnhub.io/api/v1" }),
   // list of queries
   endpoints: (builder) => ({
     getStockTicker: builder.query({

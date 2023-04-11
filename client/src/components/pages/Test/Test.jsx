@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Graph from "../../UI/Graph/Graph";
 import { fakeData } from "../../../utils/fakeData";
 import styles from "./Test.module.scss";
-import { useGetMapQuery } from "../../../redux/slices/apiSlice";
+// import { useGetMapQuery } from "../../../redux/slices/apiSlice";
 import Chart from 'chart.js/auto';
 
 

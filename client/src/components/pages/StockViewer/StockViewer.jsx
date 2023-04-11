@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./StockViewer.module.scss";
-// import people from "../../../assets/icons/people-icon.svg";
-// import creditCard from "../../../assets/icons/credit-card-icon.svg";
-import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used for Testing
-import Graph from "../../UI/Graph/Graph";
 import BuyBox from "../../UI/BuyBox/BuyBox";
 import Filter from "../../UI/Filter/Filter";
 import { useLocation } from "react-router-dom";
-import { useGetPriceQuery } from "../../../redux/slices/apiSlice";
+import { useGetPriceQuery } from "../../../redux/slices/api/finnhubApiSlice";
 import Hero from "../../UI/Hero/Hero";
 
 const StockViewer = () => {
@@ -18,13 +14,10 @@ const StockViewer = () => {
   const symbol = searchParams.get("symbol");
   const description = searchParams.get("description");
 
-  console.log(symbol)
-  console.log(description)
-
   const { data: priceData, isLoading: priceLoading } = useGetPriceQuery(symbol);
 
   if(priceLoading){}
-  else{ console.log(priceData) }
+  else{}
 
   const getPriceStock = (symbol) => {
     if(priceLoading){}
@@ -41,16 +34,6 @@ const StockViewer = () => {
     }
   }
 
-  const [stockData, setStockData] = useState({
-    labels: fakeData.map((data) => data.day),
-    datasets: [
-      {
-        label: "Price",
-        data: fakeData.map((data) => data.price),
-      },
-    ],
-  });
-
   return (
     <>
       <Hero>
@@ -58,14 +41,22 @@ const StockViewer = () => {
           <h1 className={styles.stockName}>{description} ({symbol})</h1>
           <p className={styles.stockPrice}>
             ${getPriceStock('c')}
-            <span className={styles.growth}>${getPriceStock('d')}({getPriceStock('dp')}%)</span>
+            <span className={styles.growth}
+              style={{color: priceData && priceData.d  < 0 ? 'red' : '#2ab795'}}>${getPriceStock('d')}({getPriceStock('dp')}%)
+            </span>
           </p>
         </div>
         {/* <AddFunds></AddFunds> */}
         <div className={styles.preview}>
           {/* //! GRAPH SECTION */}
           <section className={styles.graph}>
-            <Graph chartData={stockData} />
+            <iframe 
+              src={`https://widget.finnhub.io/widgets/stocks/chart?symbol=${symbol}&watermarkColor=%231db954&backgroundColor=%23FBF2EA&textColor=black`}
+              width="100%" 
+              height="100%" 
+              frameBorder="0" 
+              scrolling="no"
+            />
           </section>
           <section className={styles.buybox}>
             <BuyBox price={getPriceStock('c')} />

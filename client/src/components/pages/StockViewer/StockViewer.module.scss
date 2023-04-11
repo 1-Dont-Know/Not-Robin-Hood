@@ -58,6 +58,11 @@
       flex-grow: 1;
       max-height: 40%;
     }
+    iframe {
+      min-width: 100%;
+      flex-grow: 1;
+      max-height: 100%;
+    }
     // .buybox {
     //   min-width: 50%;
     //   max-height: 50%;
@@ -66,11 +71,35 @@
 }
 .graph {
   display: flex;
+  overflow: hidden;
   height: 100%;
   width: 60%;
+  border-radius: 25px;
   @include mixins.breakpoint-down(xlarge) {
     width: 100%;
   }
+}
+
+/* Set the iframe width to 100% of its container */
+iframe {
+  width: 100%;
+  height: 100%; /* or any percentage value based on its container's height */
+
+  // @include mixins.breakpoint-down(small) {
+  //   width: 100%;
+  // }
+  
+}
+
+.testGraph {
+  // display: flex;
+  height: 100%;
+  width: 60%;
+  // min-width: 500px;
+  @include mixins.breakpoint-down(xlarge) {
+    width: 100%;
+  }
+  border-radius: 25px;
 }
 
 .buybox {

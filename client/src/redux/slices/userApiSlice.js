@@ -5,7 +5,7 @@ export const userApiSlice = createApi({
   reducerPath: "userApiSlice",
   //   source from where to fetch data from
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://not-robin-hood-bdrk.vercel.app",
+    baseUrl: "http://localhost:7700",
   }),
   // list of queries
   endpoints: (builder) => ({

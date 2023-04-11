@@ -7,7 +7,6 @@ import {
   MARKETS_ROUTE,
   STOCK_TRANSACTIONS_ROUTE,
   NOT_FOUND,
-  Testing123,
 } from "../utils/consts";
 import Signup from "../components/pages/Signup/Signup";
 import Portfolio from "../components/pages/Portfolio/Portfolio";
@@ -33,10 +32,6 @@ export const publicRoutes = [
   {
     path: NOT_FOUND,
     element: NotFound,
-  },
-  {
-    path: Testing123,
-    element: Test,
   },
 ];
 
@@ -69,9 +64,5 @@ export const privateRoutes = [
   {
     path: NOT_FOUND,
     element: NotFound,
-  },
-  {
-    path: Testing123,
-    element: Test,
   },
 ];

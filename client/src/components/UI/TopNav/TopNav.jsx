@@ -23,11 +23,6 @@ const TopNav = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showFundsPopup, setShowFundsPopup] = useState(false);
-  const { data, isLoading} = useGetCompaniesQuery();
-
-  useEffect(() => {
-      
-  },[])
 
   //* Getting User's Name
 

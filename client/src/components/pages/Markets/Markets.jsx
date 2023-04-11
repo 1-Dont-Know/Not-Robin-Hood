@@ -6,7 +6,7 @@ import Pagination from "../../Pagination/Pagination"
 import Posts from './Posts'
 import Hero from "../../UI/Hero/Hero";
 import DownVectorIcon from "../../../assets/icons/down-vector.svg";
-import { useGetCompaniesQuery } from "../../../redux/slices/apiSlice";
+import { useGetCompaniesQuery } from "../../../redux/slices/api/finnhubApiSlice";
 
 const Markets = () => {
   // declares a new state variable setSortedStocks and initializes it with the value false

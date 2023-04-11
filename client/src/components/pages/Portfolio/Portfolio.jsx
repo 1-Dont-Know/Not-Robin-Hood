@@ -6,6 +6,10 @@ import globalStyles from "../../../styles/main.module.scss";
 import vector from "../../../assets/icons/vector.svg";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import {
+  useGetPortfolioStocksQuery,
+  useUpdatePortfolioStocksMutation,
+} from "../../../redux/slices/user/userApiSlice";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -15,6 +19,10 @@ const Portfolio = () => {
     stocksList: 2,
   };
 
+  const { data: stocksData } = useGetPortfolioStocksQuery();
+
+  const [updateStocks, { isLoading }] = useUpdatePortfolioStocksMutation();
+
   const [activeTab, setActiveTab] = useState(tabFlags.overview);
 
   function handleTabSelect(selectedTab) {
@@ -22,6 +30,11 @@ const Portfolio = () => {
       return (curr = selectedTab);
     });
   }
+
+  const fetchStocks = (e) => {
+    e.preventDefault();
+    updateStocks();
+  };
 
   //Fake data for pie chart
   const data = {
@@ -35,27 +48,6 @@ const Portfolio = () => {
       },
     ],
   };
-
-  const stockData = [
-    {
-      name: "Bay Valley Tech",
-      symbol: "BVT",
-      shares: "220",
-      price: "$2.20",
-      avgCost: "$10.00",
-      totalReturn: "$543.00",
-      equity: "$543.00",
-    },
-    {
-      name: "TESLA",
-      symbol: "TSLA",
-      shares: "2",
-      price: "$200.00",
-      avgCost: "$130.00",
-      totalReturn: "$140.00",
-      equity: "$140.00",
-    },
-  ];
 
   const options = {
     maintainAspectRatio: false,
@@ -83,22 +75,20 @@ const Portfolio = () => {
       {/* Hero Section */}
       <Hero>
         <div className={styles.tabs}>
-          <button 
-            className={styles.tabButton} 
-            onClick={(e) => { 
-              handleTabSelect(tabFlags.overview) 
-            }} 
-            
+          <button
+            className={styles.tabButton}
+            onClick={(e) => {
+              handleTabSelect(tabFlags.overview);
+            }}
             style={{
-              backgroundColor:  (activeTab === tabFlags.overview ?
-                "#37433a": "#d5e3e1"
-              ),
+              backgroundColor:
+                activeTab === tabFlags.overview ? "#37433a" : "#d5e3e1",
 
-              color: (activeTab === tabFlags.overview ?
-                "#d5e3e1" : "#37433a"
-              )
-
-          }}>Overview</button>
+              color: activeTab === tabFlags.overview ? "#d5e3e1" : "#37433a",
+            }}
+          >
+            Overview
+          </button>
 
           <h1 style={{ color: "gray" }}>|</h1>
           <button
@@ -106,18 +96,15 @@ const Portfolio = () => {
             onClick={(e) => {
               handleTabSelect(tabFlags.stocksList);
             }}
-          
             style={{
-              backgroundColor:  (activeTab === tabFlags.stocksList ?
-                "#37433a": "#d5e3e1"
-              ),
+              backgroundColor:
+                activeTab === tabFlags.stocksList ? "#37433a" : "#d5e3e1",
 
-              color: (activeTab === tabFlags.stocksList ?
-                "#d5e3e1" : "#37433a"
-              )
-
-          }}>Stocks List</button>
-
+              color: activeTab === tabFlags.stocksList ? "#d5e3e1" : "#37433a",
+            }}
+          >
+            Stocks List
+          </button>
         </div>
 
         <div className={styles.tanSquare}>
@@ -181,7 +168,7 @@ const Portfolio = () => {
                 <hr className={styles.stocksLine} />
 
                 <ul className={styles.transactionsList}>
-                  {stockData.map((item) => {
+                  {/* {stockData.map((item) => {
                     return (
                       <StockList
                         key={item.name}
@@ -194,7 +181,24 @@ const Portfolio = () => {
                         equity={item.equity}
                       />
                     );
-                  })}
+                  })} */}
+                  {stocksData
+                    ? stocksData.map((item) => {
+                        return (
+                          <StockList
+                            key={item.id}
+                            name={item.name}
+                            symbol={item.symbol}
+                            shares={item.amount}
+                            price={item.price}
+                            avgCost={item.averageCost}
+                            totalReturn={item.totalReturn}
+                            equity={item.equity}
+                          />
+                        );
+                      })
+                    : "No stocks purchased, go ahead and buy some"}
+                  <button onClick={fetchStocks}>Add Stock</button>
                 </ul>
               </section>
             </div>

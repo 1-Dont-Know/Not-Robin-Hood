@@ -8,7 +8,17 @@ import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used f
 import Graph from "../../UI/Graph/Graph";
 import Filter from "../../UI/Filter/Filter";
 
+import {
+  selectCurrentToken,
+  selectCurrentUser,
+} from "../../../redux/slices/auth/authSlice";
+import { useSelector } from "react-redux";
+
 const Account = () => {
+  const user = useSelector(selectCurrentUser);
+  const token = useSelector(selectCurrentToken);
+  console.log("logged in user: ", user);
+  console.log("logged in user's token:", token);
   //State Hook for Graph Component
   const [stockData, setStockData] = useState({
     labels: fakeData.map((data) => data.day),

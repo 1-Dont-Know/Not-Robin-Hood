@@ -22,18 +22,23 @@ import { publicRoutes } from "../../routes/routes";
 import styles from "./AppRouter.module.scss";
 import NotificationPopUp from "../UI/NotificationPopUp/NotificationPopUp";
 
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../../redux/slices/auth/authSlice";
+
 const AppRouter = () => {
-  // TEMPORARY VARIABLE TO HANDLE AUTHORIZATION, FOR PRIVATE ROUTES PURPOSE ONLY
-  const auth = {
-    token: true,
-  };
+  // VARIABLE TO HANDLE AUTHORIZATION, FOR PRIVATE ROUTES PURPOSE ONLY
+  // const token = useSelector(selectCurrentToken);
+
+  const token = true;
+
+  console.log(token);
 
   return (
     <>
       <Router>
         <Routes>
           {/* RENDERING PRIVATE ROUTES IF USER AUTHORIZED */}
-          {auth.token ? (
+          {token ? (
             <>
               {/* PRIVATE ROUTES LAYOUT, An <Outlet> should be used in parent 
               route elements to render their child route elements. This allows 

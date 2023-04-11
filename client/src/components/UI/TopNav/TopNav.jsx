@@ -13,7 +13,6 @@ import AddIcon from "../../../assets/icons/plus-icon.svg";
 import ShareIcon from "../../../assets/icons/share.svg";
 import AddFunds from "../AddFunds/AddFunds";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
-import { useGetCompaniesQuery } from "../../../redux/slices/apiSlice";
 import {
   useGetUserByIdQuery,
   useGetNotificationsQuery,

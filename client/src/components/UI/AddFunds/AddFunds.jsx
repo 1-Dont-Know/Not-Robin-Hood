@@ -4,14 +4,23 @@ import globalStyles from "../../../styles/main.module.scss";
 import people from "../../../assets/icons/people-icon.svg";
 import creditCard from "../../../assets/icons/credit-card-icon.svg";
 import { checkIfNumber } from "../../../utils/helpers";
-import { useUpdateBalanceMutation } from "../../../redux/slices/userApiSlice";
+import {
+  useAddBalanceMutation,
+  useGetUserByIdQuery,
+} from "../../../redux/slices/user/userApiSlice";
 
 const AddFunds = ({ toggle }) => {
-  // Currency State
-  const [currency, setCurrency] = useState("usd");
-
   // Amount State
   const [amount, setAmount] = useState(0);
+  // Destructuring RTK.Query Hook for updating user's balance
+  const [addBalance, { isLoading, isError, isSuccess }] =
+    useAddBalanceMutation();
+
+  // fetch the user's data when the component mounts
+  const { data: user, error } = useGetUserByIdQuery(1);
+
+  // Currency State
+  const [currency, setCurrency] = useState("usd");
 
   // List of currencies
   const currencyList = {
@@ -32,12 +41,14 @@ const AddFunds = ({ toggle }) => {
   };
 
   // HANDLE PAYMENTS
-  const updateBalance = useUpdateBalanceMutation();
-  console.log(useUpdateBalanceMutation());
-  const paymentHandler = () => {
-    updateBalance();
+
+  const handleBalanceSubmit = (e) => {
+    e.preventDefault();
+    addBalance({ id: 1, amount });
     toggle();
   };
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className={styles.gridContainerAppFunds}>
@@ -140,9 +151,15 @@ const AddFunds = ({ toggle }) => {
         </label>
       </div>
       {/* 10 - select payment and continue button */}
-      <button onClick={paymentHandler} className={globalStyles.addFundsButton}>
+      <button
+        onClick={(event) => handleBalanceSubmit(event)}
+        className={globalStyles.addFundsButton}
+      >
         SELECT PAYMENT AND CONTINUE
       </button>
+      {/* {isLoading && <p>Loading...</p>}
+      {isError && <p>Error adding balance.</p>}
+      {isSuccess && <p>Balance added successfully!</p>} */}
     </div>
   );
 };

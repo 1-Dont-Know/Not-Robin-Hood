@@ -7,7 +7,7 @@ import Graph from "../../UI/Graph/Graph";
 import BuyBox from "../../UI/BuyBox/BuyBox";
 import Filter from "../../UI/Filter/Filter";
 import { useLocation } from "react-router-dom";
-import { useGetPriceQuery } from "../../../redux/slices/apiSlice";
+import { useGetPriceQuery } from "../../../redux/slices/api/finnhubApiSlice";
 import Hero from "../../UI/Hero/Hero";
 
 const StockViewer = () => {

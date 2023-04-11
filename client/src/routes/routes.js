@@ -16,7 +16,6 @@ import Markets from "../components/pages/Markets/Markets";
 import StockViewer from "../components/pages/StockViewer/StockViewer";
 import StockTransactions from "../components/pages/StockTransactions/StockTransactions";
 import NotFound from "../components/pages/NotFound/NotFound";
-import Test from "../components/pages/Test/Test"
 
 //? PUBLIC ROUTES
 

@@ -84,22 +84,6 @@
 iframe {
   width: 100%;
   height: 100%; /* or any percentage value based on its container's height */
-
-  // @include mixins.breakpoint-down(small) {
-  //   width: 100%;
-  // }
-  
-}
-
-.testGraph {
-  // display: flex;
-  height: 100%;
-  width: 60%;
-  // min-width: 500px;
-  @include mixins.breakpoint-down(xlarge) {
-    width: 100%;
-  }
-  border-radius: 25px;
 }
 
 .buybox {

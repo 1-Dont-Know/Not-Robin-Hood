@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from "./StockViewer.module.scss";
-// import people from "../../../assets/icons/people-icon.svg";
-// import creditCard from "../../../assets/icons/credit-card-icon.svg";
-import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used for Testing
-import Graph from "../../UI/Graph/Graph";
 import BuyBox from "../../UI/BuyBox/BuyBox";
 import Filter from "../../UI/Filter/Filter";
 import { useLocation } from "react-router-dom";
@@ -38,29 +34,6 @@ const StockViewer = () => {
     }
   }
 
-  const [iframeWidth, setIframeWidth] = useState(window.innerWidth);
-  const [iframeHeight, setIframeHeight] = useState(window.innerHeight);
-
-  useEffect(() => {
-    function handleResize() {
-      setIframeWidth(window.innerWidth);
-      setIframeHeight(window.innerHeight);
-    }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-
-  const [stockData, setStockData] = useState({
-    labels: fakeData.map((data) => data.day),
-    datasets: [
-      {
-        label: "Price",
-        data: fakeData.map((data) => data.price),
-      },
-    ],
-  });
-
   return (
     <>
       <Hero>
@@ -77,19 +50,10 @@ const StockViewer = () => {
         <div className={styles.preview}>
           {/* //! GRAPH SECTION */}
           <section className={styles.graph}>
-            {/* <Graph chartData={stockData} /> */}
-            {/* <iframe
-              src={`https://widget.finnhub.io/widgets/stocks/chart?symbol=${symbol}&watermarkColor=%231db954&backgroundColor=%23FBF2EA&textColor=black`}
-              width={iframeWidth}
-              height={iframeHeight}
-              style={{ padding: '1.5rem', border: 'none' }}
-            /> */}
-
             <iframe 
               src={`https://widget.finnhub.io/widgets/stocks/chart?symbol=${symbol}&watermarkColor=%231db954&backgroundColor=%23FBF2EA&textColor=black`}
               width="100%" 
-              height="100%"
-              // padding="1.5rem" 
+              height="100%" 
               frameBorder="0" 
               scrolling="no"
             />

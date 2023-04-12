@@ -8,6 +8,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { corsOptions } from "./config/corsOptions.js";
 import { credentials } from "./middleware/credentials.js";
+import { body, validationResult } from "express-validator";
 
 // FOR WORKING WITH ENVIRONMENT VARIABLES
 dotenv.config();
@@ -37,21 +38,87 @@ app.get("/", (req, res) => {
   res.json(`WELCOME TO HOBIN ROOD REST API`);
 });
 
+const IS_AUTHORIZED = 1;
+const DEFAULT_BALANCE = 0;
+const DEFAULT_PHONE = 0;
+
 // ! USER REGISTRATION
-app.post("/register", async (req, res) => {
-  try {
+app.post(
+  "/register",
+
+  // ********************** START OF VALIDATION OF INPUTS VALUES FROM CLIENT (SIGNUP FORM) **********************
+  body("name").trim().notEmpty().withMessage("Name is required."),
+  body("email")
+    .trim()
+    .isEmail()
+    .withMessage("Invalid email address.")
+    .normalizeEmail({ gmail_remove_dots: false }),
+  body("password")
+    .trim()
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters."),
+  // ********************** END OF VALIDATION OF INPUTS VALUES FROM CLIENT (SIGNUP FORM) **********************
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const { name, email, password } = req.body;
-    const query =
-      "INSERT INTO users (name, email, password, isAuthorized, balance, phone) VALUES (?, ?, ?, 1, 0, 0)";
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const [rows] = await connection.query(query, [name, email, hashedPassword]);
+    console.log(email);
+    try {
+      if (!email || !password || !name) {
+        return res
+          .status(400)
+          .json({ message: "Name, email and password are requried." });
+      }
+
+      // ********************** START OF CHECKING FOR DUPLICATE EMAILS IN DB (SIGNUP FORM) **********************
+      const user = await connection.query(
+        "SELECT id FROM users WHERE email = ?",
+        [email]
+      );
+      console.log(user[0]);
+      if (user[0].length) {
+        return res.status(400).json({ message: "Email already exists." });
+      }
+      // ********************** END OF CHECKING FOR DUPLICATE EMAILS IN DB (SIGNUP FORM) **********************
+
+      // ********************** START OF REGISTERING USER **********************
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      const result = await connection.query(
+        "INSERT INTO users (name, email, password, isAuthorized, balance, phone) VALUES (?, ?, ?, ?, ?, ?)",
+        [
+          name,
+          email,
+          hashedPassword,
+          IS_AUTHORIZED,
+          DEFAULT_BALANCE,
+          DEFAULT_PHONE,
+        ]
+      );
+      res.json({ message: "User successfully registered." });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Server error." });
+    }
+  }
+);
+// ********************** END OF REGISTERING USER **********************
+
+// ? DELETE USER
+
+app.post("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteQuery = "DELETE FROM users WHERE id = ?";
+    const [rows] = await connection.query(deleteQuery, [id]);
     res.json({
-      message: "Congratulations, user has been registered!",
+      message: "User was deleted",
       data: rows,
     });
   } catch (error) {
-    console.error(error);
+    console.log(error);
     res.status(500).json({ error: "Server error" });
   }
 });
@@ -59,7 +126,27 @@ app.post("/register", async (req, res) => {
 // * USER AUTH
 
 app.post("/auth", async (req, res) => {
-  const { user, pwd } = req.body;
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.json({
+      status: "error",
+      error: "Please enter your email and password",
+    });
+  } else {
+    try {
+      const [rows] = await connection.query(
+        "SELECT email FROM users WHERE email = ?",
+        [email]
+      );
+      return res.json({
+        message: "Congratulations, user has been logged in!",
+        data: rows[0],
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Server error" });
+    }
+  }
 });
 
 // ? USER ID REQUEST
@@ -175,7 +262,7 @@ app.get("/users/:userId/balance", async (req, res) => {
   }
 });
 
-//? ADD BALANCE REQUEST
+//? ADD (MUTATE) BALANCE REQUEST
 
 app.patch("/users/:id", async (req, res) => {
   try {

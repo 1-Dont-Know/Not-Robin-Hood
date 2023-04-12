@@ -11,12 +11,37 @@ import { useLoginMutation } from "../../../redux/slices/auth/authApiSlice";
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-  const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [errMsg, setErrMsg] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // TO NAVIGATE TO ACCOUNT PAGE AFTER SUCCESS LOGIN
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  // INPUTS DATA HANDLER
+
+  const loginDataHandler = (e) => {
+    setUserData((prevState) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+  const [
+    login,
+    {
+      data: loginData,
+      isLoading: isLoginLoading,
+      isSuccess: isLoginSuccess,
+      isError: isLoginError,
+      error: loginError,
+    },
+  ] = useLoginMutation();
   const dispatch = useDispatch();
 
   // * TO GIVE FOCUS ON INPUT
@@ -26,36 +51,42 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd]);
+    setErrorMessage("");
+  }, [userData.email, userData.password]);
 
   // * HANDLING FORM SUBMISSION
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   const userData = await login({ user, pwd }).unwrap();
-    //   dispatch(setCredentials({ ...userData, user }));
-    //   setUser("");
-    //   setPwd("");
-    //   navigate("/account");
-    //   console.log(userData);
-    // } catch (error) {
-    //   if (!error?.originalStatus) {
-    //     setErrMsg("No Server Response");
-    //   } else if (error.originalStatus === 400) {
-    //     setErrMsg("Missing Username or Password");
-    //   } else if (error?.originalStatus === 401) {
-    //     setErrMsg("Unauthorized");
-    //   } else {
-    //     setErrMsg("Login Failed");
-    //   }
-    //   errRef.current.focus();
-    // }
+    if (userData.email && userData.password) {
+      await login(userData);
+    } else {
+      alert("Please fill in all inputs");
+    }
+
+    try {
+      const credentials = await login({ ...userData }).unwrap();
+      // dispatch(setCredentials({ ...credentials, user }));
+      setUserData({
+        email: "",
+        password: "",
+      });
+      // navigate("/account");
+      console.log(credentials);
+    } catch (error) {
+      if (!error?.originalStatus) {
+        setErrorMessage("No Server Response");
+      } else if (error.originalStatus === 400) {
+        setErrorMessage("Missing Username or Password");
+      } else if (error?.originalStatus === 401) {
+        setErrorMessage("Unauthorized");
+      } else {
+        setErrorMessage("Login Failed");
+      }
+      errRef.current.focus();
+    }
   };
 
-  const handleUserInput = (e) => setUser(e.target.value);
-  const handlePwdInput = (e) => setPwd(e.target.value);
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -69,30 +100,32 @@ const Login = () => {
         <div className={styles.image}></div>
         <div className={styles.signup}>
           {/*  LOGIN FORM  */}
-          {isLoading ? (
+          {isLoginLoading ? (
             <h1>Loading...</h1>
           ) : (
             <form onSubmit={handleSubmit} className={styles.signinForm}>
               <h1>Sign in</h1>
               <h3>Release your bull.</h3>
-              <p ref={errRef}>{errMsg}</p>
+              <p ref={errRef}>{errorMessage}</p>
               <input
                 className={globalStyles.input}
                 type="email"
                 placeholder="Email"
                 ref={userRef}
-                value={user}
-                onChange={handleUserInput}
+                value={userData.email}
+                name="email"
+                onChange={loginDataHandler}
                 autoComplete="off"
-                required
+                // required
               />
               <input
                 className={globalStyles.input}
                 type="password"
                 placeholder="Password"
-                onChange={handlePwdInput}
-                value={pwd}
-                required
+                onChange={loginDataHandler}
+                value={userData.password}
+                name="password"
+                // required
               />
               {/* SIGN IN BUTTON SECTION */}
               <div className={styles.cta}>

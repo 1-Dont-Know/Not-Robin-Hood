@@ -29,9 +29,7 @@ const AppRouter = () => {
   // VARIABLE TO HANDLE AUTHORIZATION, FOR PRIVATE ROUTES PURPOSE ONLY
   // const token = useSelector(selectCurrentToken);
 
-  const token = true;
-
-  console.log(token);
+  const token = false;
 
   return (
     <>

@@ -12,7 +12,7 @@ A stock and trade app similar to Robin Hood
 <h3>Back-end</h3>
 <ol>
   <li>Finnhub API</li>
-  <li>MySQL</li>
+  <li>PlanetScale DB</li>
   <li>Node.js</li>
   <li>Express.js</li>
 </ol>

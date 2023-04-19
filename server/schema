@@ -4,7 +4,7 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   isAuthorized BOOLEAN NOT NULL,
-  balance INT NOT NULL,
+  balance FLOAT NOT NULL,
   phone VARCHAR(255) NOT NULL
 );
 

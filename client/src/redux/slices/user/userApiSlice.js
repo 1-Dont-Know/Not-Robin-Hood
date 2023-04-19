@@ -1,17 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setCredentials } from "../auth/authSlice";
+import jwt_decode from "jwt-decode";
 
 const baseQuery = fetchBaseQuery({
   //? our base url, will be changed to our server url in production mode
-  baseUrl: "https://not-robin-hood-bdrk.vercel.app",
-
+  baseUrl: "http://localhost:7700",
   //? to include cookies
   credentials: "include",
-
   //? once we have a token we will set authorization header, and returning headers from prepareHeaders function
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
-
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
@@ -19,31 +17,33 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithReauth = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
-  if (result?.error?.originalStatus === 403) {
-    console.log("sending refresh token");
-    //* send the refresh token to get new access token
-    const refreshResult = await baseQuery("/refresh", api, extraOptions);
-    console.log(refreshResult);
-    if (refreshResult?.data) {
-      const user = api.getState().auth.user;
-      //* store the new token
-      api.dispatch(setCredentials({ ...refreshResult.data, user }));
-      //* retry the original query with new access token
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      api.dispatch(logOut());
-    }
-  }
-  return result;
-};
+// const baseQueryWithReauth = async (args, api, extraOptions) => {
+//   let result = await baseQuery(args, api, extraOptions);
+
+//   if (result?.error?.originalStatus === 403) {
+//     console.log("sending refresh token");
+//     // send refresh token to get new access token
+//     const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
+//     console.log(refreshResult);
+//     if (refreshResult?.data) {
+//       const user = api.getState().auth.user;
+//       // store the new token
+//       api.dispatch(setCredentials({ ...refreshResult.data, user }));
+//       // retry the original query with new access token
+//       result = await baseQuery(args, api, extraOptions);
+//     } else {
+//       api.dispatch(logOut());
+//     }
+//   }
+
+//   return result;
+// };
 
 export const userApi = createApi({
   //? name
   reducerPath: "userApi",
   //?   source from where to fetch data from (temporary localhost) to be changed to our server url
-  baseQuery: baseQueryWithReauth,
+  baseQuery,
   tagTypes: [
     "Balance",
     "Stocks",
@@ -54,8 +54,23 @@ export const userApi = createApi({
   ],
 
   endpoints: (builder) => ({
+    // *** REFRESH TOKEN
+    refreshAccessToken: builder.query({
+      query: () => ({
+        url: "/auth/refresh",
+        method: "POST",
+      }),
+      transformResponse: (response) => {
+        const { accessToken } = response;
+        const decodedToken = jwt_decode(accessToken);
+        return { userId: decodedToken.userId, accessToken };
+      },
+      onQueryComplete: (result, { dispatch }) => {
+        //  Set the credentials with the new access token
+        dispatch(setCredentials({ ...result }));
+      },
+    }),
     // ! REGISTER USER
-
     registerUser: builder.mutation({
       query: (user) => ({
         url: "/register",
@@ -117,12 +132,13 @@ export const userApi = createApi({
     }),
     //* Update "PORTFOLIO STOCKS"
     updatePortfolioStocks: builder.mutation({
-      query: () => ({
+      query: (stock) => ({
         url: "/portfolio",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: stock,
       }),
       invalidatesTags: ["Stocks"],
     }),
@@ -138,6 +154,7 @@ export const {
   useGetAssetPercentageQuery,
   useGetPortfolioStocksQuery,
   useGetNotificationsQuery,
+  useRefreshAccessTokenQuery,
   useUpdatePortfolioStocksMutation,
   useRegisterUserMutation,
 } = userApi;

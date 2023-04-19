@@ -11,12 +11,38 @@ import { useLoginMutation } from "../../../redux/slices/auth/authApiSlice";
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-  const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [errMsg, setErrMsg] = useState("");
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // TO NAVIGATE TO ACCOUNT PAGE AFTER SUCCESS LOGIN
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  // INPUTS DATA HANDLER
+
+  const loginDataHandler = (e) => {
+    setUserData((prevState) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
+  //  Destructuring our Login Mutation Hook
+  const [
+    login,
+    {
+      data: loginData,
+      isLoading: isLoginLoading,
+      isSuccess: isLoginSuccess,
+      isError: isLoginError,
+      error: loginError,
+    },
+  ] = useLoginMutation();
+
   const dispatch = useDispatch();
 
   // * TO GIVE FOCUS ON INPUT
@@ -26,36 +52,44 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd]);
+    setErrorMessage("");
+  }, [userData.email, userData.password]);
 
   // * HANDLING FORM SUBMISSION
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   const userData = await login({ user, pwd }).unwrap();
-    //   dispatch(setCredentials({ ...userData, user }));
-    //   setUser("");
-    //   setPwd("");
-    //   navigate("/account");
-    //   console.log(userData);
-    // } catch (error) {
-    //   if (!error?.originalStatus) {
-    //     setErrMsg("No Server Response");
-    //   } else if (error.originalStatus === 400) {
-    //     setErrMsg("Missing Username or Password");
-    //   } else if (error?.originalStatus === 401) {
-    //     setErrMsg("Unauthorized");
-    //   } else {
-    //     setErrMsg("Login Failed");
-    //   }
-    //   errRef.current.focus();
-    // }
+    try {
+      if (userData.email && userData.password) {
+        const response = await login(userData);
+        dispatch(setCredentials({ ...response.data }));
+        navigate("/account");
+      } else {
+        alert("Please fill in all inputs");
+      }
+    } catch (error) {
+      if (!error?.originalStatus) {
+        setErrorMessage("No Server Response");
+      } else if (error.originalStatus === 400) {
+        setErrorMessage("Missing Username or Password");
+      } else if (error?.originalStatus === 401) {
+        setErrorMessage("Unauthorized");
+      } else {
+        setErrorMessage("Login Failed");
+      }
+      errRef.current.focus();
+    }
   };
+  // useEffect(() => {
+  //   if (isLoginSuccess && !isLoginLoading) {
+  //     navigate("/account");
+  //   }
+  // }, [isLoginSuccess, isLoginLoading]);
 
-  const handleUserInput = (e) => setUser(e.target.value);
-  const handlePwdInput = (e) => setPwd(e.target.value);
+  // if (isLoginLoading) {
+  //   return <h1>Loading...</h1>;
+  // }
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -69,42 +103,41 @@ const Login = () => {
         <div className={styles.image}></div>
         <div className={styles.signup}>
           {/*  LOGIN FORM  */}
-          {isLoading ? (
-            <h1>Loading...</h1>
-          ) : (
-            <form onSubmit={handleSubmit} className={styles.signinForm}>
-              <h1>Sign in</h1>
-              <h3>Release your bull.</h3>
-              <p ref={errRef}>{errMsg}</p>
-              <input
-                className={globalStyles.input}
-                type="email"
-                placeholder="Email"
-                ref={userRef}
-                value={user}
-                onChange={handleUserInput}
-                autoComplete="off"
-                required
-              />
-              <input
-                className={globalStyles.input}
-                type="password"
-                placeholder="Password"
-                onChange={handlePwdInput}
-                value={pwd}
-                required
-              />
-              {/* SIGN IN BUTTON SECTION */}
-              <div className={styles.cta}>
-                {/* Sign in button*/}
-                <button className={globalStyles.loginButton}>Sign in</button>
-              </div>
-              {/* LINK TO SIGN UP */}
-              <p className={styles.loginLink}>
-                New to HobinRood? <Link to="/signup">Sign up for free</Link>
-              </p>
-            </form>
-          )}
+
+          <form onSubmit={handleSubmit} className={styles.signinForm}>
+            <h1>Sign in</h1>
+            <h3>Release your bull.</h3>
+            <p ref={errRef}>{errorMessage}</p>
+            <input
+              className={globalStyles.input}
+              type="email"
+              placeholder="Email"
+              ref={userRef}
+              value={userData.email}
+              name="email"
+              onChange={loginDataHandler}
+              autoComplete="off"
+              // required
+            />
+            <input
+              className={globalStyles.input}
+              type="password"
+              placeholder="Password"
+              onChange={loginDataHandler}
+              value={userData.password}
+              name="password"
+              // required
+            />
+            {/* SIGN IN BUTTON SECTION */}
+            <div className={styles.cta}>
+              {/* Sign in button*/}
+              <button className={globalStyles.loginButton}>Sign in</button>
+            </div>
+            {/* LINK TO SIGN UP */}
+            <p className={styles.loginLink}>
+              New to HobinRood? <Link to="/signup">Sign up for free</Link>
+            </p>
+          </form>
 
           <p className={styles.footer}>console-cobras 2023 ⓒ</p>
         </div>

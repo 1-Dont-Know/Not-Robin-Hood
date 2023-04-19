@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // IMPORTING REACT-ROUTER COMPONENTS
 import {
@@ -21,29 +21,73 @@ import { publicRoutes } from "../../routes/routes";
 // IMPORTING STYLES FROM APP ROUTER STYLES
 import styles from "./AppRouter.module.scss";
 import NotificationPopUp from "../UI/NotificationPopUp/NotificationPopUp";
+import jwt_decode from "jwt-decode";
 
 import { useSelector } from "react-redux";
-import { selectCurrentToken } from "../../redux/slices/auth/authSlice";
+import {
+  selectCurrentToken,
+  selectCurrentUser,
+  setCredentials,
+  setIsFetching,
+  logOut,
+} from "../../redux/slices/auth/authSlice";
+import { useDispatch } from "react-redux";
+
+import { useRefreshAccessTokenMutation } from "../../redux/slices/user/userApiSlice";
 
 const AppRouter = () => {
+  const [auth, setAuth] = useState(false);
   // VARIABLE TO HANDLE AUTHORIZATION, FOR PRIVATE ROUTES PURPOSE ONLY
-  // const token = useSelector(selectCurrentToken);
+  const token = useSelector(selectCurrentToken);
+  const user = useSelector(selectCurrentUser);
 
-  const token = true;
+  // ******************** CHECKING ACCESS TOKEN EXPIRY *********************
+  // function isAccessTokenExpired(token) {
+  //   const decodedToken = jwt_decode(token);
+  //   const currentTime = Date.now() / 1000;
+  //   const isExpired = decodedToken.exp < currentTime;
+  //   if (isExpired) {
+  //     alert("Access token has expired");
+  //   }
+  //   return isExpired;
+  // }
 
-  console.log(token);
+  // const checkInterval = 1 * 1000;
+
+  // function checkAccessToken() {
+  //   if (isAccessTokenExpired(token)) {
+  //     console.log("Token has been expired");
+  //   } else {
+  //     console.log("Token still active");
+  //   }
+  // }
+
+  // setInterval(checkAccessToken, checkInterval);
+  // useRefreshAccessTokenQuery();
+  const dispatch = useDispatch();
+
+  const initTokenRefresh = async () => {};
+
+  useEffect(() => {
+    if (token) {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  }, [token, auth]);
 
   return (
     <>
       <Router>
         <Routes>
           {/* RENDERING PRIVATE ROUTES IF USER AUTHORIZED */}
-          {token ? (
+          {auth ? (
             <>
               {/* PRIVATE ROUTES LAYOUT, An <Outlet> should be used in parent 
               route elements to render their child route elements. This allows 
               nested UI to show up when child routes are rendered. */}
               <Route
+                path="/"
                 element={
                   <div className={styles.wrapper}>
                     <Sidebar />
@@ -62,14 +106,17 @@ const AppRouter = () => {
                     element={<route.element />}
                   />
                 ))}
-                <Route path="/notifications" element={<NotificationPopUp />} />
               </Route>
+              <Route path="/notifications" element={<NotificationPopUp />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="*" element={<NotFound />} />
+
+              {/* <Route path="*" element={<Navigate to="/account" replace />} /> */}
             </>
           ) : (
             // PUBLIC ROUTES
             <>
+              <Route path="/" element={<Navigate to="/login" replace />} />
               {publicRoutes.map((route) => (
                 <Route
                   key={route.path}
@@ -77,7 +124,6 @@ const AppRouter = () => {
                   element={<route.element />}
                 />
               ))}
-              <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="*" element={<NotFound />} />
             </>
           )}

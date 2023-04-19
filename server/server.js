@@ -64,7 +64,7 @@ app.post(
       return res.status(400).json({ errors: errors.array() });
     }
     const { name, email, password } = req.body;
-    console.log(email);
+
     try {
       if (!email || !password || !name) {
         return res
@@ -77,7 +77,7 @@ app.post(
         "SELECT id FROM users WHERE email = ?",
         [email]
       );
-      console.log(user[0]);
+
       if (user[0].length) {
         return res.status(400).json({ message: "Email already exists." });
       }
@@ -127,27 +127,107 @@ app.post("/delete/:id", async (req, res) => {
 
 app.post("/auth", async (req, res) => {
   const { email, password } = req.body;
+
   if (!email || !password) {
     return res.json({
       status: "error",
       error: "Please enter your email and password",
     });
+  } else if (!isValidEmail(email)) {
+    return res.json({
+      status: "error",
+      error: "Please enter a valid email",
+    });
   } else {
     try {
       const [rows] = await connection.query(
-        "SELECT email FROM users WHERE email = ?",
+        "SELECT * FROM users WHERE email = ?",
         [email]
       );
-      return res.json({
-        message: "Congratulations, user has been logged in!",
-        data: rows[0],
+      if (rows.length === 0) {
+        return res.json({
+          status: "error",
+          error: "Email not found",
+        });
+      }
+      const isPasswordValid = await bcrypt.compare(password, rows[0].password);
+      if (!isPasswordValid) {
+        return res.json({
+          status: "error",
+          error: "Incorrect password",
+        });
+      }
+      // create JWTs
+      // ! ACCESS TOKEN
+      const accessToken = jwt.sign(
+        { userId: rows[0].id },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+          expiresIn: process.env.TOKEN_EXPIRY,
+        }
+      );
+
+      // ! REFRESH TOKEN
+      const refreshToken = jwt.sign(
+        { userId: rows[0].id },
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
+      );
+      // Store refresh token in a cookie
+      res.cookie("refreshToken", refreshToken, {
+        // to prevent client-side access to the cookie
+        httpOnly: true,
+        //to ensure the cookie is only transmitted over HTTPS in development (by default), in future should be changed to 'production'
+        secure: process.env.NODE_ENV === "development",
+        expire: new Date(Date.now() + process.env.REFRESH_TOKEN_EXPIRY),
       });
+
+      // Return the access token as a response
+
+      return res.json({ accessToken });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Server error" });
     }
   }
 });
+
+// ***** REFRESH TOKEN REQUEST
+
+app.post("/auth/refresh", async (req, res) => {
+  const { refreshToken } = req.cookies;
+
+  if (!refreshToken) {
+    return res.status(400).json({ error: "Refresh token is missing" });
+  }
+
+  try {
+    const decodedToken = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+
+    if (!decodedToken.userId) {
+      throw new Error("Invalid refresh token");
+    }
+    const userId = decodedToken.userId;
+    const accessToken = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: process.env.TOKEN_EXPIRY,
+    });
+
+    return res.json({ accessToken });
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({ error: "Invalid refresh token" });
+  }
+});
+
+// Email validation
+function isValidEmail(email) {
+  // A simple regular expression to check if the email is in a valid format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 // ? USER ID REQUEST
 app.get("/users/:id", async (req, res) => {
@@ -312,10 +392,13 @@ app.get("/portfolio", async (req, res) => {
 // * INSERT NEW STOCK INSIDE PORTFOLIO
 
 app.post("/portfolio", async (req, res) => {
+  const stock_id = 69;
+  const symbol = "BVT";
+
   try {
     const query =
-      "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, amount, share, price, averageCost, totalReturn, equity) VALUES (1, 6, 'HoangCoing', 'HNC', 100, 50, 150, 140, 1000, 15000)";
-    const [rows] = await connection.query(query);
+      "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, amount, share, price, averageCost, totalReturn, equity) VALUES (1, ?, 'Darshwak', ?, 100, 50, 150, 140, 1000, 15000)";
+    const [rows] = await connection.query(query, [stock_id, symbol]);
     res.json(rows);
   } catch (err) {
     console.log(err);

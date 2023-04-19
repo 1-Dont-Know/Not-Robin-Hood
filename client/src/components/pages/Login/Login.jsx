@@ -11,8 +11,6 @@ import { useLoginMutation } from "../../../redux/slices/auth/authApiSlice";
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -32,6 +30,8 @@ const Login = () => {
       };
     });
   };
+
+  //  Destructuring our Login Mutation Hook
   const [
     login,
     {
@@ -42,6 +42,7 @@ const Login = () => {
       error: loginError,
     },
   ] = useLoginMutation();
+
   const dispatch = useDispatch();
 
   // * TO GIVE FOCUS ON INPUT
@@ -58,21 +59,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (userData.email && userData.password) {
-      await login(userData);
-    } else {
-      alert("Please fill in all inputs");
-    }
-
     try {
-      const credentials = await login({ ...userData }).unwrap();
-      // dispatch(setCredentials({ ...credentials, user }));
-      setUserData({
-        email: "",
-        password: "",
-      });
-      // navigate("/account");
-      console.log(credentials);
+      if (userData.email && userData.password) {
+        const response = await login(userData);
+        dispatch(setCredentials({ ...response.data }));
+        navigate("/account");
+      } else {
+        alert("Please fill in all inputs");
+      }
     } catch (error) {
       if (!error?.originalStatus) {
         setErrorMessage("No Server Response");
@@ -86,6 +80,15 @@ const Login = () => {
       errRef.current.focus();
     }
   };
+  // useEffect(() => {
+  //   if (isLoginSuccess && !isLoginLoading) {
+  //     navigate("/account");
+  //   }
+  // }, [isLoginSuccess, isLoginLoading]);
+
+  // if (isLoginLoading) {
+  //   return <h1>Loading...</h1>;
+  // }
 
   return (
     <div className={styles.container}>
@@ -100,44 +103,41 @@ const Login = () => {
         <div className={styles.image}></div>
         <div className={styles.signup}>
           {/*  LOGIN FORM  */}
-          {isLoginLoading ? (
-            <h1>Loading...</h1>
-          ) : (
-            <form onSubmit={handleSubmit} className={styles.signinForm}>
-              <h1>Sign in</h1>
-              <h3>Release your bull.</h3>
-              <p ref={errRef}>{errorMessage}</p>
-              <input
-                className={globalStyles.input}
-                type="email"
-                placeholder="Email"
-                ref={userRef}
-                value={userData.email}
-                name="email"
-                onChange={loginDataHandler}
-                autoComplete="off"
-                // required
-              />
-              <input
-                className={globalStyles.input}
-                type="password"
-                placeholder="Password"
-                onChange={loginDataHandler}
-                value={userData.password}
-                name="password"
-                // required
-              />
-              {/* SIGN IN BUTTON SECTION */}
-              <div className={styles.cta}>
-                {/* Sign in button*/}
-                <button className={globalStyles.loginButton}>Sign in</button>
-              </div>
-              {/* LINK TO SIGN UP */}
-              <p className={styles.loginLink}>
-                New to HobinRood? <Link to="/signup">Sign up for free</Link>
-              </p>
-            </form>
-          )}
+
+          <form onSubmit={handleSubmit} className={styles.signinForm}>
+            <h1>Sign in</h1>
+            <h3>Release your bull.</h3>
+            <p ref={errRef}>{errorMessage}</p>
+            <input
+              className={globalStyles.input}
+              type="email"
+              placeholder="Email"
+              ref={userRef}
+              value={userData.email}
+              name="email"
+              onChange={loginDataHandler}
+              autoComplete="off"
+              // required
+            />
+            <input
+              className={globalStyles.input}
+              type="password"
+              placeholder="Password"
+              onChange={loginDataHandler}
+              value={userData.password}
+              name="password"
+              // required
+            />
+            {/* SIGN IN BUTTON SECTION */}
+            <div className={styles.cta}>
+              {/* Sign in button*/}
+              <button className={globalStyles.loginButton}>Sign in</button>
+            </div>
+            {/* LINK TO SIGN UP */}
+            <p className={styles.loginLink}>
+              New to HobinRood? <Link to="/signup">Sign up for free</Link>
+            </p>
+          </form>
 
           <p className={styles.footer}>console-cobras 2023 ⓒ</p>
         </div>

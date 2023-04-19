@@ -101,7 +101,7 @@ const Search = ({ placeholder }) => {
   /*Display Search Results to Console for Testing*/
   useEffect(
     () => {
-      console.log(data);
+      // console.log(data);
     },
     [data] // Only re-call effect if value or delay changes
   );

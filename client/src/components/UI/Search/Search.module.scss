@@ -49,6 +49,10 @@ input {
   border-radius: 25px;
 }
 
+.searchResults:empty {
+  display:none;
+}
+
 .listResult {
   display: flex;
   justify-content: space-between;

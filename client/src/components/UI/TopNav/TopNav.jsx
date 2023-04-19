@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./TopNav.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 import cart from "../../../assets/icons/shopping-cart.svg";

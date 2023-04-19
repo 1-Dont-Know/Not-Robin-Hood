@@ -1,37 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./Search.module.scss";
-import { useGetStockTickerQuery } from "../../../redux/slices/apiSlice";
 import { Link } from "react-router-dom";
+import { useGetStockTickerQuery } from "../../../redux/slices/api/alphaVantageApiSlice";
 
 // Search Bar component receives a placeholder prop for the search default message
 const Search = ({ placeholder }) => {
-  /*****************************  WEBSOCKET *************************/
-  // const socket = new WebSocket(`wss://ws.finnhub.io?token=${process.env.REACT_APP_API_KEY}`);
-
-  // // Connection opened -> Subscribe
-  // socket.addEventListener('open', function (event) {
-  //     socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'AAPL'}))
-
-  // });
-
-  // // Listen for messages
-  // socket.addEventListener('message', function (event) {
-  //     try{
-  //       console.log('Message from server ', JSON.parse(event.data).data[0].p);
-  //     }
-  //     catch{
-
-  //     }
-
-  // });
-
-  // // Unsubscribe
-  // var unsubscribe = function(symbol) {
-  //     socket.send(JSON.stringify({'type':'unsubscribe','symbol': symbol}))
-  // }
-  /**************************************************************/
-
-  // useDebounce Hook
+  // useDebounce Hook that tracks when the user's search query changes by using useEffect
   function useDebounce(value, delay) {
     // State and setters for debounced value
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -42,7 +16,7 @@ const Search = ({ placeholder }) => {
         const handler = setTimeout(() => {
           setDebouncedValue(value);
           setResultsIsOpen(true);
-          console.log(searchQuery);
+          // console.log(searchQuery);
         }, delay);
 
         // Cancel the timeout if value changes (also on delay change or unmount)
@@ -52,14 +26,14 @@ const Search = ({ placeholder }) => {
           clearTimeout(handler);
         };
       },
-      [value, delay] // Only re-call effect if value or delay changes
+      [value] // Only re-call effect if value changes
     );
 
     return debouncedValue;
   }
 
   const [searchQuery, setSearchQuery] = useState("");
-  const debouncedSearchQuery = useDebounce(searchQuery, 300);
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
   const [resultsIsOpen, setResultsIsOpen] = useState(false);
 
   //Function that handles when the user changes the text in the search bar
@@ -67,12 +41,14 @@ const Search = ({ placeholder }) => {
     setSearchQuery(e.target.value);
   };
 
-  //Finnhub API call to search for company/stock ticker. Only runs after set amount of time defined by useDebounce call.
+  //Alpha Vantage API call to search for company/stock ticker. Only runs after set amount of time defined by useDebounce call.
   //Skips calling the API if the search query is an empty string.
-  const { data, isSuccess, isLoading, isError } = useGetStockTickerQuery(
-    debouncedSearchQuery,
-    { skip: debouncedSearchQuery == "" }
-  );
+  const {
+    data: { bestMatches } = {},
+    isSuccess,
+    isLoading,
+    isError,
+  } = useGetStockTickerQuery(debouncedSearchQuery);
 
   /* Function to handle if user clicks outside search box or search window */
   function useOutsideAlerter(ref) {
@@ -99,16 +75,15 @@ const Search = ({ placeholder }) => {
   /********************************************************************/
 
   /*Display Search Results to Console for Testing*/
-  useEffect(
-    () => {
-      // console.log(data);
-    },
-    [data] // Only re-call effect if value or delay changes
-  );
+  useEffect(() => {
+    if (bestMatches) {
+      console.log(bestMatches);
+    }
+  }, [bestMatches]); // Only re-call effect if value or delay changes
   /***********************************************/
 
   return (
-    <>
+    <div ref={wrapperRef}>
       {/* Search Field */}
       <div className={styles.container}>
         <input
@@ -117,34 +92,44 @@ const Search = ({ placeholder }) => {
           placeholder={placeholder}
           value={searchQuery}
           onChange={inputChanged}
-          ref={wrapperRef}
         />
       </div>
 
-      {!data || searchQuery === "" || resultsIsOpen === false ? (
-        <></>
-      ) : (
-        <ul className={styles.searchResults} ref={wrapperRef}>
-          {data.result.map((item) => {
-            return (
-              <li key={item.symbol}>
-                <Link
-                  className={styles.listResult}
-                  to={{
-                    pathname: "/stock-viewer",
-                    search: `?symbol=${item.symbol}&description=${item.description}`,
-                  }}
-                  onClick={() => setResultsIsOpen(false)}
-                >
-                  <span>{item.description}</span>
-                  <span style={{ color: "green" }}>{item.symbol}</span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </>
+      {
+        //If there is no data, or if there is a blank search query, or if the search results box is not open, render empty search results
+        !bestMatches || searchQuery === "" || resultsIsOpen === false ? (
+          <></>
+        ) : (
+          //Otherwise, render the list of search results
+          <ul className={styles.searchResults}>
+            {
+              //If best matches exist, render list
+              bestMatches.map((item) => {
+                return (
+                  item["4. region"] === "United States" && (
+                    <li key={item["1. symbol"]}>
+                      <Link
+                        className={styles.listResult}
+                        to={{
+                          pathname: "/stock-viewer",
+                          search: `?symbol=${item["1. symbol"]}&description=${item["2. name"]}`,
+                        }}
+                        onClick={() => setResultsIsOpen(false)}
+                      >
+                        <span>{item["2. name"]}</span>
+                        <span style={{ color: "green" }}>
+                          {item["1. symbol"]}
+                        </span>
+                      </Link>
+                    </li>
+                  )
+                );
+              })
+            }
+          </ul>
+        )
+      }
+    </div>
   );
 };
 

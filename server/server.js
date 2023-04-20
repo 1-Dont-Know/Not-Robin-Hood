@@ -167,20 +167,20 @@ app.post("/auth", async (req, res) => {
         }
       );
 
-      // // ! REFRESH TOKEN
-      // const refreshToken = jwt.sign(
-      //   { userId: rows[0].id },
-      //   process.env.REFRESH_TOKEN_SECRET,
-      //   { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
-      // );
+      // ! REFRESH TOKEN
+      const refreshToken = jwt.sign(
+        { userId: rows[0].id },
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
+      );
       // Store refresh token in a cookie
-      // res.cookie("refreshToken", refreshToken, {
-      //   // to prevent client-side access to the cookie
-      //   httpOnly: true,
-      //   //to ensure the cookie is only transmitted over HTTPS in development (by default), in future should be changed to 'production'
-      //   secure: process.env.NODE_ENV === "development",
-      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      // });
+      res.cookie("refreshToken", refreshToken, {
+        // to prevent client-side access to the cookie
+        // httpOnly: false,
+        // //to ensure the cookie is only transmitted over HTTPS in development (by default), in future should be changed to 'production'
+        // secure: process.env.NODE_ENV === "development",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      });
 
       // Return the access token as a response
 

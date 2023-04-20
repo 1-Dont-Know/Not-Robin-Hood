@@ -56,17 +56,17 @@ export const userApi = createApi({
 
   endpoints: (builder) => ({
     // *** REFRESH TOKEN
-    refreshAccessToken: builder.query({
-      query: () => ({
-        url: "/auth/refresh",
-        method: "POST",
-      }),
-      transformResponse: (response) => {
-        const { accessToken } = response;
-        const decodedToken = jwt_decode(accessToken);
-        return { userId: decodedToken.userId, accessToken };
-      },
-    }),
+    // refreshAccessToken: builder.query({
+    //   query: () => ({
+    //     url: "/auth/refresh",
+    //     method: "POST",
+    //   }),
+    //   transformResponse: (response) => {
+    //     const { accessToken } = response;
+    //     const decodedToken = jwt_decode(accessToken);
+    //     return { userId: decodedToken.userId, accessToken };
+    //   },
+    // }),
     // ! REGISTER USER
     registerUser: builder.mutation({
       query: (user) => ({

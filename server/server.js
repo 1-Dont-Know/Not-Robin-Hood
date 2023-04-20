@@ -174,13 +174,12 @@ app.post("/auth", async (req, res) => {
         { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
       );
       // Store refresh token in a cookie
-      res.cookie("refreshToken", refreshToken, {
-        // to prevent client-side access to the cookie
-        // httpOnly: false,
-        // //to ensure the cookie is only transmitted over HTTPS in development (by default), in future should be changed to 'production'
-        // secure: process.env.NODE_ENV === "development",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
+
+      const expirationDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+      res.setHeader(
+        "Set-Cookie",
+        `refreshToken=${refreshToken}; Path=/; Expires=${expirationDate.toUTCString()}; HttpOnly; Secure`
+      );
 
       // Return the access token as a response
 

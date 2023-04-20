@@ -179,7 +179,7 @@ app.post("/auth", async (req, res) => {
         httpOnly: true,
         //to ensure the cookie is only transmitted over HTTPS in development (by default), in future should be changed to 'production'
         secure: process.env.NODE_ENV === "development",
-        expire: new Date(Date.now() + process.env.REFRESH_TOKEN_EXPIRY),
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 
       // Return the access token as a response

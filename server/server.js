@@ -178,7 +178,11 @@ app.post("/auth", async (req, res) => {
         // to prevent client-side access to the cookie
         httpOnly: true,
         //to ensure the cookie is only transmitted over HTTPS in development (by default), in future should be changed to 'production'
-        secure: process.env.NODE_ENV === "development",
+        secure: true,
+        domain:
+          process.env.NODE_ENV === "development"
+            ? ".localhost"
+            : "not-robin-hood-bdrk.vercel.app",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 

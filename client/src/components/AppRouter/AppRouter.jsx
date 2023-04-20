@@ -32,8 +32,7 @@ import {
   logOut,
 } from "../../redux/slices/auth/authSlice";
 import { useDispatch } from "react-redux";
-
-import { useRefreshAccessTokenMutation } from "../../redux/slices/user/userApiSlice";
+import { useNavigate } from "react-router-dom";
 
 const AppRouter = () => {
   const [auth, setAuth] = useState(false);

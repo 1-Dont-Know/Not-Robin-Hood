@@ -3,8 +3,6 @@ import styles from "./Search.module.scss";
 import { Link } from "react-router-dom";
 import { useGetStockTickerQuery } from "../../../redux/slices/api/alphaVantageApiSlice";
 
-
-
 // Search Bar component receives a placeholder prop for the search default message
 const Search = ({ placeholder }) => {
   // useDebounce Hook that tracks when the user's search query changes by using useEffect
@@ -19,7 +17,6 @@ const Search = ({ placeholder }) => {
           setDebouncedValue(value);
           setResultsIsOpen(true);
           // console.log(searchQuery);
-
         }, delay);
 
         // Cancel the timeout if value changes (also on delay change or unmount)
@@ -46,7 +43,12 @@ const Search = ({ placeholder }) => {
 
   //Alpha Vantage API call to search for company/stock ticker. Only runs after set amount of time defined by useDebounce call.
   //Skips calling the API if the search query is an empty string.
-  const { data: {bestMatches} = {}, isSuccess, isLoading, isError } = useGetStockTickerQuery(debouncedSearchQuery);
+  const {
+    data: { bestMatches } = {},
+    isSuccess,
+    isLoading,
+    isError,
+  } = useGetStockTickerQuery(debouncedSearchQuery);
 
   /* Function to handle if user clicks outside search box or search window */
   function useOutsideAlerter(ref) {
@@ -74,10 +76,10 @@ const Search = ({ placeholder }) => {
 
   /*Display Search Results to Console for Testing*/
   useEffect(() => {
-      if(bestMatches){
-        console.log(bestMatches)
-      }  
-  },[bestMatches]); // Only re-call effect if value or delay changes
+    if (bestMatches) {
+      console.log(bestMatches);
+    }
+  }, [bestMatches]); // Only re-call effect if value or delay changes
   /***********************************************/
 
   return (
@@ -93,17 +95,18 @@ const Search = ({ placeholder }) => {
         />
       </div>
 
-      
       {
         //If there is no data, or if there is a blank search query, or if the search results box is not open, render empty search results
-        (!bestMatches || searchQuery === "" || resultsIsOpen === false) ? ( <></> ) : 
-        //Otherwise, render the list of search results
-          <ul className={styles.searchResults} >
+        !bestMatches || searchQuery === "" || resultsIsOpen === false ? (
+          <></>
+        ) : (
+          //Otherwise, render the list of search results
+          <ul className={styles.searchResults}>
             {
               //If best matches exist, render list
               bestMatches.map((item) => {
                 return (
-                  (item["4. region"] === "United States") &&
+                  item["4. region"] === "United States" && (
                     <li key={item["1. symbol"]}>
                       <Link
                         className={styles.listResult}
@@ -114,21 +117,18 @@ const Search = ({ placeholder }) => {
                         onClick={() => setResultsIsOpen(false)}
                       >
                         <span>{item["2. name"]}</span>
-                        <span style={{ color: "green" }}>{item["1. symbol"]}</span>
+                        <span style={{ color: "green" }}>
+                          {item["1. symbol"]}
+                        </span>
                       </Link>
                     </li>
+                  )
                 );
               })
             }
           </ul>
-        
+        )
       }
-
-
-
-
-
-
     </div>
   );
 };

@@ -20,6 +20,10 @@ export const store = configureStore({
       immutableCheck: false,
       serializableCheck: false,
       /***************************************************/
-    }).concat(finnhubApiSlice.middleware, alphaVantageApiSlice.middleware, userApi.middleware),
+    }).concat(
+      finnhubApiSlice.middleware,
+      alphaVantageApiSlice.middleware,
+      userApi.middleware
+    ),
   devTools: true,
 });

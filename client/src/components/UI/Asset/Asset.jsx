@@ -26,7 +26,6 @@ const Asset = () => {
     isError: percentageError,
   } = useGetAssetPercentageQuery(1);
 
-  console.log(value, condition, percentage);
   if (loadingValue) {
     return <div className={styles.loader}></div>;
   }

@@ -1,4 +1,5 @@
 import { userApi } from "../user/userApiSlice";
+import jwt_decode from "jwt-decode";
 
 export const authApiSlice = userApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,6 +9,11 @@ export const authApiSlice = userApi.injectEndpoints({
         method: "POST",
         body: { ...credentials },
       }),
+      transformResponse: (response) => {
+        const { accessToken } = response;
+        const decodedToken = jwt_decode(accessToken);
+        return { accessToken, userId: decodedToken.userId };
+      },
     }),
   }),
 });

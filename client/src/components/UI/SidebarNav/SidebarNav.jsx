@@ -5,9 +5,20 @@ import markets from "../../../assets/icons/markets.svg";
 import transactions from "../../../assets/icons/transactions.svg";
 import settings from "../../../assets/icons/settings.svg";
 import logout from "../../../assets/icons/logout.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+
+import { useDispatch } from "react-redux";
+import { logOut } from "../../../redux/slices/auth/authSlice";
 
 const SidebarNav = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const logOutHandler = () => {
+    dispatch(logOut());
+
+    toast.success("You've succesfully logout!");
+  };
   return (
     <nav>
       {/* //! GENERAL LIST */}
@@ -56,7 +67,7 @@ const SidebarNav = () => {
             Settings
           </li>
         </NavLink>
-        <NavLink to="/">
+        <NavLink onClick={logOutHandler} to="/">
           <li className={styles.listItem} id="logout">
             <img src={logout} alt="logout" />
             Log out

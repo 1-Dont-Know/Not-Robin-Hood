@@ -33,7 +33,13 @@ const Portfolio = () => {
 
   const fetchStocks = (e) => {
     e.preventDefault();
-    updateStocks();
+    updateStocks({
+      name: "Darshwak",
+      symbol: "DRSH",
+      shares: 250,
+      price: 500,
+      averagecost: 520,
+    });
   };
 
   //Fake data for pie chart

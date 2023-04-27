@@ -8,6 +8,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { corsOptions } from "./config/corsOptions.js";
 import { credentials } from "./middleware/credentials.js";
+import { body, validationResult } from "express-validator";
 
 // FOR WORKING WITH ENVIRONMENT VARIABLES
 dotenv.config();
@@ -37,21 +38,87 @@ app.get("/", (req, res) => {
   res.json(`WELCOME TO HOBIN ROOD REST API`);
 });
 
+const IS_AUTHORIZED = 1;
+const DEFAULT_BALANCE = 0;
+const DEFAULT_PHONE = 0;
+
 // ! USER REGISTRATION
-app.post("/register", async (req, res) => {
-  try {
+app.post(
+  "/register",
+
+  // ********************** START OF VALIDATION OF INPUTS VALUES FROM CLIENT (SIGNUP FORM) **********************
+  body("name").trim().notEmpty().withMessage("Name is required."),
+  body("email")
+    .trim()
+    .isEmail()
+    .withMessage("Invalid email address.")
+    .normalizeEmail({ gmail_remove_dots: false }),
+  body("password")
+    .trim()
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters."),
+  // ********************** END OF VALIDATION OF INPUTS VALUES FROM CLIENT (SIGNUP FORM) **********************
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const { name, email, password } = req.body;
-    const query =
-      "INSERT INTO users (name, email, password, isAuthorized, balance, phone) VALUES (?, ?, ?, 1, 0, 0)";
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const [rows] = await connection.query(query, [name, email, hashedPassword]);
+
+    try {
+      if (!email || !password || !name) {
+        return res
+          .status(400)
+          .json({ message: "Name, email and password are requried." });
+      }
+
+      // ********************** START OF CHECKING FOR DUPLICATE EMAILS IN DB (SIGNUP FORM) **********************
+      const user = await connection.query(
+        "SELECT id FROM users WHERE email = ?",
+        [email]
+      );
+
+      if (user[0].length) {
+        return res.status(400).json({ message: "Email already exists." });
+      }
+      // ********************** END OF CHECKING FOR DUPLICATE EMAILS IN DB (SIGNUP FORM) **********************
+
+      // ********************** START OF REGISTERING USER **********************
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      const result = await connection.query(
+        "INSERT INTO users (name, email, password, isAuthorized, balance, phone) VALUES (?, ?, ?, ?, ?, ?)",
+        [
+          name,
+          email,
+          hashedPassword,
+          IS_AUTHORIZED,
+          DEFAULT_BALANCE,
+          DEFAULT_PHONE,
+        ]
+      );
+      res.json({ message: "User successfully registered." });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Server error." });
+    }
+  }
+);
+// ********************** END OF REGISTERING USER **********************
+
+// ? DELETE USER
+
+app.post("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteQuery = "DELETE FROM users WHERE id = ?";
+    const [rows] = await connection.query(deleteQuery, [id]);
     res.json({
-      message: "Congratulations, user has been registered!",
+      message: "User was deleted",
       data: rows,
     });
   } catch (error) {
-    console.error(error);
+    console.log(error);
     res.status(500).json({ error: "Server error" });
   }
 });
@@ -59,8 +126,107 @@ app.post("/register", async (req, res) => {
 // * USER AUTH
 
 app.post("/auth", async (req, res) => {
-  const { user, pwd } = req.body;
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.json({
+      status: "error",
+      error: "Please enter your email and password",
+    });
+  } else if (!isValidEmail(email)) {
+    return res.json({
+      status: "error",
+      error: "Please enter a valid email",
+    });
+  } else {
+    try {
+      const [rows] = await connection.query(
+        "SELECT * FROM users WHERE email = ?",
+        [email]
+      );
+      if (rows.length === 0) {
+        return res.json({
+          status: "error",
+          error: "Email not found",
+        });
+      }
+      const isPasswordValid = await bcrypt.compare(password, rows[0].password);
+      if (!isPasswordValid) {
+        return res.json({
+          status: "error",
+          error: "Incorrect password",
+        });
+      }
+      // create JWTs
+      // ! ACCESS TOKEN
+      const accessToken = jwt.sign(
+        { userId: rows[0].id },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+          expiresIn: process.env.TOKEN_EXPIRY,
+        }
+      );
+
+      // ! REFRESH TOKEN
+      const refreshToken = jwt.sign(
+        { userId: rows[0].id },
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
+      );
+      // Store refresh token in a cookie
+
+      const expirationDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+      res.setHeader(
+        "Set-Cookie",
+        `refreshToken=${refreshToken}; Path=/; Expires=${expirationDate.toUTCString()}; HttpOnly; Secure`
+      );
+
+      // Return the access token as a response
+
+      return res.json({ accessToken });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Server error" });
+    }
+  }
 });
+
+// ***** REFRESH TOKEN REQUEST
+
+app.post("/auth/refresh", async (req, res) => {
+  const { refreshToken } = req.cookies;
+
+  if (!refreshToken) {
+    return res.status(400).json({ error: "Refresh token is missing" });
+  }
+
+  try {
+    const decodedToken = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+
+    if (!decodedToken.userId) {
+      throw new Error("Invalid refresh token");
+    }
+    const userId = decodedToken.userId;
+    const accessToken = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: process.env.TOKEN_EXPIRY,
+    });
+
+    return res.json({ accessToken });
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({ error: "Invalid refresh token" });
+  }
+});
+
+// Email validation
+function isValidEmail(email) {
+  // A simple regular expression to check if the email is in a valid format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 // ? USER ID REQUEST
 app.get("/users/:id", async (req, res) => {
@@ -175,7 +341,7 @@ app.get("/users/:userId/balance", async (req, res) => {
   }
 });
 
-//? ADD BALANCE REQUEST
+//? ADD (MUTATE) BALANCE REQUEST
 
 app.patch("/users/:id", async (req, res) => {
   try {

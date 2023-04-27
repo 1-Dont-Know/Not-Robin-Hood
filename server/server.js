@@ -225,15 +225,31 @@ app.get("/portfolio", async (req, res) => {
 // * INSERT NEW STOCK INSIDE PORTFOLIO
 
 app.post("/portfolio", async (req, res) => {
+  const {userID, symbol, priceBought, company, share, cost} = req.body
+  console.log(userID, symbol, priceBought, company, share, cost);
   try {
     const query =
-      "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, amount, share, price, averageCost, totalReturn, equity) VALUES (1, 6, 'HoangCoing', 'HNC', 100, 50, 150, 140, 1000, 15000)";
-    const [rows] = await connection.query(query);
+    "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, amount, share, price, averageCost, totalReturn, equity) VALUES (?, 1, ?, ?, ?, ?, ?, 140, 1000, 15000)";
+    const [rows] = await connection.query(query, [userID, company, symbol, priceBought, share, cost]);
+    res.json(rows);
+  } catch (err) {
+    console.log(err);
+  }
+ 
+});
+
+app.delete("/portfolio/:userID/:symbol/:company", async (req, res) => {
+  const {userID, symbol, company} = req.params;
+  console.log("delete function called", userID, symbol, company)
+  try {
+    const query = "DELETE FROM user_portfolio_stocks WHERE user_id = ? AND symbol = ? AND name = ? LIMIT 1";
+    const [rows] = await connection.query(query, [userID, symbol, company]);
     res.json(rows);
   } catch (err) {
     console.log(err);
   }
 });
+
 
 // TO CHECK IF OUR APP US RUNNING AND ON WHICH PORT
 app.listen(port, () => console.log(`Server is running on port ${port}`));

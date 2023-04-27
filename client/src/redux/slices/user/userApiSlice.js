@@ -3,7 +3,8 @@ import { logOut, setCredentials } from "../auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   //? our base url, will be changed to our server url in production mode
-  baseUrl: "https://not-robin-hood-bdrk.vercel.app",
+  // baseUrl: "https://not-robin-hood-bdrk.vercel.app",
+  baseUrl: "http://localhost:7700/",
 
   //? to include cookies
   credentials: "include",
@@ -116,13 +117,30 @@ export const userApi = createApi({
       providesTags: ["Stocks"],
     }),
     //* Update "PORTFOLIO STOCKS"
+    // updatePortfolioStocks: builder.mutation({
+    //   query: () => ({
+    //     url: "/portfolio",
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }),
+    //   invalidatesTags: ["Stocks"],
+    // }),
     updatePortfolioStocks: builder.mutation({
-      query: () => ({
+      query: ({userID, symbol, priceBought, company, share, cost}) => ({
         url: "/portfolio",
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: {userID, symbol, priceBought, company, share, cost} ,
+      }),
+      invalidatesTags: ["Stocks"],
+    }),
+
+    // delete
+    deletePortfolioStocks: builder.mutation({
+      query: ({userID, symbol, company}) => ({
+        url: `/portfolio/${userID}/${symbol}/${company}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["Stocks"],
     }),
@@ -139,5 +157,6 @@ export const {
   useGetPortfolioStocksQuery,
   useGetNotificationsQuery,
   useUpdatePortfolioStocksMutation,
+  useDeletePortfolioStocksMutation,
   useRegisterUserMutation,
 } = userApi;

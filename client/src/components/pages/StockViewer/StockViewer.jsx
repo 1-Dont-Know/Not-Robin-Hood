@@ -59,7 +59,7 @@ const StockViewer = () => {
             />
           </section>
           <section className={styles.buybox}>
-            <BuyBox price={getPriceStock('c')} />
+            <BuyBox symbol = {symbol} price={getPriceStock('c')} name = {description} />
           </section>
         </div>
         {/* //! FILTER SECTION */}

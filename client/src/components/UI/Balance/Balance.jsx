@@ -7,6 +7,7 @@ import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 const Balance = () => {
   const user = useSelector(selectCurrentUser);
   const { data: balance = 0, isLoading, error } = useGetBalanceQuery(user);
+  console.log(user);
 
   if (error) return <p>Error: {error.message}</p>;
   return (

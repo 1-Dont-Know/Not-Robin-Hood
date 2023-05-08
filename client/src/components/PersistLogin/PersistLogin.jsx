@@ -9,6 +9,8 @@ import {
   setCredentials,
 } from "../../redux/slices/auth/authSlice";
 import { Outlet } from "react-router-dom";
+import Loader from "../UI/Loader/Loader";
+
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [refreshToken] = useRefreshAccessTokenMutation();
@@ -49,7 +51,7 @@ const PersistLogin = () => {
     console.log(`aT: ${JSON.stringify(token)}`);
   }, [isLoading]);
 
-  return <>{isLoading ? <p>Loading...</p> : <Outlet />}</>;
+  return <>{isLoading ? <Loader /> : <Outlet />}</>;
 };
 
 export default PersistLogin;

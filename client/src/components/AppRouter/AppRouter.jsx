@@ -21,38 +21,10 @@ import { publicRoutes } from "../../routes/routes";
 // IMPORTING STYLES FROM APP ROUTER STYLES
 import styles from "./AppRouter.module.scss";
 import NotificationPopUp from "../UI/NotificationPopUp/NotificationPopUp";
-import jwt_decode from "jwt-decode";
-
-import { useSelector } from "react-redux";
-import {
-  selectCurrentToken,
-  selectCurrentUser,
-  setCredentials,
-  logOut,
-} from "../../redux/slices/auth/authSlice";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import PersistLogin from "../PersistLogin/PersistLogin";
 import RequireAuth from "../RequireAuth/RequireAuth";
 
 const AppRouter = () => {
-  const [auth, setAuth] = useState(false);
-  const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // VARIABLE TO HANDLE AUTHORIZATION, FOR PRIVATE ROUTES PURPOSE ONLY (getting token and current user from redux store)
-  const token = useSelector(selectCurrentToken);
-  const user = useSelector(selectCurrentUser);
-  console.log("logged in user: ", user);
-  console.log("logged in user's token:", token);
-
-  useEffect(() => {
-    if (token) {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  }, [token]);
-
   return (
     <>
       <Router>

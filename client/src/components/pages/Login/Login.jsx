@@ -86,7 +86,7 @@ const Login = () => {
   };
 
   // const persist = useSelector(selectPersist);
-  // console.log(persist);
+  // console.log("Persist", persist);
 
   // const togglePersist = () => {
   //   dispatch(setPersist(!persist));
@@ -94,7 +94,7 @@ const Login = () => {
 
   // useEffect(() => {
   //   localStorage.setItem("persist", persist);
-  // }, [persist]);
+  // }, []);
 
   return (
     <div className={styles.container}>
@@ -139,11 +139,11 @@ const Login = () => {
                 type="checkbox"
                 id="persist"
                 className={styles.trustDevice}
-                onChange={togglePersist}
+                onClick={togglePersist}
                 checked={persist}
               />
               <label className={styles.trustDeviceLabel} htmlFor="persist">
-                Trust this device
+                Remember me
               </label>
             </div> */}
             {/* SIGN IN BUTTON SECTION */}

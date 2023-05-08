@@ -38,6 +38,7 @@ const PersistLogin = () => {
       }
     };
     !token ? verifyRefreshToken() : setIsLoading(false);
+    console.log(isMounted);
     return () => (isMounted = false);
   }, []);
 

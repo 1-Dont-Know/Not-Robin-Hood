@@ -7,16 +7,19 @@ import settings from "../../../assets/icons/settings.svg";
 import logout from "../../../assets/icons/logout.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../redux/slices/auth/authSlice";
-
+import { useLogoutUserMutation } from "../../../redux/slices/user/userApiSlice";
 const SidebarNav = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [logoutUser, { data }] = useLogoutUserMutation();
+
   const logOutHandler = () => {
     dispatch(logOut());
-
+    logoutUser();
+    navigate("/login");
     toast.success("You've succesfully logout!");
   };
   return (

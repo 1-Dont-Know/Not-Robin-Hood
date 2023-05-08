@@ -3,6 +3,7 @@ import { finnhubApiSlice } from "../slices/api/finnhubApiSlice.js";
 import { alphaVantageApiSlice } from "../slices/api/alphaVantageApiSlice.js";
 import { userApi } from "../slices/user/userApiSlice";
 import authReducer from "../slices/auth/authSlice";
+import persistReducer from "../slices/auth/authPersistSlice.js";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     [alphaVantageApiSlice.reducerPath]: alphaVantageApiSlice.reducer,
     [userApi.reducerPath]: userApi.reducer,
     auth: authReducer,
+    persist: persistReducer,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -25,5 +27,5 @@ export const store = configureStore({
       alphaVantageApiSlice.middleware,
       userApi.middleware
     ),
-  devTools: true,
+  devTools: true, // switch to false in production
 });

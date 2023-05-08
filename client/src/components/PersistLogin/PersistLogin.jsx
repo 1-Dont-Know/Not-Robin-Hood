@@ -20,29 +20,26 @@ const PersistLogin = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // let isMounted = true;
+    let isMounted = true;
     const verifyRefreshToken = async () => {
       try {
-        if (!token) {
-          const refreshResult = await refreshToken();
-          console.log(refreshResult);
-          dispatch(
-            setCredentials({
-              accessToken: refreshResult?.data?.accessToken,
-              userId: refreshResult?.data?.userId,
-            })
-          );
-        }
+        const refreshResult = await refreshToken();
+        console.log(refreshResult);
+        dispatch(
+          setCredentials({
+            accessToken: refreshResult?.data?.accessToken,
+            userId: refreshResult?.data?.userId,
+          })
+        );
       } catch (error) {
         console.log(error);
       } finally {
-        setIsLoading(false);
+        isMounted && setIsLoading(false);
       }
     };
-
-    return () => {
-      verifyRefreshToken();
-    };
+    !token ? verifyRefreshToken() : setIsLoading(false);
+    console.log(isMounted);
+    return () => (isMounted = false);
   }, []);
 
   useEffect(() => {

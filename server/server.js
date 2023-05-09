@@ -170,28 +170,28 @@ app.get("/users/:userId/balance", async (req, res) => {
   }
 });
 
-// //? ADD (MUTATE) BALANCE REQUEST
+//? ADD (MUTATE) BALANCE REQUEST
 
-// app.patch("/users/:id", async (req, res) => {
-//   try {
-//     // extract the id and balance from the request
-//     const id = req.params.id;
-//     const { amount } = req.body;
+app.patch("/users/:id", async (req, res) => {
+  try {
+    // extract the id and balance from the request
+    const id = req.params.id;
+    const { amount } = req.body;
 
-//     // update the balance in the database
-//     await connection.query(
-//       "UPDATE users SET balance = balance + ? WHERE id = ?",
-//       [amount, id]
-//     );
+    // update the balance in the database
+    await connection.query(
+      "UPDATE users SET balance = balance + ? WHERE id = ?",
+      [amount, id]
+    );
 
-//     // return a success response
-//     res.status(200).json({ message: "User balance updated successfully" });
-//   } catch (error) {
-//     // handle errors
-//     console.error(error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
+    // return a success response
+    res.status(200).json({ message: "User balance updated successfully" });
+  } catch (error) {
+    // handle errors
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 //  GET REQUEST TO DISPLAY USERS
 

@@ -156,6 +156,16 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Stocks"],
     }),
+
+    // patch stock
+    // patchStocks: builder.mutation({
+    //   query: ({userID, symbol, priceBought, company, share, cost}) => ({
+    //     url: "/portfolio",
+    //     method: "PATCH",
+    //     body: {userID, symbol, priceBought, company, share, cost} ,
+    //   }),
+    //   invalidatesTags: ["Stocks"],
+    // }),
   }),
 });
 
@@ -172,4 +182,5 @@ export const {
   useUpdatePortfolioStocksMutation,
   useDeletePortfolioStocksMutation,
   useRegisterUserMutation,
+  // usePatchStocksMutation,
 } = userApi;

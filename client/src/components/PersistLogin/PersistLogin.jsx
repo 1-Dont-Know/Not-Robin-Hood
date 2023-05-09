@@ -24,7 +24,6 @@ const PersistLogin = () => {
     const verifyRefreshToken = async () => {
       try {
         const refreshResult = await refreshToken();
-        console.log(refreshResult);
         dispatch(
           setCredentials({
             accessToken: refreshResult?.data?.accessToken,
@@ -38,15 +37,9 @@ const PersistLogin = () => {
       }
     };
     !token ? verifyRefreshToken() : setIsLoading(false);
-    console.log(isMounted);
+
     return () => (isMounted = false);
   }, []);
-
-  useEffect(() => {
-    console.log(user);
-    console.log(`isLoading: ${isLoading}`);
-    console.log(`aT: ${JSON.stringify(token)}`);
-  }, [isLoading]);
 
   return <>{isLoading ? <Loader /> : <Outlet />}</>;
 };

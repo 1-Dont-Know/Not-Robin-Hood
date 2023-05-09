@@ -3,10 +3,13 @@ import styles from "./Login.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 import Logo from "../../UI/Logo/Logo";
 import { Link, useNavigate } from "react-router-dom";
-
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../../../redux/slices/auth/authSlice";
 import { useLoginMutation } from "../../../redux/slices/auth/authApiSlice";
+import {
+  selectPersist,
+  setPersist,
+} from "../../../redux/slices/auth/authPersistSlice";
 
 const Login = () => {
   const userRef = useRef();
@@ -55,7 +58,7 @@ const Login = () => {
     setErrorMessage("");
   }, [userData.email, userData.password]);
 
-  // * HANDLING FORM SUBMISSION
+  // * HANDLING REGISTRATION FORM SUBMISSION
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,6 +66,7 @@ const Login = () => {
       if (userData.email && userData.password) {
         const response = await login(userData);
         dispatch(setCredentials({ ...response.data }));
+        setUserData({ email: "", password: "" });
         navigate("/account");
       } else {
         alert("Please fill in all inputs");
@@ -80,15 +84,17 @@ const Login = () => {
       errRef.current.focus();
     }
   };
-  // useEffect(() => {
-  //   if (isLoginSuccess && !isLoginLoading) {
-  //     navigate("/account");
-  //   }
-  // }, [isLoginSuccess, isLoginLoading]);
 
-  // if (isLoginLoading) {
-  //   return <h1>Loading...</h1>;
-  // }
+  // const persist = useSelector(selectPersist);
+  // console.log("Persist", persist);
+
+  // const togglePersist = () => {
+  //   dispatch(setPersist(!persist));
+  // };
+
+  // useEffect(() => {
+  //   localStorage.setItem("persist", persist);
+  // }, []);
 
   return (
     <div className={styles.container}>
@@ -128,6 +134,18 @@ const Login = () => {
               name="password"
               // required
             />
+            {/* <div className={styles.trustDeviceWrapper}>
+              <input
+                type="checkbox"
+                id="persist"
+                className={styles.trustDevice}
+                onClick={togglePersist}
+                checked={persist}
+              />
+              <label className={styles.trustDeviceLabel} htmlFor="persist">
+                Remember me
+              </label>
+            </div> */}
             {/* SIGN IN BUTTON SECTION */}
             <div className={styles.cta}>
               {/* Sign in button*/}

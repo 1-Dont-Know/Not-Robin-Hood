@@ -5,7 +5,8 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL,
   isAuthorized BOOLEAN NOT NULL,
   balance FLOAT NOT NULL,
-  phone VARCHAR(255) NOT NULL
+  phone VARCHAR(255) NOT NULL,
+  refreshToken JSON NOT NULL DEFAULT '[]'
 );
 
 CREATE TABLE user_settings (
@@ -35,12 +36,12 @@ CREATE TABLE user_portfolio_stocks (
   id INT NOT NULL,
   name VARCHAR(255) NOT NULL,
   symbol VARCHAR(255) NOT NULL,
-  amount INT NOT NULL,
+  amount FLOAT NOT NULL,
   share INT NOT NULL,
-  price INT NOT NULL,
-  averageCost INT NOT NULL,
-  totalReturn INT NOT NULL,
-  equity INT NOT NULL
+  price FLOAT NOT NULL,
+  averageCost FLOAT NOT NULL,
+  totalReturn FLOAT NOT NULL,
+  equity FLOAT NOT NULL
 );
 
 CREATE TABLE user_portfolio_orders (

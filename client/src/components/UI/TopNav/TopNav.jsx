@@ -25,9 +25,9 @@ const TopNav = () => {
 
   //* Getting User's Name
 
-  const { data: user, isLoading, isSuccess } = useGetUserByIdQuery(1);
+  // const { data: user, isLoading, isSuccess } = useGetUserByIdQuery(1);
 
-  const username = isLoading ? "LOADING" : user.map((item) => item.name);
+  // const username = isLoading ? "LOADING" : user.map((item) => item.name);
 
   // PROFILE HANDLER
   const profileHandler = () => {
@@ -100,7 +100,7 @@ const TopNav = () => {
           {showProfile && (
             <div onClick={profileHandler} className={styles.profileMenu}>
               <div className={styles.info}>
-                <h4>{username}</h4>
+                <h4>username</h4>
                 <img src={profile} alt="profile" />
               </div>
               <div className={styles.profileCta}>

@@ -4,8 +4,8 @@ import jwt_decode from "jwt-decode";
 
 const baseQuery = fetchBaseQuery({
   //? our base url, will be changed to our server url in production mode
-  // baseUrl: "https://not-robin-hood-bdrk.vercel.app",
-  baseUrl: "http://localhost:7700/",
+  
+  baseUrl: `${process.env.REACT_APP_USERS_BASE_URL}`,
 
   //? to include cookies
   credentials: "include",
@@ -13,39 +13,39 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
     if (token) {
-      headers.set("authorization", `Bearer ${token}`);
+      headers.set("Authorization", `Bearer ${token}`);
     }
     return headers;
   },
 });
 
-// const baseQueryWithReauth = async (args, api, extraOptions) => {
-//   let result = await baseQuery(args, api, extraOptions);
+const baseQueryWithReauth = async (args, api, extraOptions) => {
+  let result = await baseQuery(args, api, extraOptions);
+  if (result?.error?.originalStatus === 403) {
+    console.log("sending refresh token");
+    // send refresh token to get new access token
+    const refreshResult = await baseQuery("/refresh", api, extraOptions);
+    if (refreshResult?.data) {
+      const user = api.getState().auth.user;
+      console.log("User id from our store:", user);
+      // store the new token
+      api.dispatch(setCredentials({ ...refreshResult.data, userId: user }));
+      // retry the original query with new access token
+      result = await baseQuery(args, api, extraOptions);
+      console.log("REFETCHED REFRESH TOKEN: ", result);
+    } else {
+      api.dispatch(logOut());
+    }
+  }
 
-//   if (result?.error?.originalStatus === 403) {
-//     console.log("sending refresh token");
-//     // send refresh token to get new access token
-//     const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
-//     console.log(refreshResult);
-//     if (refreshResult?.data) {
-//       const user = api.getState().auth.user;
-//       // store the new token
-//       api.dispatch(setCredentials({ ...refreshResult.data, user }));
-//       // retry the original query with new access token
-//       result = await baseQuery(args, api, extraOptions);
-//     } else {
-//       api.dispatch(logOut());
-//     }
-//   }
-
-//   return result;
-// };
+  return result;
+};
 
 export const userApi = createApi({
   //? name
   reducerPath: "userApi",
   //?   source from where to fetch data from (temporary localhost) to be changed to our server url
-  baseQuery,
+  baseQuery: baseQueryWithReauth,
   tagTypes: [
     "Balance",
     "Stocks",
@@ -57,23 +57,31 @@ export const userApi = createApi({
 
   endpoints: (builder) => ({
     // *** REFRESH TOKEN
-    // refreshAccessToken: builder.query({
-    //   query: () => ({
-    //     url: "/auth/refresh",
-    //     method: "POST",
-    //   }),
-    //   transformResponse: (response) => {
-    //     const { accessToken } = response;
-    //     const decodedToken = jwt_decode(accessToken);
-    //     return { userId: decodedToken.userId, accessToken };
-    //   },
-    // }),
+    refreshAccessToken: builder.mutation({
+      query: () => ({
+        url: "/refresh",
+        method: "POST",
+      }),
+      transformResponse: (response) => {
+        const { accessToken } = response;
+        const decodedToken = jwt_decode(accessToken);
+        return { accessToken, userId: decodedToken.userId };
+      },
+    }),
     // ! REGISTER USER
     registerUser: builder.mutation({
       query: (user) => ({
         url: "/register",
         method: "POST",
         body: user,
+      }),
+    }),
+
+    // ? Logout
+    logoutUser: builder.mutation({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
       }),
     }),
     //* Get "CURRENT USER"
@@ -178,9 +186,9 @@ export const {
   useGetAssetPercentageQuery,
   useGetPortfolioStocksQuery,
   useGetNotificationsQuery,
-  useRefreshAccessTokenQuery,
+  useRefreshAccessTokenMutation,
   useUpdatePortfolioStocksMutation,
   useDeletePortfolioStocksMutation,
   useRegisterUserMutation,
-  // usePatchStocksMutation,
+  useLogoutUserMutation,
 } = userApi;

@@ -156,6 +156,23 @@
   }
 }
 
+.trustDeviceWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.trustDevice {
+  visibility: visible !important;
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+.trustDeviceLabel {
+  border: none;
+}
+
 // FOOTER SECTION
 
 .footer {

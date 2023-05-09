@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import globalStyles from "../../../styles/main.module.scss";
 import styles from "./Markets.module.scss";
-import Loading from "../../UI/Loading/Loading";
-import Pagination from "../../Pagination/Pagination"
-import Posts from './Posts'
+import Pagination from "../../Pagination/Pagination";
+import Posts from "./Posts";
 import Hero from "../../UI/Hero/Hero";
 import DownVectorIcon from "../../../assets/icons/down-vector.svg";
 import { useGetCompaniesQuery } from "../../../redux/slices/api/finnhubApiSlice";
+import Loader from "../../UI/Loader/Loader";
 
 const Markets = () => {
   // declares a new state variable setSortedStocks and initializes it with the value false
@@ -33,12 +33,16 @@ const Markets = () => {
 
   const { data, isLoading, isError, isSuccess } = useGetCompaniesQuery();
 
-  const output = data && data.map(item => item).filter(stock => stock.type === "Common Stock");
+  const output =
+    data &&
+    data.map((item) => item).filter((stock) => stock.type === "Common Stock");
 
   const getStockData = () => {
-    const sortedData = output && output.slice().sort((a, b) => {
-      return a.displaySymbol.localeCompare(b.displaySymbol);
-    });
+    const sortedData =
+      output &&
+      output.slice().sort((a, b) => {
+        return a.displaySymbol.localeCompare(b.displaySymbol);
+      });
 
     // Rearrange the data to match the desired sort order
     if (sortOrder === "asc") {
@@ -53,46 +57,50 @@ const Markets = () => {
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = getStockData() && getStockData().slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts =
+    getStockData() && getStockData().slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
-    {isLoading && <Loading/>}
-    {isError && <h2>ERROR!!!</h2>}
-    {isSuccess && (
-      <>
-        {/* Hero Section */}
-        <Hero>
-          {/* SORT SECTION */}
-          <section className={styles.sortSection}>
-            {/* Create a button to trigger toggleSort function when clicked */}
-            <button className={globalStyles.sortButton} onClick={toggleSort}>
-              {/* Change button text depending on the sortOrder state */}
-              {/* {sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A"} */}
-              <span className={styles.buttonText}>{buttonText}</span>
-              <img
-                src={DownVectorIcon}
-                alt="Vector"
-                className={sortedStocks ? styles.rotated : ""}
-              />
-            </button>
-          </section>
+      {/* {!isLoading && <Loader />} */}
+      {isError && <h2>ERROR!!!</h2>}
 
-          {/* STOCKS SECTIONS */}
-          <section >
-          <Posts posts={currentPosts}  />
-          <Pagination
-            postsPerPage={postsPerPage}
-            totalPosts={ output && output.length}
-            paginate={paginate}
-          />
-          </section>
-        </Hero>
-      </>
-    )}
-    </> 
+      <div style={{ position: "relative", height: "100%" }}>
+        {/* Hero Section */}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Hero>
+            {/* SORT SECTION */}
+            <section className={styles.sortSection}>
+              {/* Create a button to trigger toggleSort function when clicked */}
+              <button className={globalStyles.sortButton} onClick={toggleSort}>
+                {/* Change button text depending on the sortOrder state */}
+                {/* {sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A"} */}
+                <span className={styles.buttonText}>{buttonText}</span>
+                <img
+                  src={DownVectorIcon}
+                  alt="Vector"
+                  className={sortedStocks ? styles.rotated : ""}
+                />
+              </button>
+            </section>
+
+            {/* STOCKS SECTIONS */}
+            <section>
+              <Posts posts={currentPosts} />
+              <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={output && output.length}
+                paginate={paginate}
+              />
+            </section>
+          </Hero>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -12,17 +12,13 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 
 const AddFunds = ({ toggle }) => {
-
-  const userID = useSelector(selectCurrentUser)
+  const userID = useSelector(selectCurrentUser);
 
   // Amount State
   const [amount, setAmount] = useState(0);
   // Destructuring RTK.Query Hook for updating user's balance
   const [addBalance, { isLoading, isError, isSuccess }] =
     useAddBalanceMutation();
-
-  // fetch the user's data when the component mounts
-  const { data: user, error } = useGetUserByIdQuery(userID);
 
   // Currency State
   const [currency, setCurrency] = useState("usd");
@@ -53,7 +49,7 @@ const AddFunds = ({ toggle }) => {
     toggle();
   };
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (isError) return <p>Error: {isError.message}</p>;
 
   return (
     <div className={styles.gridContainerAppFunds}>

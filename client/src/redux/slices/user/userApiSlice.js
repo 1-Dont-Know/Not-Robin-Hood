@@ -4,8 +4,9 @@ import jwt_decode from "jwt-decode";
 
 const baseQuery = fetchBaseQuery({
   //? our base url, will be changed to our server url in production mode
-  baseUrl: "http://localhost:7700/",
-  // baseUrl: "https://not-robin-hood-bdrk.vercel.app/",
+  
+  baseUrl: `${process.env.REACT_APP_USERS_BASE_URL}`,
+
   //? to include cookies
   credentials: "include",
   //? once we have a token we will set authorization header, and returning headers from prepareHeaders function
@@ -136,17 +137,43 @@ export const userApi = createApi({
       providesTags: ["Stocks"],
     }),
     //* Update "PORTFOLIO STOCKS"
+    // updatePortfolioStocks: builder.mutation({
+    //   query: () => ({
+    //     url: "/portfolio",
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }),
+    //   invalidatesTags: ["Stocks"],
+    // }),
     updatePortfolioStocks: builder.mutation({
-      query: (stock) => ({
+      query: ({userID, symbol, priceBought, company, share, cost}) => ({
         url: "/portfolio",
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: stock,
+        body: {userID, symbol, priceBought, company, share, cost} ,
       }),
       invalidatesTags: ["Stocks"],
     }),
+
+    // delete
+    deletePortfolioStocks: builder.mutation({
+      query: ({userID, symbol, company}) => ({
+        url: `/portfolio/${userID}/${symbol}/${company}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Stocks"],
+    }),
+
+    // patch stock
+    // patchStocks: builder.mutation({
+    //   query: ({userID, symbol, priceBought, company, share, cost}) => ({
+    //     url: "/portfolio",
+    //     method: "PATCH",
+    //     body: {userID, symbol, priceBought, company, share, cost} ,
+    //   }),
+    //   invalidatesTags: ["Stocks"],
+    // }),
   }),
 });
 
@@ -161,6 +188,7 @@ export const {
   useGetNotificationsQuery,
   useRefreshAccessTokenMutation,
   useUpdatePortfolioStocksMutation,
+  useDeletePortfolioStocksMutation,
   useRegisterUserMutation,
   useLogoutUserMutation,
 } = userApi;

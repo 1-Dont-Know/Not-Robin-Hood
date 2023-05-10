@@ -20,6 +20,7 @@ const Portfolio = () => {
   };
 
   const { data: stocksData } = useGetPortfolioStocksQuery();
+  console.log(stocksData)
 
   const [updateStocks, { isLoading }] = useUpdatePortfolioStocksMutation();
 
@@ -195,7 +196,7 @@ const Portfolio = () => {
                             key={item.id}
                             name={item.name}
                             symbol={item.symbol}
-                            shares={item.amount}
+                            shares={item.share}
                             price={item.price}
                             avgCost={item.averageCost}
                             totalReturn={item.totalReturn}

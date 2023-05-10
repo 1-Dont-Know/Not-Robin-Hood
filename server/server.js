@@ -170,28 +170,28 @@ app.get("/users/:userId/balance", async (req, res) => {
   }
 });
 
-// //? ADD (MUTATE) BALANCE REQUEST
+//? ADD (MUTATE) BALANCE REQUEST
 
-// app.patch("/users/:id", async (req, res) => {
-//   try {
-//     // extract the id and balance from the request
-//     const id = req.params.id;
-//     const { amount } = req.body;
+app.patch("/users/:id", async (req, res) => {
+  try {
+    // extract the id and balance from the request
+    const id = req.params.id;
+    const { amount } = req.body;
 
-//     // update the balance in the database
-//     await connection.query(
-//       "UPDATE users SET balance = balance + ? WHERE id = ?",
-//       [amount, id]
-//     );
+    // update the balance in the database
+    await connection.query(
+      "UPDATE users SET balance = balance + ? WHERE id = ?",
+      [amount, id]
+    );
 
-//     // return a success response
-//     res.status(200).json({ message: "User balance updated successfully" });
-//   } catch (error) {
-//     // handle errors
-//     console.error(error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
+    // return a success response
+    res.status(200).json({ message: "User balance updated successfully" });
+  } catch (error) {
+    // handle errors
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 //  GET REQUEST TO DISPLAY USERS
 
@@ -209,31 +209,45 @@ app.get("/users/", async (req, res) => {
 
 // GET REQUEST TO DISPLAY PORTFOLIO
 
-// app.get("/portfolio", async (req, res) => {
-//   try {
-//     const query = "SELECT * FROM user_portfolio_stocks";
-//     const [rows] = await connection.query(query);
-//     res.json(rows);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
 
-// // * INSERT NEW STOCK INSIDE PORTFOLIO
+app.get("/portfolio", async (req, res) => {
+  try {
+    const query = "SELECT * FROM user_portfolio_stocks";
+    const [rows] = await connection.query(query);
+    res.json(rows);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
-// app.post("/portfolio", async (req, res) => {
-//   const stock_id = 69;
-//   const symbol = "BVT";
+// * INSERT NEW STOCK INSIDE PORTFOLIO
 
-//   try {
-//     const query =
-//       "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, amount, share, price, averageCost, totalReturn, equity) VALUES (1, ?, 'Darshwak', ?, 100, 50, 150, 140, 1000, 15000)";
-//     const [rows] = await connection.query(query, [stock_id, symbol]);
-//     res.json(rows);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
+app.post("/portfolio", async (req, res) => {
+  const {userID, symbol, priceBought, company, share, cost} = req.body
+  console.log(userID, symbol, priceBought, company, share, cost);
+  try {
+    const query =
+    "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, amount, share, price, averageCost, totalReturn, equity) VALUES (?, 1, ?, ?, ?, ?, ?, 140, 1000, 15000)";
+    const [rows] = await connection.query(query, [userID, company, symbol, priceBought, share, cost]);
+    res.json(rows);
+  } catch (err) {
+    console.log(err);
+  }
+ 
+});
+
+app.delete("/portfolio/:userID/:symbol/:company", async (req, res) => {
+  const {userID, symbol, company} = req.params;
+  console.log("delete function called", userID, symbol, company)
+  try {
+    const query = "DELETE FROM user_portfolio_stocks WHERE user_id = ? AND symbol = ? AND name = ? LIMIT 1";
+    const [rows] = await connection.query(query, [userID, symbol, company]);
+    res.json(rows);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 
 // TO CHECK IF OUR APP US RUNNING AND ON WHICH PORT
 app.listen(port, () => console.log(`Server is running on port ${port}`));

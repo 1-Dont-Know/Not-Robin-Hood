@@ -5,8 +5,12 @@ import Sidebar from "../../UI/Sidebar/Sidebar";
 import Hero from "../../UI/Hero/Hero";
 import Filter from "../../UI/Filter/Filter";
 import Stock from "../../UI/Stock/Stock";
+import { useGetStockTransactionsQuery } from "../../../redux/slices/user/userApiSlice";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 
 const StockTransactions = () => {
+  const currentUser = useSelector(selectCurrentUser);
   const data = [
     {
       name: "BNB-USD",
@@ -54,29 +58,23 @@ const StockTransactions = () => {
       info: "Interesting stock",
     },
   ];
+
+  const { data: transactions } = useGetStockTransactionsQuery(currentUser);
   return (
     <>
-      {/* <div className={styles.wrapper}> */}
-      {/* Sidebar Section */}
-      {/* <Sidebar /> */}
-      {/* Nav/Hero Section */}
-      {/* <main className={styles.mainSection}> */}
-      {/* Top Navigation */}
-      {/* <TopNav /> */}
-      {/* Hero Section */}
       <Hero>
         <section className={styles.titleSection}>
           <h4 className={styles.title}>Recent Transactions</h4>
         </section>
         <section className={styles.transactions}>
           <ul className={styles.transactionsList}>
-            {data.map((item) => {
+            {transactions?.map((item) => {
               return (
                 <Stock
-                  key={item.name}
+                  key={item.id}
                   name={item.name}
                   price={item.price}
-                  info={item.info}
+                  info={item.description}
                 />
               );
             })}
@@ -86,8 +84,6 @@ const StockTransactions = () => {
           <Filter />
         </section>
       </Hero>
-      {/* </main> */}
-      {/* </div> */}
     </>
   );
 };

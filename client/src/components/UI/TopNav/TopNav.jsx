@@ -17,17 +17,21 @@ import {
   useGetUserByIdQuery,
   useGetNotificationsQuery,
 } from "../../../redux/slices/user/userApiSlice";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
+import Loading from "../Loading/Loading";
 
 const TopNav = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showFundsPopup, setShowFundsPopup] = useState(false);
-
+  const currentUser = useSelector(selectCurrentUser);
   //* Getting User's Name
 
-  // const { data: user, isLoading, isSuccess } = useGetUserByIdQuery(1);
+  const { data: user, isLoading, isSuccess } = useGetUserByIdQuery(currentUser);
+  const { data: notifications } = useGetNotificationsQuery(currentUser);
 
-  // const username = isLoading ? "LOADING" : user.map((item) => item.name);
+  const username = isLoading ? <Loading /> : user.map((item) => item.name);
 
   // PROFILE HANDLER
   const profileHandler = () => {
@@ -86,7 +90,9 @@ const TopNav = () => {
                 id="notifications"
               >
                 <img src={notification} alt="notification" />
-                <span className={styles.notifications}>6</span>
+                <span className={styles.notifications}>
+                  {notifications?.length}
+                </span>
               </button>
               <button
                 onClick={profileHandler}
@@ -100,7 +106,7 @@ const TopNav = () => {
           {showProfile && (
             <div onClick={profileHandler} className={styles.profileMenu}>
               <div className={styles.info}>
-                <h4>username</h4>
+                <h4>{isLoading ? <Loading /> : username}</h4>
                 <img src={profile} alt="profile" />
               </div>
               <div className={styles.profileCta}>
@@ -129,7 +135,11 @@ const TopNav = () => {
       </div>
       {showNotifications && (
         <Popup name="notifications" toggle={popUpHandler}>
-          <NotificationPopUp name="Aaron" notifications="6" />
+          <NotificationPopUp
+            name={isLoading ? <Loading /> : username}
+            notifications={notifications?.length}
+            data={notifications}
+          />
         </Popup>
       )}
       {showFundsPopup && (

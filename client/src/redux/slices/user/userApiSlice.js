@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 
 const baseQuery = fetchBaseQuery({
   //? our base url, will be changed to our server url in production mode
-  
+
   baseUrl: `${process.env.REACT_APP_USERS_BASE_URL}`,
 
   //? to include cookies
@@ -53,6 +53,7 @@ export const userApi = createApi({
     "AssetValue",
     "AssetCondition",
     "Notifications",
+    "Transactions",
   ],
 
   endpoints: (builder) => ({
@@ -127,7 +128,7 @@ export const userApi = createApi({
     //* Get NOTIFICATIONS
     getNotifications: builder.query({
       query: (userId) => `users/${userId}/notifications`,
-      transformResponse: (response) => response.message,
+      transformResponse: (response) => response.data,
       providesTags: ["Notifications"],
     }),
 
@@ -137,43 +138,29 @@ export const userApi = createApi({
       providesTags: ["Stocks"],
     }),
     //* Update "PORTFOLIO STOCKS"
-    // updatePortfolioStocks: builder.mutation({
-    //   query: () => ({
-    //     url: "/portfolio",
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   }),
-    //   invalidatesTags: ["Stocks"],
-    // }),
     updatePortfolioStocks: builder.mutation({
-      query: ({userID, symbol, priceBought, company, share, cost}) => ({
+      query: ({ userID, id, symbol, priceBought, company, share, cost }) => ({
         url: "/portfolio",
         method: "POST",
-        body: {userID, symbol, priceBought, company, share, cost} ,
+        body: { userID, id, symbol, priceBought, company, share, cost },
       }),
       invalidatesTags: ["Stocks"],
     }),
 
-    // delete
+    // delete Stocks
     deletePortfolioStocks: builder.mutation({
-      query: ({userID, symbol, company}) => ({
+      query: ({ userID, symbol, company }) => ({
         url: `/portfolio/${userID}/${symbol}/${company}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Stocks"],
     }),
 
-    // patch stock
-    // patchStocks: builder.mutation({
-    //   query: ({userID, symbol, priceBought, company, share, cost}) => ({
-    //     url: "/portfolio",
-    //     method: "PATCH",
-    //     body: {userID, symbol, priceBought, company, share, cost} ,
-    //   }),
-    //   invalidatesTags: ["Stocks"],
-    // }),
+    getStockTransactions: builder.query({
+      query: (userId) => `users/${userId}/transactions`,
+      transformResponse: (response) => response.data,
+      providesTags: ["Transactions"],
+    }),
   }),
 });
 
@@ -191,4 +178,5 @@ export const {
   useDeletePortfolioStocksMutation,
   useRegisterUserMutation,
   useLogoutUserMutation,
+  useGetStockTransactionsQuery,
 } = userApi;

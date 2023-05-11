@@ -1,17 +1,29 @@
-.spinner {
-    margin: 0 auto;
-    border: 20px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #09f;
-    border-radius: 50%;
-    align-items: center;
-    width: 200px;
-    height: 200px;
-    animation: spin 1s linear infinite;
+@use "../../../styles/variables.scss";
+@use "../../../styles/mixins.scss";
+.loader {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+  background: variables.$golden;
+  box-shadow: -24px 0 #fff, 24px 0 #fff;
+  box-sizing: border-box;
+  animation: shadowPulse 2s linear infinite;
+}
+
+@keyframes shadowPulse {
+  33% {
+    background: #fff;
+    box-shadow: -24px 0 variables.$secondary-color, 24px 0 #fff;
   }
-  
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
+  66% {
+    background: variables.$secondary-color;
+    box-shadow: -24px 0 #fff, 24px 0 #fff;
   }
-  
+  100% {
+    background: #fff;
+    box-shadow: -24px 0 #fff, 24px 0 variables.$golden;
+  }
+}

@@ -11,55 +11,9 @@ import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 
 const StockTransactions = () => {
   const currentUser = useSelector(selectCurrentUser);
-  const data = [
-    {
-      name: "BNB-USD",
-      price: "$35",
-      info: "Very expensive stock",
-    },
-    {
-      name: "Potrero",
-      price: "$23",
-      info: "Old stock",
-    },
-    {
-      name: "Doge",
-      price: "$35",
-      info: "Grandma's stock",
-    },
-    {
-      name: "P&G",
-      price: "$35",
-      info: "Very expensive stock",
-    },
-    {
-      name: "Alameda",
-      price: "$300",
-      info: "Very cheap stock",
-    },
-    {
-      name: "BayBridge",
-      price: "$349",
-      info: "Interesting stock",
-    },
-    {
-      name: "BayBridge2",
-      price: "$349",
-      info: "Interesting stock",
-    },
-    {
-      name: "BayBridge3",
-      price: "$349",
-      info: "Interesting stock",
-    },
-    {
-      name: "BayBridge4",
-      price: "$349",
-      info: "Interesting stock",
-    },
-  ];
 
   const { data: transactions } = useGetStockTransactionsQuery(currentUser);
+
   return (
     <>
       <Hero>
@@ -67,17 +21,24 @@ const StockTransactions = () => {
           <h4 className={styles.title}>Recent Transactions</h4>
         </section>
         <section className={styles.transactions}>
-          <ul className={styles.transactionsList}>
-            {transactions?.map((item) => {
-              return (
-                <Stock
-                  key={item.id}
-                  name={item.name}
-                  price={item.price}
-                  info={item.description}
-                />
-              );
-            })}
+          <ul
+            className={styles.transactionsList}
+            style={{ justifyContent: transactions?.length < 1 ? "center" : "" }}
+          >
+            {transactions?.length < 1 ? (
+              <p className={styles.empty}>No transactions found</p>
+            ) : (
+              transactions?.map((item) => {
+                return (
+                  <Stock
+                    key={item.id}
+                    name={item.name}
+                    price={item.price}
+                    info={item.description}
+                  />
+                );
+              })
+            )}
           </ul>
         </section>
         <section className={styles.filter}>

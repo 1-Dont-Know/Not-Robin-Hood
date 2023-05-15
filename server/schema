@@ -3,7 +3,6 @@ CREATE TABLE users (
   name VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  isAuthorized BOOLEAN NOT NULL,
   balance FLOAT NOT NULL,
   phone VARCHAR(255) NOT NULL,
   refreshToken JSON NOT NULL DEFAULT '[]'
@@ -25,10 +24,8 @@ CREATE TABLE user_notifications (
 
 CREATE TABLE user_portfolio (
   user_id INT NOT NULL,
-  stocksCashValue INT NOT NULL,
-  stockPercentage INT NOT NULL,
-  cashValue INT NOT NULL,
-  cashPercentage INT NOT NULL
+  buyingPower INT NOT NULL,
+  stocksPower INT NOT NULL
 );
 
 CREATE TABLE user_portfolio_stocks (

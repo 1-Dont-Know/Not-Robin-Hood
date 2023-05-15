@@ -7,22 +7,29 @@ import vector from "../../../assets/icons/vector.svg";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import {
+  useGetBalanceQuery,
   useGetPortfolioStocksQuery,
   useUpdatePortfolioStocksMutation,
 } from "../../../redux/slices/user/userApiSlice";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
+import Loading from "../../UI/Loading/Loading";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Portfolio = () => {
+  const currentUser = useSelector(selectCurrentUser);
   const tabFlags = {
     overview: 1,
     stocksList: 2,
   };
 
-  const { data: stocksData } = useGetPortfolioStocksQuery();
-  console.log(stocksData)
+  const { data: stocksData } = useGetPortfolioStocksQuery(currentUser);
 
   const [updateStocks, { isLoading }] = useUpdatePortfolioStocksMutation();
+
+  const { data: balance = 0, isLoading: isBalanceLoading } =
+    useGetBalanceQuery(currentUser);
 
   const [activeTab, setActiveTab] = useState(tabFlags.overview);
 
@@ -31,17 +38,6 @@ const Portfolio = () => {
       return (curr = selectedTab);
     });
   }
-
-  const fetchStocks = (e) => {
-    e.preventDefault();
-    updateStocks({
-      name: "Darshwak",
-      symbol: "DRSH",
-      shares: 250,
-      price: 500,
-      averagecost: 520,
-    });
-  };
 
   //Fake data for pie chart
   const data = {
@@ -122,7 +118,9 @@ const Portfolio = () => {
                   <h1 className={styles.totalPortfolioTitle}>
                     Total Portfolio Value
                   </h1>
-                  <h1 className={styles.totalPortfolioValue}>$1200.00</h1>
+                  <h1 className={styles.totalPortfolioValue}>
+                    {isBalanceLoading ? <Loading /> : `$${balance}`}
+                  </h1>
                 </section>
 
                 <section className={styles.stocks}>
@@ -142,7 +140,7 @@ const Portfolio = () => {
                     className={styles.sectionValue}
                     id={styles.buyingPowerValue}
                   >
-                    $600
+                    {isBalanceLoading ? <Loading /> : `$${balance}`}
                   </h1>
                 </section>
 
@@ -205,7 +203,6 @@ const Portfolio = () => {
                         );
                       })
                     : "No stocks purchased, go ahead and buy some"}
-                  <button onClick={fetchStocks}>Add Stock</button>
                 </ul>
               </section>
             </div>

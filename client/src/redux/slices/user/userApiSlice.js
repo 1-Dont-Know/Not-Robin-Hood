@@ -54,13 +54,14 @@ export const userApi = createApi({
     "AssetCondition",
     "Notifications",
     "Transactions",
+    "PortfolioValue",
   ],
 
   endpoints: (builder) => ({
     // *** REFRESH TOKEN
     refreshAccessToken: builder.mutation({
       query: () => ({
-        url: "/refresh",
+        url: "api/refresh",
         method: "POST",
       }),
       transformResponse: (response) => {
@@ -72,7 +73,7 @@ export const userApi = createApi({
     // ! REGISTER USER
     registerUser: builder.mutation({
       query: (user) => ({
-        url: "/register",
+        url: "api/register",
         method: "POST",
         body: user,
       }),
@@ -81,66 +82,53 @@ export const userApi = createApi({
     // ? Logout
     logoutUser: builder.mutation({
       query: () => ({
-        url: "/logout",
+        url: "api/logout",
         method: "POST",
       }),
     }),
     //* Get "CURRENT USER"
     getUserById: builder.query({
-      query: (id) => `users/${id}`,
+      query: (id) => `user/${id}/info`,
       providesTags: ["User"],
     }),
     //* Get "BALANCE"
     getBalance: builder.query({
-      query: (userId) => `/users/${userId}/balance`,
+      query: (userId) => `/user/${userId}/balance`,
       transformResponse: (response) => response.balance,
       providesTags: ["Balance"],
     }),
     //* Add "BALANCE"
     addBalance: builder.mutation({
       query: ({ id, amount }) => ({
-        url: `/users/${id}`,
+        url: `user/balance/${id}`,
         method: "PATCH",
         body: { amount },
       }),
       invalidatesTags: ["Balance"],
     }),
 
-    //* Get "ASSET VALUE"
+    //* Get "User's Asset (Value, Condition, Percentage)"
     getAssetValue: builder.query({
-      query: (userId) => `users/${userId}/asset`,
-      transformResponse: (response) => response.value,
-      providesTags: ["AssetValue"],
+      query: (userId) => `user/${userId}/asset`,
+      transformResponse: (response) => response,
+      providesTags: ["AssetValue", "AssetCondition", "AssetPercentage"],
     }),
-    //* Get "ASSET CONDITION"
-    getAssetCondition: builder.query({
-      query: (userId) => `users/${userId}/condition`,
-      transformResponse: (response) => response.condition,
-      providesTags: ["AssetCondition"],
-    }),
-    //* Get "ASSET PERCENTAGE"
-    getAssetPercentage: builder.query({
-      query: (userId) => `users/${userId}/percentage`,
-      transformResponse: (response) => response.percentage,
-      providesTags: ["AssetPercentage"],
-    }),
-
     //* Get NOTIFICATIONS
     getNotifications: builder.query({
-      query: (userId) => `users/${userId}/notifications`,
+      query: (userId) => `user/${userId}/notifications`,
       transformResponse: (response) => response.data,
       providesTags: ["Notifications"],
     }),
 
     //* Get "PORTFOLIO STOCKS"
     getPortfolioStocks: builder.query({
-      query: () => "/portfolio",
+      query: (userId) => `user/${userId}/portfolio/stocks`,
       providesTags: ["Stocks"],
     }),
     //* Update "PORTFOLIO STOCKS"
     updatePortfolioStocks: builder.mutation({
       query: ({ userID, id, symbol, priceBought, company, share, cost }) => ({
-        url: "/portfolio",
+        url: "user/portfolio/stocks",
         method: "POST",
         body: { userID, id, symbol, priceBought, company, share, cost },
       }),
@@ -150,16 +138,28 @@ export const userApi = createApi({
     // delete Stocks
     deletePortfolioStocks: builder.mutation({
       query: ({ userID, symbol, company }) => ({
-        url: `/portfolio/${userID}/${symbol}/${company}`,
+        url: `user/portfolio/stocks/${userID}/${symbol}/${company}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Stocks"],
     }),
-
+    // Get user's transactions
     getStockTransactions: builder.query({
-      query: (userId) => `users/${userId}/transactions`,
+      query: (userId) => `user/${userId}/transactions`,
       transformResponse: (response) => response.data,
       providesTags: ["Transactions"],
+    }),
+    getPortfolioTotalValue: builder.query({
+      query: (userId) => `user/${userId}/portfolio/value`,
+      transformResponse: (response) => response.data,
+      providesTags: ["PortfolioValue"],
+    }),
+    updatePortfolioValue: builder.mutation({
+      query: ({ userId, stocksPower, buyingPower }) => ({
+        url: `user/${userId}/portfolio/value/update`,
+        method: "POST",
+        invalidatesTags: ["PortfolioValue"],
+      }),
     }),
   }),
 });
@@ -179,4 +179,6 @@ export const {
   useRegisterUserMutation,
   useLogoutUserMutation,
   useGetStockTransactionsQuery,
+  useGetPortfolioTotalValueQuery,
+  useUpdatePortfolioValueMutation,
 } = userApi;

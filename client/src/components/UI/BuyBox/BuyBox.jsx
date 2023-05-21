@@ -32,36 +32,34 @@ const BuyBox = ({ type, symbol, price, name }) => {
     isLoading: isLoading2,
     error: error2,
   } = useGetBalanceQuery(userID);
-  // console.log(balance)
+
   const { data: stocksData } = useGetPortfolioStocksQuery();
-  // console.log(stocksData)
-
-  // const found =0;
-
-  // console.log(userID)
 
   const [deleteStock] = useDeletePortfolioStocksMutation();
 
   const [updateStocks, { isLoading }] = useUpdatePortfolioStocksMutation();
-  // console.log(des)
 
   const qtyHandler = (e) => {
     setQty(Number(e.target.value));
   };
 
   const handleBalanceSubmit = (e, amount) => {
-    // console.log(balance)
     e.preventDefault();
+    // Buying case (reduce balance by amount)
     if (amount < 0) {
+      // we dont have money, so we can't buy
       if (balance < Math.abs(amount)) {
         console.log(amount, " ", balance);
         console.log("cant buy");
+        // we have money and we can buy
       } else {
         console.log(amount, " ", balance);
         console.log("can buy");
+        // we wil modify balance based on computed amount
         addBalance({ id: userID, amount });
         e.preventDefault();
         console.log(symbol);
+        // updating stocks only if we are buying (adding new stock to the array)
         updateStocks({
           userID: userID,
           id: nanoid(),
@@ -72,6 +70,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
           cost: Math.abs(amount),
         });
       }
+      // selling case
     } else {
       // let found =0;
       let tempQTY = qty;
@@ -134,6 +133,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
     }
   };
 
+  // triggering amount state
   useEffect(() => {
     setSellAmount(parseFloat((price * qty).toFixed(2)));
     setBuyAmount(parseFloat((-price * qty).toFixed(2)));

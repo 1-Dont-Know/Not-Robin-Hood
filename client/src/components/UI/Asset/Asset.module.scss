@@ -12,10 +12,9 @@
     font-weight: variables.$font-bold;
     font-size: 24px;
     margin: 20px 0;
-    span {
-      position: absolute;
-      top: -10px;
-      left: 40px;
+    &::after {
+      content: "USD";
+      padding-left: 0.5rem;
       font-size: 18px;
       font-weight: variables.$font-regular;
     }

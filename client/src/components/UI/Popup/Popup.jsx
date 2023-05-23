@@ -5,13 +5,21 @@ const Popup = ({ name, toggle, children }) => {
   return (
     <div className={styles.container}>
       <div
-        className={name === "notifications" ? styles.popup : styles.popUpFunds}
+        className={
+          name === "notifications"
+            ? styles.popup
+            : name === "sellStock"
+            ? styles.sellStock
+            : styles.popUpFunds
+        }
       >
         <button
           onClick={toggle}
           className={
             name === "notifications"
               ? styles.closePopupButton
+              : name === "sellStock"
+              ? styles.closePopupButtonSellStock
               : styles.closePopupButtonFunds
           }
         >

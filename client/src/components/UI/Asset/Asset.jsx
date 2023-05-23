@@ -3,40 +3,41 @@ import styles from "./Asset.module.scss";
 import assetUp from "../../../assets/icons/asset-up.svg";
 import assetDown from "../../../assets/icons/assetsdown.svg";
 
-import { useGetAssetValueQuery } from "../../../redux/slices/user/userApiSlice";
+import { useGetPortfolioStocksQuery } from "../../../redux/slices/user/userApiSlice";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 import Loading from "../Loading/Loading";
 
 const Asset = () => {
   const currentUser = useSelector(selectCurrentUser);
-  const { data: usersAsset, isLoading: loadingValue } =
-    useGetAssetValueQuery(currentUser);
-  if (loadingValue) {
+  const { data: stocksData } = useGetPortfolioStocksQuery(currentUser);
+
+  const assetValue = stocksData
+    ?.reduce((acc, curr) => acc + curr.equity, 0)
+    .toFixed(2);
+  const percentage = 0;
+  const condition = "negative";
+  if (!stocksData) {
     return <Loading />;
   }
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Asset Value</h3>
-      {usersAsset?.value || usersAsset?.condition || usersAsset?.percentage ? (
+      {stocksData ? (
         <>
-          <p className={styles.amount}>
-            ${usersAsset?.value}
-            <span>USD</span>
-          </p>
+          <p className={styles.amount}>${assetValue}</p>
           <div
             className={styles.results}
             style={{
-              color:
-                usersAsset?.condition === "positive" ? "#2ab795" : "#AE2424",
+              color: condition === "positive" ? "#2ab795" : "#AE2424",
             }}
           >
-            {usersAsset?.condition === "positive" ? (
+            {condition === "positive" ? (
               <img src={assetUp} alt="up" />
             ) : (
               <img src={assetDown} alt="down" />
             )}
-            $0{`(${usersAsset?.percentage})%`}
+            $0{`(${percentage})%`}
             <span>Today</span>
           </div>
         </>

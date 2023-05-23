@@ -22,6 +22,10 @@ userRouter.get("/:userId/asset", assetController.getAsset);
 
 // User's Transactions routes
 userRouter.get("/:userId/transactions", transactionsController.getTransactions);
+userRouter.post(
+  "/:userID/transactions/update",
+  transactionsController.updateTransactions
+);
 
 // User's Balance routes
 userRouter.get("/:userId/balance", balanceController.getBalance);

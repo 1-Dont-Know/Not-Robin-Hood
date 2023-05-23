@@ -10,6 +10,7 @@ import {
   useGetPortfolioStocksQuery,
   useUpdatePortfolioStocksMutation,
   useDeletePortfolioStocksMutation,
+  useAddStockTransactionsMutation,
 } from "../../../redux/slices/user/userApiSlice";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
@@ -36,6 +37,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
   const { data: stocksData } = useGetPortfolioStocksQuery();
 
   const [deleteStock] = useDeletePortfolioStocksMutation();
+  const [updateTransactions] = useAddStockTransactionsMutation();
 
   const [updateStocks, { isLoading }] = useUpdatePortfolioStocksMutation();
 
@@ -60,14 +62,22 @@ const BuyBox = ({ type, symbol, price, name }) => {
         e.preventDefault();
         console.log(symbol);
         // updating stocks only if we are buying (adding new stock to the array)
+        const id = nanoid();
         updateStocks({
           userID: userID,
-          id: nanoid(),
+          id,
           symbol: symbol,
           priceBought: price,
           company: name,
           share: qty,
           cost: Math.abs(amount),
+        });
+        updateTransactions({
+          userID,
+          id,
+          name,
+          price,
+          description: `Purchase of ${Math.abs(amount)} shares`,
         });
       }
       // selling case

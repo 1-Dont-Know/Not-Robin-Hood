@@ -112,7 +112,7 @@ const Search = ({ placeholder }) => {
                         className={styles.listResult}
                         to={{
                           pathname: "/stock-viewer",
-                          search: `?symbol=${item["1. symbol"]}&description=${item["2. name"]}`,
+                          search: `?symbol=${item["1. symbol"]}&description=${item["2. name"].replace(/\s+/g,'+')}`,
                         }}
                         onClick={() => setResultsIsOpen(false)}
                       >

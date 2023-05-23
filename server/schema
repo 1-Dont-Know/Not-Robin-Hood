@@ -24,8 +24,8 @@ CREATE TABLE user_notifications (
 
 CREATE TABLE user_portfolio (
   user_id INT NOT NULL,
-  buyingPower INT NOT NULL,
-  stocksPower INT NOT NULL
+  buyingPower FLOAT NOT NULL,
+  stocksPower FLOAT NOT NULL
 );
 
 CREATE TABLE user_portfolio_stocks (
@@ -59,8 +59,8 @@ CREATE TABLE user_asset_value (
 
 CREATE TABLE user_transactions (
   user_id INT NOT NULL,
-  id INT NOT NULL,
+  id VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,
-  price INT NOT NULL,
+  price FLOAT NOT NULL,
   description TEXT NOT NULL
 );

@@ -2,166 +2,213 @@
 @use "../../../styles/variables.scss";
 
 .tabs {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 80px;
-    min-height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+  min-height: 80px;
 
-    width: 400px;
-    padding: 0.1rem 0;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 25px 25px 0 0;
-    background-color: variables.$light-yellow;
+  width: 400px;
+  padding: 0.1rem 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 25px 25px 0 0;
+  background-color: variables.$light-yellow;
 }
 
-.tabButton{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
+.tabButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 
-    background-color: variables.$primary-color;
-    color: variables.$secondary-color;
-    font-weight: 600;
-    font-size: 1.3rem;
-    
-    padding: 0.7rem;
-    max-width: 150px;
-    border-radius: 25px;
-    transition: 0.3s ease-in-out;
-  
-    &:hover {
-      background-color: variables.$secondary-color;
-      color: variables.$primary-color;
-    }
+  background-color: variables.$primary-color;
+  color: variables.$secondary-color;
+  font-weight: 600;
+  font-size: 1.3rem;
 
-    // &:focus {
-    //     background-color: variables.$secondary-color;
-    //     color: variables.$primary-color;
-    // }
+  padding: 0.7rem;
+  max-width: 150px;
+  border-radius: 25px;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background-color: variables.$secondary-color;
+    color: variables.$primary-color;
+  }
+
+  // &:focus {
+  //     background-color: variables.$secondary-color;
+  //     color: variables.$primary-color;
+  // }
 }
 
 .tanSquare {
-    display: flex;
-    flex: 1;
-    min-width: 400px;
+  display: flex;
+  flex: 1;
+  min-width: 400px;
+  position: relative;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 0 25px 25px 25px;
+  background-color: variables.$light-yellow;
+  padding: 20px;
+}
 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 0 25px 25px 25px;
-    background-color: variables.$light-yellow;
-    padding: 20px;
-    
-
+.calculateBtn {
+  position: absolute;
+  top: 1.5%;
+  right: 1.5%;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: variables.$primary-color;
+  transition: all 0.3s ease-in-out;
+  img {
+    max-width: 1.2rem;
+  }
+  &:hover {
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.45);
+  }
 }
 
 .details {
-    display: flex;
-    flex-direction: column;
-    align-items: space-between;
-    flex: 1;
-    padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  flex: 1;
+  padding-left: 30px;
 }
 
-
-
 .totalPortfolio {
-    display: flex;
-    flex-direction: column;
-    margin: 20px 0 60px 0;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 60px 0;
 }
 
 .totalPortfolioTitle {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 32px;
-    line-height: 38px;
-    color: variables.$secondary-color;
-    margin-bottom: 20px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 38px;
+  color: variables.$secondary-color;
+  margin-bottom: 20px;
 }
 
 .totalPortfolioValue {
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
 }
 
-
 .sectionTitle {
-    font-weight: 700;
-    font-size: 2rem;
-    color: variables.$secondary-color;
-    margin-bottom: 30px;
-    flex: 1 1 50%;
+  font-weight: 700;
+  font-size: 2rem;
+  color: variables.$secondary-color;
+  margin-bottom: 30px;
+  flex: 1 1 50%;
 }
 
 .sectionPercent {
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 39px;
-    flex: 1 1 25%;
-    color: #32543A;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  flex: 1 1 25%;
+  color: #32543a;
 }
 
 .sectionValue {
-    font-weight: 800;
-    font-size: 32px;
-    line-height: 39px;
-    flex: 1 1 25%;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 39px;
+  flex: 1 1 25%;
 }
 
-#stockValue{
-    color: variables.$golden;
+#stockValue {
+  color: variables.$golden;
 }
 
-#buyingPowerValue{
-    color: #2AB795;
+#buyingPowerValue {
+  color: #2ab795;
 }
 
 .stocks {
-    display: flex;
-    justify-content: space-between;
-
+  display: flex;
+  justify-content: space-between;
 }
 
 .buyingPower {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .doughnutGraph {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
 }
 
 .overviewLine {
-    border-top: 1px solid #000;
-    width: 90%; 
-    margin-bottom: 60px;
+  border-top: 1px solid #000;
+  width: 90%;
+  margin-bottom: 60px;
 }
-
-
-
 
 .stocksLine {
-    border-top: 1px solid #000;
-    margin: 20px 30px;
+  border-top: 1px solid #000;
+  margin: 20px 30px;
 }
 
-
 .stocksTitleBar {
-    display: flex;
-    flex: 1;
-    align-items: center;
+  display: flex;
+  flex: 1;
+  align-items: center;
 
-    margin: 20px 30px 0 30px;
-    padding: 0 20px;
+  margin: 20px 30px 0 30px;
+  padding: 0 20px;
 }
 
 .title {
-    flex: 1 1 14.3%;
+  flex: 1 1 14.3%;
+}
+.sellStockPopupContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.stockName {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  p {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 25px;
+    padding: 1.4rem;
+  }
+}
+.stockDetails {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  input {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 25px;
+    padding: 1.2rem;
+  }
+  .qty,
+  .amount {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
+.sellBtnContainer {
+  display: flex;
+  align-self: center;
+  min-width: 50%;
+}

@@ -9,11 +9,32 @@ class TransactionsController {
 
     try {
       const [rows] = await connection.query(
-        "SELECT * from user_transactions WHERE id = ?",
+        "SELECT * from user_transactions WHERE user_id = ?",
         [userId]
       );
       console.log(rows[0]);
       res.json({ data: rows });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Server error" });
+    }
+  }
+
+  async updateTransactions(req, res, next) {
+    const connection = await connectDB();
+    const { userID, id, name, price, description } = req.body;
+    console.log("Transaction:", userID, id, name, price, description);
+    try {
+      const query =
+        "INSERT INTO user_transactions (user_id, id, name, price, description) VALUES (?, ?, ?, ?, ?)";
+      const [rows] = await connection.query(query, [
+        userID,
+        id,
+        name,
+        price,
+        description,
+      ]);
+      res.json(rows);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Server error" });

@@ -1,4 +1,5 @@
 # Not-Robin-Hood
+
 A stock and trade app similar to Robin Hood
 
 <h2> 🚀 &nbsp;Tech stack:</h2>
@@ -7,6 +8,7 @@ A stock and trade app similar to Robin Hood
 <ol>
   <li>React, React Router</li>
   <li>SCSS</li>
+  <li>Redux Toolkit</li>
 </ol>
 
 <h3>Back-end</h3>
@@ -28,8 +30,8 @@ A stock and trade app similar to Robin Hood
 <li>Discord</li>
 </ol>
 
-
 ## Installing Dependencies
+
 To install the node_modules folder, run:
 
 ```bash
@@ -37,6 +39,7 @@ npm install
 ```
 
 ## Run
+
 ```bash
 npm start
 ```

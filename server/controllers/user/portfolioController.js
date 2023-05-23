@@ -18,10 +18,13 @@ class PortfolioController {
     // Establishing connection to our PlanetScale DB
     const connection = await connectDB();
     const { userID, id, symbol, priceBought, company, share, cost } = req.body;
+    const averageCost = cost / share;
+    const totalReturn = share * (priceBought - averageCost);
+    const equity = priceBought * share;
     console.log(userID, id, symbol, priceBought, company, share, cost);
     try {
       const query =
-        "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, amount, share, price, averageCost, totalReturn, equity) VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0, 0)";
+        "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, amount, share, price, averageCost, totalReturn, equity) VALUES (?, ?, ?, ?, ?, ?, ?, ? , ?, ?)";
       const [rows] = await connection.query(query, [
         userID,
         id,
@@ -30,6 +33,9 @@ class PortfolioController {
         priceBought,
         share,
         cost,
+        averageCost,
+        totalReturn,
+        equity,
       ]);
       res.json(rows);
     } catch (err) {

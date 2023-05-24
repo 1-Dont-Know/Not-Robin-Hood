@@ -149,6 +149,14 @@ export const userApi = createApi({
       transformResponse: (response) => response.data,
       providesTags: ["Transactions"],
     }),
+    addStockTransactions: builder.mutation({
+      query: ({ userID, id, name, price, description }) => ({
+        url: `user/${userID}/transactions/update`,
+        method: "POST",
+        body: { userID, id, name, price, description },
+      }),
+      invalidatesTags: ["Transactions"],
+    }),
     getPortfolioTotalValue: builder.query({
       query: (userId) => `user/${userId}/portfolio/value`,
       transformResponse: (response) => response.data,
@@ -181,4 +189,5 @@ export const {
   useGetStockTransactionsQuery,
   useGetPortfolioTotalValueQuery,
   useUpdatePortfolioValueMutation,
+  useAddStockTransactionsMutation,
 } = userApi;

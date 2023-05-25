@@ -13,7 +13,6 @@ const StockTransactions = () => {
   const currentUser = useSelector(selectCurrentUser);
 
   const { data: transactions } = useGetStockTransactionsQuery(currentUser);
-  console.log(transactions);
 
   return (
     <>

@@ -136,7 +136,7 @@ const Portfolio = () => {
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.fillText(
-        `Total Value: ${totalValue}`,
+        `Total Value: ${totalValue.toFixed(2)}`,
         chart.getDatasetMeta(0).data[0].x,
         chart.getDatasetMeta(0).data[0].y
       );
@@ -248,19 +248,18 @@ const Portfolio = () => {
 
                 <hr className={styles.overviewLine} />
               </div>
-              
+
               {isBalanceLoading ? (
-                      <Loading />
-                    ) : (
-                      <div className={styles.doughnutGraph}>
-                        <Doughnut
-                          data={data}
-                          options={options}
-                          plugins={[textCenter]}
-                        ></Doughnut>
-                      </div>
+                <Loading />
+              ) : (
+                <div className={styles.doughnutGraph}>
+                  <Doughnut
+                    data={data}
+                    options={options}
+                    plugins={[textCenter]}
+                  ></Doughnut>
+                </div>
               )}
-              
             </>
           )}
 

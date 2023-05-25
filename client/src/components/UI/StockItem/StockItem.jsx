@@ -41,7 +41,7 @@ const StockItem = ({ symbol, value, des, type, figi }) => {
         <div className={styles.buyStock}>
           <Link  to={{ 
             pathname: "/stock-viewer", 
-            search: `?symbol=${symbol}&description=${des}`
+            search: `?symbol=${symbol}&description=${des.replace(/\s+/g,'+')}`
             }}  
             className={globalStyles.whiteBuyButton}
           >

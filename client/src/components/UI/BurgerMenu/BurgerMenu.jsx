@@ -10,10 +10,20 @@ import notification from "../../../assets/icons/bell-icon.svg";
 import profile from "../../../assets/icons/profile.svg";
 import AddIcon from "../../../assets/icons/plus-icon.svg";
 import ShareIcon from "../../../assets/icons/share.svg";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
+import {
+  useGetNotificationsQuery,
+  useGetUserByIdQuery,
+} from "../../../redux/slices/user/userApiSlice";
+import Loading from "../Loading/Loading";
 
 const BurgerMenu = ({ showProfile, notificationsHandler, addFundsHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const currentUser = useSelector(selectCurrentUser);
+  const { data: user, isLoading, isSuccess } = useGetUserByIdQuery(currentUser);
+  const { data: notifications } = useGetNotificationsQuery(currentUser);
+  const username = isLoading ? <Loading /> : user.map((item) => item.name);
   const burgerMenuHandler = () => {
     setIsOpen((isOpen) => !isOpen);
   };
@@ -41,10 +51,12 @@ const BurgerMenu = ({ showProfile, notificationsHandler, addFundsHandler }) => {
               id="notifications"
             >
               <img src={notification} alt="notification" />
-              <span className={styles.notifications}>6</span>
+              <span className={styles.notifications}>
+                {notifications?.length}
+              </span>
             </button>
             <div className={styles.info}>
-              <h4>Aaron Smith</h4>
+              <h4>{username}</h4>
               <img src={profile} alt="profile" />
             </div>
             <div className={styles.profileCta}>

@@ -4,8 +4,9 @@ import jwt_decode from "jwt-decode";
 
 const baseQuery = fetchBaseQuery({
   //? our base url, will be changed to our server url in production mode
-  baseUrl: "http://localhost:7700/",
-  // baseUrl: "https://not-robin-hood-bdrk.vercel.app/",
+
+  baseUrl: `${process.env.REACT_APP_USERS_BASE_URL}`,
+
   //? to include cookies
   credentials: "include",
   //? once we have a token we will set authorization header, and returning headers from prepareHeaders function
@@ -52,13 +53,15 @@ export const userApi = createApi({
     "AssetValue",
     "AssetCondition",
     "Notifications",
+    "Transactions",
+    "PortfolioValue",
   ],
 
   endpoints: (builder) => ({
     // *** REFRESH TOKEN
     refreshAccessToken: builder.mutation({
       query: () => ({
-        url: "/refresh",
+        url: "api/refresh",
         method: "POST",
       }),
       transformResponse: (response) => {
@@ -70,7 +73,7 @@ export const userApi = createApi({
     // ! REGISTER USER
     registerUser: builder.mutation({
       query: (user) => ({
-        url: "/register",
+        url: "api/register",
         method: "POST",
         body: user,
       }),
@@ -79,73 +82,92 @@ export const userApi = createApi({
     // ? Logout
     logoutUser: builder.mutation({
       query: () => ({
-        url: "/logout",
+        url: "api/logout",
         method: "POST",
       }),
     }),
     //* Get "CURRENT USER"
     getUserById: builder.query({
-      query: (id) => `users/${id}`,
+      query: (id) => `user/${id}/info`,
       providesTags: ["User"],
     }),
     //* Get "BALANCE"
     getBalance: builder.query({
-      query: (userId) => `/users/${userId}/balance`,
+      query: (userId) => `/user/${userId}/balance`,
       transformResponse: (response) => response.balance,
       providesTags: ["Balance"],
     }),
     //* Add "BALANCE"
     addBalance: builder.mutation({
       query: ({ id, amount }) => ({
-        url: `/users/${id}`,
+        url: `user/balance/${id}`,
         method: "PATCH",
         body: { amount },
       }),
       invalidatesTags: ["Balance"],
     }),
 
-    //* Get "ASSET VALUE"
+    //* Get "User's Asset (Value, Condition, Percentage)"
     getAssetValue: builder.query({
-      query: (userId) => `users/${userId}/asset`,
-      transformResponse: (response) => response.value,
-      providesTags: ["AssetValue"],
+      query: (userId) => `user/${userId}/asset`,
+      transformResponse: (response) => response,
+      providesTags: ["AssetValue", "AssetCondition", "AssetPercentage"],
     }),
-    //* Get "ASSET CONDITION"
-    getAssetCondition: builder.query({
-      query: (userId) => `users/${userId}/condition`,
-      transformResponse: (response) => response.condition,
-      providesTags: ["AssetCondition"],
-    }),
-    //* Get "ASSET PERCENTAGE"
-    getAssetPercentage: builder.query({
-      query: (userId) => `users/${userId}/percentage`,
-      transformResponse: (response) => response.percentage,
-      providesTags: ["AssetPercentage"],
-    }),
-
     //* Get NOTIFICATIONS
     getNotifications: builder.query({
-      query: (userId) => `users/${userId}/notifications`,
-      transformResponse: (response) => response.message,
+      query: (userId) => `user/${userId}/notifications`,
+      transformResponse: (response) => response.data,
       providesTags: ["Notifications"],
     }),
 
     //* Get "PORTFOLIO STOCKS"
     getPortfolioStocks: builder.query({
-      query: () => "/portfolio",
+      query: (userId) => `user/${userId}/portfolio/stocks`,
       providesTags: ["Stocks"],
     }),
     //* Update "PORTFOLIO STOCKS"
     updatePortfolioStocks: builder.mutation({
-      query: (stock) => ({
-        url: "/portfolio",
+      query: ({ userID, id, symbol, priceBought, company, share, cost }) => ({
+        url: "user/portfolio/stocks",
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: stock,
+        body: { userID, id, symbol, priceBought, company, share, cost },
       }),
       invalidatesTags: ["Stocks"],
+    }),
+
+    // delete Stocks
+    deletePortfolioStocks: builder.mutation({
+      query: ({ userID, symbol, company }) => ({
+        url: `user/portfolio/stocks/${userID}/${symbol}/${company}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Stocks"],
+    }),
+    // Get user's transactions
+    getStockTransactions: builder.query({
+      query: (userId) => `user/${userId}/transactions`,
+      transformResponse: (response) => response.data,
+      providesTags: ["Transactions"],
+    }),
+    addStockTransactions: builder.mutation({
+      query: ({ userID, id, name, price, description }) => ({
+        url: `user/${userID}/transactions/update`,
+        method: "POST",
+        body: { userID, id, name, price, description },
+      }),
+      invalidatesTags: ["Transactions"],
+    }),
+    getPortfolioTotalValue: builder.query({
+      query: (userId) => `user/${userId}/portfolio/value`,
+      transformResponse: (response) => response.data,
+      providesTags: ["PortfolioValue"],
+    }),
+    updatePortfolioValue: builder.mutation({
+      query: ({ userId, stocksPower, buyingPower }) => ({
+        url: `user/${userId}/portfolio/value/update`,
+        method: "POST",
+        invalidatesTags: ["PortfolioValue"],
+      }),
     }),
   }),
 });
@@ -161,6 +183,11 @@ export const {
   useGetNotificationsQuery,
   useRefreshAccessTokenMutation,
   useUpdatePortfolioStocksMutation,
+  useDeletePortfolioStocksMutation,
   useRegisterUserMutation,
   useLogoutUserMutation,
+  useGetStockTransactionsQuery,
+  useGetPortfolioTotalValueQuery,
+  useUpdatePortfolioValueMutation,
+  useAddStockTransactionsMutation,
 } = userApi;

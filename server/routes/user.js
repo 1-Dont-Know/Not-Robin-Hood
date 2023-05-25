@@ -1,0 +1,45 @@
+import express from "express";
+import assetController from "../controllers/user/assetController.js";
+import balanceController from "../controllers/user/balanceController.js";
+import notificationsController from "../controllers/user/notificationsController.js";
+import transactionsController from "../controllers/user/transactionsController.js";
+import portfolioController from "../controllers/user/portfolioController.js";
+import userInfoController from "../controllers/user/userInfoController.js";
+
+const userRouter = express.Router();
+
+// User's general info routes
+userRouter.get("/:id/info", userInfoController.getDetails);
+
+// User's Notifications routes
+userRouter.get(
+  "/:userId/notifications",
+  notificationsController.getNotifications
+);
+
+// User's Asset routes
+userRouter.get("/:userId/asset", assetController.getAsset);
+
+// User's Transactions routes
+userRouter.get("/:userId/transactions", transactionsController.getTransactions);
+userRouter.post(
+  "/:userID/transactions/update",
+  transactionsController.updateTransactions
+);
+
+// User's Balance routes
+userRouter.get("/:userId/balance", balanceController.getBalance);
+userRouter.patch("/balance/:id", balanceController.changeBalance);
+
+// User's Stocks routes
+userRouter.get(
+  "/:userId/portfolio/stocks",
+  portfolioController.getPortfolioStocks
+);
+userRouter.post("/portfolio/stocks", portfolioController.addPortfolioStock);
+userRouter.delete(
+  "/portfolio/stocks/:userID/:symbol/:company",
+  portfolioController.deletePortfolioStock
+);
+
+export default userRouter;

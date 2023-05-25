@@ -3,7 +3,6 @@ CREATE TABLE users (
   name VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  isAuthorized BOOLEAN NOT NULL,
   balance FLOAT NOT NULL,
   phone VARCHAR(255) NOT NULL,
   refreshToken JSON NOT NULL DEFAULT '[]'
@@ -25,15 +24,13 @@ CREATE TABLE user_notifications (
 
 CREATE TABLE user_portfolio (
   user_id INT NOT NULL,
-  stocksCashValue INT NOT NULL,
-  stockPercentage INT NOT NULL,
-  cashValue INT NOT NULL,
-  cashPercentage INT NOT NULL
+  buyingPower FLOAT NOT NULL,
+  stocksPower FLOAT NOT NULL
 );
 
 CREATE TABLE user_portfolio_stocks (
   user_id INT NOT NULL,
-  id INT NOT NULL,
+  id VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,
   symbol VARCHAR(255) NOT NULL,
   amount FLOAT NOT NULL,
@@ -62,8 +59,8 @@ CREATE TABLE user_asset_value (
 
 CREATE TABLE user_transactions (
   user_id INT NOT NULL,
-  id INT NOT NULL,
+  id VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,
-  price INT NOT NULL,
+  price FLOAT NOT NULL,
   description TEXT NOT NULL
 );

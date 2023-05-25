@@ -6,40 +6,12 @@
   color: variables.$secondary-color;
   margin: 2rem 0rem;
   padding: 1rem;
+  display: flex;
+  justify-content: center;
   max-width: 326px;
   width: 100%;
   border-radius: 25px;
   text-align: center;
   font-size: 24px;
   font-weight: 700;
-}
-
-// LOADER FOR BALANCE
-
-.loader {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  display: block;
-  margin: 15px auto;
-  position: relative;
-  background: variables.$golden;
-  box-shadow: -24px 0 #fff, 24px 0 #fff;
-  box-sizing: border-box;
-  animation: shadowPulse 2s linear infinite;
-}
-
-@keyframes shadowPulse {
-  33% {
-    background: #fff;
-    box-shadow: -24px 0 variables.$secondary-color, 24px 0 #fff;
-  }
-  66% {
-    background: variables.$secondary-color;
-    box-shadow: -24px 0 #fff, 24px 0 #fff;
-  }
-  100% {
-    background: #fff;
-    box-shadow: -24px 0 #fff, 24px 0 variables.$golden;
-  }
 }

@@ -130,13 +130,13 @@ const Portfolio = () => {
   const textCenter = {
     id: "textCenter",
     beforeDatasetsDraw(chart, args, pluginOptions) {
-      const { ctx, data } = chart;
+      const { ctx } = chart;
       ctx.save();
-      ctx.font = "bolder sans-serif";
+      ctx.font = "bolder 0.7vw sans-serif";
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.fillText(
-        `Total Portfolio Value: ${totalValue}`,
+        `Total Value: ${totalValue}`,
         chart.getDatasetMeta(0).data[0].x,
         chart.getDatasetMeta(0).data[0].y
       );
@@ -248,14 +248,19 @@ const Portfolio = () => {
 
                 <hr className={styles.overviewLine} />
               </div>
-
-              <div className={styles.doughnutGraph}>
-                <Doughnut
-                  data={data}
-                  options={options}
-                  // plugins={[textCenter]}
-                ></Doughnut>
-              </div>
+              
+              {isBalanceLoading ? (
+                      <Loading />
+                    ) : (
+                      <div className={styles.doughnutGraph}>
+                        <Doughnut
+                          data={data}
+                          options={options}
+                          plugins={[textCenter]}
+                        ></Doughnut>
+                      </div>
+              )}
+              
             </>
           )}
 

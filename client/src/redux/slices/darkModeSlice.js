@@ -9,8 +9,9 @@ import { createSlice } from "@reduxjs/toolkit";
     // If localstorage is undefined, it will automatically be false. And when user changes darkMode you store it with :
     // localStorage.setItem("darkMode", darkMode);
 const initialState = {
-    darkMode: localStorage.getItem("darkMode") || false
-}
+  darkMode: localStorage.getItem("darkMode") || false,
+};
+
 // ------------------------------------------------------
 
 export const darkModeSlice = createSlice({
@@ -18,7 +19,8 @@ export const darkModeSlice = createSlice({
   initialState,
   reducers: {
     toggleTheme: (state) => {
-        state.darkMode = !state.darkMode;
+      state.darkMode = !state.darkMode;
+      localStorage.setItem("darkMode", state.darkMode);
     },
   },
 });

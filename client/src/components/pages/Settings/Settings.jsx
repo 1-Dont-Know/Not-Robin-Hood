@@ -11,6 +11,9 @@ import settings from "../../../assets/icons/settings.svg";
 import alert from "../../../assets/icons/alert.svg";
 import person from "../../../assets/icons/person.svg";
 import { NavLink, Link } from "react-router-dom";
+
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleTheme } from './darkModeSlice';
 //import AppFundsPopup from "../StockViewer/StockViewer";
 
 const Settings = () => {
@@ -22,6 +25,13 @@ const Settings = () => {
 
   const [activeTab, setActiveTab] = useState(tabFlags.settings);
   const [selectedOption, setSelectedOption] = useState("Settings");
+
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.darkMode.darkMode);
+
+  const handleToggle = () => {
+    dispatch(toggleTheme());
+  };
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -54,6 +64,7 @@ const Settings = () => {
         <main className={styles.headerSection}>
           <section className={styles.featured}>Modify your settings.</section>
 
+          {/* Settings Navigation */}
           <div className={styles.settingsNavBar}>
             <div className={styles.settingsNavLink}>
               <button
@@ -64,9 +75,42 @@ const Settings = () => {
                 style={{
                   backgroundColor:
                     activeTab === tabFlags.settings ? "#37433a" : "#ffff",
-
                   color:
                     activeTab === tabFlags.settings ? "#d5e3e1" : "#37433a",
+                }}
+              >
+                <img
+                  src={settings}
+                  alt="settings"
+                  className={styles.settingsPageButton}
+                  onClick={(e) => {
+                    handleTabSelect(tabFlags.settings);
+                  }}
+                  style={{
+                    filter:
+                      activeTab === tabFlags.settings
+                        ? "invert(1) contrast(200%) saturate(0)"
+                        : "invert(0) contrast(200%) saturate(0)",
+                  }}
+                />
+                Settings
+              </button>
+              <hr></hr>
+            </div>
+
+            <div className={styles.settingsNavLink}>
+              <button
+                className={globalStyles.settingsPageButton}
+                onClick={(e) => {
+                  handleTabSelect(tabFlags.notifications);
+                }}
+                style={{
+                  backgroundColor:
+                    activeTab === tabFlags.notifications ? "#37433a" : "#ffff",
+                  color:
+                    activeTab === tabFlags.notifications
+                      ? "#d5e3e1"
+                      : "#37433a",
                 }}
               >
                 <img
@@ -187,10 +231,15 @@ const Settings = () => {
           {activeTab === tabFlags.settings && (
             <div className={styles.settings}>
               <h1 id="settingsOption">Dark Mode</h1>
-              <input type="checkbox" id="switch" />
-              <label className={styles.switchLabel} htmlFor="switch">
+                <input
+                  type="checkbox"
+                  id="switch"
+                  checked={darkMode}
+                  onChange={handleToggle}
+                />
+                <label className={styles.switchLabel} htmlFor="switch">
                 Toggle
-              </label>
+                </label>
             </div>
           )}
 

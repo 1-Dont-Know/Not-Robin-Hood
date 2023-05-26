@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./StockList.module.scss";
 import { Link } from "react-router-dom";
 import Popup from "../Popup/Popup";
-
+import DownVectorIcon from "../../../assets/icons/down-vector.svg";
 const StockList = ({
   name,
   symbol,
@@ -15,7 +15,7 @@ const StockList = ({
 }) => {
   return (
     <>
-      <Link className={styles.stockList}>
+      <div className={styles.stockList}>
         <p className={styles.item}>{name}</p>
         <p className={styles.item}>{symbol}</p>
         <p className={styles.item}>{shares} pcs</p>
@@ -26,7 +26,11 @@ const StockList = ({
         <button onClick={sellHandler} className={styles.sellBtn}>
           SELL
         </button>
-      </Link>
+        {/* <button className={styles.openBtn}>
+          {" "}
+          <img src={DownVectorIcon} alt="Vector" />
+        </button> */}
+      </div>
     </>
   );
 };

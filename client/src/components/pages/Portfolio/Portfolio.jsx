@@ -18,15 +18,22 @@ import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 import Loading from "../../UI/Loading/Loading";
 import Popup from "../../UI/Popup/Popup";
 
+// Register chart as pie chart
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Portfolio = () => {
+  // let's get our currently logged in user from redux store (we are using built-in useSelector hook from redux toolkit)
   const currentUser = useSelector(selectCurrentUser);
+
+  // setting flags for each tab to identify which tab is active
   const tabFlags = {
     overview: 1,
     stocksList: 2,
   };
+  // state to display/hide our sell stock popup
   const [sellStockPopup, setSellStockPopup] = useState(false);
+
+  // state to display information about the stock we are going to sell
   const [sellStockInfo, setSellStockInfo] = useState({
     name: "",
     stocksAmount: 0,
@@ -35,10 +42,18 @@ const Portfolio = () => {
 
   // Destructuring pulled info from the sellstockinfo state
   const { name, stocksAmount, averageCost } = sellStockInfo;
+  // state of the qty input inside sell stock popup (we are keeping it to compare with initial value for validation purposes)
   const [sellStocksAmount, setSellStocksAmount] = useState(0);
+
   // Display sell stock popup
   const sellPopUpHandler = (e) => {
+    // toggling value to display/hide popup
     setSellStockPopup((sellStockPopup) => !sellStockPopup);
+
+    // getting stock values (name,qty,price) to display inside popup
+    // 1. retrieve a parent element of the clicked target
+    // 2. get all child nodes of the parent
+    // 3. get a name,qty,average cost from textContent (array elements order numbers can be seen in StockList.jsx)
     const parentElement = e.target.parentElement;
     const childNodes = parentElement.childNodes;
     const name = childNodes[0]?.textContent;
@@ -55,6 +70,7 @@ const Portfolio = () => {
         averageCost,
       };
     });
+    // setting our popup qty input as well
     setSellStocksAmount(qty);
   };
 
@@ -114,13 +130,13 @@ const Portfolio = () => {
   const textCenter = {
     id: "textCenter",
     beforeDatasetsDraw(chart, args, pluginOptions) {
-      const { ctx, data } = chart;
+      const { ctx } = chart;
       ctx.save();
-      ctx.font = "bolder sans-serif";
+      ctx.font = "bolder 0.7vw sans-serif";
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.fillText(
-        `Total Portfolio Value: ${totalValue}`,
+        `Total Value: ${totalValue.toFixed(2)}`,
         chart.getDatasetMeta(0).data[0].x,
         chart.getDatasetMeta(0).data[0].y
       );
@@ -129,7 +145,6 @@ const Portfolio = () => {
 
   // Proceed to sell choosen stock, good luck :D
   const sellStockHandler = (e) => {
-    // logic to sell stock
     if (
       !sellStocksAmount ||
       sellStocksAmount < 1 ||
@@ -143,6 +158,7 @@ const Portfolio = () => {
       alert(
         `Congratulations, you've sold ${sellStocksAmount} stocks of ${name}`
       );
+      //TODO: logic to sell stock should be here
       setSellStockPopup((prevState) => !prevState);
     }
   };
@@ -233,13 +249,17 @@ const Portfolio = () => {
                 <hr className={styles.overviewLine} />
               </div>
 
-              <div className={styles.doughnutGraph}>
-                <Doughnut
-                  data={data}
-                  options={options}
-                  // plugins={[textCenter]}
-                ></Doughnut>
-              </div>
+              {isBalanceLoading ? (
+                <Loading />
+              ) : (
+                <div className={styles.doughnutGraph}>
+                  <Doughnut
+                    data={data}
+                    options={options}
+                    plugins={[textCenter]}
+                  ></Doughnut>
+                </div>
+              )}
             </>
           )}
 

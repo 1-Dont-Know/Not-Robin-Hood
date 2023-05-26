@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //import NotificationPopUp from "../../UI/NotificationPopUp/NotificationPopUp";
 //import AddFunds from "../../UI/AddFunds/AddFunds";
 //import Sidebar from "../../UI/Sidebar/Sidebar";
@@ -13,7 +13,7 @@ import person from "../../../assets/icons/person.svg";
 import { NavLink, Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleTheme } from './darkModeSlice';
+import { selectDarkMode, toggleTheme } from './../../../redux/slices/darkModeSlice';
 //import AppFundsPopup from "../StockViewer/StockViewer";
 
 const Settings = () => {
@@ -26,11 +26,19 @@ const Settings = () => {
   const [activeTab, setActiveTab] = useState(tabFlags.settings);
   const [selectedOption, setSelectedOption] = useState("Settings");
 
-  const dispatch = useDispatch();
-  const darkMode = useSelector((state) => state.darkMode.darkMode);
 
+  const dispatch = useDispatch();
+  const darkModeTheme = useSelector(selectDarkMode);
+
+
+// When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkModeTheme);
+  }, [darkModeTheme]);
+
+  // Handling dark mode switch
   const handleToggle = () => {
-    dispatch(toggleTheme());
+    dispatch(toggleTheme(!darkModeTheme));
   };
 
   const handleSelectChange = (event) => {
@@ -234,7 +242,7 @@ const Settings = () => {
                 <input
                   type="checkbox"
                   id="switch"
-                  checked={darkMode}
+                  checked={Boolean(darkModeTheme)}
                   onChange={handleToggle}
                 />
                 <label className={styles.switchLabel} htmlFor="switch">

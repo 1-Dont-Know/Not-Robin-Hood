@@ -38,7 +38,8 @@ CREATE TABLE user_portfolio_stocks (
   price FLOAT NOT NULL,
   averageCost FLOAT NOT NULL,
   totalReturn FLOAT NOT NULL,
-  equity FLOAT NOT NULL
+  equity FLOAT NOT NULL,
+  purchased_at DATE NULL
 );
 
 CREATE TABLE user_portfolio_orders (
@@ -63,4 +64,5 @@ CREATE TABLE user_transactions (
   name VARCHAR(255) NOT NULL,
   price FLOAT NOT NULL,
   description TEXT NOT NULL
+  date DATE NULL
 );

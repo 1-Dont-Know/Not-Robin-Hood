@@ -26,6 +26,7 @@ const StockList = ({
         <button onClick={sellHandler} className={styles.sellBtn}>
           SELL
         </button>
+        {/* TODO: According of stocks with the same name  */}
         {/* <button className={styles.openBtn}>
           {" "}
           <img src={DownVectorIcon} alt="Vector" />

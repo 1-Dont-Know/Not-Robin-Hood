@@ -5,7 +5,6 @@ import buyIcon from "../../../assets/icons/shopping-cart.svg";
 import { checkIfNumber } from "../../../utils/helpers";
 import {
   useAddBalanceMutation,
-  useGetUserByIdQuery,
   useGetBalanceQuery,
   useGetPortfolioStocksQuery,
   useUpdatePortfolioStocksMutation,
@@ -15,6 +14,7 @@ import {
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 import { nanoid } from "nanoid";
+import toast, { Toaster } from "react-hot-toast";
 
 const BuyBox = ({ type, symbol, price, name }) => {
   // Handling stock quantity
@@ -74,6 +74,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
       if (balance < Math.abs(amount)) {
         console.log(amount, " ", balance);
         console.log("sorry, you cant buy, not enough money");
+        toast.error("Insufficient amount of money");
         // we have money and we can buy
       } else {
         console.log("you can buy");
@@ -101,6 +102,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
           description: `Purchase of ${name} ${Math.abs(amount)} shares`,
           date: datePurchased,
         });
+        toast.success("Successfully purchased");
       }
       //! selling case
     } else {
@@ -120,6 +122,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
             if (tempQTY === item.share) {
               deleteStock({ userID: userID, symbol: symbol, company: name });
               console.log("found and sold(deleted) = ", item.share);
+              toast.success("Successfully sold");
               tempQTY = 0;
               // in case input quantity amount is bigger than the actual amount of stock, we will sell (delete) all stocks
             } else if (tempQTY > item.share) {
@@ -148,7 +151,6 @@ const BuyBox = ({ type, symbol, price, name }) => {
                 description: `Sold ${Math.abs(amount)} shares of ${name}`,
                 date: datePurchased,
               });
-
               deleteStock({ userID: userID, symbol: symbol, company: name });
 
               tempQTY = 0;
@@ -160,6 +162,8 @@ const BuyBox = ({ type, symbol, price, name }) => {
       console.log("tempQTY = ", tempQTY);
       if (tempQTY === qty) {
         console.log("you dont have this stock");
+        toast.error("Please enter the amount of stock");
+        // TODO: ASK DARSHWAK ABOUT THIS LOGIC
         // addBalance({ id: userID, amount });
       } else if (tempQTY === 0) {
         console.log("Sold all ", qty, " stocks");
@@ -181,6 +185,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
 
   return (
     <div className={styles.BuyBody}>
+      <Toaster />
       {/* CALL TO ACTION BUTTONS SECTION */}
       <section className={styles.ctaSection}>
         <button

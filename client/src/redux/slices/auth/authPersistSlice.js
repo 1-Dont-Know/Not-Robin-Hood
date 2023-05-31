@@ -13,4 +13,4 @@ const authPersistSlice = createSlice({
 export const { setPersist } = authPersistSlice.actions;
 export default authPersistSlice.reducer;
 
-export const selectPersist = (state) => state.persist.persist;
+export const selectPersist = (state) => state.persist;

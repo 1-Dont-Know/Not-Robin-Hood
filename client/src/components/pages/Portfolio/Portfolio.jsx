@@ -9,6 +9,9 @@ import { Doughnut } from "react-chartjs-2";
 import buyIcon from "../../../assets/icons/shopping-cart.svg";
 import CalculateIcon from "../../../assets/icons/calculate.svg";
 import {
+  useAddBalanceMutation,
+  useAddStockTransactionsMutation,
+  useDeletePortfolioStocksMutation,
   useGetBalanceQuery,
   useGetPortfolioStocksQuery,
   useUpdatePortfolioStocksMutation,
@@ -17,6 +20,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 import Loading from "../../UI/Loading/Loading";
 import Popup from "../../UI/Popup/Popup";
+import { nanoid } from "nanoid";
 
 // Register chart as pie chart
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -86,8 +90,21 @@ const Portfolio = () => {
   const { data: balance = 0, isLoading: isBalanceLoading } =
     useGetBalanceQuery(currentUser);
 
+  // Destructuring RTK.Query Hook for updating user's balance
+  const [addBalance, { isError, isSuccess }] = useAddBalanceMutation();
+
+  // once we sold the stock, we would need to remove it from DB
+  const [deleteStock] = useDeletePortfolioStocksMutation();
+
+  // Updating our transactions list (add stock purchase transaction to the list), when buying stock.
+  const [updateTransactions] = useAddStockTransactionsMutation();
+
+  // Add new stock to portfolio stock list, let everyone know how rich you're ;)
+  const [updateStocks, { isLoading }] = useUpdatePortfolioStocksMutation();
+
   // based on stocks list, we are going through each with reduce and adding their equity for stocks value (stocks power)
   const stocksPower = stocksData?.reduce((acc, curr) => acc + curr.equity, 0);
+
   // our buying power is our balance
   const buyingPower = balance;
 
@@ -155,6 +172,49 @@ const Portfolio = () => {
     } else if (sellStocksAmount > stocksAmount) {
       alert(`Hold your horses, you've only got ${stocksAmount} stocks`);
     } else {
+      stocksData &&
+        stocksData.map((item) => {
+          const formattedDate = new Date(item.purchased_at);
+          console.log(formattedDate);
+          // Get the month with leading zero if necessary
+          const month = (formattedDate.getMonth() + 1)
+            .toString()
+            .padStart(2, "0");
+          // today's date (formatted)
+          const date = `${formattedDate.getFullYear()}-${month}-${formattedDate.getDate()}`;
+          if (currentUser === item.user_id) {
+            let temp = item.share - sellStocksAmount;
+            updateStocks({
+              userID: currentUser,
+              id: item.id,
+              symbol: item.symbol,
+              priceBought: averageCost,
+              company: name,
+              share: temp,
+              cost: Math.abs(averageCost * sellStocksAmount),
+              date,
+            });
+            deleteStock({
+              userID: currentUser,
+              symbol: item.symbol,
+              company: name,
+            });
+            addBalance({
+              id: currentUser,
+              amount: averageCost * sellStocksAmount,
+            });
+            updateTransactions({
+              userID: currentUser,
+              id: nanoid(),
+              name,
+              price: (averageCost * sellStocksAmount).toFixed(2),
+              description: `Sold ${Math.abs(
+                sellStocksAmount
+              )} shares of ${name}`,
+              date,
+            });
+          }
+        });
       alert(
         `Congratulations, you've sold ${sellStocksAmount} stocks of ${name}`
       );

@@ -30,7 +30,8 @@ const BuyBox = ({ type, symbol, price, name }) => {
   // Amount State
   const [sellAmount, setSellAmount] = useState(0);
   const [buyAmount, setBuyAmount] = useState(0);
-
+  const [purchaseHistory, setPurchaseHistory] = useState([]);
+  console.log("Purchase History:", purchaseHistory);
   const userID = useSelector(selectCurrentUser);
 
   // Destructuring RTK.Query Hook for updating user's balance
@@ -45,7 +46,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
 
   // Let's get all stocks from portfolio
   const { data: stocksData } = useGetPortfolioStocksQuery(userID);
-
+  console.log(stocksData);
   // once we sold the stock, we would need to remove it from DB
   const [deleteStock] = useDeletePortfolioStocksMutation();
 
@@ -183,6 +184,11 @@ const BuyBox = ({ type, symbol, price, name }) => {
     setBuyAmount(parseFloat((-price * qty).toFixed(2)));
   }, [qty]);
 
+  const history = stocksData?.filter((item) => item.symbol === symbol);
+  useEffect(() => {
+    if (history) setPurchaseHistory(history);
+  }, []);
+
   return (
     <div className={styles.BuyBody}>
       <Toaster />
@@ -218,6 +224,8 @@ const BuyBox = ({ type, symbol, price, name }) => {
         {/* Date Input */}
         <input
           type="date"
+          min={datePurchased}
+          max={datePurchased}
           id="userDate"
           className={styles.inputBoxes}
           onChange={purchaseDateHandler}
@@ -231,9 +239,22 @@ const BuyBox = ({ type, symbol, price, name }) => {
 
       {/* ORDERS SECTION */}
       <section className={styles.ordersSection}>
-        <h1>Queue Order</h1>
+        <h1>Purchase History</h1>
         <div className={styles.orders}>
-          <p>Order conformation</p>
+          {purchaseHistory.length > 0
+            ? history.map((item) => {
+                return (
+                  <ol key={item.id}>
+                    <li style={{ fontSize: "0.8rem" }} key={item.id}>
+                      <p>
+                        Date: {datePurchased} / Name: {item.name} / Share:{" "}
+                        {item.share}
+                      </p>
+                    </li>
+                  </ol>
+                );
+              })
+            : "No history found"}
         </div>
       </section>
     </div>

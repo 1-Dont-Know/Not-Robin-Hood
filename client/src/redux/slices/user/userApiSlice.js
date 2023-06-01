@@ -127,10 +127,19 @@ export const userApi = createApi({
     }),
     //* Update "PORTFOLIO STOCKS"
     updatePortfolioStocks: builder.mutation({
-      query: ({ userID, id, symbol, priceBought, company, share, cost }) => ({
+      query: ({
+        userID,
+        id,
+        symbol,
+        priceBought,
+        company,
+        share,
+        cost,
+        date,
+      }) => ({
         url: "user/portfolio/stocks",
         method: "POST",
-        body: { userID, id, symbol, priceBought, company, share, cost },
+        body: { userID, id, symbol, priceBought, company, share, cost, date },
       }),
       invalidatesTags: ["Stocks"],
     }),
@@ -150,10 +159,10 @@ export const userApi = createApi({
       providesTags: ["Transactions"],
     }),
     addStockTransactions: builder.mutation({
-      query: ({ userID, id, name, price, description }) => ({
+      query: ({ userID, id, name, price, description, date }) => ({
         url: `user/${userID}/transactions/update`,
         method: "POST",
-        body: { userID, id, name, price, description },
+        body: { userID, id, name, price, description, date },
       }),
       invalidatesTags: ["Transactions"],
     }),

@@ -35,6 +35,7 @@ const StockTransactions = () => {
                     name={item.name}
                     price={item.price}
                     info={item.description}
+                    date={item.date}
                   />
                 );
               })

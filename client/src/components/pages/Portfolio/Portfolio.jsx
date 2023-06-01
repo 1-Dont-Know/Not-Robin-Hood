@@ -21,6 +21,7 @@ import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 import Loading from "../../UI/Loading/Loading";
 import Popup from "../../UI/Popup/Popup";
 import { nanoid } from "nanoid";
+import toast, { Toaster } from "react-hot-toast";
 
 // Register chart as pie chart
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -168,9 +169,9 @@ const Portfolio = () => {
       sellStocksAmount === undefined ||
       sellStocksAmount === null
     ) {
-      alert("Enter amount to sell");
+      toast.error("Enter amount to sell");
     } else if (sellStocksAmount > stocksAmount) {
-      alert(`Hold your horses, you've only got ${stocksAmount} stocks`);
+      toast.error(`Hold your horses, you've only got ${stocksAmount} stocks`);
     } else {
       stocksData &&
         stocksData.map((item) => {
@@ -215,7 +216,7 @@ const Portfolio = () => {
             });
           }
         });
-      alert(
+      toast.success(
         `Congratulations, you've sold ${sellStocksAmount} stocks of ${name}`
       );
       //TODO: logic to sell stock should be here
@@ -227,6 +228,7 @@ const Portfolio = () => {
     <>
       {/* Hero Section */}
       <Hero>
+        <Toaster />
         <div className={styles.tabs}>
           <button
             className={styles.tabButton}

@@ -45,6 +45,8 @@ const Portfolio = () => {
     averageCost: 0,
   });
 
+  console.log(sellStockInfo);
+
   // Destructuring pulled info from the sellstockinfo state
   const { name, stocksAmount, averageCost } = sellStockInfo;
   // state of the qty input inside sell stock popup (we are keeping it to compare with initial value for validation purposes)
@@ -86,7 +88,6 @@ const Portfolio = () => {
 
   // we need stocksdata to display stocks list in portfolio
   const { data: stocksData } = useGetPortfolioStocksQuery(currentUser);
-  console.log(stocksData);
 
   // we need balance of current user to display it as a buying power
   const { data: balance = 0, isLoading: isBalanceLoading } =
@@ -177,7 +178,7 @@ const Portfolio = () => {
       stocksData &&
         stocksData.map((item) => {
           const formattedDate = new Date(item.purchased_at);
-          console.log(formattedDate);
+
           // Get the month with leading zero if necessary
           const month = (formattedDate.getMonth() + 1)
             .toString()
@@ -190,10 +191,10 @@ const Portfolio = () => {
               userID: currentUser,
               id: item.id,
               symbol: item.symbol,
-              totalCost: averageCost,
+              stockPrice: averageCost,
               company: name,
               share: temp,
-              cost: Math.abs(averageCost * sellStocksAmount),
+              totalCost: Math.abs(averageCost * sellStocksAmount),
               date,
             });
             deleteStock({

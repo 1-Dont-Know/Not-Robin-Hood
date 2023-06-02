@@ -19,6 +19,16 @@ class PortfolioController {
     const connection = await connectDB();
     const { userID, id, symbol, stockPrice, company, share, totalCost, date } =
       req.body;
+    console.log(
+      userID,
+      id,
+      symbol,
+      stockPrice,
+      company,
+      share,
+      totalCost,
+      date
+    );
     const averageCost = totalCost / share;
     const totalReturn = 0;
 
@@ -27,7 +37,6 @@ class PortfolioController {
       total return = fetched new price * amount of stocks  - total cost
     
     */
-
     const equity = stockPrice * share;
     try {
       const query =

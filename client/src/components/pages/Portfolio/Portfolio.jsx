@@ -45,6 +45,8 @@ const Portfolio = () => {
     averageCost: 0,
   });
 
+  console.log(sellStockInfo);
+
   // Destructuring pulled info from the sellstockinfo state
   const { name, stocksAmount, averageCost } = sellStockInfo;
   // state of the qty input inside sell stock popup (we are keeping it to compare with initial value for validation purposes)
@@ -176,7 +178,7 @@ const Portfolio = () => {
       stocksData &&
         stocksData.map((item) => {
           const formattedDate = new Date(item.purchased_at);
-          console.log(formattedDate);
+
           // Get the month with leading zero if necessary
           const month = (formattedDate.getMonth() + 1)
             .toString()
@@ -189,10 +191,10 @@ const Portfolio = () => {
               userID: currentUser,
               id: item.id,
               symbol: item.symbol,
-              priceBought: averageCost,
+              stockPrice: averageCost,
               company: name,
               share: temp,
-              cost: Math.abs(averageCost * sellStocksAmount),
+              totalCost: Math.abs(averageCost * sellStocksAmount),
               date,
             });
             deleteStock({
@@ -223,6 +225,12 @@ const Portfolio = () => {
       setSellStockPopup((prevState) => !prevState);
     }
   };
+
+  // Let's make calculation of our total return value
+  // 1. Get all the stocks from the user's portfolio, particularly their price
+  // 2. We need to search those stocks on the market, based on the symbol of those stocks inside portfolio
+  // 3. Fetch them, get their prices, compare with prices of the owned stocks
+  // 4. Calculate total return and update asset value
 
   return (
     <>
@@ -332,7 +340,7 @@ const Portfolio = () => {
                   <h1 className={styles.title}>Name</h1>
                   <h1 className={styles.title}>Symbol</h1>
                   <h1 className={styles.title}>Shares</h1>
-                  <h1 className={styles.title}>Price</h1>
+                  <h1 className={styles.title}>Total Cost</h1>
                   <h1 className={styles.title}>Average Cost</h1>
                   <h1 className={styles.title}>Total Return</h1>
                   <h1 className={styles.title}>Equity</h1>
@@ -349,7 +357,7 @@ const Portfolio = () => {
                             name={item.name}
                             symbol={item.symbol}
                             shares={item.share}
-                            price={item.price}
+                            totalCost={item.totalCost}
                             avgCost={item.averageCost}
                             totalReturn={item.totalReturn}
                             equity={item.equity}
@@ -363,7 +371,10 @@ const Portfolio = () => {
             </div>
           )}
           {activeTab === tabFlags.stocksList && (
-            <button className={styles.calculateBtn}>
+            <button
+              onClick={() => alert("Lets go")}
+              className={styles.calculateBtn}
+            >
               <img src={CalculateIcon} alt="Calculate Portfolio" />
             </button>
           )}

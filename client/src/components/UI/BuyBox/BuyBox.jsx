@@ -123,13 +123,14 @@ const BuyBox = ({ type, symbol, price, name }) => {
             if (tempQTY === item.share) {
               deleteStock({ userID: userID, symbol: symbol, company: name });
               console.log("found and sold(deleted) = ", item.share);
-              toast.success("Successfully sold");
+              toast.success("Successfully sold!");
               tempQTY = 0;
               // in case input quantity amount is bigger than the actual amount of stock, we will sell (delete) all stocks
             } else if (tempQTY > item.share) {
-              tempQTY = tempQTY - item.share;
-              deleteStock({ userID: userID, symbol: symbol, company: name });
-              console.log("found >");
+              // tempQTY = tempQTY - item.share;
+              // deleteStock({ userID: userID, symbol: symbol, company: name });
+              // toast.error("Don't have enough of this stock")
+              console.log("don't have enough");
             } else if (tempQTY < item.share) {
               let temp = item.share - tempQTY;
               console.log(temp);
@@ -156,14 +157,15 @@ const BuyBox = ({ type, symbol, price, name }) => {
 
               tempQTY = 0;
               console.log("found <");
+              toast.success("Successfully sold!")
             }
           }
           console.log("tempQTY = ", tempQTY);
         });
       console.log("tempQTY = ", tempQTY);
       if (tempQTY === qty) {
-        console.log("you dont have this stock");
-        toast.error("Please enter the amount of stock");
+        // console.log("you dont have this stock");
+        toast.error("Don't have enough of this stock");
         // TODO: ASK DARSHWAK ABOUT THIS LOGIC
         // addBalance({ id: userID, amount });
       } else if (tempQTY === 0) {

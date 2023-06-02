@@ -74,9 +74,9 @@ const AddFunds = ({ toggle }) => {
         description: `Add balance of $${amount}`,
         date: defaultDate,
       });
-      setTimeout(() => {
-        toggle();
-      }, 3000);
+      // setTimeout(() => {
+      //   toggle();
+      // }, 3000);
     } else {
       toast.error("Enter amount please!");
     }

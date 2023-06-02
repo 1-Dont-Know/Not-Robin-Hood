@@ -89,10 +89,10 @@ const BuyBox = ({ type, symbol, price, name }) => {
           userID: userID,
           id,
           symbol: symbol,
-          priceBought: price,
+          stockPrice: price,
           company: name,
           share: qty,
-          cost: Math.abs(amount),
+          totalCost: Math.abs(amount),
           date: datePurchased,
         });
         updateTransactions({
@@ -138,10 +138,10 @@ const BuyBox = ({ type, symbol, price, name }) => {
                 userID: userID,
                 id: item.id,
                 symbol: symbol,
-                priceBought: price,
+                stockPrice: price,
                 company: name,
                 share: temp,
-                cost: Math.abs(sold),
+                totalCost: Math.abs(sold),
                 date: datePurchased,
               });
               updateTransactions({

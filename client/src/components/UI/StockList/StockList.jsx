@@ -7,7 +7,7 @@ const StockList = ({
   name,
   symbol,
   shares,
-  price,
+  totalCost,
   avgCost,
   totalReturn,
   equity,
@@ -19,7 +19,7 @@ const StockList = ({
         <p className={styles.item}>{name}</p>
         <p className={styles.item}>{symbol}</p>
         <p className={styles.item}>{shares} pcs</p>
-        <p className={styles.item}>${price}</p>
+        <p className={styles.item}>${totalCost}</p>
         <p className={styles.item}>${avgCost}</p>
         <p className={styles.item}>${totalReturn}</p>
         <p className={styles.item}>${equity}</p>

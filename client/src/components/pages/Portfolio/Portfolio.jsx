@@ -85,6 +85,7 @@ const Portfolio = () => {
 
   // we need stocksdata to display stocks list in portfolio
   const { data: stocksData } = useGetPortfolioStocksQuery(currentUser);
+  console.log(stocksData);
 
   // we need balance of current user to display it as a buying power
   const { data: balance = 0, isLoading: isBalanceLoading } =
@@ -188,7 +189,7 @@ const Portfolio = () => {
               userID: currentUser,
               id: item.id,
               symbol: item.symbol,
-              priceBought: averageCost,
+              totalCost: averageCost,
               company: name,
               share: temp,
               cost: Math.abs(averageCost * sellStocksAmount),
@@ -222,6 +223,12 @@ const Portfolio = () => {
       setSellStockPopup((prevState) => !prevState);
     }
   };
+
+  // Let's make calculation of our total return value
+  // 1. Get all the stocks from the user's portfolio, particularly their price
+  // 2. We need to search those stocks on the market, based on the symbol of those stocks inside portfolio
+  // 3. Fetch them, get their prices, compare with prices of the owned stocks
+  // 4. Calculate total return and update asset value
 
   return (
     <>
@@ -330,7 +337,7 @@ const Portfolio = () => {
                   <h1 className={styles.title}>Name</h1>
                   <h1 className={styles.title}>Symbol</h1>
                   <h1 className={styles.title}>Shares</h1>
-                  <h1 className={styles.title}>Price</h1>
+                  <h1 className={styles.title}>Total Cost</h1>
                   <h1 className={styles.title}>Average Cost</h1>
                   <h1 className={styles.title}>Total Return</h1>
                   <h1 className={styles.title}>Equity</h1>
@@ -347,7 +354,7 @@ const Portfolio = () => {
                             name={item.name}
                             symbol={item.symbol}
                             shares={item.share}
-                            price={item.price}
+                            totalCost={item.totalCost}
                             avgCost={item.averageCost}
                             totalReturn={item.totalReturn}
                             equity={item.equity}
@@ -361,7 +368,10 @@ const Portfolio = () => {
             </div>
           )}
           {activeTab === tabFlags.stocksList && (
-            <button className={styles.calculateBtn}>
+            <button
+              onClick={() => alert("Lets go")}
+              className={styles.calculateBtn}
+            >
               <img src={CalculateIcon} alt="Calculate Portfolio" />
             </button>
           )}

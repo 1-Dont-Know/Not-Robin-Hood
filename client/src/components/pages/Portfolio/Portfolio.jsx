@@ -225,12 +225,16 @@ const Portfolio = () => {
       setSellStockPopup((prevState) => !prevState);
     }
   };
-
+  // Calculate stocks total return
   // Let's make calculation of our total return value
   // 1. Get all the stocks from the user's portfolio, particularly their price
   // 2. We need to search those stocks on the market, based on the symbol of those stocks inside portfolio
   // 3. Fetch them, get their prices, compare with prices of the owned stocks
   // 4. Calculate total return and update asset value
+
+  const calculateTotalReturn = () => {
+    alert("calculated");
+  };
 
   return (
     <>
@@ -370,9 +374,10 @@ const Portfolio = () => {
               </section>
             </div>
           )}
+          {/* Calculate total return */}
           {activeTab === tabFlags.stocksList && (
             <button
-              onClick={() => alert("Lets go")}
+              onClick={calculateTotalReturn}
               className={styles.calculateBtn}
             >
               <img src={CalculateIcon} alt="Calculate Portfolio" />

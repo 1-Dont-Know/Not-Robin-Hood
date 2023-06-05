@@ -60,6 +60,36 @@ class PortfolioController {
       console.log(err);
     }
   }
+  async modifyPortfolioStock(req, res, next) {
+    // Establishing connection to our PlanetScale DB
+    const connection = await connectDB();
+    const { userID, id, share, symbol, stockPrice, totalCost } = req.body;
+    console.log(
+      "Info for stock modification:",
+      userID,
+      id,
+      share,
+      symbol,
+      stockPrice,
+      totalCost
+    );
+    const updatedShare = share;
+    try {
+      const query =
+        "UPDATE user_portfolio_stocks SET share = share + ?, stockPrice = stockPrice + ?, totalCost = totalCost + ? WHERE user_id = ? AND id = ? AND symbol = ?;";
+      const [rows] = await connection.query(query, [
+        updatedShare,
+        stockPrice,
+        totalCost,
+        userID,
+        id,
+        symbol,
+      ]);
+      res.json(rows);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   async deletePortfolioStock(req, res, next) {
     // Establishing connection to our PlanetScale DB
     const connection = await connectDB();

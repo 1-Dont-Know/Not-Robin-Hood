@@ -45,8 +45,6 @@ const Portfolio = () => {
     averageCost: 0,
   });
 
-  console.log(sellStockInfo);
-
   // Destructuring pulled info from the sellstockinfo state
   const { name, stocksAmount, averageCost } = sellStockInfo;
   // state of the qty input inside sell stock popup (we are keeping it to compare with initial value for validation purposes)

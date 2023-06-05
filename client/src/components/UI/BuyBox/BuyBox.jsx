@@ -10,6 +10,7 @@ import {
   useUpdatePortfolioStocksMutation,
   useDeletePortfolioStocksMutation,
   useAddStockTransactionsMutation,
+  useModifyPortfolioStocksMutation,
 } from "../../../redux/slices/user/userApiSlice";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
@@ -27,15 +28,19 @@ const BuyBox = ({ type, symbol, price, name }) => {
   const defaultDate = `${currentDate.getFullYear()}-${month}-${currentDate.getDate()}`;
   const [datePurchased, setDatePurchased] = useState(defaultDate);
 
+  console.log(datePurchased);
+
   // Amount State
   const [sellAmount, setSellAmount] = useState(0);
   const [buyAmount, setBuyAmount] = useState(0);
   const [purchaseHistory, setPurchaseHistory] = useState([]);
-  console.log("Purchase History:", purchaseHistory);
   const userID = useSelector(selectCurrentUser);
 
   // Destructuring RTK.Query Hook for updating user's balance
   const [addBalance, { isError, isSuccess }] = useAddBalanceMutation();
+
+  // Destructing our hook for updating stock if it's already owned/in our portfolio
+  const [modifyStock] = useModifyPortfolioStocksMutation();
 
   // To modify user's balance, we need to get a current balance, based on the currently logged in user
   const {
@@ -46,7 +51,6 @@ const BuyBox = ({ type, symbol, price, name }) => {
 
   // Let's get all stocks from portfolio
   const { data: stocksData } = useGetPortfolioStocksQuery(userID);
-  console.log(stocksData);
   // once we sold the stock, we would need to remove it from DB
   const [deleteStock] = useDeletePortfolioStocksMutation();
 
@@ -65,10 +69,16 @@ const BuyBox = ({ type, symbol, price, name }) => {
   const purchaseDateHandler = (e) => {
     setDatePurchased(e.target.value);
   };
+  const match =
+    stocksData && stocksData.filter((data) => data.symbol === symbol);
+  console.log("match: ", match);
+  console.log("owned stocks data:", stocksData);
 
   const handlePurchaseSubmit = (e, amount) => {
     e.preventDefault();
-
+    const stocks = stocksData?.filter((data) => data.symbol === symbol);
+    console.log("stocks:", stocks);
+    console.log("symbol:", symbol);
     //* Buying case (reduce balance by amount)
     if (amount < 0) {
       // we dont have money, so we can't buy
@@ -85,16 +95,32 @@ const BuyBox = ({ type, symbol, price, name }) => {
         e.preventDefault();
         // updating stocks only if we are buying (adding new stock to the array)
         const id = nanoid();
-        updateStocks({
-          userID: userID,
-          id,
-          symbol: symbol,
-          stockPrice: price,
-          company: name,
-          share: qty,
-          totalCost: Math.abs(amount),
-          date: datePurchased,
-        });
+        /* check if this stock is already owned (inside portfolio),
+          if so, call modifyStock function to modify the owned stock by modifying share
+          if not, just add this stock to portfolio
+        */
+        if (match.length > 0) {
+          modifyStock({
+            userID,
+            id: match[0].id,
+            share: qty,
+            symbol,
+            stockPrice: price,
+            totalCost: Math.abs(amount),
+          });
+        } else {
+          updateStocks({
+            userID: userID,
+            id,
+            symbol: symbol,
+            stockPrice: price,
+            company: name,
+            share: qty,
+            totalCost: Math.abs(amount),
+            date: datePurchased,
+          });
+        }
+
         updateTransactions({
           userID,
           id,
@@ -157,7 +183,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
 
               tempQTY = 0;
               console.log("found <");
-              toast.success("Successfully sold!")
+              toast.success("Successfully sold!");
             }
           }
           console.log("tempQTY = ", tempQTY);
@@ -246,14 +272,14 @@ const BuyBox = ({ type, symbol, price, name }) => {
           {purchaseHistory.length > 0
             ? history.map((item) => {
                 return (
-                  <ol key={item.id}>
+                  <ul key={item.id}>
                     <li style={{ fontSize: "0.8rem" }} key={item.id}>
                       <p>
                         Date: {datePurchased} / Name: {item.name} / Share:{" "}
                         {item.share}
                       </p>
                     </li>
-                  </ol>
+                  </ul>
                 );
               })
             : "No history found"}

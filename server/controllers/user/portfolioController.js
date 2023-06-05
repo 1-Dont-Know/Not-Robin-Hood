@@ -35,6 +35,7 @@ class PortfolioController {
     /*
     total cost = amount of stocks * the price it was purchased (e.x 06/01/23)
       total return = fetched new price * amount of stocks  - total cost
+      
     
     */
     const equity = stockPrice * share;

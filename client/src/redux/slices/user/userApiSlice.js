@@ -152,6 +152,10 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Stocks"],
     }),
+    // Modify stocks
+    modifyPortfolioStocks: builder.mutation({
+      query: {},
+    }),
 
     // delete Stocks
     deletePortfolioStocks: builder.mutation({

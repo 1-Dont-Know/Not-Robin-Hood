@@ -4,6 +4,7 @@ import { alphaVantageApiSlice } from "../slices/api/alphaVantageApiSlice.js";
 import { userApi } from "../slices/user/userApiSlice";
 import authReducer from "../slices/auth/authSlice";
 import persistReducer from "../slices/auth/authPersistSlice.js";
+import themeReducer from "../slices/darkModeSlice.js";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     auth: authReducer,
     persist: persistReducer,
+    darkmode: themeReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

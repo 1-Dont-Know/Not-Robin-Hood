@@ -28,6 +28,8 @@ const BuyBox = ({ type, symbol, price, name }) => {
   const defaultDate = `${currentDate.getFullYear()}-${month}-${currentDate.getDate()}`;
   const [datePurchased, setDatePurchased] = useState(defaultDate);
 
+  console.log(datePurchased);
+
   // Amount State
   const [sellAmount, setSellAmount] = useState(0);
   const [buyAmount, setBuyAmount] = useState(0);
@@ -106,7 +108,6 @@ const BuyBox = ({ type, symbol, price, name }) => {
             stockPrice: price,
             totalCost: Math.abs(amount),
           });
-          alert("Found match! Merged stocks in portfolio");
         } else {
           updateStocks({
             userID: userID,
@@ -118,17 +119,17 @@ const BuyBox = ({ type, symbol, price, name }) => {
             totalCost: Math.abs(amount),
             date: datePurchased,
           });
-
-          updateTransactions({
-            userID,
-            id,
-            name,
-            price: sellAmount,
-            description: `Purchase of ${name} ${Math.abs(amount)} shares`,
-            date: datePurchased,
-          });
-          toast.success("Successfully purchased");
         }
+
+        updateTransactions({
+          userID,
+          id,
+          name,
+          price: sellAmount,
+          description: `Purchase of ${name} ${Math.abs(amount)} shares`,
+          date: datePurchased,
+        });
+        toast.success("Successfully purchased");
       }
       //! selling case
     } else {

@@ -9,6 +9,9 @@ import { Doughnut } from "react-chartjs-2";
 import buyIcon from "../../../assets/icons/shopping-cart.svg";
 import CalculateIcon from "../../../assets/icons/calculate.svg";
 import {
+  useAddBalanceMutation,
+  useAddStockTransactionsMutation,
+  useDeletePortfolioStocksMutation,
   useGetBalanceQuery,
   useGetPortfolioStocksQuery,
   useUpdatePortfolioStocksMutation,
@@ -17,28 +20,47 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 import Loading from "../../UI/Loading/Loading";
 import Popup from "../../UI/Popup/Popup";
+import { nanoid } from "nanoid";
+import toast, { Toaster } from "react-hot-toast";
 
+// Register chart as pie chart
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Portfolio = () => {
+  // let's get our currently logged in user from redux store (we are using built-in useSelector hook from redux toolkit)
   const currentUser = useSelector(selectCurrentUser);
+
+  // setting flags for each tab to identify which tab is active
   const tabFlags = {
     overview: 1,
     stocksList: 2,
   };
+  // state to display/hide our sell stock popup
   const [sellStockPopup, setSellStockPopup] = useState(false);
+
+  // state to display information about the stock we are going to sell
   const [sellStockInfo, setSellStockInfo] = useState({
     name: "",
     stocksAmount: 0,
     averageCost: 0,
   });
 
+  console.log(sellStockInfo);
+
   // Destructuring pulled info from the sellstockinfo state
   const { name, stocksAmount, averageCost } = sellStockInfo;
+  // state of the qty input inside sell stock popup (we are keeping it to compare with initial value for validation purposes)
   const [sellStocksAmount, setSellStocksAmount] = useState(0);
+
   // Display sell stock popup
   const sellPopUpHandler = (e) => {
+    // toggling value to display/hide popup
     setSellStockPopup((sellStockPopup) => !sellStockPopup);
+
+    // getting stock values (name,qty,price) to display inside popup
+    // 1. retrieve a parent element of the clicked target
+    // 2. get all child nodes of the parent
+    // 3. get a name,qty,average cost from textContent (array elements order numbers can be seen in StockList.jsx)
     const parentElement = e.target.parentElement;
     const childNodes = parentElement.childNodes;
     const name = childNodes[0]?.textContent;
@@ -55,6 +77,7 @@ const Portfolio = () => {
         averageCost,
       };
     });
+    // setting our popup qty input as well
     setSellStocksAmount(qty);
   };
 
@@ -70,8 +93,21 @@ const Portfolio = () => {
   const { data: balance = 0, isLoading: isBalanceLoading } =
     useGetBalanceQuery(currentUser);
 
+  // Destructuring RTK.Query Hook for updating user's balance
+  const [addBalance, { isError, isSuccess }] = useAddBalanceMutation();
+
+  // once we sold the stock, we would need to remove it from DB
+  const [deleteStock] = useDeletePortfolioStocksMutation();
+
+  // Updating our transactions list (add stock purchase transaction to the list), when buying stock.
+  const [updateTransactions] = useAddStockTransactionsMutation();
+
+  // Add new stock to portfolio stock list, let everyone know how rich you're ;)
+  const [updateStocks, { isLoading }] = useUpdatePortfolioStocksMutation();
+
   // based on stocks list, we are going through each with reduce and adding their equity for stocks value (stocks power)
   const stocksPower = stocksData?.reduce((acc, curr) => acc + curr.equity, 0);
+
   // our buying power is our balance
   const buyingPower = balance;
 
@@ -120,7 +156,7 @@ const Portfolio = () => {
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.fillText(
-        `Total Value: ${totalValue}`,
+        `Total Value: ${totalValue.toFixed(2)}`,
         chart.getDatasetMeta(0).data[0].x,
         chart.getDatasetMeta(0).data[0].y
       );
@@ -129,28 +165,78 @@ const Portfolio = () => {
 
   // Proceed to sell choosen stock, good luck :D
   const sellStockHandler = (e) => {
-    // logic to sell stock
     if (
       !sellStocksAmount ||
       sellStocksAmount < 1 ||
       sellStocksAmount === undefined ||
       sellStocksAmount === null
     ) {
-      alert("Enter amount to sell");
+      toast.error("Enter amount to sell");
     } else if (sellStocksAmount > stocksAmount) {
-      alert(`Hold your horses, you've only got ${stocksAmount} stocks`);
+      toast.error(`Hold your horses, you've only got ${stocksAmount} stocks`);
     } else {
-      alert(
+      stocksData &&
+        stocksData.map((item) => {
+          const formattedDate = new Date(item.purchased_at);
+
+          // Get the month with leading zero if necessary
+          const month = (formattedDate.getMonth() + 1)
+            .toString()
+            .padStart(2, "0");
+          // today's date (formatted)
+          const date = `${formattedDate.getFullYear()}-${month}-${formattedDate.getDate()}`;
+          if (currentUser === item.user_id) {
+            let temp = item.share - sellStocksAmount;
+            updateStocks({
+              userID: currentUser,
+              id: item.id,
+              symbol: item.symbol,
+              stockPrice: averageCost,
+              company: name,
+              share: temp,
+              totalCost: Math.abs(averageCost * sellStocksAmount),
+              date,
+            });
+            deleteStock({
+              userID: currentUser,
+              symbol: item.symbol,
+              company: name,
+            });
+            addBalance({
+              id: currentUser,
+              amount: averageCost * sellStocksAmount,
+            });
+            updateTransactions({
+              userID: currentUser,
+              id: nanoid(),
+              name,
+              price: (averageCost * sellStocksAmount).toFixed(2),
+              description: `Sold ${Math.abs(
+                sellStocksAmount
+              )} shares of ${name}`,
+              date,
+            });
+          }
+        });
+      toast.success(
         `Congratulations, you've sold ${sellStocksAmount} stocks of ${name}`
       );
+      //TODO: logic to sell stock should be here
       setSellStockPopup((prevState) => !prevState);
     }
   };
+
+  // Let's make calculation of our total return value
+  // 1. Get all the stocks from the user's portfolio, particularly their price
+  // 2. We need to search those stocks on the market, based on the symbol of those stocks inside portfolio
+  // 3. Fetch them, get their prices, compare with prices of the owned stocks
+  // 4. Calculate total return and update asset value
 
   return (
     <>
       {/* Hero Section */}
       <Hero>
+        <Toaster />
         <div className={styles.tabs}>
           <button
             className={styles.tabButton}
@@ -232,19 +318,18 @@ const Portfolio = () => {
 
                 <hr className={styles.overviewLine} />
               </div>
-              
+
               {isBalanceLoading ? (
-                      <Loading />
-                    ) : (
-                      <div className={styles.doughnutGraph}>
-                        <Doughnut
-                          data={data}
-                          options={options}
-                          plugins={[textCenter]}
-                        ></Doughnut>
-                      </div>
+                <Loading />
+              ) : (
+                <div className={styles.doughnutGraph}>
+                  <Doughnut
+                    data={data}
+                    options={options}
+                    plugins={[textCenter]}
+                  ></Doughnut>
+                </div>
               )}
-              
             </>
           )}
 
@@ -255,7 +340,7 @@ const Portfolio = () => {
                   <h1 className={styles.title}>Name</h1>
                   <h1 className={styles.title}>Symbol</h1>
                   <h1 className={styles.title}>Shares</h1>
-                  <h1 className={styles.title}>Price</h1>
+                  <h1 className={styles.title}>Total Cost</h1>
                   <h1 className={styles.title}>Average Cost</h1>
                   <h1 className={styles.title}>Total Return</h1>
                   <h1 className={styles.title}>Equity</h1>
@@ -272,7 +357,7 @@ const Portfolio = () => {
                             name={item.name}
                             symbol={item.symbol}
                             shares={item.share}
-                            price={item.price}
+                            totalCost={item.totalCost}
                             avgCost={item.averageCost}
                             totalReturn={item.totalReturn}
                             equity={item.equity}
@@ -286,7 +371,10 @@ const Portfolio = () => {
             </div>
           )}
           {activeTab === tabFlags.stocksList && (
-            <button className={styles.calculateBtn}>
+            <button
+              onClick={() => alert("Lets go")}
+              className={styles.calculateBtn}
+            >
               <img src={CalculateIcon} alt="Calculate Portfolio" />
             </button>
           )}

@@ -17,25 +17,42 @@ class PortfolioController {
   async addPortfolioStock(req, res, next) {
     // Establishing connection to our PlanetScale DB
     const connection = await connectDB();
-    const { userID, id, symbol, priceBought, company, share, cost } = req.body;
-    const averageCost = cost / share;
-    const totalReturn = share * (priceBought - averageCost);
-    const equity = priceBought * share;
-    console.log(userID, id, symbol, priceBought, company, share, cost);
+    const { userID, id, symbol, stockPrice, company, share, totalCost, date } =
+      req.body;
+    console.log(
+      userID,
+      id,
+      symbol,
+      stockPrice,
+      company,
+      share,
+      totalCost,
+      date
+    );
+    const averageCost = totalCost / share;
+    const totalReturn = 0;
+
+    /*
+    total cost = amount of stocks * the price it was purchased (e.x 06/01/23)
+      total return = fetched new price * amount of stocks  - total cost
+    
+    */
+    const equity = stockPrice * share;
     try {
       const query =
-        "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, amount, share, price, averageCost, totalReturn, equity) VALUES (?, ?, ?, ?, ?, ?, ?, ? , ?, ?)";
+        "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, stockPrice, share, totalCost, averageCost, totalReturn, equity, purchased_at) VALUES (?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?)";
       const [rows] = await connection.query(query, [
         userID,
         id,
         company,
         symbol,
-        priceBought,
+        stockPrice,
         share,
-        cost,
+        totalCost,
         averageCost,
         totalReturn,
         equity,
+        date,
       ]);
       res.json(rows);
     } catch (err) {

@@ -401,3 +401,44 @@ input:checked + .switchLabel:after {
     // bottom: 10%;
   }
 }
+
+// Dark Mode
+.dark-mode {
+  background-color: #1f1f1f;
+  color: #fff;
+
+  .logo {
+    color: #fff;
+  }
+
+  .closeSettingsBtn {
+    color: #fff;
+  }
+
+  .featured {
+    color: #fff;
+  }
+
+  .container {
+    background-color: #121212;
+  }
+
+  .logoutButton {
+    color: #000;
+  }
+
+  .settingsContainer {
+    background-color: #121212;
+  }
+
+  .notifications,
+  .accountInfo {
+    color: #fff;
+  }
+
+  .settingsNavLink {
+    hr {
+      background-color: #fff;
+    }
+  }
+}

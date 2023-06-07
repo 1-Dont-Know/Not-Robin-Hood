@@ -37,6 +37,11 @@ userRouter.get(
   portfolioController.getPortfolioStocks
 );
 userRouter.post("/portfolio/stocks", portfolioController.addPortfolioStock);
+
+userRouter.patch(
+  "/portfolio/stocks/update",
+  portfolioController.modifyPortfolioStock
+);
 userRouter.delete(
   "/portfolio/stocks/:userID/:symbol/:company",
   portfolioController.deletePortfolioStock

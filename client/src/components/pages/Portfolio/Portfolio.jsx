@@ -21,6 +21,7 @@ import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 import Loading from "../../UI/Loading/Loading";
 import Popup from "../../UI/Popup/Popup";
 import { nanoid } from "nanoid";
+import toast, { Toaster } from "react-hot-toast";
 
 // Register chart as pie chart
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -168,14 +169,14 @@ const Portfolio = () => {
       sellStocksAmount === undefined ||
       sellStocksAmount === null
     ) {
-      alert("Enter amount to sell");
+      toast.error("Enter amount to sell");
     } else if (sellStocksAmount > stocksAmount) {
-      alert(`Hold your horses, you've only got ${stocksAmount} stocks`);
+      toast.error(`Hold your horses, you've only got ${stocksAmount} stocks`);
     } else {
       stocksData &&
         stocksData.map((item) => {
           const formattedDate = new Date(item.purchased_at);
-          console.log(formattedDate);
+
           // Get the month with leading zero if necessary
           const month = (formattedDate.getMonth() + 1)
             .toString()
@@ -188,10 +189,10 @@ const Portfolio = () => {
               userID: currentUser,
               id: item.id,
               symbol: item.symbol,
-              priceBought: averageCost,
+              stockPrice: averageCost,
               company: name,
               share: temp,
-              cost: Math.abs(averageCost * sellStocksAmount),
+              totalCost: Math.abs(averageCost * sellStocksAmount),
               date,
             });
             deleteStock({
@@ -215,18 +216,29 @@ const Portfolio = () => {
             });
           }
         });
-      alert(
+      toast.success(
         `Congratulations, you've sold ${sellStocksAmount} stocks of ${name}`
       );
       //TODO: logic to sell stock should be here
       setSellStockPopup((prevState) => !prevState);
     }
   };
+  // Calculate stocks total return
+  // Let's make calculation of our total return value
+  // 1. Get all the stocks from the user's portfolio, particularly their price
+  // 2. We need to search those stocks on the market, based on the symbol of those stocks inside portfolio
+  // 3. Fetch them, get their prices, compare with prices of the owned stocks
+  // 4. Calculate total return and update asset value
+
+  const calculateTotalReturn = () => {
+    alert("calculated");
+  };
 
   return (
     <>
       {/* Hero Section */}
       <Hero>
+        <Toaster />
         <div className={styles.tabs}>
           <button
             className={styles.tabButton}
@@ -330,7 +342,7 @@ const Portfolio = () => {
                   <h1 className={styles.title}>Name</h1>
                   <h1 className={styles.title}>Symbol</h1>
                   <h1 className={styles.title}>Shares</h1>
-                  <h1 className={styles.title}>Price</h1>
+                  <h1 className={styles.title}>Total Cost</h1>
                   <h1 className={styles.title}>Average Cost</h1>
                   <h1 className={styles.title}>Total Return</h1>
                   <h1 className={styles.title}>Equity</h1>
@@ -347,7 +359,7 @@ const Portfolio = () => {
                             name={item.name}
                             symbol={item.symbol}
                             shares={item.share}
-                            price={item.price}
+                            totalCost={item.totalCost}
                             avgCost={item.averageCost}
                             totalReturn={item.totalReturn}
                             equity={item.equity}
@@ -360,8 +372,12 @@ const Portfolio = () => {
               </section>
             </div>
           )}
+          {/* Calculate total return */}
           {activeTab === tabFlags.stocksList && (
-            <button className={styles.calculateBtn}>
+            <button
+              onClick={calculateTotalReturn}
+              className={styles.calculateBtn}
+            >
               <img src={CalculateIcon} alt="Calculate Portfolio" />
             </button>
           )}

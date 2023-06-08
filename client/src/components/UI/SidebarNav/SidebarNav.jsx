@@ -38,10 +38,10 @@ const SidebarNav = () => {
     <nav>
       {/* //! GENERAL LIST */}
       <ul className={styles.generalList}>
-        <h2 className={styles.sectionTitle}>
+        <h2 className={`${styles.sectionTitle} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           General
           <span>
-            <hr className={styles.divider} />
+            <hr className={`${styles.divider} ${darkModeTheme ? styles["dark-mode"] : ""}`} />
           </span>
         </h2>
         <NavLink to="/account">
@@ -51,7 +51,7 @@ const SidebarNav = () => {
             className={`${isActive ? styles.active : styles.listItem} 
             ${darkModeTheme ? styles["dark-mode"] : ""}`}
             >
-              <img src={overview} alt="overview" />
+              <img src={overview} alt="overview" className={`${darkModeTheme ? styles["dark-mode-img"] : ""}`} />
               Overview
             </li>
           )}
@@ -62,7 +62,7 @@ const SidebarNav = () => {
             className={`${isActive ? styles.active : styles.listItem} 
             ${darkModeTheme ? styles["dark-mode"] : ""}`}
             >
-              <img src={markets} alt="markets" />
+              <img src={markets} alt="markets" className={`${darkModeTheme ? styles["dark-mode-img"] : ""}`}/>
               Markets
             </li>
           )}
@@ -73,28 +73,28 @@ const SidebarNav = () => {
             className={`${isActive ? styles.active : styles.listItem} 
             ${darkModeTheme ? styles["dark-mode"] : ""}`}
             >
-              <img src={transactions} alt="transactions" /> Stock Transactions
+              <img src={transactions} alt="transactions" className={`${darkModeTheme ? styles["dark-mode-img"] : ""}`}/> Stock Transactions
             </li>
           )}
         </NavLink>
       </ul>
       {/* //! SUPPORT LIST */}
       <ul className={styles.supportList}>
-        <h2 className={styles.sectionTitle}>
+        <h2 className={`${styles.sectionTitle} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           Support
           <span>
-            <hr className={styles.divider} />
+            <hr className={`${styles.divider} ${darkModeTheme ? styles["dark-mode"] : ""}`} />
           </span>
         </h2>
         <NavLink to="/settings">
           <li className={`${styles.listItem} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
-            <img src={settings} alt="settings" />
+            <img src={settings} alt="settings" className={`${darkModeTheme ? styles["dark-mode-img"] : ""}`}/>
             Settings
           </li>
         </NavLink>
         <NavLink onClick={logOutHandler} to="/">
           <li className={`${styles.listItem} ${darkModeTheme ? styles["dark-mode"] : ""}`} id="logout">
-            <img src={logout} alt="logout" />
+            <img src={logout} alt="logout" className={`${darkModeTheme ? styles["dark-mode-img"] : ""}`}/>
             Log out
           </li>
         </NavLink>

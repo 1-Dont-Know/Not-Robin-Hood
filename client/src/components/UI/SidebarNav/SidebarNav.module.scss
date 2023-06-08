@@ -8,6 +8,9 @@
   display: flex;
   align-items: center;
   gap: 2.5rem;
+  &.dark-mode {
+    color: #fff;
+  }
 }
 
 .divider {
@@ -15,6 +18,9 @@
   height: 1px;
   background-color: variables.$secondary-color;
   opacity: 0.45;
+  &.dark-mode {
+    background-color: #fff;
+  }
 }
 
 .listItem {
@@ -37,10 +43,18 @@
     background-color: #fff;
     border-radius: 25px;
   }
-  &.dark-mode:hover {
-    background-color: #3A514E;
+  &.dark-mode {
     color: #fff;
   }
+  &.dark-mode:hover {
+    background-color: #333636;
+    color: #fff;
+  }
+}
+.dark-mode-img {
+    //Modifies the credit/bank icon colors on hover
+    filter: invert(1) contrast(200%) //hue-rotate(100deg)
+      saturate(0);
 }
 
 .active {

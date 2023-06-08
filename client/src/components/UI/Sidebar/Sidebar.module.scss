@@ -16,6 +16,10 @@
   @include mixins.breakpoint-down(medium) {
     display: none;
   }
+
+  &.dark-mode {
+    background-color: #3A514E;
+  }
 }
 .toggle {
   position: absolute;

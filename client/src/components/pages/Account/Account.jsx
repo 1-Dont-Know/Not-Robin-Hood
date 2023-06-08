@@ -8,6 +8,9 @@ import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used f
 import Graph from "../../UI/Graph/Graph";
 import Filter from "../../UI/Filter/Filter";
 
+import { useGetPortfolioStocksQuery } from "../../../redux/slices/user/userApiSlice"
+//"../../../redux/slices/user/userApiSlice";
+
 import {
   selectCurrentToken,
   selectCurrentUser,
@@ -15,12 +18,48 @@ import {
 import { useSelector } from "react-redux";
 
 const Account = () => {
+
+  // Currently logged in user from redux store (we are using built-in useSelector hook from redux toolkit)
+  const currentUser = useSelector(selectCurrentUser);
+
+  // Get user's stocks data
+  const { data: stocksData } = useGetPortfolioStocksQuery(currentUser);
+  
+  //Function to remove duplicate stock names from portfolio and only show unique list of stocks
+  const uniqueStocks = () => {
+    if (stocksData) {
+      const uniqueStocksArray = [];
+      stocksData.forEach(stock => {
+        const found = uniqueStocksArray.find(item => item.name === stock.name);
+        if (!found) {
+          uniqueStocksArray.push({
+            name: stock.name,
+            symbol: stock.symbol,
+          });
+        }
+      });
+      return uniqueStocksArray;
+    }
+  };
+
+
+
+  // console.log(stocksData);
+  // console.log(uniqueStocks());
+
+  //Fucntion to calculate User Stock Data for specific day
+  // const totalStockPriceForDay = (day) => {
+  //   
+  // };
+  // totalStockPriceForDay();
+
+
   //State Hook for Graph Component
   const [stockData, setStockData] = useState({
     labels: fakeData.map((data) => data.day),
     datasets: [
       {
-        label: "Price",
+        label: "$",
         data: fakeData.map((data) => data.price),
       },
     ],
@@ -30,12 +69,19 @@ const Account = () => {
     <>
       <Hero style={{ gap: "1rem" }}>
         {/* //! FEATURED STOCKS */}
-        <section className={styles.featured}>
+        {/* <section className={styles.featured}>
           <FeaturedStock status="up" />
           <FeaturedStock status="down" />
           <FeaturedStock status="up" />
           <FeaturedStock status="up" />
+        </section> */}
+
+        <section className={styles.featured}>
+          {stocksData && uniqueStocks().map(data => (
+            <FeaturedStock key={data.name} symbol={data.symbol} name={data.name}/>
+          ))}
         </section>
+
         {/* //! FILTER SECTION */}
         <section className={styles.filter}>
           <Filter />

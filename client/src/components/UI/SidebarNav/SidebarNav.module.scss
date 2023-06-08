@@ -37,6 +37,10 @@
     background-color: #fff;
     border-radius: 25px;
   }
+  &.dark-mode:hover {
+    background-color: #3A514E;
+    color: #fff;
+  }
 }
 
 .active {
@@ -52,6 +56,11 @@
   // @include mixins.flexbox($display: flex, $gap: 1rem);
   display: flex;
   gap: 1rem;
+
+  &.dark-mode {
+    background-color: #2A2C2E;
+    color: #fff;
+  }
 }
 .supportList {
   a {

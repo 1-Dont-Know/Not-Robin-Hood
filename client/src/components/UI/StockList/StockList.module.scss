@@ -4,12 +4,13 @@
   display: flex;
   flex: 1;
   align-items: center;
-
   margin: 0 40px;
 }
 
 .item {
   flex: 1 1 14.3%;
+  font-size: 0.9rem;
+  font-weight: variables.$font-bold;
 }
 
 .stockList {
@@ -20,7 +21,8 @@
   color: #000;
 }
 
-.sellBtn {
+.sellBtn,
+.openBtn {
   background-color: rgba(50, 84, 58, 0.35);
   border-radius: 25px;
   color: variables.$secondary-color;
@@ -32,6 +34,48 @@
     color: #fff;
     background-color: variables.$secondary-color;
   }
+}
+
+.openBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 0.7rem;
+  img {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+/* Accordion item header styles */
+.accordion-header {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+}
+
+/* Active accordion item header styles */
+.accordion-header.active {
+  background-color: #e9e9e9;
+}
+
+/* Accordion item content styles */
+.accordion-content {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  display: none; /* Hide content by default */
+}
+
+/* Active accordion item content styles */
+.accordion-content.active {
+  display: block; /* Show content when active */
 }
 
 .sellStockPopup {

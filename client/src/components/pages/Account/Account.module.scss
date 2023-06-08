@@ -5,7 +5,7 @@
 .featured {
   display: flex;
   gap: 1rem;
-  justify-content: space-evenly;
+  justify-content: left;
   flex-wrap: wrap;
   flex-basis: 25%;
   background-color: variables.$light-yellow;

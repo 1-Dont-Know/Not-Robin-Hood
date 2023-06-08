@@ -22,17 +22,18 @@ class TransactionsController {
 
   async updateTransactions(req, res, next) {
     const connection = await connectDB();
-    const { userID, id, name, price, description } = req.body;
-    console.log("Transaction:", userID, id, name, price, description);
+    const { userID, id, name, price, description, date } = req.body;
+    console.log("Transaction:", userID, id, name, price, description, date);
     try {
       const query =
-        "INSERT INTO user_transactions (user_id, id, name, price, description) VALUES (?, ?, ?, ?, ?)";
+        "INSERT INTO user_transactions (user_id, id, name, price, description, date) VALUES (?, ?, ?, ?, ?, ?)";
       const [rows] = await connection.query(query, [
         userID,
         id,
         name,
         price,
         description,
+        date,
       ]);
       res.json(rows);
     } catch (error) {

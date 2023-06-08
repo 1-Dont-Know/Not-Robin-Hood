@@ -5,131 +5,194 @@ import buyIcon from "../../../assets/icons/shopping-cart.svg";
 import { checkIfNumber } from "../../../utils/helpers";
 import {
   useAddBalanceMutation,
-  useGetUserByIdQuery,
   useGetBalanceQuery,
   useGetPortfolioStocksQuery,
   useUpdatePortfolioStocksMutation,
   useDeletePortfolioStocksMutation,
   useAddStockTransactionsMutation,
+  useModifyPortfolioStocksMutation,
 } from "../../../redux/slices/user/userApiSlice";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 import { nanoid } from "nanoid";
+import toast, { Toaster } from "react-hot-toast";
 
 const BuyBox = ({ type, symbol, price, name }) => {
+  // Handling stock quantity
   const [qty, setQty] = useState(0);
+  // Setting purchase date
+  const currentDate = new Date();
+  // Get the month with leading zero if necessary
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+  // today's date (formatted)
+  const defaultDate = `${currentDate.getFullYear()}-${month}-${currentDate.getDate()}`;
+  const [datePurchased, setDatePurchased] = useState(defaultDate);
+
+  console.log(datePurchased);
 
   // Amount State
   const [sellAmount, setSellAmount] = useState(0);
   const [buyAmount, setBuyAmount] = useState(0);
-
+  const [purchaseHistory, setPurchaseHistory] = useState([]);
   const userID = useSelector(selectCurrentUser);
 
   // Destructuring RTK.Query Hook for updating user's balance
   const [addBalance, { isError, isSuccess }] = useAddBalanceMutation();
 
+  // Destructing our hook for updating stock if it's already owned/in our portfolio
+  const [modifyStock] = useModifyPortfolioStocksMutation();
+
+  // To modify user's balance, we need to get a current balance, based on the currently logged in user
   const {
     data: balance = 0,
     isLoading: isLoading2,
     error: error2,
   } = useGetBalanceQuery(userID);
 
-  const { data: stocksData } = useGetPortfolioStocksQuery();
-
+  // Let's get all stocks from portfolio
+  const { data: stocksData } = useGetPortfolioStocksQuery(userID);
+  // once we sold the stock, we would need to remove it from DB
   const [deleteStock] = useDeletePortfolioStocksMutation();
+
+  // Updating our transactions list (add stock purchase transaction to the list), when buying stock.
   const [updateTransactions] = useAddStockTransactionsMutation();
 
+  // Add new stock to portfolio stock list, let everyone know how rich you're ;)
   const [updateStocks, { isLoading }] = useUpdatePortfolioStocksMutation();
 
+  // Magic handler to set our quantity state, it makes our input to be controlled :)
   const qtyHandler = (e) => {
     setQty(Number(e.target.value));
   };
 
-  const handleBalanceSubmit = (e, amount) => {
+  // Let's make our date input controlled
+  const purchaseDateHandler = (e) => {
+    setDatePurchased(e.target.value);
+  };
+  const match =
+    stocksData && stocksData.filter((data) => data.symbol === symbol);
+  console.log("match: ", match);
+  console.log("owned stocks data:", stocksData);
+
+  const handlePurchaseSubmit = (e, amount) => {
     e.preventDefault();
-    // Buying case (reduce balance by amount)
+    const stocks = stocksData?.filter((data) => data.symbol === symbol);
+    console.log("stocks:", stocks);
+    console.log("symbol:", symbol);
+    //* Buying case (reduce balance by amount)
     if (amount < 0) {
       // we dont have money, so we can't buy
       if (balance < Math.abs(amount)) {
         console.log(amount, " ", balance);
-        console.log("cant buy");
+        console.log("sorry, you cant buy, not enough money");
+        toast.error("Insufficient amount of money");
         // we have money and we can buy
       } else {
-        console.log(amount, " ", balance);
-        console.log("can buy");
+        console.log("you can buy");
+        console.log("amount to deduct:", amount, "balance:", balance);
         // we wil modify balance based on computed amount
         addBalance({ id: userID, amount });
         e.preventDefault();
-        console.log(symbol);
         // updating stocks only if we are buying (adding new stock to the array)
         const id = nanoid();
-        updateStocks({
-          userID: userID,
-          id,
-          symbol: symbol,
-          priceBought: price,
-          company: name,
-          share: qty,
-          cost: Math.abs(amount),
-        });
+        /* check if this stock is already owned (inside portfolio),
+          if so, call modifyStock function to modify the owned stock by modifying share
+          if not, just add this stock to portfolio
+        */
+        if (match.length > 0) {
+          modifyStock({
+            userID,
+            id: match[0].id,
+            share: qty,
+            symbol,
+            stockPrice: price,
+            totalCost: Math.abs(amount),
+          });
+        } else {
+          updateStocks({
+            userID: userID,
+            id,
+            symbol: symbol,
+            stockPrice: price,
+            company: name,
+            share: qty,
+            totalCost: Math.abs(amount),
+            date: datePurchased,
+          });
+        }
+
         updateTransactions({
           userID,
           id,
           name,
-          price,
-          description: `Purchase of ${Math.abs(amount)} shares`,
+          price: sellAmount,
+          description: `Purchase of ${name} ${Math.abs(amount)} shares`,
+          date: datePurchased,
         });
+        toast.success("Successfully purchased");
       }
-      // selling case
+      //! selling case
     } else {
-      // let found =0;
+      // variable to set temporary quantity based on quantity input
       let tempQTY = qty;
       stocksData &&
         stocksData.map((item) => {
-          // let tempQTY = qty;
+          // let's check if we have this stock in our portfolio before we will proceed to sell
+          // check if symbol matched, check user's id and if the choosen quantity is valid (more than 0)
           if (
             symbol === item.symbol &&
             userID === item.user_id &&
             tempQTY > 0
           ) {
-            // addBalance({ id: 1, amount })
+            // if everything above is matched (validated) we will check if our quantity is exactly equal to amount of owned stock quantity
+            //  and delete it from db + update our balance
             if (tempQTY === item.share) {
               deleteStock({ userID: userID, symbol: symbol, company: name });
-              console.log("found =");
+              console.log("found and sold(deleted) = ", item.share);
+              toast.success("Successfully sold!");
               tempQTY = 0;
-              // addBalance({ id: userID, amount });
+              // in case input quantity amount is bigger than the actual amount of stock, we will sell (delete) all stocks
             } else if (tempQTY > item.share) {
-              tempQTY = tempQTY - item.share;
-              deleteStock({ userID: userID, symbol: symbol, company: name });
-              console.log("found >");
+              // tempQTY = tempQTY - item.share;
+              // deleteStock({ userID: userID, symbol: symbol, company: name });
+              // toast.error("Don't have enough of this stock")
+              console.log("don't have enough");
             } else if (tempQTY < item.share) {
               let temp = item.share - tempQTY;
               console.log(temp);
               let sold = price * tempQTY;
               updateStocks({
                 userID: userID,
-                id: nanoid(),
+                id: item.id,
                 symbol: symbol,
-                priceBought: price,
+                stockPrice: price,
                 company: name,
                 share: temp,
-                cost: Math.abs(sold),
+                totalCost: Math.abs(sold),
+                date: datePurchased,
               });
-
+              updateTransactions({
+                userID,
+                id: nanoid(),
+                name,
+                price: sellAmount,
+                description: `Sold ${Math.abs(amount)} shares of ${name}`,
+                date: datePurchased,
+              });
               deleteStock({ userID: userID, symbol: symbol, company: name });
 
               tempQTY = 0;
               console.log("found <");
+              toast.success("Successfully sold!");
             }
-
-            // found = 1;
-            // console.log("found")
           }
           console.log("tempQTY = ", tempQTY);
         });
       console.log("tempQTY = ", tempQTY);
       if (tempQTY === qty) {
-        console.log("you dont have this stock");
+        // console.log("you dont have this stock");
+        toast.error("Don't have enough of this stock");
+        // TODO: ASK DARSHWAK ABOUT THIS LOGIC
         // addBalance({ id: userID, amount });
       } else if (tempQTY === 0) {
         console.log("Sold all ", qty, " stocks");
@@ -143,26 +206,32 @@ const BuyBox = ({ type, symbol, price, name }) => {
     }
   };
 
-  // triggering amount state
+  // triggering amount state for two (buy/sell) scenario
   useEffect(() => {
     setSellAmount(parseFloat((price * qty).toFixed(2)));
     setBuyAmount(parseFloat((-price * qty).toFixed(2)));
   }, [qty]);
 
+  const history = stocksData?.filter((item) => item.symbol === symbol);
+  useEffect(() => {
+    if (history) setPurchaseHistory(history);
+  }, []);
+
   return (
     <div className={styles.BuyBody}>
+      <Toaster />
       {/* CALL TO ACTION BUTTONS SECTION */}
       <section className={styles.ctaSection}>
         <button
           className={globalStyles.buyBoxButton}
-          onClick={(event) => handleBalanceSubmit(event, buyAmount)}
+          onClick={(event) => handlePurchaseSubmit(event, buyAmount)}
         >
           <img src={buyIcon} alt="Buy" />
           Buy
         </button>
         <button
           className={globalStyles.sellButton}
-          onClick={(event) => handleBalanceSubmit(event, sellAmount)}
+          onClick={(event) => handlePurchaseSubmit(event, sellAmount)}
         >
           <img src={buyIcon} alt="Sell" />
           Sell
@@ -183,9 +252,12 @@ const BuyBox = ({ type, symbol, price, name }) => {
         {/* Date Input */}
         <input
           type="date"
+          min={datePurchased}
+          max={datePurchased}
           id="userDate"
           className={styles.inputBoxes}
-          placeholder="MM/DD"
+          onChange={purchaseDateHandler}
+          value={datePurchased}
         />
         {/* Total Amount  */}
         <div className={styles.inputBoxes}>
@@ -195,9 +267,22 @@ const BuyBox = ({ type, symbol, price, name }) => {
 
       {/* ORDERS SECTION */}
       <section className={styles.ordersSection}>
-        <h1>Queue Order</h1>
+        <h1>Purchase History</h1>
         <div className={styles.orders}>
-          <p>Order conformation</p>
+          {purchaseHistory.length > 0
+            ? history.map((item) => {
+                return (
+                  <ul key={item.id}>
+                    <li style={{ fontSize: "0.8rem" }} key={item.id}>
+                      <p>
+                        Date: {datePurchased} / Name: {item.name} / Share:{" "}
+                        {item.share}
+                      </p>
+                    </li>
+                  </ul>
+                );
+              })
+            : "No history found"}
         </div>
       </section>
     </div>

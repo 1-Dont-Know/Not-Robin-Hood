@@ -5,6 +5,7 @@ import notificationsController from "../controllers/user/notificationsController
 import transactionsController from "../controllers/user/transactionsController.js";
 import portfolioController from "../controllers/user/portfolioController.js";
 import userInfoController from "../controllers/user/userInfoController.js";
+import apiController from "../controllers/api/apiController.js";
 
 const userRouter = express.Router();
 
@@ -46,5 +47,7 @@ userRouter.delete(
   "/portfolio/stocks/:userID/:symbol/:company",
   portfolioController.deletePortfolioStock
 );
+
+userRouter.patch("/changepassword/update", apiController.changePassword)
 
 export default userRouter;

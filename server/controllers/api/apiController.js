@@ -326,6 +326,30 @@ class ApiController {
       console.log(error);
     }
   }
+
+  async changePassword(req, res, next) {
+    const connection = await connectDB();
+    const { userID, newPassword, oldPassword } = req.body;
+  
+    try {
+      const [rows] = await connection.query("SELECT * FROM users WHERE id = ?", [userID]);
+      const foundUser = rows[0];
+      if (!foundUser || foundUser.id !== userID) {
+        return res.sendStatus(401); // unauthorized
+      }
+      const match = await bcrypt.compare(oldPassword, foundUser.password);
+      if (!match) {
+        return res.status(401).json({ message: "Please enter correct old password" });
+      }
+      const query = "UPDATE users SET password = ? WHERE id = ?";
+      const salt = await bcrypt.genSalt(10);
+      const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+      await connection.query(query, [hashedNewPassword, userID]);
+      res.status(201).json({ message: "Password successfully updated." });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 export default new ApiController();

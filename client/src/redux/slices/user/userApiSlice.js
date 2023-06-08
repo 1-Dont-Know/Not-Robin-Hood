@@ -203,6 +203,13 @@ export const userApi = createApi({
         invalidatesTags: ["PortfolioValue"],
       }),
     }),
+    changePassword: builder.mutation({
+      query: ( {userID, newPassword, oldPassword}) => ({
+        url: `user/changepassword/update`,
+        method: "PATCH",
+        body: {userID, newPassword, oldPassword},
+      }),
+    }),
   }),
 });
 
@@ -225,4 +232,5 @@ export const {
   useUpdatePortfolioValueMutation,
   useAddStockTransactionsMutation,
   useModifyPortfolioStocksMutation,
+  useChangePasswordMutation
 } = userApi;

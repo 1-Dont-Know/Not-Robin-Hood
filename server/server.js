@@ -40,5 +40,7 @@ app.use(verifyJWT);
 
 app.use("/user", userRouter);
 
+
+
 // TO CHECK IF OUR APP US RUNNING AND ON WHICH PORT
 app.listen(port, () => console.log(`Server is running on port ${port}`));

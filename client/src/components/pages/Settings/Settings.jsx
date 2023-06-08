@@ -14,6 +14,8 @@ import { NavLink, Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDarkMode, toggleTheme } from './../../../redux/slices/darkModeSlice';
+import { useChangePasswordMutation } from "../../../redux/slices/user/userApiSlice";
+import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 //import AppFundsPopup from "../StockViewer/StockViewer";
 
 const Settings = () => {
@@ -22,6 +24,21 @@ const Settings = () => {
     notifications: 2,
     accountInfo: 3,
   };
+
+  const [newPasswordVal, setNewPasswordVal] = useState("");
+  const [oldPassworVal, setOldPasswordVal] = useState("");
+
+
+  const [
+    changePassword,
+    {
+      data: changePasswordData,
+      isLoading: isLoading,
+      isError: isError,
+      isSuccess: isSuccess,
+    }
+  ] = useChangePasswordMutation();
+  const userID = useSelector(selectCurrentUser);
 
   const [activeTab, setActiveTab] = useState(tabFlags.settings);
   const [selectedOption, setSelectedOption] = useState("Settings");
@@ -35,6 +52,25 @@ const Settings = () => {
   useEffect(() => {
     localStorage.setItem("darkMode", darkModeTheme);
   }, [darkModeTheme]);
+
+  // const [passworData, setPasswordData] = useState({
+  //   userID: userID,
+  //   password: newPasswordVal,
+  // });
+
+  // handler for new password
+  const newPasswordHandler = (e) => {
+    setNewPasswordVal(e.target.value)
+    // setPasswordData((prevState) => {
+    //   return {
+    //     ...prevState,
+    //     [e.target.name]: e.target.value,
+    //   };
+    // });
+  }
+  const oldPasswordHandler = (e) => {
+    setOldPasswordVal(e.target.value)
+  }
 
   // Handling dark mode switch
   const handleToggle = () => {
@@ -51,6 +87,32 @@ const Settings = () => {
       return (curr = selectedTab);
     });
   }
+
+
+  // console.log("old= " + oldPassworVal)
+  // console.log("new= " + newPasswordVal)
+  // console.log("new = " + passworData.password)
+
+  const changePasswordHandler = async (e) => {
+    e.preventDefault();
+    try{
+      if(oldPassworVal !== newPasswordVal && newPasswordVal !== ""){
+        console.log("old= " + oldPassworVal)
+        
+        console.log("ID = " + userID)
+        // const response = await changePassword(userID, {password: newPasswordVal})
+        const response = await changePassword({userID, newPassword: newPasswordVal, oldPassword: oldPassworVal})
+        console.log("new= " + newPasswordVal)
+      }
+      else{
+        // toast
+        console.log("same")
+      }
+    }catch (error){
+      console.log(error)
+    }
+   
+  };
 
   return (
     <>
@@ -289,9 +351,11 @@ const Settings = () => {
                     type="text"
                     id="password"
                     placeholder="current password"
+                    value={oldPassworVal}
+                    onChange={oldPasswordHandler}
                   />
-                  <input type="text" id="password" placeholder="new password" />
-                  <button className={globalStyles.saveChangesButton}>
+                  <input type="text" id="password" placeholder="new password" value={newPasswordVal} onChange={newPasswordHandler}/>
+                  <button className={globalStyles.saveChangesButton} onClick={changePasswordHandler}>
                     Save
                   </button>
                 </div>

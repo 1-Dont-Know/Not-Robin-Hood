@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./Search.module.scss";
 import { Link } from "react-router-dom";
 import { useGetStockTickerQuery } from "../../../redux/slices/api/alphaVantageApiSlice";
+// Dark Mode
+import { useSelector } from 'react-redux';
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 
 // Search Bar component receives a placeholder prop for the search default message
 const Search = ({ placeholder }) => {
@@ -40,6 +43,13 @@ const Search = ({ placeholder }) => {
   const inputChanged = (e) => {
     setSearchQuery(e.target.value);
   };
+
+// Dark Mode Theme
+  const darkModeTheme = useSelector(selectDarkMode);
+  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkModeTheme);
+  }, [darkModeTheme]);
 
   //Alpha Vantage API call to search for company/stock ticker. Only runs after set amount of time defined by useDebounce call.
   //Skips calling the API if the search query is an empty string.
@@ -85,9 +95,9 @@ const Search = ({ placeholder }) => {
   return (
     <div ref={wrapperRef}>
       {/* Search Field */}
-      <div className={styles.container}>
+      <div className={`${styles.container} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
         <input
-          className={styles.search}
+          className={`${styles.search} ${darkModeTheme ? styles["dark-mode-search"] : ""}`}
           type="text"
           placeholder={placeholder}
           value={searchQuery}
@@ -101,7 +111,7 @@ const Search = ({ placeholder }) => {
           <></>
         ) : (
           //Otherwise, render the list of search results
-          <ul className={styles.searchResults}>
+          <ul className={`${styles.searchResults} ${darkModeTheme ? styles["dark-mode-results"] : ""}`}>
             {
               //If best matches exist, render list
               bestMatches.map((item) => {
@@ -109,7 +119,7 @@ const Search = ({ placeholder }) => {
                   item["4. region"] === "United States" && (
                     <li key={item["1. symbol"]}>
                       <Link
-                        className={styles.listResult}
+                        className={`${styles.listResult} ${darkModeTheme ? styles["dark-mode"] : ""}`}
                         to={{
                           pathname: "/stock-viewer",
                           search: `?symbol=${item["1. symbol"]}&description=${item["2. name"].replace(/\s+/g,'+')}`,

@@ -23,8 +23,19 @@ import styles from "./AppRouter.module.scss";
 import NotificationPopUp from "../UI/NotificationPopUp/NotificationPopUp";
 import PersistLogin from "../PersistLogin/PersistLogin";
 import RequireAuth from "../RequireAuth/RequireAuth";
+// Dark Mode
+import { useSelector } from 'react-redux';
+import { selectDarkMode } from '../../redux/slices/darkModeSlice.js';
 
 const AppRouter = () => {
+
+  // Dark Mode Theme
+  const darkModeTheme = useSelector(selectDarkMode);
+  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkModeTheme);
+  }, [darkModeTheme]);
+
   return (
     <>
       <Router>
@@ -41,7 +52,7 @@ const AppRouter = () => {
                   element={
                     <div className={styles.wrapper}>
                       <Sidebar />
-                      <main className={styles.mainSection}>
+                      <main className={`${styles.mainSection} ${darkModeTheme ? styles['dark-mode'] : ''}`}>
                         <TopNav />
                         <Outlet />
                       </main>

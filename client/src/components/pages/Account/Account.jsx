@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../../UI/Sidebar/Sidebar";
 import TopNav from "../../UI/TopNav/TopNav";
 import styles from "./Account.module.scss";
@@ -10,6 +10,8 @@ import Filter from "../../UI/Filter/Filter";
 
 import { useGetPortfolioStocksQuery } from "../../../redux/slices/user/userApiSlice"
 //"../../../redux/slices/user/userApiSlice";
+// Dark Mode
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 
 import {
   selectCurrentToken,
@@ -18,6 +20,11 @@ import {
 import { useSelector } from "react-redux";
 
 const Account = () => {
+  // Dark Mode Theme
+  const darkModeTheme = useSelector(selectDarkMode);
+  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
+  // End Dark Mode Theme
 
   // Currently logged in user from redux store (we are using built-in useSelector hook from redux toolkit)
   const currentUser = useSelector(selectCurrentUser);
@@ -76,7 +83,7 @@ const Account = () => {
           <FeaturedStock status="up" />
         </section> */}
 
-        <section className={styles.featured}>
+        <section className={`${styles.featured} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           {stocksData && uniqueStocks().map(data => (
             <FeaturedStock key={data.name} symbol={data.symbol} name={data.name}/>
           ))}

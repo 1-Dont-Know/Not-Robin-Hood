@@ -11,6 +11,9 @@
   background-color: variables.$light-yellow;
   border-radius: 25px;
   padding: 1.4rem;
+  &.dark-mode {
+    background-color: #633F20;
+  }
 }
 
 // FILTER SECTION

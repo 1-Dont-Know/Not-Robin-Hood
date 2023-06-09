@@ -29,8 +29,6 @@ class BalanceController {
       // extract the id and balance from the request
       const id = req.params.id;
       const { amount } = req.body;
-      console.log("id:", id);
-      console.log("amount:", amount);
 
       // update the balance in the database
       await connection.query(

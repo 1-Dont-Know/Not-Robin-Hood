@@ -187,8 +187,9 @@ const Portfolio = () => {
             .padStart(2, "0");
           // today's date (formatted)
           const date = `${formattedDate.getFullYear()}-${month}-${formattedDate.getDate()}`;
-          if (currentUser === item.user_id) {
+          if (currentUser === item.user_id && name === item.name) {
             let temp = item.share - sellStocksAmount;
+            console.log("TEMP:", temp);
             modifyStock({
               userID: currentUser,
               id: item.id,
@@ -199,11 +200,11 @@ const Portfolio = () => {
               totalCost: Math.abs(averageCost * sellStocksAmount),
               date,
             });
-            deleteStock({
-              userID: currentUser,
-              symbol: item.symbol,
-              company: name,
-            });
+            // deleteStock({
+            //   userID: currentUser,
+            //   symbol: item.symbol,
+            //   company: name,
+            // });
             addBalance({
               id: currentUser,
               amount: averageCost * sellStocksAmount,

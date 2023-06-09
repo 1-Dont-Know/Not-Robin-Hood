@@ -39,23 +39,45 @@ class PortfolioController {
     
     */
     const equity = stockPrice * share;
-    try {
-      const query =
-        "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, stockPrice, share, totalCost, averageCost, totalReturn, equity, purchased_at) VALUES (?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?)";
-      const [rows] = await connection.query(query, [
-        userID,
-        id,
-        company,
-        symbol,
+    const query =
+      "SELECT * FROM user_portfolio_stocks WHERE user_id = ? AND symbol = ?";
+    const [rows] = await connection.query(query, [userID, symbol]);
+    const match = rows[0];
+    console.log("Matched stock", match);
+    if (match) {
+      const updatedShare = share;
+      const updateStockQuery =
+        "UPDATE user_portfolio_stocks SET share = share + ?, stockPrice = stockPrice + ?, totalCost = totalCost + ?, purchased_at = ? WHERE user_id = ? AND id = ? AND symbol = ?";
+      const [rows] = await connection.query(updateStockQuery, [
+        updatedShare,
         stockPrice,
-        share,
         totalCost,
-        averageCost,
-        totalReturn,
-        equity,
         date,
+        userID,
+        match.id,
+        symbol,
       ]);
       res.json(rows);
+    }
+    try {
+      if (!match) {
+        const query =
+          "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, stockPrice, share, totalCost, averageCost, totalReturn, equity, purchased_at) VALUES (?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?)";
+        const [rows] = await connection.query(query, [
+          userID,
+          id,
+          company,
+          symbol,
+          stockPrice,
+          share,
+          totalCost,
+          averageCost,
+          totalReturn,
+          equity,
+          date,
+        ]);
+        res.json(rows);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -63,7 +85,7 @@ class PortfolioController {
   async modifyPortfolioStock(req, res, next) {
     // Establishing connection to our PlanetScale DB
     const connection = await connectDB();
-    const { userID, id, share, symbol, stockPrice, totalCost } = req.body;
+    const { userID, id, share, symbol, stockPrice, totalCost, date } = req.body;
     console.log(
       "Info for stock modification:",
       userID,
@@ -73,14 +95,15 @@ class PortfolioController {
       stockPrice,
       totalCost
     );
-    const updatedShare = share;
+
     try {
       const query =
-        "UPDATE user_portfolio_stocks SET share = share + ?, stockPrice = stockPrice + ?, totalCost = totalCost + ? WHERE user_id = ? AND id = ? AND symbol = ?;";
+        "UPDATE user_portfolio_stocks SET share = ?, stockPrice = stockPrice - ?, totalCost = totalCost - ?, purchased_at = ? WHERE user_id = ? AND id = ? AND symbol = ?";
       const [rows] = await connection.query(query, [
-        updatedShare,
+        share,
         stockPrice,
         totalCost,
+        date,
         userID,
         id,
         symbol,

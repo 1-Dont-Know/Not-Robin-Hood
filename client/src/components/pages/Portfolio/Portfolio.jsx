@@ -14,6 +14,7 @@ import {
   useDeletePortfolioStocksMutation,
   useGetBalanceQuery,
   useGetPortfolioStocksQuery,
+  useModifyPortfolioStocksMutation,
   useUpdatePortfolioStocksMutation,
 } from "../../../redux/slices/user/userApiSlice";
 import { useSelector } from "react-redux";
@@ -22,6 +23,7 @@ import Loading from "../../UI/Loading/Loading";
 import Popup from "../../UI/Popup/Popup";
 import { nanoid } from "nanoid";
 import toast, { Toaster } from "react-hot-toast";
+import { useGetPriceQuery } from "../../../redux/slices/api/finnhubApiSlice";
 
 // Register chart as pie chart
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -49,6 +51,8 @@ const Portfolio = () => {
   const { name, stocksAmount, averageCost } = sellStockInfo;
   // state of the qty input inside sell stock popup (we are keeping it to compare with initial value for validation purposes)
   const [sellStocksAmount, setSellStocksAmount] = useState(0);
+
+  const [modifyStock] = useModifyPortfolioStocksMutation();
 
   // Display sell stock popup
   const sellPopUpHandler = (e) => {
@@ -185,7 +189,7 @@ const Portfolio = () => {
           const date = `${formattedDate.getFullYear()}-${month}-${formattedDate.getDate()}`;
           if (currentUser === item.user_id) {
             let temp = item.share - sellStocksAmount;
-            updateStocks({
+            modifyStock({
               userID: currentUser,
               id: item.id,
               symbol: item.symbol,
@@ -230,9 +234,45 @@ const Portfolio = () => {
   // 3. Fetch them, get their prices, compare with prices of the owned stocks
   // 4. Calculate total return and update asset value
 
-  const calculateTotalReturn = () => {
-    alert("calculated");
+  /*
+    total cost = amount of stocks * the price it was purchased (e.x 06/01/23)
+      total return = fetched new price * amount of stocks  - total cost
+      
+    
+    */
+
+  const api_key = `${process.env.REACT_APP_FINNHUB_API_KEY}`;
+
+  // Destructuring RTK.Query Hook for getting the newest price of the owned stocks companies
+
+  const calculateTotalReturn = async (company) => {
+    const responseArray = await Promise.all(
+      company.map((item) =>
+        fetch(
+          `https://finnhub.io/api/v1/quote?symbol=${item.symbol}&token=${api_key}`
+        )
+          .then((response) => response.json())
+          .then((data) => ({
+            name: item.symbol,
+            qty: item.qty,
+            totalReturn: (data.c - item.price) * item.qty,
+            prevPrice: item.price,
+          }))
+      )
+    );
+
+    console.log(responseArray);
+
+    return responseArray;
   };
+  const ownedStocksStats =
+    stocksData &&
+    stocksData.map((item) => ({
+      symbol: item.symbol,
+      qty: item.share,
+      price: item.averageCost,
+    }));
+  console.log("Owned Stocks symbols:", ownedStocksStats);
 
   return (
     <>
@@ -375,7 +415,7 @@ const Portfolio = () => {
           {/* Calculate total return */}
           {activeTab === tabFlags.stocksList && (
             <button
-              onClick={calculateTotalReturn}
+              onClick={() => calculateTotalReturn(ownedStocksStats)}
               className={styles.calculateBtn}
             >
               <img src={CalculateIcon} alt="Calculate Portfolio" />

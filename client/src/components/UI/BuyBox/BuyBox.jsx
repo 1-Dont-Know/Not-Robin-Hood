@@ -20,15 +20,23 @@ import toast, { Toaster } from "react-hot-toast";
 const BuyBox = ({ type, symbol, price, name }) => {
   // Handling stock quantity
   const [qty, setQty] = useState(0);
-  // Setting purchase date
-  const currentDate = new Date();
-  // Get the month with leading zero if necessary
-  const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-  // today's date (formatted)
-  const defaultDate = `${currentDate.getFullYear()}-${month}-${currentDate.getDate()}`;
-  const [datePurchased, setDatePurchased] = useState(defaultDate);
 
-  console.log(datePurchased);
+  // Setting pucharse date
+  const [datePurchased, setDatePurchased] = useState(getCurrentDate());
+
+  // Let's make our date input controlled
+  const purchaseDateHandler = (e) => {
+    setDatePurchased(getCurrentDate());
+  };
+
+  function getCurrentDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    let month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    let day = currentDate.getDate().toString().padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
 
   // Amount State
   const [sellAmount, setSellAmount] = useState(0);
@@ -65,14 +73,16 @@ const BuyBox = ({ type, symbol, price, name }) => {
     setQty(Number(e.target.value));
   };
 
-  // Let's make our date input controlled
-  const purchaseDateHandler = (e) => {
-    setDatePurchased(e.target.value);
-  };
   const match =
     stocksData && stocksData.filter((data) => data.symbol === symbol);
-  console.log("match: ", match);
-  console.log("owned stocks data:", stocksData);
+  // console.log("matched stocks: ", match);
+  // console.log("stocks from portfolio:", stocksData);
+
+  // useEffect(() => {
+  //   setPurchaseHistory((prevState) => {
+  //     return [...prevState, match];
+  //   });
+  // }, [match]);
 
   const handlePurchaseSubmit = (e, amount) => {
     e.preventDefault();
@@ -99,27 +109,27 @@ const BuyBox = ({ type, symbol, price, name }) => {
           if so, call modifyStock function to modify the owned stock by modifying share
           if not, just add this stock to portfolio
         */
-        if (match.length > 0) {
-          modifyStock({
-            userID,
-            id: match[0].id,
-            share: qty,
-            symbol,
-            stockPrice: price,
-            totalCost: Math.abs(amount),
-          });
-        } else {
-          updateStocks({
-            userID: userID,
-            id,
-            symbol: symbol,
-            stockPrice: price,
-            company: name,
-            share: qty,
-            totalCost: Math.abs(amount),
-            date: datePurchased,
-          });
-        }
+
+        // modifyStock({
+        //   userID,
+        //   id,
+        //   share: qty,
+        //   symbol,
+        //   stockPrice: price,
+        //   totalCost: Math.abs(amount),
+        //   date: datePurchased,
+        // });
+
+        updateStocks({
+          userID: userID,
+          id,
+          symbol: symbol,
+          stockPrice: price,
+          company: name,
+          share: qty,
+          totalCost: Math.abs(amount),
+          date: datePurchased,
+        });
 
         updateTransactions({
           userID,
@@ -159,9 +169,9 @@ const BuyBox = ({ type, symbol, price, name }) => {
               console.log("don't have enough");
             } else if (tempQTY < item.share) {
               let temp = item.share - tempQTY;
-              console.log(temp);
+              console.log("TEMP:", temp);
               let sold = price * tempQTY;
-              updateStocks({
+              modifyStock({
                 userID: userID,
                 id: item.id,
                 symbol: symbol,
@@ -179,7 +189,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
                 description: `Sold ${Math.abs(amount)} shares of ${name}`,
                 date: datePurchased,
               });
-              deleteStock({ userID: userID, symbol: symbol, company: name });
+              // deleteStock({ userID: userID, symbol: symbol, company: name });
 
               tempQTY = 0;
               console.log("found <");
@@ -212,10 +222,10 @@ const BuyBox = ({ type, symbol, price, name }) => {
     setBuyAmount(parseFloat((-price * qty).toFixed(2)));
   }, [qty]);
 
-  const history = stocksData?.filter((item) => item.symbol === symbol);
   useEffect(() => {
-    if (history) setPurchaseHistory(history);
-  }, []);
+    const history = stocksData?.filter((item) => item.symbol === symbol);
+    history && setPurchaseHistory(history);
+  }, [stocksData]);
 
   return (
     <div className={styles.BuyBody}>
@@ -269,8 +279,8 @@ const BuyBox = ({ type, symbol, price, name }) => {
       <section className={styles.ordersSection}>
         <h1>Purchase History</h1>
         <div className={styles.orders}>
-          {purchaseHistory.length > 0
-            ? history.map((item) => {
+          {purchaseHistory && purchaseHistory.length > 0
+            ? purchaseHistory.map((item) => {
                 return (
                   <ul key={item.id}>
                     <li style={{ fontSize: "0.8rem" }} key={item.id}>

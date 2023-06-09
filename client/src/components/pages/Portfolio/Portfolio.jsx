@@ -200,11 +200,6 @@ const Portfolio = () => {
               totalCost: Math.abs(averageCost * sellStocksAmount),
               date,
             });
-            // deleteStock({
-            //   userID: currentUser,
-            //   symbol: item.symbol,
-            //   company: name,
-            // });
             addBalance({
               id: currentUser,
               amount: averageCost * sellStocksAmount,
@@ -219,6 +214,27 @@ const Portfolio = () => {
               )} shares of ${name}`,
               date,
             });
+            if (temp <= 0) {
+              deleteStock({
+                userID: currentUser,
+                symbol: item.symbol,
+                company: name,
+              });
+              addBalance({
+                id: currentUser,
+                amount: averageCost * sellStocksAmount,
+              });
+              updateTransactions({
+                userID: currentUser,
+                id: nanoid(),
+                name,
+                price: (averageCost * sellStocksAmount).toFixed(2),
+                description: `Sold ${Math.abs(
+                  sellStocksAmount
+                )} shares of ${name}`,
+                date,
+              });
+            }
           }
         });
       toast.success(

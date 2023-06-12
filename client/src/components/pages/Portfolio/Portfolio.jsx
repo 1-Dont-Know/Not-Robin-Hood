@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Portfolio.module.scss";
 import Hero from "../../UI/Hero/Hero";
 import StockList from "../../UI/StockList/StockList";
@@ -16,6 +16,7 @@ import {
   useGetPortfolioStocksQuery,
   useModifyPortfolioStocksMutation,
   useUpdatePortfolioStocksMutation,
+  useSetPortfolioStocksTotalReturnMutation,
 } from "../../../redux/slices/user/userApiSlice";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
@@ -23,7 +24,6 @@ import Loading from "../../UI/Loading/Loading";
 import Popup from "../../UI/Popup/Popup";
 import { nanoid } from "nanoid";
 import toast, { Toaster } from "react-hot-toast";
-import { useGetPriceQuery } from "../../../redux/slices/api/finnhubApiSlice";
 
 // Register chart as pie chart
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -257,11 +257,9 @@ const Portfolio = () => {
       
     
     */
+  const [setStocksTotalReturn, {}] = useSetPortfolioStocksTotalReturnMutation();
 
   const api_key = `${process.env.REACT_APP_FINNHUB_API_KEY}`;
-
-  // Destructuring RTK.Query Hook for getting the newest price of the owned stocks companies
-
   const calculateTotalReturn = async (company) => {
     const responseArray = await Promise.all(
       company.map((item) =>
@@ -270,18 +268,28 @@ const Portfolio = () => {
         )
           .then((response) => response.json())
           .then((data) => ({
-            name: item.symbol,
-            qty: item.qty,
-            totalReturn: (data.c - item.price) * item.qty,
-            prevPrice: item.price,
+            oldPrice: item.price,
+            fullinfo: data,
+            symbol: item.symbol,
+            totalCost: item.qty * item.price,
+            currentPrice: Math.abs(data.c),
+            totalReturn: item.qty * data.c - item.qty * item.price,
           }))
       )
     );
 
     console.log(responseArray);
 
-    return responseArray;
+    if (responseArray.length > 0) {
+      responseArray.map((item) =>
+        setStocksTotalReturn({
+          totalReturn: item.totalReturn,
+          symbol: item.symbol,
+        })
+      );
+    }
   };
+
   const ownedStocksStats =
     stocksData &&
     stocksData.map((item) => ({
@@ -289,7 +297,7 @@ const Portfolio = () => {
       qty: item.share,
       price: item.averageCost,
     }));
-  console.log("Owned Stocks symbols:", ownedStocksStats);
+  // console.log("Owned Stocks symbols:", ownedStocksStats);
 
   return (
     <>

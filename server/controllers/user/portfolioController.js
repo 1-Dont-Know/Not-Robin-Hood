@@ -131,7 +131,18 @@ class PortfolioController {
     }
   }
 
-  async getPortfolioTotalValue(req, res, next) {}
+  async setTotalReturnValues(req, res, next) {
+    // Establishing connection to our PlanetScale DB
+    const connection = await connectDB();
+    const { totalReturn, symbol } = req.body;
+    try {
+      const query = `UPDATE user_portfolio_stocks SET totalReturn = ? WHERE symbol = ?`;
+      const [rows] = await connection.query(query, [totalReturn, symbol]);
+      res.json(rows);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default new PortfolioController();

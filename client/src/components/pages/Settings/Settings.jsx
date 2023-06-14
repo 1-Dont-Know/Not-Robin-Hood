@@ -144,7 +144,8 @@ const Settings = () => {
 
   return (
     <>
-      <div className={styles.container}>
+
+     <div className={`${styles.container} ${darkModeTheme ? styles['dark-mode'] : ''}`}>
       <Toaster />
         {/* LOGO SECTION */}
         <div className={styles.logo}>
@@ -197,39 +198,6 @@ const Settings = () => {
               <hr></hr>
             </div>
 
-            <div className={styles.settingsNavLink}>
-              <button
-                className={globalStyles.settingsPageButton}
-                onClick={(e) => {
-                  handleTabSelect(tabFlags.notifications);
-                }}
-                style={{
-                  backgroundColor:
-                    activeTab === tabFlags.notifications ? "#37433a" : "#ffff",
-                  color:
-                    activeTab === tabFlags.notifications
-                      ? "#d5e3e1"
-                      : "#37433a",
-                }}
-              >
-                <img
-                  src={settings}
-                  alt="settings"
-                  className={styles.settingsPageButton}
-                  onClick={(e) => {
-                    handleTabSelect(tabFlags.settings);
-                  }}
-                  style={{
-                    filter:
-                      activeTab === tabFlags.settings
-                        ? "invert(1) contrast(200%) saturate(0)"
-                        : "invert(0) contrast(200%) saturate(0)",
-                  }}
-                />
-                Settings
-              </button>
-              <hr></hr>
-            </div>
             {/* <img src={divider} alt="divider" id="divider"/> */}
 
             <div className={styles.settingsNavLink}>

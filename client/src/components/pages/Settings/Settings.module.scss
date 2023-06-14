@@ -53,7 +53,7 @@
   opacity: calc(4%);
   background-size: cover;
   height: 115vh;
-  background-image: url(../../../assets/bull.png);
+  background-image: url(../../../assets/transparent_bull.png);
   background-repeat: no-repeat;
   pointer-events: none;
 }
@@ -399,5 +399,46 @@ input:checked + .switchLabel:after {
   left: 12%;
   @include mixins.breakpoint-down(small) {
     // bottom: 10%;
+  }
+}
+
+// Dark Mode
+.dark-mode {
+  background-color: #1f1f1f;
+  color: #fff;
+
+  .logo {
+    color: #fff;
+  }
+
+  .closeSettingsBtn {
+    color: #fff;
+  }
+
+  .featured {
+    color: #fff;
+  }
+
+  .container {
+    background-color: #121212;
+  }
+
+  .logoutButton {
+    color: #000;
+  }
+
+  .settingsContainer {
+    background-color: #121212;
+  }
+
+  .notifications,
+  .accountInfo {
+    color: #fff;
+  }
+
+  .settingsNavLink {
+    hr {
+      background-color: #fff;
+    }
   }
 }

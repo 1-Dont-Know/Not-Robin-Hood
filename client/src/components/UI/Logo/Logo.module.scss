@@ -7,6 +7,9 @@
   font-size: 2rem;
   color: variables.$secondary-color;
   letter-spacing: -2px;
+  &.dark-mode {
+    color: #fff;
+  }
   h2 {
     font-size: 100px;
     height: 150px;

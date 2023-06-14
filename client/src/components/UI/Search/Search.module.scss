@@ -12,7 +12,13 @@
 
   min-width: 80%; //Temp Value for now
   padding: 0.9rem;
+
+    /* Dark mode styles */
+    &.dark-mode {
+      background-color: #2A2C2E;
+    }
 }
+
 
 //Styling for the Search Bar Text
 input {
@@ -29,6 +35,14 @@ input {
   height: 30px;
   //   padding: 20px 0px 20px 25px;
   text-transform:uppercase;
+
+  
+  /* Dark mode styles */
+  &.dark-mode-search {
+    background: invert;
+    background-color: #2A2C2E;
+    color: #fff;
+  }
 }
 
 
@@ -47,6 +61,12 @@ input {
   background: #ffffff;
   border: 1px solid #32543a;
   border-radius: 25px;
+
+    /* Dark mode styles */
+    &.dark-mode-results {
+      background: #2A2C2E;
+      color: #ffffff;
+    }
 }
 
 .searchResults:empty {
@@ -59,9 +79,19 @@ input {
   font-size: 20px;
   padding: 10px 5px;
   color: inherit;
+
+    /* Dark mode styles */
+    &.dark-mode {
+      color: #fff;
+      background-color: #2A2C2E;
+    }
+    &.dark-mode:hover {
+      color: #000;
+      background-color: #d5e3e1;
+    }
 }
 
 .listResult:hover{
-  background-color: variables.$golden;
+  background-color: #ffee00;
   border-radius: 5px;
 }

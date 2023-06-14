@@ -210,6 +210,13 @@ export const userApi = createApi({
         body: {userID, newPassword, oldPassword},
       }),
     }),
+    changeName: builder.mutation({
+      query: ( {userID, oldName, newName}) => ({
+        url: `user/changename/update`,
+        method: "PATCH",
+        body: {userID, oldName, newName},
+      }),
+    }),
   }),
 });
 
@@ -232,5 +239,6 @@ export const {
   useUpdatePortfolioValueMutation,
   useAddStockTransactionsMutation,
   useModifyPortfolioStocksMutation,
-  useChangePasswordMutation
+  useChangePasswordMutation,
+  useChangeNameMutation
 } = userApi;

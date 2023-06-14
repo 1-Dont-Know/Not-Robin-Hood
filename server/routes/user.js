@@ -48,6 +48,10 @@ userRouter.delete(
   portfolioController.deletePortfolioStock
 );
 
+// User's Change Password route
 userRouter.patch("/changepassword/update", apiController.changePassword)
+
+// User's Change Name route
+userRouter.patch("/changename/update", apiController.changeName)
 
 export default userRouter;

@@ -14,9 +14,10 @@ import { NavLink, Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDarkMode, toggleTheme } from './../../../redux/slices/darkModeSlice';
-import { useChangePasswordMutation } from "../../../redux/slices/user/userApiSlice";
+import { useChangePasswordMutation, useChangeNameMutation } from "../../../redux/slices/user/userApiSlice";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 //import AppFundsPopup from "../StockViewer/StockViewer";
+import toast, { Toaster } from "react-hot-toast";
 
 const Settings = () => {
   const tabFlags = {
@@ -28,6 +29,9 @@ const Settings = () => {
   const [newPasswordVal, setNewPasswordVal] = useState("");
   const [oldPassworVal, setOldPasswordVal] = useState("");
 
+  const [newName, setNewName] = useState("");
+  const [oldName, setOldName] = useState("");
+
 
   const [
     changePassword,
@@ -38,6 +42,16 @@ const Settings = () => {
       isSuccess: isSuccess,
     }
   ] = useChangePasswordMutation();
+  const [
+    changeName,
+    {
+      data: changeNameData,
+      isLoading: isNameLoading,
+      isError: isNameError,
+      isSuccess: isNameSuccess,
+    }
+  ] = useChangeNameMutation();
+
   const userID = useSelector(selectCurrentUser);
 
   const [activeTab, setActiveTab] = useState(tabFlags.settings);
@@ -53,20 +67,16 @@ const Settings = () => {
     localStorage.setItem("darkMode", darkModeTheme);
   }, [darkModeTheme]);
 
-  // const [passworData, setPasswordData] = useState({
-  //   userID: userID,
-  //   password: newPasswordVal,
-  // });
+  const newNameHandler = (e) => {
+    setNewName(e.target.value)
+  }
+  const oldNameHandler = (e) => {
+    setOldName(e.target.value)
+  }
 
   // handler for new password
   const newPasswordHandler = (e) => {
     setNewPasswordVal(e.target.value)
-    // setPasswordData((prevState) => {
-    //   return {
-    //     ...prevState,
-    //     [e.target.name]: e.target.value,
-    //   };
-    // });
   }
   const oldPasswordHandler = (e) => {
     setOldPasswordVal(e.target.value)
@@ -88,10 +98,25 @@ const Settings = () => {
     });
   }
 
-
-  // console.log("old= " + oldPassworVal)
-  // console.log("new= " + newPasswordVal)
-  // console.log("new = " + passworData.password)
+  const changeNameHandler = async (e) => {
+    e.preventDefault();
+    try{
+      if(oldName !== newName && newName !== ""){
+        const response = await changeName({userID, oldName, newName})
+        console.log(response)
+        if(!response.data){
+          toast.error(response.error.data.message)
+        }
+        toast.success(response.data.message)
+      }
+      else{
+        //toast
+        toast.error("Names are the Same")
+      }
+    }catch (error){
+      console.log(error)
+    }
+  }
 
   const changePasswordHandler = async (e) => {
     e.preventDefault();
@@ -100,13 +125,16 @@ const Settings = () => {
         console.log("old= " + oldPassworVal)
         
         console.log("ID = " + userID)
-        // const response = await changePassword(userID, {password: newPasswordVal})
         const response = await changePassword({userID, newPassword: newPasswordVal, oldPassword: oldPassworVal})
-        console.log("new= " + newPasswordVal)
+        console.log(response)
+        if(!response.data){
+          toast.error(response.error.data.message)
+        }
+        toast.success(response.data.message)
       }
       else{
         // toast
-        console.log("same")
+        toast.error("Don't use the same password")
       }
     }catch (error){
       console.log(error)
@@ -117,6 +145,7 @@ const Settings = () => {
   return (
     <>
       <div className={styles.container}>
+      <Toaster />
         {/* LOGO SECTION */}
         <div className={styles.logo}>
           <Logo />
@@ -362,9 +391,9 @@ const Settings = () => {
 
                 <div className={styles.changeName}>
                   <h1 id="settingsOption">Change your name</h1>
-                  <input type="text" id="name" placeholder="current name" />
-                  <input type="text" id="name" placeholder="new name" />
-                  <button className={globalStyles.saveChangesButton}>
+                  <input type="text" id="name" placeholder="current name" value={oldName} onChange={oldNameHandler}/>
+                  <input type="text" id="name" placeholder="new name" value={newName} onChange={newNameHandler}/>
+                  <button className={globalStyles.saveChangesButton} onClick={changeNameHandler}>
                     Save
                   </button>
                 </div>

@@ -5,12 +5,15 @@
 .featured {
   display: flex;
   gap: 1rem;
-  justify-content: space-evenly;
+  justify-content: left;
   flex-wrap: wrap;
   flex-basis: 25%;
   background-color: variables.$light-yellow;
   border-radius: 25px;
   padding: 1.4rem;
+  &.dark-mode {
+    background-color: #633F20;
+  }
 }
 
 // FILTER SECTION

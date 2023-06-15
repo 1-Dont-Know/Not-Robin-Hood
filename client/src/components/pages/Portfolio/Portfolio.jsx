@@ -25,18 +25,8 @@ import Popup from "../../UI/Popup/Popup";
 import { nanoid } from "nanoid";
 import toast, { Toaster } from "react-hot-toast";
 
-// Register chart as pie chart
-ChartJS.register(ArcElement, Tooltip, Legend);
-
 const Portfolio = () => {
-  // let's get our currently logged in user from redux store (we are using built-in useSelector hook from redux toolkit)
-  const currentUser = useSelector(selectCurrentUser);
-
-  // setting flags for each tab to identify which tab is active
-  const tabFlags = {
-    overview: 1,
-    stocksList: 2,
-  };
+  // ***** STATES
   // state to display/hide our sell stock popup
   const [sellStockPopup, setSellStockPopup] = useState(false);
 
@@ -46,47 +36,29 @@ const Portfolio = () => {
     stocksAmount: 0,
     averageCost: 0,
   });
-
-  // Destructuring pulled info from the sellstockinfo state
-  const { name, stocksAmount, averageCost } = sellStockInfo;
   // state of the qty input inside sell stock popup (we are keeping it to compare with initial value for validation purposes)
   const [sellStocksAmount, setSellStocksAmount] = useState(0);
 
+  // active tab state
+  // setting flags for each tab to identify which tab is active
+  const tabFlags = {
+    overview: 1,
+    stocksList: 2,
+  };
+  const [activeTab, setActiveTab] = useState(tabFlags.overview);
+
+  // ***** CONSTS
+
+  // Register chart as pie chart
+  ChartJS.register(ArcElement, Tooltip, Legend);
+
+  // let's get our currently logged in user from redux store (we are using built-in useSelector hook from redux toolkit)
+  const currentUser = useSelector(selectCurrentUser);
+
+  // Destructuring pulled info from the sellstockinfo state
+  const { name, stocksAmount, averageCost } = sellStockInfo;
+
   const [modifyStock] = useModifyPortfolioStocksMutation();
-
-  // Display sell stock popup
-  const sellPopUpHandler = (e) => {
-    // toggling value to display/hide popup
-    setSellStockPopup((sellStockPopup) => !sellStockPopup);
-
-    // getting stock values (name,qty,price) to display inside popup
-    // 1. retrieve a parent element of the clicked target
-    // 2. get all child nodes of the parent
-    // 3. get a name,qty,average cost from textContent (array elements order numbers can be seen in StockList.jsx)
-    const parentElement = e.target.parentElement;
-    const childNodes = parentElement.childNodes;
-    const name = childNodes[0]?.textContent;
-    const qty = Number(childNodes[2]?.textContent.split(" ")[0]);
-    const priceStr = childNodes[4]?.textContent;
-    const averageCost = Number(priceStr?.replace("$", ""));
-
-    // Setting state of selected stock to sell (state: sellStockInfo)
-    setSellStockInfo((prevState) => {
-      return {
-        ...prevState,
-        name,
-        stocksAmount: qty,
-        averageCost,
-      };
-    });
-    // setting our popup qty input as well
-    setSellStocksAmount(qty);
-  };
-
-  // Setting amount based on the stocksAmount (stocksAmount * price)
-  const sellStockInfoHandler = (e) => {
-    setSellStocksAmount(() => e.target.value);
-  };
 
   // we need stocksdata to display stocks list in portfolio
   const { data: stocksData } = useGetPortfolioStocksQuery(currentUser);
@@ -107,6 +79,9 @@ const Portfolio = () => {
   // Add new stock to portfolio stock list, let everyone know how rich you're ;)
   const [updateStocks, { isLoading }] = useUpdatePortfolioStocksMutation();
 
+  // Apply calculated total return to each owned stock
+  const [setStocksTotalReturn, {}] = useSetPortfolioStocksTotalReturnMutation();
+
   // based on stocks list, we are going through each with reduce and adding their equity for stocks value (stocks power)
   const stocksPower = stocksData?.reduce((acc, curr) => acc + curr.equity, 0);
 
@@ -116,19 +91,22 @@ const Portfolio = () => {
   // Total portfolio value
   const totalValue = stocksPower + buyingPower;
 
+  // stats of the owned stocks
+  const ownedStocksStats =
+    stocksData &&
+    stocksData.map((item) => ({
+      symbol: item.symbol,
+      qty: item.share,
+      price: item.averageCost,
+    }));
+  // console.log("Owned Stocks symbols:", ownedStocksStats);
+
   // Getting percentage value based on our previous calculations
   const stocksPowerPercentage = ((stocksPower / totalValue) * 100).toFixed(2);
   const buyingPowerPercentage = ((buyingPower / totalValue) * 100).toFixed(2);
 
-  // active tab state
-  const [activeTab, setActiveTab] = useState(tabFlags.overview);
-
-  // handling active tab state
-  function handleTabSelect(selectedTab) {
-    setActiveTab((curr) => {
-      return (curr = selectedTab);
-    });
-  }
+  // shouldn't be here, but just for now
+  const api_key = `${process.env.REACT_APP_FINNHUB_API_KEY}`;
 
   // Display data for pie chart
   const data = {
@@ -165,7 +143,52 @@ const Portfolio = () => {
     },
   };
 
+  // ***** FUNCTIONS
+
+  // Display sell stock popup
+  // TODO: Change approach by using useRef or somethign else, it's a spicy DOM traversing stuff here, be careful :D
+  const sellPopUpHandler = (e) => {
+    // toggling value to display/hide popup
+    setSellStockPopup((sellStockPopup) => !sellStockPopup);
+
+    // getting stock values (name,qty,price) to display inside popup
+    // 1. retrieve a parent element of the clicked target
+    // 2. get all child nodes of the parent
+    // 3. get a name,qty,average cost from textContent (array elements order numbers can be seen in StockList.jsx)
+    const parentElement = e.target.parentElement;
+    const childNodes = parentElement.childNodes;
+    const name = childNodes[0]?.textContent;
+    const qty = Number(childNodes[2]?.textContent.split(" ")[0]);
+    const priceStr = childNodes[4]?.textContent;
+    const averageCost = Number(priceStr?.replace("$", ""));
+
+    // Setting state of selected stock to sell (state: sellStockInfo)
+    setSellStockInfo((prevState) => {
+      return {
+        ...prevState,
+        name,
+        stocksAmount: qty,
+        averageCost,
+      };
+    });
+    // setting our popup qty input as well
+    setSellStocksAmount(qty);
+  };
+
+  // Setting amount based on the stocksAmount (stocksAmount * price)
+  const sellStockInfoHandler = (e) => {
+    setSellStocksAmount(() => e.target.value);
+  };
+
+  // handling active tab state
+  function handleTabSelect(selectedTab) {
+    setActiveTab((curr) => {
+      return (curr = selectedTab);
+    });
+  }
+
   // Proceed to sell choosen stock, good luck :D
+  // TODO: We need to create a separate function helper and reuse it for buying and selling
   const sellStockHandler = (e) => {
     if (
       !sellStocksAmount ||
@@ -255,11 +278,7 @@ const Portfolio = () => {
     total cost = amount of stocks * the price it was purchased (e.x 06/01/23)
       total return = fetched new price * amount of stocks  - total cost
       
-    
     */
-  const [setStocksTotalReturn, {}] = useSetPortfolioStocksTotalReturnMutation();
-
-  const api_key = `${process.env.REACT_APP_FINNHUB_API_KEY}`;
   const calculateTotalReturn = async (company) => {
     const responseArray = await Promise.all(
       company.map((item) =>
@@ -289,15 +308,6 @@ const Portfolio = () => {
       );
     }
   };
-
-  const ownedStocksStats =
-    stocksData &&
-    stocksData.map((item) => ({
-      symbol: item.symbol,
-      qty: item.share,
-      price: item.averageCost,
-    }));
-  // console.log("Owned Stocks symbols:", ownedStocksStats);
 
   return (
     <>

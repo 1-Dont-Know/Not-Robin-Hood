@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styles from "./Asset.module.scss";
 import assetUp from "../../../assets/icons/asset-up.svg";
@@ -7,13 +7,15 @@ import { useGetPortfolioStocksQuery } from "../../../redux/slices/user/userApiSl
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 import Loading from "../Loading/Loading";
 // Dark Mode
-import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
+import { selectDarkMode } from "./../../../redux/slices/darkModeSlice";
 
 const Asset = () => {
   // Dark Mode Theme
   const darkModeTheme = useSelector(selectDarkMode);
   // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
-  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkModeTheme);
+  }, [darkModeTheme]);
   // End Dark Mode Theme
 
   const currentUser = useSelector(selectCurrentUser);
@@ -28,7 +30,11 @@ const Asset = () => {
     return <Loading />;
   }
   return (
-    <div className={`${styles.container} ${darkModeTheme ? styles['dark-mode'] : ''}`}>
+    <div
+      className={`${styles.container} ${
+        darkModeTheme ? styles["dark-mode"] : ""
+      }`}
+    >
       <h3 className={styles.title}>Asset Value</h3>
       {stocksData ? (
         <>

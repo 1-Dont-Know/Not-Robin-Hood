@@ -2,27 +2,33 @@
 @use "../../../styles/variables.scss";
 
 .positive,
-.negative {
+.negative {  
+  display: flex;
+  flex-direction: column;  
+  align-items: start;
+  justify-content: space-evenly;
   width: 250px;
-  background-color: variables.$primary-color;
   border-radius: 25px;
-  padding: 1rem;
-  cursor: pointer;
+  padding: 1rem;  
+  background-color: variables.$primary-color;
   transition: 0.3s ease-in-out;
+  gap: 1rem;
+  cursor: pointer;
   &:hover {
     box-shadow: 0px 0px 0px 2px #667269;
   }
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: start;
-  justify-content: space-evenly;
+  &.dark-mode { // dark mode background color, positive/default state
+    background-color: #3aa066;
+  }  
+  &.dark-mode:hover { // dark mode hover border color, positive/default state
+    box-shadow: 0px 0px 0px 2px #68c07e;
+  }
 
   .stockInformation {
     display: flex;
-    gap: 1rem;
     align-items: center;
-    justify-content: center;
+    justify-content: center;    
+    gap: 1rem;
     .stockIcon {
       background-color: #b3c5c2;
       border-radius: 25px;
@@ -31,64 +37,100 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      &.dark-mode {
+        background-color: #78ad8f;
+      }
     }
     .stockName {
       display: flex;
       gap: 0.3rem;
       flex-direction: column;
       flex-grow: 1;
-      h1 {
+      h1 { // stock name
         font-size: 1.5rem;
         font-weight: variables.$font-medium;
         color: #000;
       }
-      h4 {
+      h4 { // stock description
         font-size: 1rem;
         color: #798482;
       }
+        &.dark-mode {
+          h1 { //dark mode stock name
+            color: #000000;
+          }
+          h4 { // dark mode stock description
+            color: #2b2b2b;
+          }
+        } 
     }
   }
+
   .stockResults {
     display: flex;
     gap: 1rem;
     align-items: center;
-    p {
+    p { // percentage
       color: #0f1310;
       background-color: #b3c5c2;
       border-radius: 25px;
       padding: 0.7rem 1rem;
       font-weight: variables.$font-medium;
     }
-    span {
+    span { // up or down arrow
       background-color: #b3c5c2;
       padding: 0.5rem;
       border-radius: 50%;
     }
+    &.dark-mode {
+      p, span { //dark mode percentage and arrow icon
+        background-color: #78ad8f;
+      }
+    }
   }
-  .stockPrice {
+  .stockPrice { // pricing styles
     font-size: 1.5rem;
     color: variables.$secondary-color;
     font-weight: variables.$font-bold;
+    &.dark-mode { // dark mode pricing styles
+      color: #002f5a;
+    }
   }
 }
 
-.negative {
+.negative { // Negative stock styles that overwrites above 
   background-color: #e1c5c1;
   &:hover {
     box-shadow: 0px 0px 0px 2px #af9592;
   }
   .stockResults {
-    p,
-    span {
+    p, span {
       background-color: #ceb0ac;
       img {
         transform: rotate(90deg);
+      }
+    }
+    &.dark-mode {
+      p, span { //dark mode percentage and arrow icon, negative state
+        background-color: #b97f91;
       }
     }
   }
   .stockInformation {
     .stockIcon {
       background-color: #ceb0ac;
+      &.dark-mode {
+        background-color: #b97f91;
+      }
     }
+  }
+  &.dark-mode { // dark mode background color, negative state
+    background-color: rgb(179, 1, 1);
+    p, span {
+      background-color: #092c18;
+    }
+  }
+  &.dark-mode:hover { // dark mode hover border color, negative state
+    box-shadow: 0px 0px 0px 2px #e64c4c;
   }
 }

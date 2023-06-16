@@ -326,6 +326,65 @@ class ApiController {
       console.log(error);
     }
   }
+
+  async changePassword(req, res, next) {
+    const connection = await connectDB();
+    const { userID, newPassword, oldPassword } = req.body;
+  
+    try {
+      const [rows] = await connection.query("SELECT * FROM users WHERE id = ?", [userID]);
+      const foundUser = rows[0];
+      if (!foundUser || foundUser.id !== userID) {
+        return res.sendStatus(401); // unauthorized
+      }
+      const match = await bcrypt.compare(oldPassword, foundUser.password);
+      if (!match) {
+        return res.status(401).json({ message: "Please enter correct old password" });
+      }
+      const query = "UPDATE users SET password = ? WHERE id = ?";
+      const salt = await bcrypt.genSalt(10);
+      const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+      await connection.query(query, [hashedNewPassword, userID]);
+      res.status(201).json({ message: "Password successfully updated." });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+  async changeName(req, res, next) {
+    const connection = await connectDB();
+    const { userID, oldName, newName } = req.body;
+
+    try{
+      const [rows] = await connection.query("SELECT * FROM users WHERE id = ?", [userID]);
+      const foundUser = rows[0];
+      if (!foundUser || foundUser.id !== userID) {
+        return res.sendStatus(401); // unauthorized
+      } 
+      console.log("found = " + foundUser.name)
+      console.log("oldname = " + oldName)
+
+      if(!foundUser || foundUser.name !== oldName){
+        console.log("old names are not the same")
+        return res.status(401).json({ message: "Please enter correct old name" });
+      }
+      const query = "UPDATE users SET name = ? WHERE id = ?";
+      await connection.query(query, [newName, userID]);
+      res.status(201).json({ message: "Name successfully updated." });
+    }catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+
+    // testing if name changes
+    // console.log("new name ----------------- ")
+    // try{
+    //   const [rows] = await connection.query("SELECT * FROM users WHERE id = ?", [userID]);
+    //   const foundUser2 = rows[0];
+    //   console.log(foundUser2)
+    // }catch (error){
+    //   console.log("found user name")
+    // }
+  } 
 }
 
 export default new ApiController();

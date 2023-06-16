@@ -114,7 +114,7 @@ const Account = () => {
   useEffect(() => {
     if (symbols && numShares) {
       historicalData(symbols, numDays).then((results) => {
-        //console.log(`Finnhub API Closing Results`, results);
+        // console.log(`Finnhub API Closing Results`, results);
 
         //Update the dates array if the user has stocks. We only need the first position because
         //the dates are the same in all the other api requests. Fill sumArray with 0's based on length
@@ -141,7 +141,7 @@ const Account = () => {
           labels: dates,
           datasets: [
             {
-              label: "$",
+              // label: "$",
               data: sumArray,
             },
           ],

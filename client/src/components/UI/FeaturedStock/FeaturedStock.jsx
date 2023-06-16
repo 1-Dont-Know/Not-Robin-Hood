@@ -5,12 +5,9 @@ import up from "../../../assets/icons/up.svg";
 import {useGetPriceQuery} from "../../../redux/slices/api/finnhubApiSlice";
 import {Link} from "react-router-dom";
 
-const useStockPrice = (symbol) => {
-	return useGetPriceQuery(symbol);
-};
 
 const FeaturedStock = ({symbol, name}) => {
-	const {data, error, isLoading} = useStockPrice(symbol);
+	const {data, error, isLoading} = useGetPriceQuery(symbol);
 	const [status, setStatus] = useState(); //State used to track if there is current gain or loss for stock
 
 	useEffect(() => {

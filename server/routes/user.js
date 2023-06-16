@@ -43,6 +43,11 @@ userRouter.patch(
   "/portfolio/stocks/update",
   portfolioController.modifyPortfolioStock
 );
+
+userRouter.patch(
+  "/portfolio/stocks/return/update",
+  portfolioController.setTotalReturnValues
+);
 userRouter.delete(
   "/portfolio/stocks/:userID/:symbol/:company",
   portfolioController.deletePortfolioStock

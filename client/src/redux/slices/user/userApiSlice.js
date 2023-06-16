@@ -169,6 +169,14 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Stocks"],
     }),
+    setPortfolioStocksTotalReturn: builder.mutation({
+      query: ({ totalReturn, symbol }) => ({
+        url: "user/portfolio/stocks/return/update",
+        method: "PATCH",
+        body: { totalReturn, symbol },
+      }),
+      invalidatesTags: ["Stocks"],
+    }),
 
     // delete Stocks
     deletePortfolioStocks: builder.mutation({
@@ -240,6 +248,7 @@ export const {
   useUpdatePortfolioValueMutation,
   useAddStockTransactionsMutation,
   useModifyPortfolioStocksMutation,
+  useSetPortfolioStocksTotalReturnMutation,
   useChangePasswordMutation,
   useChangeNameMutation
 } = userApi;

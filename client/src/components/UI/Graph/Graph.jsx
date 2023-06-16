@@ -9,6 +9,14 @@ const Graph = ({ chartData }) => {
     maintainAspectRatio: false,
     responsive: true,
     plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            const value = context.parsed.y;
+            return ` $ ${value.toFixed(2)}`;
+          },
+        },
+      },
       title: {
         display: true,
         // text: "GAINS!",
@@ -17,6 +25,7 @@ const Graph = ({ chartData }) => {
         display: false,
       },
     },
+    
   };
 
   return (

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const api_key = `${process.env.REACT_APP_FINNHUB_API_KEY}` ;
+const api_key = `${process.env.REACT_APP_FINNHUB_API_KEY}`;
 
 export const finnhubApiSlice = createApi({
   // name
@@ -20,11 +20,13 @@ export const finnhubApiSlice = createApi({
     getCompanies: builder.query({
       query: () => `/stock/symbol?exchange=US&token=${api_key}`,
     }),
-    
+
     getMap: builder.query({
-      query: () => `/stock/candle?symbol=AAPL&resolution=1&from=1679476980&to=1679649780&token=${api_key}`,
-    })
+      query: () =>
+        `/stock/candle?symbol=AAPL&resolution=1&from=1679476980&to=1679649780&token=${api_key}`,
+    }),
   }),
 });
 
-export const { useGetPriceQuery, useGetCompaniesQuery, useGetMapQuery } = finnhubApiSlice;
+export const { useGetPriceQuery, useGetCompaniesQuery, useGetMapQuery } =
+  finnhubApiSlice;

@@ -21,12 +21,11 @@ export const finnhubApiSlice = createApi({
       query: () => `/stock/symbol?exchange=US&token=${api_key}`,
     }),
 
-    getMap: builder.query({
-      query: () =>
-        `/stock/candle?symbol=AAPL&resolution=1&from=1679476980&to=1679649780&token=${api_key}`,
-    }),
+    //Query for historical data. Symbol is the stock symbol and numDays is the number of days closing data you want.
+    getCandleData: builder.query({
+      query: (symbol, numDays) => `/stock/candle?symbol=${symbol}&resolution=D&count=${numDays}&token=${api_key}`,
+    })
   }),
 });
 
-export const { useGetPriceQuery, useGetCompaniesQuery, useGetMapQuery } =
-  finnhubApiSlice;
+export const { useGetPriceQuery, useGetCompaniesQuery, useGetCandleDataQuery } = finnhubApiSlice;

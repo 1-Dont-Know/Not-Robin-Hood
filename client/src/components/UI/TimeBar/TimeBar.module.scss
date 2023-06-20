@@ -12,6 +12,9 @@
   padding: 0.5rem 0.75rem;
   width: 100%;
   border-radius: 25px;
+  &.dark-mode {
+    background-color: #5c807b;
+  }
 
   @include mixins.breakpoint-down(xlarge) {
     // display: none;

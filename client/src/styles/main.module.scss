@@ -279,6 +279,13 @@ body {
   font-size: 1rem;
   background: #d5e3e1;
   color: variables.$secondary-color;
+  &.dark-mode {
+    background: #5c807b;;
+    color: #fff;
+    img {
+      filter: invert(1) contrast(200%) saturate(0);
+    }
+  }
 
   img {
     transition: 0.3s ease-in-out;
@@ -309,7 +316,11 @@ body {
   font-size: 0.9rem;
   padding: 0.7rem 0rem;
   color: variables.$secondary-color;
-  background: #fff;
+  background: #ffffff;
+  &.dark-mode {
+    background: #2A2C2E;
+    color: #fff;
+  }
 
   &:hover {
     background-color: variables.$secondary-color;
@@ -319,6 +330,7 @@ body {
   @include mixins.breakpoint-down(large) {
     padding: 0.5rem;
   }
+  
 }
 
 // Profile type button
@@ -363,6 +375,13 @@ body {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  &.dark-mode {
+    background: #5c807b;;
+    color: #fff;
+    img {
+      filter: invert(1) contrast(200%) saturate(0);
+    }
+  }
 
   img {
     transition: 0.3s ease-in-out;

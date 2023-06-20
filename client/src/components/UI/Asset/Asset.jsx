@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, } from "react";
 import { useSelector } from "react-redux";
 import styles from "./Asset.module.scss";
 import assetUp from "../../../assets/icons/asset-up.svg";
@@ -10,6 +10,7 @@ import Loading from "../Loading/Loading";
 import { selectDarkMode } from "./../../../redux/slices/darkModeSlice";
 
 const Asset = () => {
+  
   // Dark Mode Theme
   const darkModeTheme = useSelector(selectDarkMode);
   // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
@@ -21,10 +22,32 @@ const Asset = () => {
   const currentUser = useSelector(selectCurrentUser);
   const { data: stocksData } = useGetPortfolioStocksQuery(currentUser);
 
+  const sumArray = useSelector((state) => state.sumOfAssets); //Redux Toolkit Store variable that stores previous days sum of assets
+  const [dailyPercentageChange, setDailyPercentageChange] = useState(0);
+  const [dailyAssetValueChange, setDailyAssetValueChange] = useState(0);
+  
+
+  useEffect(() => {
+    const lengthOfSumArray = sumArray.length;
+    if (lengthOfSumArray > 2){
+      setDailyAssetValueChange((sumArray[lengthOfSumArray - 1] - sumArray[lengthOfSumArray - 2]).toFixed(2));
+      setDailyPercentageChange( (((sumArray[lengthOfSumArray - 1] - sumArray[lengthOfSumArray - 2])/sumArray[lengthOfSumArray - 2])*100).toFixed(2) );
+    }
+
+    
+    // console.log('Asset Value Change', dailyAssetValueChange);
+    // console.log('Percent Change', dailyPercentageChange);
+    
+
+    // console.log('Length',lengthOfSumArray, sumArray);
+  }, [sumArray, dailyAssetValueChange, dailyPercentageChange]);
+  
+
+
   const assetValue = stocksData
     ?.reduce((acc, curr) => acc + curr.equity, 0)
     .toFixed(2);
-  const percentage = 0;
+  
   const condition = "negative";
   if (!stocksData) {
     return <Loading />;
@@ -50,7 +73,8 @@ const Asset = () => {
             ) : (
               <img src={assetDown} alt="down" />
             )}
-            $0{`(${percentage})%`}
+            {/* {`$${dailyAssetValueChange} (${dailyPercentageChange}%)`} */}
+            {dailyAssetValueChange > 0 ? `+ $${dailyAssetValueChange} ( + ${dailyPercentageChange.toString().slice(1)}% )` : `- $${dailyAssetValueChange.toString().slice(1)} ( - ${dailyPercentageChange.toString().slice(1)}% )`}
             <span>Today</span>
           </div>
         </>

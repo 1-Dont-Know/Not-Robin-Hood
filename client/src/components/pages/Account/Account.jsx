@@ -14,8 +14,8 @@ import {
   selectCurrentUser,
 } from "../../../redux/slices/auth/authSlice";
 import { useSelector } from "react-redux";
-import {useGetCandleDataQuery} from "../../../redux/slices/api/finnhubApiSlice";
-
+import { useDispatch } from "react-redux";
+import { setSumOfAssets } from "../../../redux/slices/sumOfAssetsSlice"
 const Account = () => {
   // Dark Mode Theme
   const darkModeTheme = useSelector(selectDarkMode);
@@ -110,8 +110,12 @@ const Account = () => {
   //Graph Data State for Graph Component
   const [graphData, setGraphData] = useState();
 
-  //Wait unitl symbols and numShares async is done, then grab all historic data
+  const dispatch = useDispatch();
+
+  //Wait unitl symbols and numShares async is done, then grab all historic data for graph
+  //as well as calculate change Daily change in Asset Value
   useEffect(() => {
+    //Wait Until Symbols and numShares exist
     if (symbols && numShares) {
       historicalData(symbols, numDays).then((results) => {
         // console.log(`Finnhub API Closing Results`, results);
@@ -133,6 +137,9 @@ const Account = () => {
           });
         });
 
+        // Dispatch the setSumArray action with the sumArray data
+        dispatch(setSumOfAssets(sumArray)); //Calculate the sum of your investments in this Account component and pass the data to the Asset Component in order to update the sidebar
+
         // console.log('Sum',sumArray);
         // console.log('Dates', dates);
 
@@ -146,6 +153,8 @@ const Account = () => {
             },
           ],
         });
+
+
 
       });
     }

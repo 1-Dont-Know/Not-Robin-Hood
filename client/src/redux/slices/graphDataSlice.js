@@ -3,15 +3,15 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-const sumOfAssetsSlice = createSlice({
-  name: "sumOfAssets",
+const graphDataSlice = createSlice({
+  name: "graphData",
   initialState: [],
   reducers: {
-    setSumOfAssets: (state, action) => {
+    setGraphData: (state, action) => {
       return action.payload;
     },
   },
 });
 
-export const { setSumOfAssets } = sumOfAssetsSlice.actions;
-export default sumOfAssetsSlice.reducer;
+export const { setGraphData } = graphDataSlice.actions;
+export default graphDataSlice.reducer;

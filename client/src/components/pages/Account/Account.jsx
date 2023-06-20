@@ -14,8 +14,7 @@ import {
   selectCurrentUser,
 } from "../../../redux/slices/auth/authSlice";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { setSumOfAssets } from "../../../redux/slices/sumOfAssetsSlice"
+
 const Account = () => {
   // Dark Mode Theme
   const darkModeTheme = useSelector(selectDarkMode);
@@ -49,134 +48,7 @@ const Account = () => {
     }
   };
 
-  //Async function to list all user owned stock symbols in an array
-  const stockSymbolArray = async () => {
-    const result = await Promise.all(stocksData.map(async (stock) => {
-      return stock.symbol;
-    }));
-    return result;
-  };
-
-  //Async function to list number of shares per stock of all user owned stock in an array
-  const numSharesArray = async () => {
-    const result = await Promise.all(stocksData.map(async (stock) => {
-      return stock.share;
-    }));
-    return result;
-  };
-
-  // console.log(stocksData); //View all stocks owned by user
-  // console.log(uniqueStocks()); //View list of unique stocks owned by user (removes duplicate names)
-
-
-
-  const numDays = 30; //Set number of days for graph range as well as how far back you want historic finnhub data. Doesn't include weekends.
-  const [symbols, setSymbols] = useState(); //Array of stock symbols
-  const [numShares, setNumShares] = useState(); //Array of number of shares of each stock
-  let dates = []; //Array of dates based on numDays variable
-  let sumArray = []; //Array of the sum of equity from our portfolio
-
-  //useEffect hook to update symbols and number of shares at startup
-  useEffect(() => {
-    const fetchSymbolsAndShares = async () => {
-      const symbolsResult = await stockSymbolArray();
-      const numSharesResult = await numSharesArray();
-      setSymbols(symbolsResult);
-      setNumShares(numSharesResult);
-    };
-  
-    if (stocksData) {
-      fetchSymbolsAndShares();
-    }
-  }, [stocksData]);
-
-  //Historical data function to get amount of all owned stock from portfolio 
-  //and return an array of total closing costs across set number of days
-  //For example if 7 days of historical data is wanted, it would return an array
-  //of the sum of all closing prices for each day
-  const historicalData = async (symbols,numDays) => {
-    const results = [];
-
-    for (const symbol of symbols) {
-      const response= await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=D&count=${numDays}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`);
-      const data = await response.json();
-  
-      results.push(data);
-    }
-
-    return results;
-  }
-  
-  //Graph Data State for Graph Component
-  const [graphData, setGraphData] = useState();
-
-  const dispatch = useDispatch();
-
-  //Wait unitl symbols and numShares async is done, then grab all historic data for graph
-  //as well as calculate change Daily change in Asset Value
-  useEffect(() => {
-    //Wait Until Symbols and numShares exist
-    if (symbols && numShares) {
-      historicalData(symbols, numDays).then((results) => {
-        // console.log(`Finnhub API Closing Results`, results);
-
-        //Update the dates array if the user has stocks. We only need the first position because
-        //the dates are the same in all the other api requests. Fill sumArray with 0's based on length
-        //of closing costs
-        if (results.length !== 0){
-          dates = convertUnixToReadableDates(results[0].t);
-          sumArray = Array.from({ length: results[0].c.length }, () => 0);
-          
-        }
-
-        //For each of the stocks the user owns, step through each day and sum the (shares owned * daily closing price)
-        results.forEach((finnhubResult, stockPosition) => {
-          // console.log(finnhubResult.c)
-          finnhubResult.c.forEach((value, index) => {
-            sumArray[index] += value * numShares[stockPosition];
-          });
-        });
-
-        // Dispatch the setSumArray action with the sumArray data
-        dispatch(setSumOfAssets(sumArray)); //Calculate the sum of your investments in this Account component and pass the data to the Asset Component in order to update the sidebar
-
-        // console.log('Sum',sumArray);
-        // console.log('Dates', dates);
-
-        // Update graphData state with the dates and sumArray data
-        setGraphData({
-          labels: dates,
-          datasets: [
-            {
-              // label: "$",
-              data: sumArray,
-            },
-          ],
-        });
-
-
-
-      });
-    }
-  }, [symbols, numShares]);
-
-
-
-
-
-  //Function used to convert UNIX Timestamps to readable dates
-  function convertUnixToReadableDates(timestamps) {
-    const dates = [];
-    timestamps.forEach((timestamp) => {
-      const date = new Date(timestamp * 1000);
-      const month = date.getUTCMonth() + 1;
-      const day = date.getUTCDate();
-      const year = date.getUTCFullYear();
-      const formattedDate = `${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}-${year}`;
-      dates.push(formattedDate);
-  });
-  return dates;
-  }
+  const graphData = useSelector((state) => state.graphData);
 
 
 
@@ -204,7 +76,7 @@ const Account = () => {
         </section>
         {/* //! GRAPH SECTION */}
         <section className={styles.graph}>
-          {graphData && <Graph chartData={graphData}/>} 
+          {stocksData && <Graph chartData={graphData}/>} 
         </section>{" "}
       </Hero>
     </>

@@ -240,7 +240,7 @@ const Asset = () => {
               <img src={assetDown} alt="down" />
             )}
             {/* {`$${dailyAssetValueChange} (${dailyPercentageChange}%)`} */}
-            {dailyAssetValueChange >= 0 ? `+$${dailyAssetValueChange} (+${dailyPercentageChange.toString()}%)` : `-$${dailyAssetValueChange.toString().slice(1)} ( -${dailyPercentageChange.toString().slice(1)}% )`}
+            {dailyAssetValueChange >= 0 ? `+$${dailyAssetValueChange} (+${dailyPercentageChange}%)` : `-$${dailyAssetValueChange.toString().slice(1)} ( -${dailyPercentageChange.toString().slice(1)}% )`}
             <span>Today</span>
           </div>
         </>

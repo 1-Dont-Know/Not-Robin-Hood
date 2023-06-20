@@ -38,7 +38,7 @@ const FeaturedStock = ({symbol, name}) => {
 						</div>
 					</div>
 					<div className={styles.stockResults}>
-						<p>{parseFloat(data.d) > 0 ? `+$${data.d}` : `-$${data.d.toString().slice(1)} (${data.dp.toFixed(2)}%)`}</p>
+						<p>{parseFloat(data.d) > 0 ? `+$${data.d} (${data.dp.toFixed(2)}%)` : `-$${data.d.toString().slice(1)} (${data.dp.toFixed(2)}%)`}</p>
 						<span>
 							<img src={up} alt="up" />
 						</span>

@@ -48,10 +48,13 @@ const Asset = () => {
     ?.reduce((acc, curr) => acc + curr.equity, 0)
     .toFixed(2);
   
-  const condition = "negative";
+  const condition = dailyAssetValueChange >= 0 ? "positive" : "negative";
+
   if (!stocksData) {
     return <Loading />;
   }
+
+
   return (
     <div
       className={`${styles.container} ${
@@ -64,9 +67,11 @@ const Asset = () => {
           <p className={styles.amount}>${assetValue}</p>
           <div
             className={styles.results}
-            style={{
+            style={
+              {
               color: condition === "positive" ? "#2ab795" : "#AE2424",
-            }}
+            }
+          }
           >
             {condition === "positive" ? (
               <img src={assetUp} alt="up" />
@@ -74,7 +79,7 @@ const Asset = () => {
               <img src={assetDown} alt="down" />
             )}
             {/* {`$${dailyAssetValueChange} (${dailyPercentageChange}%)`} */}
-            {dailyAssetValueChange > 0 ? `+ $${dailyAssetValueChange} ( + ${dailyPercentageChange.toString().slice(1)}% )` : `- $${dailyAssetValueChange.toString().slice(1)} ( - ${dailyPercentageChange.toString().slice(1)}% )`}
+            {dailyAssetValueChange >= 0 ? `+ $${dailyAssetValueChange} ( + ${dailyPercentageChange.toString().slice(1)}% )` : `- $${dailyAssetValueChange.toString().slice(1)} ( - ${dailyPercentageChange.toString().slice(1)}% )`}
             <span>Today</span>
           </div>
         </>

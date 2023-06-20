@@ -19,6 +19,9 @@
   @include mixins.breakpoint-down(xlarge) {
     // display: none;
     margin: 1rem 0rem;
+    &.dark-mode {
+        background-color: 5c807b;
+    }
   }
   @include mixins.breakpoint-down(large) {
     margin: 1rem 0rem;

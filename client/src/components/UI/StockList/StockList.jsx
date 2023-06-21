@@ -3,6 +3,7 @@ import styles from "./StockList.module.scss";
 import { Link } from "react-router-dom";
 import Popup from "../Popup/Popup";
 import DownVectorIcon from "../../../assets/icons/down-vector.svg";
+
 const StockList = ({
   name,
   symbol,
@@ -16,6 +17,7 @@ const StockList = ({
   return (
     <>
       <div className={styles.stockList}>
+      <div className={styles.container}>
         <p className={styles.item}>{name}</p>
         <p className={styles.item}>{symbol}</p>
         <p className={styles.item}>{shares} pcs</p>
@@ -23,6 +25,7 @@ const StockList = ({
         <p className={styles.item}>${avgCost}</p>
         <p className={styles.item}>${totalReturn}</p>
         <p className={styles.item}>${equity}</p>
+        </div>
         <button onClick={sellHandler} className={styles.sellBtn}>
           SELL
         </button>

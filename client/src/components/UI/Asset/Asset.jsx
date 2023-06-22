@@ -160,7 +160,7 @@ const Asset = () => {
         // console.log(temp);
 
         const lengthOfSumArray = sumArray.length;
-        if (lengthOfSumArray > 2){
+        if (lengthOfSumArray >= 2){
           setDailyAssetValueChange((sumArray[lengthOfSumArray - 1] - sumArray[lengthOfSumArray - 2]).toFixed(2));
           setDailyPercentageChange( (((sumArray[lengthOfSumArray - 1] - sumArray[lengthOfSumArray - 2])/sumArray[lengthOfSumArray - 2])*100).toFixed(2) );
         }

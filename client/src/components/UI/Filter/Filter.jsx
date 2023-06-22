@@ -26,6 +26,7 @@ const Filter = () => {
       <div className={styles.settings}>
         <Settings />
       </div>
+      
       {/* Common Filter Coontainer */}
       <div className={styles.commonFilter}>
         <div className={styles.commonFilterTools}>

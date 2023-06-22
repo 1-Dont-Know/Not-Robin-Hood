@@ -10,7 +10,7 @@ import Loading from "../Loading/Loading";
 import { selectDarkMode } from "./../../../redux/slices/darkModeSlice";
 import { useDispatch } from "react-redux";
 import { setGraphData } from "../../../redux/slices/graphDataSlice"
-
+import { selectGraphFilterRange } from "../../../redux/slices/graphFilterRangeSlice";
 
 const Asset = () => {
   
@@ -83,7 +83,7 @@ const Asset = () => {
     return results;
   }
 
-  const numDays = 30; //Set number of days for graph range as well as how far back you want historic finnhub data. Doesn't include weekends.
+  const numDays = useSelector(selectGraphFilterRange); //Set number of days for graph range as well as how far back you want historic finnhub data. Doesn't include weekends.
   const [symbols, setSymbols] = useState(); //Array of stock symbols
   const [numShares, setNumShares] = useState(); //Array of number of shares of each stock
   let dates = []; //Array of dates based on numDays variable
@@ -112,7 +112,7 @@ const Asset = () => {
     ],
   }));
 
-  }, [stocksData]);
+  }, [stocksData, numDays]);
   
   
   const temp = useSelector((state) => state.graphData);
@@ -142,7 +142,7 @@ const Asset = () => {
           });
         });
 
-        console.log('Sum',sumArray);
+        // console.log('Sum',sumArray);
         // console.log('Dates', dates);
 
         // Update graphData state with the dates and sumArray data
@@ -157,7 +157,7 @@ const Asset = () => {
         }));
 
         
-        console.log(temp);
+        // console.log(temp);
 
         const lengthOfSumArray = sumArray.length;
         if (lengthOfSumArray > 2){

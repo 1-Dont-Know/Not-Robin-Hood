@@ -27,6 +27,9 @@
 .title {
   font-size: 20px;
   font-weight: variables.$font-bold;
+  &.dark-mode {
+    color: #D5E3E1;
+  }
 }
 
 .transactions {

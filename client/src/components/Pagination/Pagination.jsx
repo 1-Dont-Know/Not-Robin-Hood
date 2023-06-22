@@ -39,7 +39,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   if (pageNumbers.length <= 5) {
     pageLinks = pageNumbers.map((page, index) => {
       return (
-        <li key={index}>
+        <li className={`${styles.paginationSeparator} ${darkModeTheme ? styles["dark-mode"] : ""}`} key={index}>
           <button onClick={() => handlePageClick(page)}>{page}</button>
         </li>
       );
@@ -64,19 +64,19 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     pageLinks = (
       <>
         <li>
-          <button onClick={() => handlePageClick(1)}>1</button>
+          <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(1)}>1</button>
         </li>
-        <li>...</li>
+        <li className={`${styles.paginationSeparator} ${darkModeTheme ? styles["dark-mode"] : ""}`}>...</li>
         {[currentPage - 1, currentPage, currentPage + 1].map((page, index) => {
           return (
             <li key={index}>
-              <button onClick={() => handlePageClick(page)}>{page}</button>
+              <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(page)}>{page}</button>
             </li>
           );
         })}
-        <li>...</li>
+        <li className={`${styles.paginationSeparator} ${darkModeTheme ? styles["dark-mode"] : ""}`}>...</li>
         <li>
-          <button onClick={() => handlePageClick(pageNumbers.length)}>{pageNumbers.length}</button>
+          <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(pageNumbers.length)}>{pageNumbers.length}</button>
         </li>
       </>
     );
@@ -84,13 +84,13 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     pageLinks = (
       <>
         <li>
-          <button onClick={() => handlePageClick(1)}>1</button>
+          <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(1)}>1</button>
         </li>
-        <li>...</li>
+        <li className={`${styles.paginationSeparator} ${darkModeTheme ? styles["dark-mode"] : ""}`}>...</li>
         {[pageNumbers.length - 4, pageNumbers.length - 3, pageNumbers.length - 2, pageNumbers.length - 1, pageNumbers.length].map((page, index) => {
           return (
             <li key={index}>
-              <button onClick={() => handlePageClick(page)}>{page}</button>
+              <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(page)}>{page}</button>
             </li>
           );
         })}

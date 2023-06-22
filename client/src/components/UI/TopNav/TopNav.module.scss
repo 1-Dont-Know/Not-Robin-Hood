@@ -58,6 +58,9 @@
     top: 0;
     right: 0;
     color: #fff;
+    &.dark-mode {
+      background-color: #A46128;;
+    }
   }
 }
 

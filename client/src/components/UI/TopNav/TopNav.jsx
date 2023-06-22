@@ -96,7 +96,7 @@ const TopNav = () => {
                 id="notifications"
               >
                 <img src={notification} alt="notification" />
-                <span className={styles.notifications}>
+                <span className={`${styles.notifications} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
                   {notifications?.length}
                 </span>
               </button>

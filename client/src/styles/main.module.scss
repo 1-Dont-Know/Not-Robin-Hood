@@ -391,13 +391,14 @@ body {
     background-color: #5C807B;
     color: white;
     img { 
-      filter: invert(0) contrast(400%) saturate(10);
+      filter: invert(0) contrast(300%) saturate(8) brightness(70%);
     }
     &:hover {
       background-color: #172e2c;
       box-shadow: 0px 3px 5px 0px #51a39b;
       img { 
         filter: invert(0) contrast(350%) saturate(8);
+        transition: 0.3s ease-in-out;
       }
     }
   }

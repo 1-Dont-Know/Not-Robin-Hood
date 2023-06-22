@@ -5,7 +5,7 @@
     margin-top: 1rem;
 }
 
-.pagination button {
+.paginationButton {
     width: 40px;
     height: 40px;
     font-family: inherit;
@@ -19,6 +19,20 @@
     color: #37433A;
     border-color: #eee;
     background-color: #D5E3E1;
+    &.dark-mode {
+        color: #eefffd;
+        background-color: #37433A;
+    }
+}
+
+.paginationSeparator {
+    padding-top: 1.5rem;
+    color: #000;
+    font-weight: bold;
+    &.dark-mode{
+        color: #fff;
+        font-weight: bold;
+    }
 }
 
 /* .pagination button.active {

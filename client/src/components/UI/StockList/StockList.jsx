@@ -23,7 +23,7 @@ const StockList = ({
           to={{
             pathname: "/stock-viewer",
             search: `?symbol=${symbol}&description=${name.replace(/\s+/g, "+")}`,
-          }}> <p >{name}</p>
+          }}> <p>{name}</p>
         </Link>
         <Link
           className={styles.item}

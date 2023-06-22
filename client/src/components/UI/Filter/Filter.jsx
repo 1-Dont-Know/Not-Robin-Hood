@@ -36,11 +36,11 @@ const Filter = () => {
         <Settings />
       </div>
       {/* Common Filter Coontainer */}
-      <div className={styles.commonFilter}>
-        <div className={styles.commonFilterTools}>
+      <div className={`${styles.commonFilter} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
+        <div className={`${styles.commonFilterTools} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           <img src={tools} alt="Tools" />
         </div>
-        <div className={styles.commonFilterRange}>
+        <div className={`${styles.commonFilterRange} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           {range.map((item) => {
             return (
               <button key={item} className={globalStyles.timeBarButton}>

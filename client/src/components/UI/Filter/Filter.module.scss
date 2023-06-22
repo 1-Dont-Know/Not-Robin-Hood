@@ -25,10 +25,20 @@
       border-radius: 25px;
       align-items: center;
       gap: 1rem;
+      &.dark-mode {
+        background: #5C807B;
+      }
 
       @include mixins.breakpoint-down(medium) {
         .commonFilterRange {
           display: none;
+        }
+        &.dark-mode {
+          background-color: #2A2C2E;
+          color: #fff;
+          img {
+            filter: invert(1) contrast(200%) saturate(0);
+          }
         }
       }
       @include mixins.breakpoint-down(large) {
@@ -63,6 +73,14 @@
         img {
           max-width: 1.5rem;
         }
+        &.dark-mode {
+          background-color: #2A2C2E;
+          color: #fff;
+          img {
+            filter: invert(1) contrast(200%) saturate(0);
+          }
+        }
+
         @include mixins.breakpoint-down(large) {
           flex: 1;
           display: flex;
@@ -116,6 +134,7 @@
         img {
           max-width: 1.5rem;
         }
+        
         @include mixins.breakpoint-down(large) {
           flex: 1;
           display: flex;
@@ -162,6 +181,9 @@
       }
       .timeBarButton {
         padding: 1rem 2rem;
+        &.dark-mode {
+          background-color: red;
+        }
       }
     }
   }

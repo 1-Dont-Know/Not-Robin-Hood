@@ -605,6 +605,16 @@ body {
   font-weight: 600;
   font-size: 20px;
   width: 100%;
+  &.dark-mode {
+    color: #fff;
+    background: #4e4e4e;
+    img {
+      filter: brightness(100%);
+    }
+    &:hover {
+      background-color: #25440c;
+    }
+  }
 
   &:hover {
     background-color: variables.$secondary-color;
@@ -653,6 +663,10 @@ body {
   padding: 1rem 2rem;
   max-width: 9.375rem;
   width: 100%;
+  &.dark-mode {
+    color: #fff;
+    background-color: #37433A;
+  }
 }
 
 .stockSymbolButton {
@@ -666,6 +680,10 @@ body {
   padding: 1rem 2rem;
   max-width: 9.375rem;
   width: 100%;
+  &.dark-mode {
+    color: #fff;
+    background-color: #37433A;
+  }
 }
 
 //White buy button
@@ -684,6 +702,13 @@ body {
   font-weight: 600;
   font-size: 20px;
   transition: 0.3s ease-in-out;
+  &.dark-mode {
+    color: #fff;
+    background-color: #424242;
+    img {
+      filter: invert(0) saturate(1) brightness(1);
+    }
+  }
 
   &:hover {
     background-color: variables.$secondary-color;

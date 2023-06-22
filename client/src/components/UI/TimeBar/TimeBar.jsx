@@ -9,7 +9,7 @@ import { selectGraphFilterRange } from "../../../redux/slices/graphFilterRangeSl
 const TimeBar = () => {
   const range = ["1D", "1W", "1M", "3M", "6M", "1Y"];
   const dispatch = useDispatch();
-  const graphFilterRange = useSelector(selectGraphFilterRange)
+  const graphFilterRange = useSelector(selectGraphFilterRange);
 
   const handleClick = (item) => {
     switch(item) {

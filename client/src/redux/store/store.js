@@ -5,6 +5,7 @@ import { userApi } from "../slices/user/userApiSlice";
 import authReducer from "../slices/auth/authSlice";
 import persistReducer from "../slices/auth/authPersistSlice.js";
 import themeReducer from "../slices/darkModeSlice.js";
+import graphDataReducer from "../slices/graphDataSlice.js"
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,8 @@ export const store = configureStore({
     auth: authReducer,
     persist: persistReducer,
     darkmode: themeReducer,
+    graphData: graphDataReducer,
+    
   },
 
   middleware: (getDefaultMiddleware) =>

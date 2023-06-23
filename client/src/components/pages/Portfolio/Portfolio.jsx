@@ -157,9 +157,9 @@ const Portfolio = () => {
     // 3. get a name,qty,average cost from textContent (array elements order numbers can be seen in StockList.jsx)
     const parentElement = e.target.parentElement;
     const childNodes = parentElement.childNodes;
-    const name = childNodes[0]?.textContent;
-    const qty = Number(childNodes[2]?.textContent.split(" ")[0]);
-    const priceStr = childNodes[4]?.textContent;
+    const name = childNodes[0]?.childNodes[0].textContent.slice(1);
+    const qty = Number(childNodes[0].childNodes[2]?.textContent.split(" ")[0]);
+    const priceStr = childNodes[0].childNodes[4]?.textContent;
     const averageCost = Number(priceStr?.replace("$", ""));
 
     // Setting state of selected stock to sell (state: sellStockInfo)

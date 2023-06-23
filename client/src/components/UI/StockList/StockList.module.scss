@@ -1,19 +1,28 @@
 @use "../../../styles/mixins.scss";
 @use "../../../styles/variables.scss";
-.stockList {
+
+.container {
   display: flex;
-  flex: 1;
-  align-items: center;
-  margin: 0 40px;
+  justify-content: space-between;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .item {
-  flex: 1 1 14.3%;
+  display: flex;
+  align-items: center;
+  width: 10%;
+  font-weight: 700;
   font-size: 0.9rem;
-  font-weight: variables.$font-bold;
+  color: #000;
 }
 
 .stockList {
+  display: flex;
+  align-items: center;
+  margin: 0 40px;
+
   background: #d9d9d9;
   border-radius: 25px;
   padding: 20px;

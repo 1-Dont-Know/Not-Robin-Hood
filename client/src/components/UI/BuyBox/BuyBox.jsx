@@ -251,12 +251,12 @@ const BuyBox = ({ type, symbol, price, name }) => {
       <section className={styles.inputsSection}>
         {/* Quantity Input */}
         <input
-          value={qty === 0 ? "QTR" : qty}
+          value={qty === 0 ? "QTY" : qty}
           onChange={qtyHandler}
           type="number"
           id="Quantity"
           className={styles.inputBoxes}
-          placeholder="QTR"
+          placeholder="QTY"
           onKeyDown={(event) => checkIfNumber(event)}
         />
         {/* Date Input */}

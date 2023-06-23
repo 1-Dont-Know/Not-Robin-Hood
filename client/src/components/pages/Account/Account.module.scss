@@ -5,9 +5,10 @@
 .featured {
   display: flex;
   gap: 1rem;
-  justify-content: left;
-  flex-wrap: wrap;
-  flex-basis: 25%;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto; 
+  min-height: 250px;
   background-color: variables.$light-yellow;
   border-radius: 25px;
   padding: 1.4rem;

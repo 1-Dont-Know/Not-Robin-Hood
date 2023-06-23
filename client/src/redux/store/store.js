@@ -6,6 +6,7 @@ import authReducer from "../slices/auth/authSlice";
 import persistReducer from "../slices/auth/authPersistSlice.js";
 import themeReducer from "../slices/darkModeSlice.js";
 import graphDataReducer from "../slices/graphDataSlice.js"
+import graphFilterRangeReducer from "../slices/graphFilterRangeSlice.js";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     persist: persistReducer,
     darkmode: themeReducer,
     graphData: graphDataReducer,
+    graphFilterRange: graphFilterRangeReducer,
     
   },
 

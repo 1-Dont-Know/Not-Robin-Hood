@@ -9,9 +9,43 @@ import CameraIcon from "../../../assets/icons/camera-icon.svg";
 import SquareIcon from "../../../assets/icons/square-icon.svg";
 import SettingIcon from "../../../assets/icons/settings.svg";
 import TimeIcon from "../../../assets/icons/timer.svg";
+import { useDispatch } from "react-redux";
+import { setGraphFilterRange } from "../../../redux/slices/graphFilterRangeSlice";
+import { useSelector } from "react-redux";
+import { selectGraphFilterRange } from "../../../redux/slices/graphFilterRangeSlice";
 
 const Filter = () => {
-  const range = ["1d", "5d", "2w", "1m", "6m", "1y", "5y", "7y", "Max"];
+  const range = ["1D", "1W", "1M", "3M", "6M", "1Y"];
+
+  const dispatch = useDispatch();
+  const graphFilterRange = useSelector(selectGraphFilterRange);
+
+  const handleClick = (item) => {
+    switch(item) {
+      case ("1D"):
+        dispatch(setGraphFilterRange(2));
+        break;
+      case ("1W"):
+        dispatch(setGraphFilterRange(10));
+        break;
+      case ("1M"):
+        dispatch(setGraphFilterRange(32));
+        break;
+      case ("3M"):
+        dispatch(setGraphFilterRange(100));
+        break;
+      case ("6M"):
+        dispatch(setGraphFilterRange(200));
+        break;
+      case ("1Y"):
+        dispatch(setGraphFilterRange(366));
+        break;
+      default:
+        dispatch(setGraphFilterRange(31));
+    }
+  };
+
+
   return (
     <div className={styles.container}>
       <div className={styles.tools}>
@@ -26,6 +60,7 @@ const Filter = () => {
       <div className={styles.settings}>
         <Settings />
       </div>
+      
       {/* Common Filter Coontainer */}
       <div className={styles.commonFilter}>
         <div className={styles.commonFilterTools}>
@@ -34,7 +69,7 @@ const Filter = () => {
         <div className={styles.commonFilterRange}>
           {range.map((item) => {
             return (
-              <button key={item} className={globalStyles.timeBarButton}>
+              <button key={item} className={globalStyles.timeBarButton} onClick={() => handleClick(item)}>
                 {item}
               </button>
             );

@@ -27,9 +27,9 @@ const StockTransactions = () => {
         <section className={styles.titleSection}>
           <h4 className={`${styles.title} ${darkModeTheme ? styles["dark-mode"] : ""}`}>Recent Transactions</h4>
         </section>
-        <section className={styles.transactions}>
+        <section className={`${styles.transactions} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           <ul
-            className={styles.transactionsList}
+            className={`${styles.transactionsList} ${darkModeTheme ? styles["dark-mode"] : ""}`}
             style={{ justifyContent: transactions?.length < 1 ? "center" : "" }}
           >
             {transactions?.length < 1 ? (

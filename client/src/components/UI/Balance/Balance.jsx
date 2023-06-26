@@ -17,6 +17,9 @@ const Balance = () => {
   const userID = useSelector(selectCurrentUser);
 
   const { data: balance = 0, isLoading, error } = useGetBalanceQuery(userID);
+  useEffect(() => {
+    console.log(balance);
+  }, [balance]);
 
   if (error) return <p>Error: {error.message}</p>;
   return (

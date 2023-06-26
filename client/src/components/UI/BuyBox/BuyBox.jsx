@@ -218,8 +218,8 @@ const BuyBox = ({ type, symbol, price, name }) => {
 
   // triggering amount state for two (buy/sell) scenario
   useEffect(() => {
-    setSellAmount(parseFloat((price * qty).toFixed(2)));
-    setBuyAmount(parseFloat((-price * qty).toFixed(2)));
+    setSellAmount((price * qty).toFixed(2));
+    setBuyAmount((-price * qty).toFixed(2));
   }, [qty]);
 
   useEffect(() => {

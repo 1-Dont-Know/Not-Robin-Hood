@@ -47,7 +47,7 @@ class PortfolioController {
     if (match) {
       const updatedShare = share;
       const updateStockQuery =
-        "UPDATE user_portfolio_stocks SET share = share + ?, stockPrice = stockPrice + ?, totalCost = totalCost + ?, averageCost = (totalCost + ?) / (share + ?), purchased_at = ?, equity = equity + ? WHERE user_id = ? AND id = ? AND symbol = ?";
+        "UPDATE user_portfolio_stocks SET share = share + ?, stockPrice = ?, totalCost = totalCost + ?, averageCost = (totalCost + ?) / (share + ?), purchased_at = ?, equity = stockPrice * share WHERE user_id = ? AND id = ? AND symbol = ?";
       const [updateRows] = await connection.query(updateStockQuery, [
         updatedShare,
         stockPrice,
@@ -55,7 +55,6 @@ class PortfolioController {
         totalCost,
         updatedShare,
         date,
-        EQUITY,
         userID,
         match.id,
         symbol,
@@ -136,9 +135,11 @@ class PortfolioController {
   async setTotalReturnValues(req, res, next) {
     // Establishing connection to our PlanetScale DB
     const connection = await connectDB();
-    const { totalReturn, symbol } = req.body;
+    const { totalReturn, symbol, stockPrice, share } = req.body;
+    console.log("stockPrice: ", stockPrice);
+    console.log("shares: ", share);
     try {
-      const query = `UPDATE user_portfolio_stocks SET totalReturn = ? WHERE symbol = ?`;
+      const query = `UPDATE user_portfolio_stocks SET totalReturn = ?, equity = stockPrice * share  WHERE symbol = ?`;
       const [rows] = await connection.query(query, [totalReturn, symbol]);
       res.json(rows);
     } catch (error) {

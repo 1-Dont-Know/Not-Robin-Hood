@@ -86,7 +86,7 @@ const Portfolio = () => {
   const stocksPower = stocksData?.reduce((acc, curr) => acc + curr.equity, 0);
 
   // our buying power is our balance
-  const buyingPower = balance;
+  const buyingPower = Number(balance);
 
   // Total portfolio value
   const totalValue = stocksPower + buyingPower;
@@ -97,7 +97,7 @@ const Portfolio = () => {
     stocksData.map((item) => ({
       symbol: item.symbol,
       qty: item.share,
-      price: item.averageCost,
+      averageCost: item.averageCost,
     }));
   // console.log("Owned Stocks symbols:", ownedStocksStats);
 
@@ -136,7 +136,7 @@ const Portfolio = () => {
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.fillText(
-        `Total Value: ${totalValue.toFixed(2)}`,
+        `Total Value: ${totalValue}`,
         chart.getDatasetMeta(0).data[0].x,
         chart.getDatasetMeta(0).data[0].y
       );
@@ -287,12 +287,13 @@ const Portfolio = () => {
         )
           .then((response) => response.json())
           .then((data) => ({
-            oldPrice: item.price,
+            oldAverageCost: item.averageCost,
             fullinfo: data,
             symbol: item.symbol,
-            totalCost: item.qty * item.price,
+            totalCost: item.qty * item.averageCost,
             currentPrice: Math.abs(data.c),
-            totalReturn: item.qty * data.c - item.qty * item.price,
+            totalReturn: item.qty * (data.c - item.averageCost),
+            qty: item.qty,
           }))
       )
     );
@@ -304,6 +305,8 @@ const Portfolio = () => {
         setStocksTotalReturn({
           totalReturn: item.totalReturn,
           symbol: item.symbol,
+          stockPrice: item.currentPrice,
+          share: item.qty,
         })
       );
     }
@@ -359,7 +362,7 @@ const Portfolio = () => {
                     {isBalanceLoading ? (
                       <Loading />
                     ) : (
-                      `$${(stocksPower + balance).toFixed(2)}`
+                      `$${stocksPower + buyingPower}`
                     )}
                   </h1>
                 </section>

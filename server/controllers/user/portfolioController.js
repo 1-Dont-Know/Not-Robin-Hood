@@ -47,7 +47,7 @@ class PortfolioController {
     if (match) {
       const updatedShare = share;
       const updateStockQuery =
-        "UPDATE user_portfolio_stocks SET share = share + ?, stockPrice = stockPrice + ?, totalCost = totalCost + ?, averageCost = (totalCost + ?) / (share + ?), purchased_at = ?, equity = equity + ? WHERE user_id = ? AND id = ? AND symbol = ?";
+        "UPDATE user_portfolio_stocks SET share = share + ?, currentPrice = ?, totalCost = totalCost + ?, averageCost = (totalCost + ?) / (share + ?), purchased_at = ?, equity = currentPrice * share WHERE user_id = ? AND id = ? AND symbol = ?";
       const [updateRows] = await connection.query(updateStockQuery, [
         updatedShare,
         stockPrice,
@@ -55,7 +55,6 @@ class PortfolioController {
         totalCost,
         updatedShare,
         date,
-        EQUITY,
         userID,
         match.id,
         symbol,
@@ -65,7 +64,7 @@ class PortfolioController {
     try {
       if (!match) {
         const query =
-          "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, stockPrice, share, totalCost, averageCost, totalReturn, equity, purchased_at) VALUES (?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?)";
+          "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, currentPrice, share, totalCost, averageCost, totalReturn, equity, purchased_at) VALUES (?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?)";
         const [rows] = await connection.query(query, [
           userID,
           id,
@@ -136,10 +135,17 @@ class PortfolioController {
   async setTotalReturnValues(req, res, next) {
     // Establishing connection to our PlanetScale DB
     const connection = await connectDB();
-    const { totalReturn, symbol } = req.body;
+    const { totalReturn, symbol, stockPrice, share } = req.body;
+    console.log("stockPrice: ", stockPrice);
+    console.log("shares: ", share);
+    const newEquity = stockPrice * share;
     try {
-      const query = `UPDATE user_portfolio_stocks SET totalReturn = ? WHERE symbol = ?`;
-      const [rows] = await connection.query(query, [totalReturn, symbol]);
+      const query = `UPDATE user_portfolio_stocks SET totalReturn = ?, equity = ?  WHERE symbol = ?`;
+      const [rows] = await connection.query(query, [
+        totalReturn,
+        newEquity,
+        symbol,
+      ]);
       res.json(rows);
     } catch (error) {
       console.log(error);

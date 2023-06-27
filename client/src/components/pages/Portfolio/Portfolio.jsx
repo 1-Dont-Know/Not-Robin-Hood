@@ -86,7 +86,7 @@ const Portfolio = () => {
   const stocksPower = stocksData?.reduce((acc, curr) => acc + curr.equity, 0);
 
   // our buying power is our balance
-  const buyingPower = balance;
+  const buyingPower = Number(balance);
 
   // Total portfolio value
   const totalValue = stocksPower + buyingPower;
@@ -97,7 +97,7 @@ const Portfolio = () => {
     stocksData.map((item) => ({
       symbol: item.symbol,
       qty: item.share,
-      price: item.averageCost,
+      averageCost: item.averageCost,
     }));
   // console.log("Owned Stocks symbols:", ownedStocksStats);
 
@@ -287,12 +287,13 @@ const Portfolio = () => {
         )
           .then((response) => response.json())
           .then((data) => ({
-            oldPrice: item.price,
+            oldPrice: item.averageCost,
             fullinfo: data,
             symbol: item.symbol,
-            totalCost: item.qty * item.price,
-            currentPrice: Math.abs(data.c),
-            totalReturn: item.qty * data.c - item.qty * item.price,
+            totalCost: item.qty * item.averageCost,
+            currentPrice: data.c,
+            totalReturn: item.qty * (data.c - item.averageCost),
+            qty: item.qty,
           }))
       )
     );
@@ -300,12 +301,15 @@ const Portfolio = () => {
     console.log(responseArray);
 
     if (responseArray.length > 0) {
-      responseArray.map((item) =>
-        setStocksTotalReturn({
+      responseArray.map((item) => {
+        console.log("Current Price:", item.currentPrice);
+        return setStocksTotalReturn({
           totalReturn: item.totalReturn,
           symbol: item.symbol,
-        })
-      );
+          stockPrice: item.currentPrice,
+          share: item.qty,
+        });
+      });
     }
   };
 
@@ -359,7 +363,7 @@ const Portfolio = () => {
                     {isBalanceLoading ? (
                       <Loading />
                     ) : (
-                      `$${(stocksPower + balance).toFixed(2)}`
+                      `$${(stocksPower + buyingPower).toFixed(2)}`
                     )}
                   </h1>
                 </section>
@@ -417,7 +421,7 @@ const Portfolio = () => {
                   <h1 className={styles.title}>Name</h1>
                   <h1 className={styles.title}>Symbol</h1>
                   <h1 className={styles.title}>Shares</h1>
-                  <h1 className={styles.title}>Total Cost</h1>
+                  <h1 className={styles.title}>Current Price</h1>
                   <h1 className={styles.title}>Average Cost</h1>
                   <h1 className={styles.title}>Total Return</h1>
                   <h1 className={styles.title}>Equity</h1>
@@ -434,7 +438,7 @@ const Portfolio = () => {
                             name={item.name}
                             symbol={item.symbol}
                             shares={item.share}
-                            totalCost={item.totalCost}
+                            currentPrice={item.currentPrice}
                             avgCost={item.averageCost}
                             totalReturn={item.totalReturn}
                             equity={item.equity}

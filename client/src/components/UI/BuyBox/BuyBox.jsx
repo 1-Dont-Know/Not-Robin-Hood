@@ -44,6 +44,8 @@ const BuyBox = ({ type, symbol, price, name }) => {
   const [purchaseHistory, setPurchaseHistory] = useState([]);
   const userID = useSelector(selectCurrentUser);
 
+  console.log(purchaseHistory);
+
   // Destructuring RTK.Query Hook for updating user's balance
   const [addBalance, { isError, isSuccess }] = useAddBalanceMutation();
 
@@ -224,7 +226,10 @@ const BuyBox = ({ type, symbol, price, name }) => {
 
   useEffect(() => {
     const history = stocksData?.filter((item) => item.symbol === symbol);
-    history && setPurchaseHistory(history);
+    history &&
+      setPurchaseHistory((prevState) => {
+        return [...prevState, history];
+      });
   }, [stocksData]);
 
   return (
@@ -281,11 +286,14 @@ const BuyBox = ({ type, symbol, price, name }) => {
         <div className={styles.orders}>
           {purchaseHistory && purchaseHistory.length > 0
             ? purchaseHistory.map((item) => {
+                const dateString = item.purchased_at;
+                const date = new Date(dateString);
+                const formattedDate = date.toLocaleString();
                 return (
-                  <ul key={item.id}>
-                    <li style={{ fontSize: "0.8rem" }} key={item.id}>
-                      <p>
-                        Date: {datePurchased} / Name: {item.name} / Share:{" "}
+                  <ul key={nanoid()}>
+                    <li key={nanoid()} style={{ fontSize: "0.8rem" }}>
+                      <p key={nanoid()}>
+                        Date: {formattedDate}/ Name: {item.name} / Share:{" "}
                         {item.share}
                       </p>
                     </li>

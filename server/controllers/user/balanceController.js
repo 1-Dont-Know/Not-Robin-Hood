@@ -33,6 +33,7 @@ class BalanceController {
       // update the balance in the database
       await connection.query(
         "UPDATE users SET balance = balance + ? WHERE id = ?",
+        // "UPDATE users SET balance = (balance * 100 + ? * 100) / 100 WHERE id = ?",
         [amount, id]
       );
 

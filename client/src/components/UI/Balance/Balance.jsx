@@ -24,7 +24,7 @@ const Balance = () => {
   if (error) return <p>Error: {error.message}</p>;
   return (
     <div className={`${styles.container} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
-      {isLoading ? <Loading /> : `$${balance.toFixed(2)}`}
+      {isLoading ? <Loading /> : `$${balance}`}
     </div>
   );
 };

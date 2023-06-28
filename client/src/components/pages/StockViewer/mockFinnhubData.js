@@ -1,7 +1,8 @@
+//For stockViewer.js
 export const mockFinnhubData = {
-    "c": 20.00,
-    "d": 6.03,
-    "dp": 2.41,
+    "c": 100.0000,
+    "d": 6.00033333,
+    "dp": 2.00033333,
     "h": 259.87,
     "l": 248.89,
     "o": 249.7,

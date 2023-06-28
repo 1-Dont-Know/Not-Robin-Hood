@@ -1,3 +1,4 @@
+//For Portfolio.js
 export const mockFinnhubData = {
     "c": 20.00,
     "d": 6.03,

@@ -24,6 +24,7 @@ import Loading from "../../UI/Loading/Loading";
 import Popup from "../../UI/Popup/Popup";
 import { nanoid } from "nanoid";
 import toast, { Toaster } from "react-hot-toast";
+import { mockFinnhubData } from "./mockFinnhubData";
 
 const Portfolio = () => {
   // ***** STATES
@@ -282,19 +283,31 @@ const Portfolio = () => {
   const calculateTotalReturn = async (company) => {
     const responseArray = await Promise.all(
       company.map((item) =>
-        fetch(
-          `https://finnhub.io/api/v1/quote?symbol=${item.symbol}&token=${api_key}`
-        )
-          .then((response) => response.json())
-          .then((data) => ({
-            oldPrice: item.averageCost,
-            fullinfo: data,
+        // fetch(
+        //   `https://finnhub.io/api/v1/quote?symbol=${item.symbol}&token=${api_key}`
+        // )
+        //   .then((response) => response.json())
+        //   .then((data) => ({
+        //     oldPrice: item.averageCost,
+        //     fullinfo: data,
+        //     symbol: item.symbol,
+        //     totalCost: item.qty * item.averageCost,
+        //     currentPrice: data.c,
+        //     totalReturn: item.qty * (data.c - item.averageCost),
+        //     qty: item.qty,
+        //   }))
+
+        {
+          return {
+            averagePrice: item.averageCost,
+            fullinfo: mockFinnhubData,
             symbol: item.symbol,
             totalCost: item.qty * item.averageCost,
-            currentPrice: data.c,
-            totalReturn: item.qty * (data.c - item.averageCost),
+            currentPrice: mockFinnhubData.c,
+            totalReturn: item.qty * (mockFinnhubData.c - item.averageCost),
             qty: item.qty,
-          }))
+          };
+        }
       )
     );
 

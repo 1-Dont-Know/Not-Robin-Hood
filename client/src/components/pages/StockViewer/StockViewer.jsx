@@ -5,6 +5,7 @@ import Filter from "../../UI/Filter/Filter";
 import { useLocation } from "react-router-dom";
 import { useGetPriceQuery } from "../../../redux/slices/api/finnhubApiSlice";
 import Hero from "../../UI/Hero/Hero";
+import { mockFinnhubData } from "./mockFinnhubData";
 
 const StockViewer = () => {
 
@@ -14,24 +15,35 @@ const StockViewer = () => {
   const symbol = searchParams.get("symbol");
   const description = searchParams.get("description");
 
-  const { data: priceData, isLoading: priceLoading } = useGetPriceQuery(symbol);
+  // const { data: priceData, isLoading: priceLoading } = useGetPriceQuery(symbol);
 
-  if(priceLoading){}
-  else{}
+  // const getPriceStock = (symbol) => {
+  //   if(priceLoading){}
+  //   else{ 
+  //     if(symbol === 'c'){
+  //       return priceData.c 
+  //     }
+  //     if(symbol === 'd'){
+  //       return priceData.d 
+  //     }
+  //     if(symbol === 'dp'){
+  //       return priceData.dp 
+  //     } 
+  //   }
+  // }
+
+  const priceData = mockFinnhubData;
 
   const getPriceStock = (symbol) => {
-    if(priceLoading){}
-    else{ 
-      if(symbol === 'c'){
-        return priceData.c 
-      }
-      if(symbol === 'd'){
-        return priceData.d 
-      }
-      if(symbol === 'dp'){
-        return priceData.dp 
-      } 
+    if(symbol === 'c'){
+      return priceData.c 
     }
+    if(symbol === 'd'){
+      return priceData.d 
+    }
+    if(symbol === 'dp'){
+      return priceData.dp 
+    } 
   }
 
   return (

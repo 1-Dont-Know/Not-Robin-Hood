@@ -45,10 +45,9 @@ class PortfolioController {
     const match = rows[0];
     console.log("Matched stock", match);
     if (match) {
-      const newTotalCost = match.totalCost + totalCost;
+      const newTotalCost = totalCost + match.totalCost;
       const newAverageCost = newTotalCost / (match.share + share);
       const newEquity = stockPrice * (match.share + share);
-
       const updatedShare = share;
       const updateStockQuery =
         "UPDATE user_portfolio_stocks SET share = share + ?, currentPrice = ?, totalCost = ?, averageCost = ?, purchased_at = ?, equity = ? WHERE user_id = ? AND id = ? AND symbol = ?";
@@ -144,11 +143,11 @@ class PortfolioController {
     console.log("shares: ", share);
     const newEquity = stockPrice * share;
     try {
-      const query = `UPDATE user_portfolio_stocks SET totalReturn = ?, currentPrice = ?, equity = ?  WHERE symbol = ?`;
+      const query = `UPDATE user_portfolio_stocks SET totalReturn = ?, equity = ?, currentPrice = ?  WHERE symbol = ?`;
       const [rows] = await connection.query(query, [
         totalReturn,
-        stockPrice,
         newEquity,
+        stockPrice,
         symbol,
       ]);
       res.json(rows);

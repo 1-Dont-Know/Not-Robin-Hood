@@ -142,8 +142,8 @@ const Asset = () => {
           });
         });
 
-        // console.log('Sum',sumArray);
-        // console.log('Dates', dates);
+        console.log('Sum',sumArray);
+        console.log('Dates', dates);
 
         // Update graphData state with the dates and sumArray data
         dispatch(setGraphData({

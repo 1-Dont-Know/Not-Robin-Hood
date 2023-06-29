@@ -5,7 +5,6 @@ import Filter from "../../UI/Filter/Filter";
 import { useLocation } from "react-router-dom";
 import { useGetPriceQuery } from "../../../redux/slices/api/finnhubApiSlice";
 import Hero from "../../UI/Hero/Hero";
-import { mockFinnhubData } from "./mockFinnhubData";
 
 const StockViewer = () => {
 
@@ -15,35 +14,21 @@ const StockViewer = () => {
   const symbol = searchParams.get("symbol");
   const description = searchParams.get("description");
 
-  // const { data: priceData, isLoading: priceLoading } = useGetPriceQuery(symbol);
-
-  // const getPriceStock = (symbol) => {
-  //   if(priceLoading){}
-  //   else{ 
-  //     if(symbol === 'c'){
-  //       return priceData.c.toFixed(2) //Current Price as a string
-  //     }
-  //     if(symbol === 'd'){
-  //       return priceData.d.toFixed(2) //Price Change as a string 
-  //     }
-  //     if(symbol === 'dp'){
-  //       return priceData.dp.toFixed(2) //Price Change Percentage as a string
-  //     } 
-  //   }
-  // }
-
-  const priceData = mockFinnhubData;
+  const { data: priceData, isLoading: priceLoading } = useGetPriceQuery(symbol);
 
   const getPriceStock = (symbol) => {
-    if(symbol === 'c'){
-      return priceData.c.toFixed(2) //Current Price as a string
+    if(priceLoading){}
+    else{ 
+      if(symbol === 'c'){
+        return priceData.c.toFixed(2) //Current Price as a string
+      }
+      if(symbol === 'd'){
+        return priceData.d.toFixed(2) //Price Change as a string 
+      }
+      if(symbol === 'dp'){
+        return priceData.dp.toFixed(2) //Price Change Percentage as a string
+      } 
     }
-    if(symbol === 'd'){
-      return priceData.d.toFixed(2) //Price Change as a string
-    }
-    if(symbol === 'dp'){
-      return priceData.dp.toFixed(2) //Price Change Percentage as a string
-    } 
   }
 
   return (

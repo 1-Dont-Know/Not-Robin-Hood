@@ -138,7 +138,7 @@ const Asset = () => {
         results.forEach((finnhubResult, stockPosition) => {
           // console.log(finnhubResult.c)
           finnhubResult.c.forEach((value, index) => {
-            sumArray[index] += value * numShares[stockPosition];
+            sumArray[index] += ((value*1000) * numShares[stockPosition])/1000;
           });
         });
 

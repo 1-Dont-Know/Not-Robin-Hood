@@ -6,7 +6,6 @@ const baseQuery = fetchBaseQuery({
   //? our base url, will be changed to our server url in production mode
 
   baseUrl: `${process.env.REACT_APP_USERS_BASE_URL}`,
-  // baseUrl: "http://localhost:7700/",
 
   //? to include cookies
   credentials: "include",

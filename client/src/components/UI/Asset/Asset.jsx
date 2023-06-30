@@ -149,8 +149,8 @@ const Asset = () => {
           });
         });
 
-        console.log("Sum", sumArray);
-        console.log("Dates", dates);
+        // console.log("Sum", sumArray);
+        // console.log("Dates", dates);
 
         // Update graphData state with the dates and sumArray data
         dispatch(
@@ -187,9 +187,7 @@ const Asset = () => {
           setDailyPercentageChange(0);
         }
 
-        setAssetValue(
-          stocksData?.reduce((acc, curr) => acc + curr.equity, 0).toFixed(2)
-        );
+        setAssetValue(stocksData?.reduce((acc, curr) => acc + curr.equity, 0));
 
         // console.log("Asset Value Change", dailyAssetValueChange);
         // console.log("Percent Change", dailyPercentageChange);
@@ -230,7 +228,7 @@ const Asset = () => {
       <h3 className={styles.title}>Asset Value</h3>
       {stocksData ? (
         <>
-          <p className={styles.amount}>${assetValue}</p>
+          <p className={styles.amount}>${assetValue.toFixed(2)}</p>
           <div
             className={styles.results}
             style={{

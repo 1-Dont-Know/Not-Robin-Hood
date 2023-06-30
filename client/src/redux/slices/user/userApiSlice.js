@@ -193,10 +193,10 @@ export const userApi = createApi({
       providesTags: ["Transactions"],
     }),
     addStockTransactions: builder.mutation({
-      query: ({ userID, id, name, price, description, date }) => ({
+      query: ({ userID, id, name, price, qty, amount, description, date }) => ({
         url: `user/${userID}/transactions/update`,
         method: "POST",
-        body: { userID, id, name, price, description, date },
+        body: { userID, id, name, price, qty, amount, description, date },
       }),
       invalidatesTags: ["Transactions"],
     }),

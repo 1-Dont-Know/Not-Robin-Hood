@@ -62,7 +62,9 @@ CREATE TABLE user_transactions (
   user_id INT NOT NULL,
   id VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,
+  amount FLOAT NOT NULL,
+  qty INT NOT NULL,
   price FLOAT NOT NULL,
-  description TEXT NOT NULL
+  description TEXT NOT NULL,
   date DATE NULL
 );

@@ -132,13 +132,14 @@ const Asset = () => {
       historicalData(symbols, numDays).then((results) => {
         // console.log(`Finnhub API Closing Results`, results);
 
-        //Update the dates array if the user has stocks. We only need the first position because
-        //the dates are the same in all the other api requests. Fill sumArray with 0's based on length
+        //Generate an array of dates Fill sumArray with 0's based on length
         //of closing costs
         if (results.length !== 0) {
-          dates = convertUnixToReadableDates(results[0].t);
-          sumArray = Array.from({ length: results[0].c.length }, () => 0);
+          dates = convertUnixToReadableDates(generateDatesArray(numDays));
+          sumArray = Array.from({ length: dates.length }, () => 0);
           // console.log('ALERT: ', sumArray);
+          console.log("Dates in Unix format", generateDatesArray(numDays));
+          console.log("Dates in readable format", dates);
         }
 
         //For each of the stocks the user owns, step through each day and sum the (shares owned * daily closing price)
@@ -199,8 +200,21 @@ const Asset = () => {
     }
   }, [symbols, numShares]);
 
+  //Function to generate an array of dates based on the number of days
+  const generateDatesArray = (numDays) => {
+    const dates = [];
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0); // Set hours in UTC timezone
+    for (let i = numDays - 1; i >= 0; i--) {
+      const date = new Date(today);
+      date.setUTCDate(today.getUTCDate() - i); // Set date in UTC timezone
+      dates.push(Math.floor(date.getTime() / 1000));
+    }
+    return dates;
+  }
+
   //Function used to convert UNIX Timestamps to readable dates
-  function convertUnixToReadableDates(timestamps) {
+  const convertUnixToReadableDates = (timestamps) => {
     const dates = [];
     timestamps.forEach((timestamp) => {
       const date = new Date(timestamp * 1000);

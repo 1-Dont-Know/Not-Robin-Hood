@@ -250,6 +250,7 @@ const Portfolio = () => {
               updateTransactions({
                 userID: currentUser,
                 id: nanoid(),
+                amount: sellStocksAmount,
                 name,
                 price: (averageCost * sellStocksAmount),
                 description: `Sold ${Math.abs(

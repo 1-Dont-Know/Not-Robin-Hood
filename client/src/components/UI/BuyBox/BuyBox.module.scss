@@ -82,11 +82,13 @@
 .orders {
   background: #ffffff;
   border-radius: 25px;
+  max-height: 14.125rem;
   width: 100%;
   padding: 1.5rem;
   flex: 1;
   font-size: 25px;
   font-weight: variables.$font-regular;
+  overflow-y: auto;
   @include mixins.breakpoint-down(small) {
     padding: 1rem 2rem;
     width: 100%;

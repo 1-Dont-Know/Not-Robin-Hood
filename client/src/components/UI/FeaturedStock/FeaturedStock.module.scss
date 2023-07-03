@@ -13,10 +13,12 @@
   background-color: variables.$primary-color;
   transition: 0.3s ease-in-out;
   gap: 1rem;
+  height: 100%;
   cursor: pointer;
   &:hover {
     box-shadow: 0px 0px 0px 2px #667269;
   }
+ 
   &.dark-mode { // dark mode background color, positive/default state
     background-color: #3aa066;
   }  

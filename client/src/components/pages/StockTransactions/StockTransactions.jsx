@@ -45,12 +45,9 @@ const StockTransactions = () => {
                     date={item.date}
                   />
                 );
-              })
+              }).reverse()
             )}
           </ul>
-        </section>
-        <section className={styles.filter}>
-          <Filter />
         </section>
       </Hero>
     </>

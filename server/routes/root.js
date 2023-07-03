@@ -14,4 +14,7 @@ router.post("/logout", ApiController.logout);
 // User's refresh token
 router.post("/refresh", ApiController.refresh);
 
+// User's cahnge password
+// router.patch("/changepassword",ApiController.changePassword);
+
 export default router;

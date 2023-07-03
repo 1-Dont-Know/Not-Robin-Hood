@@ -7,12 +7,8 @@ import FeaturedStock from "../../UI/FeaturedStock/FeaturedStock";
 import { fakeData } from "../../../utils/fakeData"; //Temporary Fake Data used for Testing
 import Graph from "../../UI/Graph/Graph";
 import Filter from "../../UI/Filter/Filter";
-
 import { useGetPortfolioStocksQuery } from "../../../redux/slices/user/userApiSlice"
-//"../../../redux/slices/user/userApiSlice";
-// Dark Mode
-import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
-
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice'; //Dark Mode
 import {
   selectCurrentToken,
   selectCurrentUser,
@@ -29,10 +25,12 @@ const Account = () => {
   // Currently logged in user from redux store (we are using built-in useSelector hook from redux toolkit)
   const currentUser = useSelector(selectCurrentUser);
 
-  // Get user's stocks data
+  // Get user's stocks data from database
   const { data: stocksData } = useGetPortfolioStocksQuery(currentUser);
+
   
   //Function to remove duplicate stock names from portfolio and only show unique list of stocks
+  //Returns array of objects of all unique stock tickers, name, and number of shares owned by user
   const uniqueStocks = () => {
     if (stocksData) {
       const uniqueStocksArray = [];
@@ -42,6 +40,7 @@ const Account = () => {
           uniqueStocksArray.push({
             name: stock.name,
             symbol: stock.symbol,
+            shares: stock.share,
           });
         }
       });
@@ -49,28 +48,10 @@ const Account = () => {
     }
   };
 
+  const graphData = useSelector((state) => state.graphData);
 
 
-  // console.log(stocksData);
-  // console.log(uniqueStocks());
 
-  //Fucntion to calculate User Stock Data for specific day
-  // const totalStockPriceForDay = (day) => {
-  //   
-  // };
-  // totalStockPriceForDay();
-
-
-  //State Hook for Graph Component
-  const [stockData, setStockData] = useState({
-    labels: fakeData.map((data) => data.day),
-    datasets: [
-      {
-        label: "$",
-        data: fakeData.map((data) => data.price),
-      },
-    ],
-  });
 
   return (
     <>
@@ -95,7 +76,7 @@ const Account = () => {
         </section>
         {/* //! GRAPH SECTION */}
         <section className={styles.graph}>
-          <Graph chartData={stockData} />
+          {stocksData && <Graph chartData={graphData}/>} 
         </section>{" "}
       </Hero>
     </>

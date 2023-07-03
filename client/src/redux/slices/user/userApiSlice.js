@@ -169,6 +169,14 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Stocks"],
     }),
+    setPortfolioStocksTotalReturn: builder.mutation({
+      query: ({ totalReturn, symbol, stockPrice, share }) => ({
+        url: "user/portfolio/stocks/return/update",
+        method: "PATCH",
+        body: { totalReturn, symbol, stockPrice, share },
+      }),
+      invalidatesTags: ["Stocks"],
+    }),
 
     // delete Stocks
     deletePortfolioStocks: builder.mutation({
@@ -185,10 +193,10 @@ export const userApi = createApi({
       providesTags: ["Transactions"],
     }),
     addStockTransactions: builder.mutation({
-      query: ({ userID, id, name, price, description, date }) => ({
+      query: ({ userID, id, name, price, qty, amount, description, date }) => ({
         url: `user/${userID}/transactions/update`,
         method: "POST",
-        body: { userID, id, name, price, description, date },
+        body: { userID, id, name, price, qty, amount, description, date },
       }),
       invalidatesTags: ["Transactions"],
     }),
@@ -202,6 +210,20 @@ export const userApi = createApi({
         url: `user/${userId}/portfolio/value/update`,
         method: "POST",
         invalidatesTags: ["PortfolioValue"],
+      }),
+    }),
+    changePassword: builder.mutation({
+      query: ({ userID, newPassword, oldPassword }) => ({
+        url: `user/changepassword/update`,
+        method: "PATCH",
+        body: { userID, newPassword, oldPassword },
+      }),
+    }),
+    changeName: builder.mutation({
+      query: ({ userID, oldName, newName }) => ({
+        url: `user/changename/update`,
+        method: "PATCH",
+        body: { userID, oldName, newName },
       }),
     }),
   }),
@@ -226,4 +248,7 @@ export const {
   useUpdatePortfolioValueMutation,
   useAddStockTransactionsMutation,
   useModifyPortfolioStocksMutation,
+  useSetPortfolioStocksTotalReturnMutation,
+  useChangePasswordMutation,
+  useChangeNameMutation,
 } = userApi;

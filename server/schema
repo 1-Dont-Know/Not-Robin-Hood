@@ -3,7 +3,7 @@ CREATE TABLE users (
   name VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  balance FLOAT NOT NULL,
+  balance DECIMAL(15,2) NOT NULL,
   phone VARCHAR(255) NOT NULL,
   refreshToken JSON NOT NULL DEFAULT '[]'
 );
@@ -62,7 +62,9 @@ CREATE TABLE user_transactions (
   user_id INT NOT NULL,
   id VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,
+  amount FLOAT NOT NULL,
+  qty INT NOT NULL,
   price FLOAT NOT NULL,
-  description TEXT NOT NULL
+  description TEXT NOT NULL,
   date DATE NULL
 );

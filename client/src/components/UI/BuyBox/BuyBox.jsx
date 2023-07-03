@@ -11,6 +11,7 @@ import {
   useDeletePortfolioStocksMutation,
   useAddStockTransactionsMutation,
   useModifyPortfolioStocksMutation,
+  useGetStockTransactionsQuery,
 } from "../../../redux/slices/user/userApiSlice";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
@@ -41,14 +42,18 @@ const BuyBox = ({ type, symbol, price, name }) => {
   // Amount State
   const [sellAmount, setSellAmount] = useState(0);
   const [buyAmount, setBuyAmount] = useState(0);
-  const [purchaseHistory, setPurchaseHistory] = useState([]);
+  const [purchaseHistory, setPurchaseHistory] = useState();
   const userID = useSelector(selectCurrentUser);
+
+  // console.log(purchaseHistory);
 
   // Destructuring RTK.Query Hook for updating user's balance
   const [addBalance, { isError, isSuccess }] = useAddBalanceMutation();
 
   // Destructing our hook for updating stock if it's already owned/in our portfolio
   const [modifyStock] = useModifyPortfolioStocksMutation();
+
+  //
 
   // To modify user's balance, we need to get a current balance, based on the currently logged in user
   const {
@@ -62,6 +67,8 @@ const BuyBox = ({ type, symbol, price, name }) => {
   // once we sold the stock, we would need to remove it from DB
   const [deleteStock] = useDeletePortfolioStocksMutation();
 
+  const { data: transactions } = useGetStockTransactionsQuery(userID);
+
   // Updating our transactions list (add stock purchase transaction to the list), when buying stock.
   const [updateTransactions] = useAddStockTransactionsMutation();
 
@@ -73,16 +80,15 @@ const BuyBox = ({ type, symbol, price, name }) => {
     setQty(Number(e.target.value));
   };
 
-  const match =
-    stocksData && stocksData.filter((data) => data.symbol === symbol);
-  // console.log("matched stocks: ", match);
-  // console.log("stocks from portfolio:", stocksData);
-
-  // useEffect(() => {
-  //   setPurchaseHistory((prevState) => {
-  //     return [...prevState, match];
-  //   });
-  // }, [match]);
+  //****** Displaying a purchase history of the stock
+  // Checking if we currently own this stock in our portfolio
+  const matchedStockConverted =
+    stocksData &&
+    stocksData
+      .filter((data) => data.symbol === symbol)
+      .map((item) => item.purchased_at)
+      .toString();
+  const matchedStockDate = new Date(matchedStockConverted);
 
   const handlePurchaseSubmit = (e, amount) => {
     e.preventDefault();
@@ -105,21 +111,9 @@ const BuyBox = ({ type, symbol, price, name }) => {
         e.preventDefault();
         // updating stocks only if we are buying (adding new stock to the array)
         const id = nanoid();
-        /* check if this stock is already owned (inside portfolio),
-          if so, call modifyStock function to modify the owned stock by modifying share
-          if not, just add this stock to portfolio
-        */
-
-        // modifyStock({
-        //   userID,
-        //   id,
-        //   share: qty,
-        //   symbol,
-        //   stockPrice: price,
-        //   totalCost: Math.abs(amount),
-        //   date: datePurchased,
-        // });
-
+        /* logic for the case, when we already own the stock we are about to purchase is located inside portfolioController.js (server folder)
+         */
+        // Adding/updating stock inside portfolio
         updateStocks({
           userID: userID,
           id,
@@ -130,13 +124,17 @@ const BuyBox = ({ type, symbol, price, name }) => {
           totalCost: Math.abs(amount),
           date: datePurchased,
         });
-
+        // Adding transaction
         updateTransactions({
           userID,
           id,
           name,
-          price: sellAmount,
-          description: `Purchase of ${name} ${Math.abs(amount)} shares`,
+          amount: sellAmount,
+          qty,
+          price,
+          description: `Purchase of ${name} ${Math.abs(
+            qty
+          )} shares with price of ${price} each`,
           date: datePurchased,
         });
         toast.success("Successfully purchased");
@@ -185,8 +183,12 @@ const BuyBox = ({ type, symbol, price, name }) => {
                 userID,
                 id: nanoid(),
                 name,
-                price: sellAmount,
-                description: `Sold ${Math.abs(amount)} shares of ${name}`,
+                amount: sellAmount,
+                qty,
+                price,
+                description: `Sold ${Math.abs(
+                  qty
+                )} shares of ${name}, with price of ${price} each`,
                 date: datePurchased,
               });
               // deleteStock({ userID: userID, symbol: symbol, company: name });
@@ -218,14 +220,21 @@ const BuyBox = ({ type, symbol, price, name }) => {
 
   // triggering amount state for two (buy/sell) scenario
   useEffect(() => {
-    setSellAmount(parseFloat((price * qty).toFixed(2)));
-    setBuyAmount(parseFloat((-price * qty).toFixed(2)));
+    setSellAmount((price * qty).toFixed(2));
+    setBuyAmount((-price * qty).toFixed(2));
   }, [qty]);
 
   useEffect(() => {
-    const history = stocksData?.filter((item) => item.symbol === symbol);
-    history && setPurchaseHistory(history);
-  }, [stocksData]);
+    const matchedTransactions =
+      transactions &&
+      transactions
+        .map((transaction) => transaction)
+        .filter(
+          (item) =>
+            item.name === name && item.description.startsWith("Purchase")
+        );
+    transactions && setPurchaseHistory(matchedTransactions);
+  }, [transactions]);
 
   return (
     <div className={styles.BuyBody}>
@@ -251,12 +260,12 @@ const BuyBox = ({ type, symbol, price, name }) => {
       <section className={styles.inputsSection}>
         {/* Quantity Input */}
         <input
-          value={qty === 0 ? "QTR" : qty}
+          value={qty === 0 ? "QTY" : qty}
           onChange={qtyHandler}
           type="number"
           id="Quantity"
           className={styles.inputBoxes}
-          placeholder="QTR"
+          placeholder="QTY"
           onKeyDown={(event) => checkIfNumber(event)}
         />
         {/* Date Input */}
@@ -281,12 +290,15 @@ const BuyBox = ({ type, symbol, price, name }) => {
         <div className={styles.orders}>
           {purchaseHistory && purchaseHistory.length > 0
             ? purchaseHistory.map((item) => {
+                const dateString = item.date;
+                const date = new Date(dateString);
+                const formattedDate = date.toLocaleString().split(",")[0];
                 return (
-                  <ul key={item.id}>
-                    <li style={{ fontSize: "0.8rem" }} key={item.id}>
-                      <p>
-                        Date: {datePurchased} / Name: {item.name} / Share:{" "}
-                        {item.share}
+                  <ul key={nanoid()}>
+                    <li key={nanoid()} style={{ fontSize: "0.8rem" }}>
+                      <p key={nanoid()}>
+                        {date <= matchedStockDate &&
+                          `${formattedDate} ${item.description}`}
                       </p>
                     </li>
                   </ul>

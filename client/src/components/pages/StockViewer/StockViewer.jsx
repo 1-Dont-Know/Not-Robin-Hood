@@ -16,17 +16,20 @@ const StockViewer = () => {
 
   const { data: priceData, isLoading: priceLoading } = useGetPriceQuery(symbol);
 
+  if(priceLoading){}
+  else{}
+
   const getPriceStock = (symbol) => {
     if(priceLoading){}
     else{ 
       if(symbol === 'c'){
-        return priceData.c.toFixed(2) //Current Price as a string
+        return priceData.c 
       }
       if(symbol === 'd'){
-        return priceData.d.toFixed(2) //Price Change as a string 
+        return priceData.d 
       }
       if(symbol === 'dp'){
-        return priceData.dp.toFixed(2) //Price Change Percentage as a string
+        return priceData.dp 
       } 
     }
   }

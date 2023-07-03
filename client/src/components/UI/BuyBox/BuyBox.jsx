@@ -44,7 +44,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
   const [purchaseHistory, setPurchaseHistory] = useState([]);
   const userID = useSelector(selectCurrentUser);
 
-  // console.log(purchaseHistory);
+  console.log(purchaseHistory);
 
   // Destructuring RTK.Query Hook for updating user's balance
   const [addBalance, { isError, isSuccess }] = useAddBalanceMutation();
@@ -289,7 +289,6 @@ const BuyBox = ({ type, symbol, price, name }) => {
                 const dateString = item.purchased_at;
                 const date = new Date(dateString);
                 const formattedDate = date.toLocaleString();
-
                 return (
                   <ul key={nanoid()}>
                     <li key={nanoid()} style={{ fontSize: "0.8rem" }}>

@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./TimeBar.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 import { useDispatch } from "react-redux";
 import { setGraphFilterRange } from "../../../redux/slices/graphFilterRangeSlice";
 import { useSelector } from "react-redux";
 import { selectGraphFilterRange } from "../../../redux/slices/graphFilterRangeSlice";
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 
 const TimeBar = () => {
+  {/* Dark Mode Theme*/}
+  const darkModeTheme = useSelector(selectDarkMode);
+  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
+  {/* End Dark Mode Theme*/}
+  
   const range = ["1D", "1W", "1M", "3M", "6M", "1Y"];
   const dispatch = useDispatch();
   const graphFilterRange = useSelector(selectGraphFilterRange);
@@ -38,10 +45,12 @@ const TimeBar = () => {
 
   return (
     <>
-      <div className={styles.timeBar}>
+      <div className={`${styles.timeBar} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
         {range.map((item) => {
           return (
             <button key={item} className={globalStyles.timeBarButton} onClick={() => handleClick(item)}>
+//             //<button key={item} className={`${globalStyles.timeBarButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}>
+
               {item}
             </button>
           );

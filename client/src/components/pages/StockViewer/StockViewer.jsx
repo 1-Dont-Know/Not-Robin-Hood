@@ -5,8 +5,15 @@ import Filter from "../../UI/Filter/Filter";
 import { useLocation } from "react-router-dom";
 import { useGetPriceQuery } from "../../../redux/slices/api/finnhubApiSlice";
 import Hero from "../../UI/Hero/Hero";
+import { useSelector } from 'react-redux';
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 
 const StockViewer = () => {
+    {/* Dark Mode Theme*/}
+    const darkModeTheme = useSelector(selectDarkMode);
+    // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+    useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
+    {/* End Dark Mode Theme*/}
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -14,6 +21,9 @@ const StockViewer = () => {
   const symbol = searchParams.get("symbol");
   const description = searchParams.get("description");
 
+  const iframeSrc = `https://widget.finnhub.io/widgets/stocks/chart?symbol=${symbol}&watermarkColor=%231db954&backgroundColor=
+  ${darkModeTheme ? '%23111111' : '%23FBF2EA'}&textColor=${darkModeTheme ? 'white' : 'black'}`;
+  
   const { data: priceData, isLoading: priceLoading } = useGetPriceQuery(symbol);
 
   const getPriceStock = (symbol) => {
@@ -48,7 +58,7 @@ const StockViewer = () => {
           {/* //! GRAPH SECTION */}
           <section className={styles.graph}>
             <iframe 
-              src={`https://widget.finnhub.io/widgets/stocks/chart?symbol=${symbol}&watermarkColor=%231db954&backgroundColor=%23FBF2EA&textColor=black`}
+              src={iframeSrc}
               width="100%" 
               height="100%" 
               frameBorder="0" 

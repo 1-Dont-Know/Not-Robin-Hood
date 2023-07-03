@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
-import "./Pagination.css";
+import React, { useState, useEffect } from 'react';
+import styles from './Pagination.module.scss';
+import { useSelector } from 'react-redux';
+import { selectDarkMode } from './../../redux/slices/darkModeSlice';
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+    {/* Dark Mode Theme*/}
+    const darkModeTheme = useSelector(selectDarkMode);
+    // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+    useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
+    {/* End Dark Mode Theme*/}
+
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumbers = [];
 
@@ -31,7 +39,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   if (pageNumbers.length <= 5) {
     pageLinks = pageNumbers.map((page, index) => {
       return (
-        <li key={index}>
+        <li className={`${styles.paginationSeparator} ${darkModeTheme ? styles["dark-mode"] : ""}`} key={index}>
           <button onClick={() => handlePageClick(page)}>{page}</button>
         </li>
       );
@@ -42,13 +50,13 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
         {[1, 2, 3, 4, 5].map((page, index) => {
           return (
             <li key={index}>
-              <button onClick={() => handlePageClick(page)}>{page}</button>
+              <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(page)}>{page}</button>
             </li>
           );
         })}
-        <li>...</li>
+        <li className={`${styles.paginationSeparator} ${darkModeTheme ? styles["dark-mode"] : ""}`}>...</li>
         <li>
-          <button onClick={() => handlePageClick(pageNumbers.length)}>{pageNumbers.length}</button>
+          <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(pageNumbers.length)}>{pageNumbers.length}</button>
         </li>
       </>
     );
@@ -56,19 +64,19 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     pageLinks = (
       <>
         <li>
-          <button onClick={() => handlePageClick(1)}>1</button>
+          <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(1)}>1</button>
         </li>
-        <li>...</li>
+        <li className={`${styles.paginationSeparator} ${darkModeTheme ? styles["dark-mode"] : ""}`}>...</li>
         {[currentPage - 1, currentPage, currentPage + 1].map((page, index) => {
           return (
             <li key={index}>
-              <button onClick={() => handlePageClick(page)}>{page}</button>
+              <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(page)}>{page}</button>
             </li>
           );
         })}
-        <li>...</li>
+        <li className={`${styles.paginationSeparator} ${darkModeTheme ? styles["dark-mode"] : ""}`}>...</li>
         <li>
-          <button onClick={() => handlePageClick(pageNumbers.length)}>{pageNumbers.length}</button>
+          <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(pageNumbers.length)}>{pageNumbers.length}</button>
         </li>
       </>
     );
@@ -76,13 +84,13 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     pageLinks = (
       <>
         <li>
-          <button onClick={() => handlePageClick(1)}>1</button>
+          <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(1)}>1</button>
         </li>
-        <li>...</li>
+        <li className={`${styles.paginationSeparator} ${darkModeTheme ? styles["dark-mode"] : ""}`}>...</li>
         {[pageNumbers.length - 4, pageNumbers.length - 3, pageNumbers.length - 2, pageNumbers.length - 1, pageNumbers.length].map((page, index) => {
           return (
             <li key={index}>
-              <button onClick={() => handlePageClick(page)}>{page}</button>
+              <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={() => handlePageClick(page)}>{page}</button>
             </li>
           );
         })}
@@ -95,19 +103,19 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
   if (currentPage > 1) {
     prevButton = (
-      <button onClick={handlePrevClick}>Prev</button>
+      <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={handlePrevClick}>Prev</button>
     );
   }
 
   if (currentPage < pageNumbers.length) {
     nextButton = (
-      <button onClick={handleNextClick}>Next</button>
+      <button className={`${styles.paginationButton} ${darkModeTheme ? styles["dark-mode"] : ""}`} onClick={handleNextClick}>Next</button>
     );
   }
 
   return (
     <nav>
-      <ul className='pagination'>
+      <ul className={styles.pagination}>
         {prevButton}
         {pageLinks}
         {nextButton}

@@ -149,6 +149,13 @@ body {
   @include mixins.button;
   background-color: variables.$golden;
   min-width: 14rem;
+  &.dark-mode {
+    background-color: #A46128;
+    &:hover {
+      background-color: #633F20;
+      box-shadow: 0px 3px 5px 0px #f7ae6e;
+    }
+  }
 
   img {
     max-width: 41.79px;
@@ -165,6 +172,10 @@ body {
   color: #fff;
   gap: 0.5rem;
   transition: 0.3s ease-in-out;
+  &.dark-mode {
+    background-color: #A46128;
+  }
+
   @include mixins.breakpoint-down(xlarge) {
     background-color: variables.$secondary-color;
     color: #fff;
@@ -213,13 +224,24 @@ body {
   color: variables.$secondary-color;
   gap: 0.5rem;
   transition: 0.3s ease-in-out;
+  &.dark-mode {
+    background-color: #5c807b;
+    color: white;
+    img { 
+      filter: invert(1) contrast(200%) saturate(0);
+    }
+    &:hover {
+      background-color: #172e2c;
+      box-shadow: 0px 3px 5px 0px #51a39b;
+    }
+  }
+  
   @include mixins.breakpoint-down(xlarge) {
     background-color: variables.$secondary-color;
     color: #fff;
     img {
       //Modifies the credit/bank icon colors on hover
-      filter: invert(1) contrast(200%) //hue-rotate(100deg)
-        saturate(0);
+      filter: invert(1) contrast(200%) /*hue-rotate(100deg)*/ saturate(0);
     }
   }
 
@@ -259,7 +281,17 @@ body {
   border-radius: 50%;
   color: #37433a;
   transition: 0.3s ease-in-out;
-
+  &.dark-mode {
+    background-color: #5C807B;
+    color: white;
+    img { 
+      filter: invert(1) contrast(200%) saturate(0);
+    }
+    &:hover {
+      background-color: #172e2c;
+      box-shadow: 0px 3px 5px 0px #51a39b;
+    }
+  }
   &:hover {
     transform: scale(1.1);
   }
@@ -279,6 +311,13 @@ body {
   font-size: 1rem;
   background: #d5e3e1;
   color: variables.$secondary-color;
+  &.dark-mode {
+    background: #5c807b;;
+    color: #fff;
+    img {
+      filter: invert(1) contrast(200%) saturate(0);
+    }
+  }
 
   img {
     transition: 0.3s ease-in-out;
@@ -309,7 +348,15 @@ body {
   font-size: 0.9rem;
   padding: 0.7rem 0rem;
   color: variables.$secondary-color;
-  background: #fff;
+  background: #ffffff;
+  &.dark-mode {
+    background: #2A2C2E;
+    color: #fff;
+    @media (max-width: 75.4375em) {
+      color: rgb(218, 14, 14);
+      background: #5c807b;
+    }
+  }
 
   &:hover {
     background-color: variables.$secondary-color;
@@ -318,7 +365,11 @@ body {
   }
   @include mixins.breakpoint-down(large) {
     padding: 0.5rem;
+      &.dark-mode {
+    background: #2274c5;
+    color: #fff;
   }
+}  
 }
 
 // Profile type button
@@ -336,6 +387,21 @@ body {
   border-radius: 50%;
   color: variables.$secondary-color;
   transition: 0.3s ease-in-out;
+  &.dark-mode {
+    background-color: #5C807B;
+    color: white;
+    img { 
+      filter: invert(0) contrast(300%) saturate(8) brightness(70%);
+    }
+    &:hover {
+      background-color: #172e2c;
+      box-shadow: 0px 3px 5px 0px #51a39b;
+      img { 
+        filter: invert(0) contrast(350%) saturate(8);
+        transition: 0.3s ease-in-out;
+      }
+    }
+  }
 
   &:hover {
     transform: scale(1.1);
@@ -363,6 +429,13 @@ body {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  &.dark-mode {
+    background: #5c807b;;
+    color: #fff;
+    img {
+      filter: invert(1) contrast(200%) saturate(0);
+    }
+  }
 
   img {
     transition: 0.3s ease-in-out;
@@ -533,6 +606,16 @@ body {
   font-weight: 600;
   font-size: 20px;
   width: 100%;
+  &.dark-mode {
+    color: #fff;
+    background: #4e4e4e;
+    img {
+      filter: brightness(100%);
+    }
+    &:hover {
+      background-color: #25440c;
+    }
+  }
 
   &:hover {
     background-color: variables.$secondary-color;
@@ -581,6 +664,10 @@ body {
   padding: 1rem 2rem;
   max-width: 9.375rem;
   width: 100%;
+  &.dark-mode {
+    color: #fff;
+    background-color: #37433A;
+  }
 }
 
 .stockSymbolButton {
@@ -594,6 +681,10 @@ body {
   padding: 1rem 2rem;
   max-width: 9.375rem;
   width: 100%;
+  &.dark-mode {
+    color: #fff;
+    background-color: #37433A;
+  }
 }
 
 //White buy button
@@ -612,6 +703,13 @@ body {
   font-weight: 600;
   font-size: 20px;
   transition: 0.3s ease-in-out;
+  &.dark-mode {
+    color: #fff;
+    background-color: #424242;
+    img {
+      filter: invert(0) saturate(1) brightness(1);
+    }
+  }
 
   &:hover {
     background-color: variables.$secondary-color;
@@ -646,6 +744,17 @@ body {
   color: #fff;
   font-weight: variables.$font-bold;
   transition: 0.3s ease-in-out;
+  &.dark-mode {
+    background-color:#242424d8;
+    &:hover {
+      color: #242424d8;
+      box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+      img { 
+        filter: invert(0) contrast(400%) saturate(0);
+        transition: 0.3s ease-in-out;
+      }
+    }
+  }
 
   img {
     filter: invert(1) contrast(200%) //hue-rotate(100deg)
@@ -674,6 +783,20 @@ body {
   color: variables.$secondary-color;
   font-weight: variables.$font-bold;
   transition: 0.3s ease-in-out;
+  &.dark-mode {
+    background-color: #5C807B;
+    color: white;
+    img { 
+      filter: invert(1) contrast(200%) saturate(0);
+    }
+    &:hover {
+      background-color: variables.$golden;
+      img { 
+        filter: invert(0) contrast(400%) saturate(0);
+        transition: 0.3s ease-in-out;
+      }
+    }
+  }
 
   &:hover {
     box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);

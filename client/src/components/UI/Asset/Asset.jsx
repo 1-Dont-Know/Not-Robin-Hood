@@ -129,7 +129,7 @@ const Asset = () => {
   useEffect(() => {
     //Wait Until Symbols and numShares exist
     if (symbols && numShares) {
-      historicalData(symbols, numDays).then((results) => {
+      historicalData(symbols, numDays+100).then((results) => {
         // console.log(`Finnhub API Closing Results`, results);
 
         //Generate an array of dates Fill sumArray with 0's based on length
@@ -144,7 +144,8 @@ const Asset = () => {
 
         //For each of the stocks the user owns, step through each day and sum the (shares owned * daily closing price)
         results.forEach((finnhubResult, stockPosition) => {
-          // console.log(finnhubResult.c)
+
+
           finnhubResult.c?.forEach((value, index) => {
             sumArray[index] += value * numShares[stockPosition];
           });
@@ -199,15 +200,29 @@ const Asset = () => {
   }, [symbols, numShares]);
 
   //Function to generate an array of dates based on the number of days
+  //This accounts for the timezone of the user and the graph won't display the next date until it turns midnight for the user
   const generateDatesArray = (numDays) => {
-    const dates = [];
-    const today = new Date();
-    today.setUTCHours(0, 0, 0, 0); // Set hours in UTC timezone
+    const dates = []; //Create an array to store all dates in the range of numDays
+    
+    const today = new Date(); //Grab today's date based on user's local timezone
+    today.setHours(0, 0, 0, 0); //Set the time to 00:00:00 midnight
+
+    const options = { year: 'numeric', month: 'short', day: '2-digit'}; //Set the date format to "Jul 03, 2023"
+    const dateString = today.toLocaleString('en-US', options); //Create a string of the date in the format above
+    const specificDate = new Date(dateString + " 00:00:00 GMT+0000");//Create a new date object based on the date string above, but set the timezone to GMT +0000
+
+    const gmtDate = specificDate.toGMTString(); // Get the GMT +0000 date string
+    console.log('Todays Date in UTC+0000: ', gmtDate);
+
+
     for (let i = numDays - 1; i >= 0; i--) {
-      const date = new Date(today);
-      date.setUTCDate(today.getUTCDate() - i); // Set date in UTC timezone
-      dates.push(Math.floor(date.getTime() / 1000));
+      const date = new Date(specificDate); // Create a new date object based on the specificDate
+      date.setDate(date.getDate() - i); // Subtract the number of days from the specificDate
+      
+      const unixTimestamp = Math.floor(date.getTime() / 1000); // Convert the date to Unix Timestamp (seconds)
+      dates.push(unixTimestamp); // Add the formatted date to the dates array
     }
+
     return dates;
   }
 

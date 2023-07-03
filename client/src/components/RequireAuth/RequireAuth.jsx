@@ -15,11 +15,20 @@ import {
 const RequireAuth = () => {
   const token = useSelector(selectCurrentToken);
   const user = useSelector(selectCurrentUser);
+
   // we need stocksdata to display stocks list in portfolio
   const { data: stocksData } = useGetPortfolioStocksQuery(user);
   // Apply calculated total return to each owned stock
   const [setStocksTotalReturn, {}] = useSetPortfolioStocksTotalReturnMutation();
 
+  // stats of the owned stocks
+  const ownedStocksStats =
+    stocksData &&
+    stocksData.map((item) => ({
+      symbol: item.symbol,
+      qty: item.share,
+      averageCost: item.averageCost,
+    }));
   const calculateTotalReturn = async (company) => {
     // shouldn't be here, but just for now
     const api_key = `${process.env.REACT_APP_FINNHUB_API_KEY}`;
@@ -57,21 +66,14 @@ const RequireAuth = () => {
   };
 
   useEffect(() => {
-    const calculate = setTimeout(() => {
-      // stats of the owned stocks
-      const ownedStocksStats =
-        stocksData &&
-        stocksData.map((item) => ({
-          symbol: item.symbol,
-          qty: item.share,
-          averageCost: item.averageCost,
-        }));
-      console.log(ownedStocksStats);
-    }, 2000);
-    return () => {
-      clearTimeout(calculate);
+    const check = async () => {
+      if (ownedStocksStats && ownedStocksStats?.length > 0) {
+        await calculateTotalReturn(ownedStocksStats);
+      }
     };
-  }, []);
+
+    check();
+  }, [ownedStocksStats?.length]);
 
   const location = useLocation();
   return token ? (

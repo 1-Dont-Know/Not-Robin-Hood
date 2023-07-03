@@ -102,8 +102,8 @@ const Portfolio = () => {
   // console.log("Owned Stocks symbols:", ownedStocksStats);
 
   // Getting percentage value based on our previous calculations
-  const stocksPowerPercentage = ((stocksPower / totalValue) * 100).toFixed(2);
-  const buyingPowerPercentage = ((buyingPower / totalValue) * 100).toFixed(2);
+  const stocksPowerPercentage = ((stocksPower / totalValue) * 100);
+  const buyingPowerPercentage = ((buyingPower / totalValue) * 100);
 
   // shouldn't be here, but just for now
   const api_key = `${process.env.REACT_APP_FINNHUB_API_KEY}`;
@@ -136,7 +136,7 @@ const Portfolio = () => {
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.fillText(
-        `Total Value: ${totalValue.toFixed(2)}`,
+        `Total Value: $${totalValue.toFixed(2)}`,
         chart.getDatasetMeta(0).data[0].x,
         chart.getDatasetMeta(0).data[0].y
       );
@@ -231,7 +231,7 @@ const Portfolio = () => {
               userID: currentUser,
               id: nanoid(),
               name,
-              price: (averageCost * sellStocksAmount).toFixed(2),
+              price: (averageCost * sellStocksAmount),
               description: `Sold ${Math.abs(
                 sellStocksAmount
               )} shares of ${name}`,
@@ -251,7 +251,7 @@ const Portfolio = () => {
                 userID: currentUser,
                 id: nanoid(),
                 name,
-                price: (averageCost * sellStocksAmount).toFixed(2),
+                price: (averageCost * sellStocksAmount),
                 description: `Sold ${Math.abs(
                   sellStocksAmount
                 )} shares of ${name}`,
@@ -371,7 +371,7 @@ const Portfolio = () => {
                 <section className={styles.stocks}>
                   <h1 className={styles.sectionTitle}>Stocks</h1>
                   <h1 className={styles.sectionPercent}>
-                    {isNaN(stocksPowerPercentage) ? 0 : stocksPowerPercentage}%
+                    {isNaN(stocksPowerPercentage) ? 0 : stocksPowerPercentage?.toFixed(4)}%
                   </h1>
                   <h1 className={styles.sectionValue} id={styles.stockValue}>
                     {isBalanceLoading ? (
@@ -387,13 +387,13 @@ const Portfolio = () => {
                 <section className={styles.buyingPower}>
                   <h1 className={styles.sectionTitle}>Buying Power</h1>
                   <h1 className={styles.sectionPercent}>
-                    {isNaN(buyingPowerPercentage) ? 0 : buyingPowerPercentage}%
+                    {isNaN(buyingPowerPercentage) ? 0 : buyingPowerPercentage?.toFixed(4)}%
                   </h1>
                   <h1
                     className={styles.sectionValue}
                     id={styles.buyingPowerValue}
                   >
-                    {isBalanceLoading ? <Loading /> : `$${buyingPower}`}
+                    {isBalanceLoading ? <Loading /> : `$${buyingPower?.toFixed(2)}`}
                   </h1>
                 </section>
 
@@ -438,10 +438,10 @@ const Portfolio = () => {
                             name={item.name}
                             symbol={item.symbol}
                             shares={item.share}
-                            currentPrice={item.currentPrice}
-                            avgCost={item.averageCost}
-                            totalReturn={item.totalReturn}
-                            equity={item.equity}
+                            currentPrice={item.currentPrice.toFixed(2)}
+                            avgCost={item.averageCost.toFixed(2)}
+                            totalReturn={item.totalReturn.toFixed(2)}
+                            equity={item.equity.toFixed(2)}
                             sellHandler={sellPopUpHandler}
                           />
                         );

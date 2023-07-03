@@ -130,15 +130,20 @@ const Asset = () => {
     //Wait Until Symbols and numShares exist
     if (symbols && numShares) {
       const datesUnix = generateDatesArray(numDays);
+      dates = convertUnixToReadableDates(datesUnix);
+      sumArray = Array.from({ length: dates.length }, () => 0);
+      
 
-      historicalData(symbols, numDays+100).then((results) => {
+      historicalData(symbols, numDays+100).then((results) => { //Get historical data for all owned stocks
         console.log(`Finnhub API Closing Results`, results);
-        //Generate an array of dates Fill sumArray with 0's based on length
-        //of closing costs
+
+        //Generate an array of dates Fill sumArray with 0's based on length of closing costs
         if (results.length !== 0) {
-          dates = convertUnixToReadableDates(datesUnix);
-          sumArray = Array.from({ length: dates.length }, () => 0);
-          
+          const finnhubDataMap = new Map(); 
+          for (let i = 0; i < datesUnix.length; i++) {
+            finnhubDataMap.set(datesUnix[i], null);
+          }
+          console.log("Finnhub Data Map", finnhubDataMap);
           // console.log('ALERT: ', sumArray);
           // console.log("Dates in Unix format", datesUnix);
           // console.log("Dates in readable format", dates);

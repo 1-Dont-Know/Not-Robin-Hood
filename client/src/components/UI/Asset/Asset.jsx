@@ -135,69 +135,58 @@ const Asset = () => {
       
 
       historicalData(symbols, numDays+100).then((results) => { //Get historical data for all owned stocks
-        console.log(`Finnhub API Closing Results`, results);
+        // console.log(`Finnhub API Closing Results`, results);
 
         //Generate an array of dates Fill sumArray with 0's based on length of closing costs
         if (results.length !== 0) {
-          const finnhubDataMap = new Map(); 
-          for (let i = 0; i < datesUnix.length; i++) {
-            finnhubDataMap.set(datesUnix[i], null);
+          const finnhubDataMap = new Map(); //Create a map to store all dates and sumArray values
+          for (let i = 0; i < datesUnix.length; i++) { //Fill the map with all Unix Dates and null values
+            finnhubDataMap.set(datesUnix[i], 0);
           }
-          console.log("Finnhub Data Map", finnhubDataMap);
+
+          //Iterate through each date in the finnhubDataMap and find the corresponding closing price
+          finnhubDataMap.forEach((value, date) => {
+            //For each of the stocks the user owns, step through each day and sum the (shares owned * daily closing price)
+            results.forEach((finnhubResult, stockPosition) => {
+                if (finnhubResult.t.includes(date)) {
+                  const index = finnhubResult.t.findIndex(time => time === date);
+                  const stockValue = finnhubResult.c[index];
+                  const totalValue = finnhubDataMap.get(date) + Number(stockValue.toFixed(2)) * numShares[stockPosition];
+
+                  finnhubDataMap.set(date, totalValue);
+                  // console.log("Date ",date);
+                  // console.log("Start position ", index);
+                  // console.log("Stock Value: ", stockValue);
+                  // console.log("Total Value: ", totalValue);
+                  // console.log("Value in Map: ", finnhubDataMap.get(date))
+                  
+                }
+                else {
+                  const reverseFinnhubDates = finnhubResult.t.slice().reverse();
+                  const nearestDate = reverseFinnhubDates.find(d => d <= date);
+                  const index = finnhubResult.t.findIndex(time => time === nearestDate);
+                  const stockValue = finnhubResult.c[index];
+                  const totalValue = finnhubDataMap.get(date) + Number(stockValue.toFixed(2)) * numShares[stockPosition];
+
+                  finnhubDataMap.set(date, totalValue);
+                  // console.log("Nearest Date ", nearestDate);
+                  // console.log("Start position w/ nearest date ", index);
+                  // console.log("Stock Value: ", stockValue);
+                  // console.log("Total Value: ", totalValue);
+                  // console.log("Value in Map: ", finnhubDataMap.get(date))
+                  
+                }
+            });
+
+            sumArray = Array.from(finnhubDataMap.values()); //Convert the map to an array and update the Sum Array
+            
+          });
+
+          // console.log("Finnhub Data Map", finnhubDataMap);
           // console.log('ALERT: ', sumArray);
           // console.log("Dates in Unix format", datesUnix);
           // console.log("Dates in readable format", dates);
         }
-
-        //For each of the stocks the user owns, step through each day and sum the (shares owned * daily closing price)
-        // results.forEach((finnhubResult, stockPosition) => {
-        //   // Find the starting position in finnhubResult.t that matches the first date in dates array
-        //   let startPosition = finnhubResult.t.findIndex(time => time === datesUnix[0]);
-        //   console.log("Dates[0] ",datesUnix[0]);
-        //   console.log("Start position ",startPosition);
-        
-        //   // If startPosition doesn't exist, find the nearest oldest date in dates array
-        //   if (startPosition === -1) {
-        //     const reverseFinnhubDates = finnhubResult.t.slice().reverse();
-        //     let nearestDate = reverseFinnhubDates.find(date => date <= datesUnix[0]);
-        //     console.log("Nearest Date ", nearestDate);
-
-        //     // If a nearest date is found, set the startPosition accordingly
-        //     if (nearestDate) {
-        //       startPosition = finnhubResult.t.findIndex(time => time === nearestDate);
-        //       console.log("Start position w/ nearest date ",startPosition);
-        //     }
-        //   }
-        
-        //   // If startPosition exists, calculate the sumArray
-        //   if (startPosition !== -1) {
-        //     finnhubResult.c?.slice(startPosition).forEach((value, index) => {
-        //       let currentDate = finnhubResult.t[startPosition + index];
-        //       let nextDate = datesUnix[index + 1];
-        
-        //       // Check if the next finnhubResult.t matches the next date in the dates array
-        //       if (nextDate && currentDate === nextDate) {
-        //         // If they match, add the value multiplied by the number of shares to the sumArray
-        //         sumArray[index] += value * numShares[stockPosition];
-        //       } else {
-        //         // If they don't match, find the nearest oldest date in the dates array
-        //         const reverseFinnhubDates = finnhubResult.t.slice().reverse();
-        //         let nearestDate = reverseFinnhubDates.find(date => date <= datesUnix[0]);
-        //         startPosition = finnhubResult.t.findIndex(time => time === nearestDate);
-        
-        //         // If a nearest date is found, update the startPosition and add the value multiplied by the number of shares to the sumArray
-        //         if (nearestDate) {
-        //           startPosition = finnhubResult.t.findIndex(time => time === nearestDate);
-        //           sumArray[index] += value * numShares[stockPosition];
-        //           console.log("Start position w/ nearest date (Second Time) ",startPosition);
-        //           console.log("Sum Array: ", sumArray);
-        //           console.log("Current Value: ", value);
-        //           console.log("Number of Shares: ", numShares[stockPosition]);
-        //         }
-        //       }
-        //     });
-        //   }
-        // });
 
         // console.log("Sum", sumArray);
         // console.log("Dates", dates);
@@ -260,7 +249,7 @@ const Asset = () => {
     const specificDate = new Date(dateString + " 00:00:00 GMT+0000");//Create a new date object based on the date string above, but set the timezone to GMT +0000
 
     const gmtDate = specificDate.toGMTString(); // Get the GMT +0000 date string
-    console.log('Todays Date in UTC+0000: ', gmtDate);
+    // console.log('Todays Date in UTC+0000: ', gmtDate);
 
 
     for (let i = numDays - 1; i >= 0; i--) {

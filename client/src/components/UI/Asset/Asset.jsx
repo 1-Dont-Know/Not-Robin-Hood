@@ -130,7 +130,6 @@ const Asset = () => {
     //Wait Until Symbols and numShares exist
     if (symbols && numShares) {
       const datesUnix = generateDatesArray(numDays);
-      dates = convertUnixToReadableDates(datesUnix);
       sumArray = Array.from({ length: dates.length }, () => 0);
       
 
@@ -139,6 +138,8 @@ const Asset = () => {
 
         //Generate an array of dates Fill sumArray with 0's based on length of closing costs
         if (results.length !== 0) {
+          dates = convertUnixToReadableDates(datesUnix);
+          
           const finnhubDataMap = new Map(); //Create a map to store all dates and sumArray values
           for (let i = 0; i < datesUnix.length; i++) { //Fill the map with all Unix Dates and null values
             finnhubDataMap.set(datesUnix[i], 0);

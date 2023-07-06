@@ -114,8 +114,11 @@ class PortfolioController {
     // const modifiedTotalCost = totalCost;
     // console.log("oldTotalCost", match.totalCost);
     // console.log("modifiedTotalCost", totalCost);
+    console.log("temp", share);
+    console.log("stockprice", stockPrice);
+    console.log("totalcost:", totalCost);
     const newAverageCost = totalCost / share;
-    // console.log("New average cost:", newAverageCost);
+    console.log("New average cost:", newAverageCost);
     // const newEquity = stockPrice * share;
     // console.log("New equity:", newEquity);
 

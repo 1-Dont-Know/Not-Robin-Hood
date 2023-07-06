@@ -117,7 +117,12 @@ class PortfolioController {
     console.log("temp", share);
     console.log("stockprice", stockPrice);
     console.log("totalcost:", totalCost);
-    const newAverageCost = isNaN(totalCost / share) ? 0 : totalCost / share;
+    console.log("matched totalCost", match.totalCost);
+    const newTotalCost = match.totalCost - totalCost;
+    console.log("New Total Cost:", newTotalCost);
+    const newAverageCost = isNaN(newTotalCost / share)
+      ? 0
+      : newTotalCost / share;
 
     console.log("New average cost:", newAverageCost);
     // const newEquity = stockPrice * share;
@@ -129,7 +134,7 @@ class PortfolioController {
       const [rows] = await connection.query(query, [
         share,
         stockPrice,
-        totalCost,
+        newTotalCost,
         newAverageCost,
         date,
         EQUITY,

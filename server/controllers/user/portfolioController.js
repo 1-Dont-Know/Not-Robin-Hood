@@ -114,8 +114,12 @@ class PortfolioController {
     // const modifiedTotalCost = totalCost;
     // console.log("oldTotalCost", match.totalCost);
     // console.log("modifiedTotalCost", totalCost);
-    const newAverageCost = totalCost / share;
-    // console.log("New average cost:", newAverageCost);
+    console.log("temp", share);
+    console.log("stockprice", stockPrice);
+    console.log("totalcost:", totalCost);
+    const newAverageCost = isNaN(totalCost / share) ? 0 : totalCost / share;
+
+    console.log("New average cost:", newAverageCost);
     // const newEquity = stockPrice * share;
     // console.log("New equity:", newEquity);
 

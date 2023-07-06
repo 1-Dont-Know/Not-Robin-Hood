@@ -35,9 +35,11 @@ const Portfolio = () => {
     name: "",
     stocksAmount: 0,
     averageCost: 0,
+    price: 0,
   });
   // state of the qty input inside sell stock popup (we are keeping it to compare with initial value for validation purposes)
   const [sellStocksAmount, setSellStocksAmount] = useState(0);
+  console.log(sellStocksAmount);
 
   // active tab state
   // setting flags for each tab to identify which tab is active
@@ -160,8 +162,9 @@ const Portfolio = () => {
     const childNodes = parentElement.childNodes;
     const name = childNodes[0]?.childNodes[0].textContent.slice(1);
     const qty = Number(childNodes[0].childNodes[2]?.textContent.split(" ")[0]);
-    const priceStr = childNodes[0].childNodes[4]?.textContent;
+    const priceStr = childNodes[0].childNodes[3]?.textContent;
     const averageCost = Number(priceStr?.replace("$", ""));
+    console.log(priceStr);
 
     // Setting state of selected stock to sell (state: sellStockInfo)
     setSellStockInfo((prevState) => {

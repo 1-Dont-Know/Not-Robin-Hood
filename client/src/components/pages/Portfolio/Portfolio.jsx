@@ -225,7 +225,8 @@ const Portfolio = () => {
               stockPrice: item.currentPrice,
               company: name,
               share: temp,
-              totalCost: Math.abs(item.currentPrice * temp),
+              totalCost: Math.abs(item.currentPrice * sellStocksAmount),
+              // totalCost: 2,
               date,
             });
             addBalance({

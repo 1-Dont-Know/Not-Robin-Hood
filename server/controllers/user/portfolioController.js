@@ -101,16 +101,34 @@ class PortfolioController {
       stockPrice,
       totalCost
     );
+    const query =
+      "SELECT * FROM user_portfolio_stocks WHERE user_id = ? AND symbol = ?";
+    const [rows] = await connection.query(query, [userID, symbol]);
+    const match = rows[0];
+
     const EQUITY = stockPrice * share;
+    // const newTotalCost = match.totalCost - totalCost;
+    // console.log("Calculated total cost:", newTotalCost);
+
+    // const oldTotalCost = match.totalCost;
+    // const modifiedTotalCost = totalCost;
+    // console.log("oldTotalCost", match.totalCost);
+    // console.log("modifiedTotalCost", totalCost);
+    const newAverageCost = totalCost / share;
+    // console.log("New average cost:", newAverageCost);
+    // const newEquity = stockPrice * share;
+    // console.log("New equity:", newEquity);
+
     try {
       const query =
-        "UPDATE user_portfolio_stocks SET share = ?, stockPrice = stockPrice - ?, totalCost = totalCost - ?, purchased_at = ?, equity = equity - ? WHERE user_id = ? AND id = ? AND symbol = ?";
+        "UPDATE user_portfolio_stocks SET share = ?, currentPrice = ?, totalCost = ?, averageCost = ?, purchased_at = ?, equity = ? WHERE user_id = ? AND id = ? AND symbol = ?";
       const [rows] = await connection.query(query, [
         share,
         stockPrice,
         totalCost,
+        newAverageCost,
         date,
-        totalCost,
+        EQUITY,
         userID,
         id,
         symbol,

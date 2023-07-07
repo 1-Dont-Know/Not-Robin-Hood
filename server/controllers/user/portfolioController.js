@@ -38,7 +38,7 @@ class PortfolioController {
       
     
     */
-    const EQUITY = stockPrice * share;
+    const EQUITY = Number(stockPrice * share).toFixed(2);
     const query =
       "SELECT * FROM user_portfolio_stocks WHERE user_id = ? AND symbol = ?";
     const [rows] = await connection.query(query, [userID, symbol]);
@@ -66,6 +66,7 @@ class PortfolioController {
     }
     try {
       if (!match) {
+        console.log("EQUITY", EQUITY);
         const query =
           "INSERT INTO user_portfolio_stocks (user_id, id, name, symbol, currentPrice, share, totalCost, averageCost, totalReturn, equity, purchased_at) VALUES (?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?)";
         const [rows] = await connection.query(query, [

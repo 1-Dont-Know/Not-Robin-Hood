@@ -85,13 +85,18 @@ const Portfolio = () => {
   const [setStocksTotalReturn, {}] = useSetPortfolioStocksTotalReturnMutation();
 
   // based on stocks list, we are going through each with reduce and adding their equity for stocks value (stocks power)
-  const stocksPower = stocksData?.reduce((acc, curr) => acc + curr.equity, 0);
+  const stocksPower = stocksData?.reduce(
+    (acc, curr) => acc + Number(curr.equity),
+    0
+  );
+  console.log("stocksPower", stocksPower);
 
   // our buying power is our balance
   const buyingPower = Number(balance);
 
   // Total portfolio value
   const totalValue = stocksPower + buyingPower;
+  console.log(totalValue);
 
   // stats of the owned stocks
   const ownedStocksStats =
@@ -373,7 +378,7 @@ const Portfolio = () => {
                     {isBalanceLoading ? (
                       <Loading />
                     ) : (
-                      `$${(stocksPower + buyingPower).toFixed(2)}`
+                      `$${Number(stocksPower + buyingPower).toFixed(2)}`
                     )}
                   </h1>
                 </section>
@@ -390,7 +395,7 @@ const Portfolio = () => {
                     {isBalanceLoading ? (
                       <Loading />
                     ) : (
-                      `$${stocksPower?.toFixed(2)}`
+                      `$${Number(stocksPower)?.toFixed(2)}`
                     )}
                   </h1>
                 </section>
@@ -461,7 +466,7 @@ const Portfolio = () => {
                             currentPrice={item.currentPrice.toFixed(2)}
                             avgCost={item.averageCost.toFixed(2)}
                             totalReturn={item.totalReturn.toFixed(2)}
-                            equity={item.equity.toFixed(2)}
+                            equity={Number(item.equity).toFixed(2)}
                             sellHandler={sellPopUpHandler}
                           />
                         );

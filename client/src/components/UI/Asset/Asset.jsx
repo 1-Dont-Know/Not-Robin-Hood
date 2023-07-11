@@ -129,25 +129,70 @@ const Asset = () => {
   useEffect(() => {
     //Wait Until Symbols and numShares exist
     if (symbols && numShares) {
-      historicalData(symbols, numDays).then((results) => {
+      const datesUnix = generateDatesArray(numDays);
+      sumArray = Array.from({ length: dates.length }, () => 0);
+
+      historicalData(symbols, numDays + 100).then((results) => {
+        //Get historical data for all owned stocks
         // console.log(`Finnhub API Closing Results`, results);
 
-        //Update the dates array if the user has stocks. We only need the first position because
-        //the dates are the same in all the other api requests. Fill sumArray with 0's based on length
-        //of closing costs
+        //Generate an array of dates Fill sumArray with 0's based on length of closing costs
         if (results.length !== 0) {
-          dates = convertUnixToReadableDates(results[0].t);
-          sumArray = Array.from({ length: results[0].c.length }, () => 0);
-          // console.log('ALERT: ', sumArray);
-        }
+          dates = convertUnixToReadableDates(datesUnix);
 
-        //For each of the stocks the user owns, step through each day and sum the (shares owned * daily closing price)
-        results.forEach((finnhubResult, stockPosition) => {
-          // console.log(finnhubResult.c)
-          finnhubResult.c?.forEach((value, index) => {
-            sumArray[index] += value * numShares[stockPosition];
+          const finnhubDataMap = new Map(); //Create a map to store all dates and sumArray values
+          for (let i = 0; i < datesUnix.length; i++) {
+            //Fill the map with all Unix Dates and null values
+            finnhubDataMap.set(datesUnix[i], 0);
+          }
+
+          //Iterate through each date in the finnhubDataMap and find the corresponding closing price
+          finnhubDataMap.forEach((value, date) => {
+            //For each of the stocks the user owns, step through each day and sum the (shares owned * daily closing price)
+            results.forEach((finnhubResult, stockPosition) => {
+              if (finnhubResult.t.includes(date)) {
+                const index = finnhubResult.t.findIndex(
+                  (time) => time === date
+                );
+                const stockValue = finnhubResult.c[index];
+                const totalValue =
+                  finnhubDataMap.get(date) +
+                  Number(stockValue.toFixed(2)) * numShares[stockPosition];
+
+                finnhubDataMap.set(date, totalValue);
+                // console.log("Date ",date);
+                // console.log("Start position ", index);
+                // console.log("Stock Value: ", stockValue);
+                // console.log("Total Value: ", totalValue);
+                // console.log("Value in Map: ", finnhubDataMap.get(date))
+              } else {
+                const reverseFinnhubDates = finnhubResult.t.slice().reverse();
+                const nearestDate = reverseFinnhubDates.find((d) => d <= date);
+                const index = finnhubResult.t.findIndex(
+                  (time) => time === nearestDate
+                );
+                const stockValue = finnhubResult.c[index];
+                const totalValue =
+                  finnhubDataMap.get(date) +
+                  Number(stockValue.toFixed(2)) * numShares[stockPosition];
+
+                finnhubDataMap.set(date, totalValue);
+                // console.log("Nearest Date ", nearestDate);
+                // console.log("Start position w/ nearest date ", index);
+                // console.log("Stock Value: ", stockValue);
+                // console.log("Total Value: ", totalValue);
+                // console.log("Value in Map: ", finnhubDataMap.get(date))
+              }
+            });
+
+            sumArray = Array.from(finnhubDataMap.values()); //Convert the map to an array and update the Sum Array
           });
-        });
+
+          // console.log("Finnhub Data Map", finnhubDataMap);
+          // console.log('ALERT: ', sumArray);
+          // console.log("Dates in Unix format", datesUnix);
+          // console.log("Dates in readable format", dates);
+        }
 
         // console.log("Sum", sumArray);
         // console.log("Dates", dates);
@@ -187,7 +232,9 @@ const Asset = () => {
           setDailyPercentageChange(0);
         }
 
-        setAssetValue(stocksData?.reduce((acc, curr) => acc + curr.equity, 0));
+        setAssetValue(
+          stocksData?.reduce((acc, curr) => acc + Number(curr.equity), 0)
+        );
 
         // console.log("Asset Value Change", dailyAssetValueChange);
         // console.log("Percent Change", dailyPercentageChange);
@@ -197,8 +244,34 @@ const Asset = () => {
     }
   }, [symbols, numShares]);
 
+  //Function to generate an array of dates based on the number of days
+  //This accounts for the timezone of the user and the graph won't display the next date until it turns midnight for the user
+  const generateDatesArray = (numDays) => {
+    const dates = []; //Create an array to store all dates in the range of numDays
+
+    const today = new Date(); //Grab today's date based on user's local timezone
+    today.setHours(0, 0, 0, 0); //Set the time to 00:00:00 midnight
+
+    const options = { year: "numeric", month: "short", day: "2-digit" }; //Set the date format to "Jul 03, 2023"
+    const dateString = today.toLocaleString("en-US", options); //Create a string of the date in the format above
+    const specificDate = new Date(dateString + " 00:00:00 GMT+0000"); //Create a new date object based on the date string above, but set the timezone to GMT +0000
+
+    const gmtDate = specificDate.toGMTString(); // Get the GMT +0000 date string
+    // console.log('Todays Date in UTC+0000: ', gmtDate);
+
+    for (let i = numDays - 1; i >= 0; i--) {
+      const date = new Date(specificDate); // Create a new date object based on the specificDate
+      date.setDate(date.getDate() - i); // Subtract the number of days from the specificDate
+
+      const unixTimestamp = Math.floor(date.getTime() / 1000); // Convert the date to Unix Timestamp (seconds)
+      dates.push(unixTimestamp); // Add the formatted date to the dates array
+    }
+
+    return dates;
+  };
+
   //Function used to convert UNIX Timestamps to readable dates
-  function convertUnixToReadableDates(timestamps) {
+  const convertUnixToReadableDates = (timestamps) => {
     const dates = [];
     timestamps.forEach((timestamp) => {
       const date = new Date(timestamp * 1000);
@@ -211,7 +284,7 @@ const Asset = () => {
       dates.push(formattedDate);
     });
     return dates;
-  }
+  };
 
   const condition = dailyAssetValueChange >= 0 ? "positive" : "negative";
 
@@ -228,7 +301,7 @@ const Asset = () => {
       <h3 className={styles.title}>Asset Value</h3>
       {stocksData ? (
         <>
-          <p className={styles.amount}>${assetValue.toFixed(2)}</p>
+          <p className={styles.amount}>${Number(assetValue).toFixed(2)}</p>
           <div
             className={styles.results}
             style={{

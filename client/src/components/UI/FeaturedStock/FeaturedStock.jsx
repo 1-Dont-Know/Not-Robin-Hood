@@ -2,23 +2,18 @@ import {React, useEffect, useState} from "react";
 import styles from "./FeaturedStock.module.scss";
 import featured from "../../../assets/icons/featured.svg";
 import up from "../../../assets/icons/up.svg";
-
 import {useGetPriceQuery} from "../../../redux/slices/api/finnhubApiSlice";
 import {Link} from "react-router-dom";
-//Dark Mode
 import { useSelector } from 'react-redux';
-import { selectDarkMode, toggleTheme } from './../../../redux/slices/darkModeSlice';
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
+
 
 const FeaturedStock = ({symbol, name}) => {
+	const darkModeTheme = useSelector(selectDarkMode);
+	useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+
 	const {data, error, isLoading} = useGetPriceQuery(symbol);
 	const [status, setStatus] = useState(); //State used to track if there is current gain or loss for stock
-  
-  
-  {/* Dark Mode Theme*/}
-  const darkModeTheme = useSelector(selectDarkMode);
-  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
-  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
-  {/* End Dark Mode Theme*/}
 
 	useEffect(() => {
 		if (data) {
@@ -37,17 +32,17 @@ const FeaturedStock = ({symbol, name}) => {
 					pathname: "/stock-viewer",
 					search: `?symbol=${symbol}&description=${name.replace(/\s+/g, "+")}`,
 				}}>
-				<div className={status === "up" ? styles.positive : styles.negative}>
-					<div className={styles.stockInformation}>
-						<div className={styles.stockIcon}>
+				<div className={`${status === "up" ? styles.positive : styles.negative} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
+					<div className={`${styles.stockInformation} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
+						<div className={`${styles.stockIcon} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
 							<img src={featured} alt="stock-icon" />
 						</div>
-						<div className={styles.stockName}>
+						<div className={`${styles.stockName} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
 							<h1>{symbol}</h1>
 							<h4>{name}</h4>
 						</div>
 					</div>
-					<div className={styles.stockResults}>
+					<div className={`${styles.stockResults} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
 						<p>{parseFloat(data.d.toFixed(2)) > 0 ? `+$${data.d.toFixed(2)} (${data.dp.toFixed(2)}%)` : `-$${data.d.toString().slice(1)} (${data.dp.toFixed(2)}%)`}</p>
 						<span>
 							<img src={up} alt="up" />

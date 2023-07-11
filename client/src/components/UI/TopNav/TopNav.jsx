@@ -23,6 +23,9 @@ import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 import Loading from "../Loading/Loading";
 
 const TopNav = () => {
+  const darkModeTheme = useSelector(selectDarkMode);
+  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showFundsPopup, setShowFundsPopup] = useState(false);
@@ -60,11 +63,6 @@ const TopNav = () => {
   const addFundsHandler = () => {
     setShowFundsPopup((showFundsPopup) => !showFundsPopup);
   };
-      {/* Dark Mode Theme*/}
-      const darkModeTheme = useSelector(selectDarkMode);
-      // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
-      useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
-      {/* End Dark Mode Theme*/}
 
   return (
     <>

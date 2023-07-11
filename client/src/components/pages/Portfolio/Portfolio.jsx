@@ -24,8 +24,12 @@ import Loading from "../../UI/Loading/Loading";
 import Popup from "../../UI/Popup/Popup";
 import { nanoid } from "nanoid";
 import toast, { Toaster } from "react-hot-toast";
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 
 const Portfolio = () => {
+  const darkModeTheme = useSelector(selectDarkMode);
+  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+
   // ***** STATES
   // state to display/hide our sell stock popup
   const [sellStockPopup, setSellStockPopup] = useState(false);
@@ -333,17 +337,15 @@ const Portfolio = () => {
       {/* Hero Section */}
       <Hero>
         <Toaster />
-        <div className={styles.tabs}>
+        <div className={`${styles.tabs} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           <button
             className={styles.tabButton}
             onClick={(e) => {
               handleTabSelect(tabFlags.overview);
             }}
             style={{
-              backgroundColor:
-                activeTab === tabFlags.overview ? "#37433a" : "#d5e3e1",
-
-              color: activeTab === tabFlags.overview ? "#d5e3e1" : "#37433a",
+              backgroundColor: activeTab === tabFlags.overview ? (darkModeTheme ? "#d5e3e1" : "#d5e3e1") : (darkModeTheme ? "rgb(113, 113, 113)" : "#37433a"),
+              color: activeTab === tabFlags.overview ? (darkModeTheme ? "#37433a" : "#37433a") : (darkModeTheme ? "rgb(74, 74, 74)" : "#d5e3e1"),
             }}
           >
             Overview
@@ -356,22 +358,21 @@ const Portfolio = () => {
               handleTabSelect(tabFlags.stocksList);
             }}
             style={{
-              backgroundColor:
-                activeTab === tabFlags.stocksList ? "#37433a" : "#d5e3e1",
-
-              color: activeTab === tabFlags.stocksList ? "#d5e3e1" : "#37433a",
+              backgroundColor: activeTab === tabFlags.stocksList ? (darkModeTheme ? "#d5e3e1" : "#d5e3e1") : (darkModeTheme ? "rgb(113, 113, 113)" : "#37433a"),
+              color: activeTab === tabFlags.stocksList ? (darkModeTheme ? "#37433a" : "#37433a") : (darkModeTheme ? "rgb(74, 74, 74)" : "#d5e3e1"),
             }}
+            
           >
             Stocks List
           </button>
         </div>
 
-        <div className={styles.tanSquare}>
+        <div className={`${styles.tanSquare} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           {activeTab === tabFlags.overview && (
             <>
               <div className={styles.details}>
                 <section className={styles.totalPortfolio}>
-                  <h1 className={styles.totalPortfolioTitle}>
+                  <h1 className={`${styles.totalPortfolioTitle} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
                     Total Portfolio Value
                   </h1>
                   <h1 className={styles.totalPortfolioValue}>
@@ -384,8 +385,8 @@ const Portfolio = () => {
                 </section>
 
                 <section className={styles.stocks}>
-                  <h1 className={styles.sectionTitle}>Stocks</h1>
-                  <h1 className={styles.sectionPercent}>
+                  <h1 className={`${styles.sectionTitle} ${darkModeTheme ? styles["dark-mode"] : ""}`}>Stocks</h1>
+                  <h1 className={`${styles.sectionPercent} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
                     {isNaN(stocksPowerPercentage)
                       ? 0
                       : stocksPowerPercentage?.toFixed(4)}
@@ -403,8 +404,8 @@ const Portfolio = () => {
                 <hr className={styles.overviewLine} />
 
                 <section className={styles.buyingPower}>
-                  <h1 className={styles.sectionTitle}>Buying Power</h1>
-                  <h1 className={styles.sectionPercent}>
+                  <h1 className={`${styles.sectionTitle} ${darkModeTheme ? styles["dark-mode"] : ""}`}>Buying Power</h1>
+                  <h1 className={`${styles.sectionPercent} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
                     {isNaN(buyingPowerPercentage)
                       ? 0
                       : buyingPowerPercentage?.toFixed(4)}
@@ -480,7 +481,7 @@ const Portfolio = () => {
           {activeTab === tabFlags.stocksList && (
             <button
               onClick={() => calculateTotalReturn(ownedStocksStats)}
-              className={styles.calculateBtn}
+              className={`${styles.calculateBtn} ${darkModeTheme ? styles["dark-mode"] : ""}`}
             >
               <img src={CalculateIcon} alt="Calculate Portfolio" />
             </button>
@@ -489,11 +490,11 @@ const Portfolio = () => {
         {sellStockPopup && (
           <Popup name="sellStock" toggle={sellPopUpHandler}>
             <div className={styles.sellStockPopupContainer}>
-              <div className={styles.stockName}>
+              <div className={`${styles.stockName} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
                 <h4>Stock name:</h4>
                 <p>{name}</p>
               </div>
-              <div className={styles.stockDetails}>
+              <div className={`${styles.stockDetails} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
                 <div className={styles.qty}>
                   <h4>QTY:</h4>
                   <input
@@ -528,7 +529,7 @@ const Portfolio = () => {
               <div className={styles.sellBtnContainer}>
                 <button
                   onClick={sellStockHandler}
-                  className={globalStyles.sellButton}
+                  className={`${globalStyles.sellButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}
                   // disable button if the amount of input more than actual purchased stocks amount
                   disabled={sellStocksAmount > stocksAmount ? true : false}
                 >

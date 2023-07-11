@@ -50,6 +50,9 @@
   @include mixins.boxShadow();
   border-radius: 25px;
   padding: 4rem;
+  &.dark-mode {
+    background-color: #5c807b;
+  }
 }
 
 .closePopupButtonSellStock {

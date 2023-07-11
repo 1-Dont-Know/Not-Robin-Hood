@@ -214,6 +214,18 @@ body {
     background-color: #781515;
     color: #fff;
   }
+  &.dark-mode {
+    background-color: #ae2424;
+    color: #fff;
+    &:hover {
+      background-color: #781515;
+      color: #ce7667;
+      img {
+        filter: brightness(80%) sepia(0.1);
+        transition: ease-in-out 0.3s;
+      }
+    }
+  }
 }
 
 // Portfolio type button

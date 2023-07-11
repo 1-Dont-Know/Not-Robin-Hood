@@ -48,8 +48,8 @@ const TimeBar = () => {
       <div className={`${styles.timeBar} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
         {range.map((item) => {
           return (
-            <button key={item} className={globalStyles.timeBarButton} onClick={() => handleClick(item)}>
-//             //<button key={item} className={`${globalStyles.timeBarButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}>
+            /* <button key={item} className={globalStyles.timeBarButton} onClick={() => handleClick(item)}> */
+            <button key={item} className={`${globalStyles.timeBarButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`} onClick={() => handleClick(item)}>
 
               {item}
             </button>

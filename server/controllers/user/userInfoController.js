@@ -22,6 +22,22 @@ class UserController {
       res.status(500).json({ error: "Internal Server Error" });
     }
   }
+  async getStockTicker(req, res, next) {
+    const apiKey = process.env.ALPHAVANTAGE_API_KEY;
+    const alphaUrl = "https://www.alphavantage.co";
+    const { query } = req.params;
+    const alphaQuery = `${alphaUrl}/query?function=SYMBOL_SEARCH&keywords=${query}&apikey=${apiKey}`;
+    try {
+      const response = await fetch(alphaQuery);
+      const data = await response.json();
+      res.json({ results: data });
+      console.log("query:", query);
+      console.log("apiKey:", apiKey);
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ error: "An error occurred" });
+    }
+  }
 }
 
 export default new UserController();

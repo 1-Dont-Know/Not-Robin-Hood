@@ -12,6 +12,10 @@ const userRouter = express.Router();
 // User's general info routes
 userRouter.get("/:id/info", userInfoController.getDetails);
 
+// Get Search Stock Results
+
+userRouter.get("/search/:query", userInfoController.getStockTicker);
+
 // User's Notifications routes
 userRouter.get(
   "/:userId/notifications",

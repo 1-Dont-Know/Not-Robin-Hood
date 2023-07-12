@@ -37,11 +37,13 @@ const Search = ({ placeholder }) => {
   }
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [skip, setSkip] = useState(false);
+  const [skip, setSkip] = useState(true);
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
   const [resultsIsOpen, setResultsIsOpen] = useState(false);
 
   console.log("SKIP:", skip);
+  console.log("search query:", searchQuery);
+  console.log("debounced query:", debouncedSearchQuery);
   //Function that handles when the user changes the text in the search bar
   const inputChanged = (e) => {
     setSearchQuery(e.target.value);

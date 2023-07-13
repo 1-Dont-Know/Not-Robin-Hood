@@ -13,6 +13,9 @@
   // font-size: 25px;
   font-weight: variables.$font-regular;
   // width: 100%;
+  &.dark-mode {
+    background-color: #5C807B;
+  }
   @include mixins.breakpoint-down(small) {
     background-color: #d5e3e1;
     max-width: 99%;
@@ -52,6 +55,10 @@
     font-size: 15px;
     font-weight: variables.$font-regular;
   }
+  &.dark-mode {
+    background-color: #333333;
+    color: #fff;
+  }
 }
 
 .ctaSection {
@@ -77,6 +84,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  &.dark-mode {
+    color: #fff;
+  }
 }
 
 .orders {
@@ -98,5 +108,9 @@
     margin: 0.5rem 0rem;
     font-size: 15px;
     font-weight: variables.$font-regular;
+  }
+  &.dark-mode {
+    background-color: #333333;
+    color: #fff;
   }
 }

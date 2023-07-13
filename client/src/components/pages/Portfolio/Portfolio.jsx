@@ -372,10 +372,11 @@ const Portfolio = () => {
             <>
               <div className={styles.details}>
                 <section className={styles.totalPortfolio}>
-                  <h1 className={`${styles.totalPortfolioTitle} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
+                  <h1 className={`${styles.totalPortfolioTitle} 
+                    ${darkModeTheme ? styles["dark-mode"] : ""}`}>
                     Total Portfolio Value
                   </h1>
-                  <h1 className={styles.totalPortfolioValue}>
+                  <h1 className={`${styles.totalPortfolioValue} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
                     {isBalanceLoading ? (
                       <Loading />
                     ) : (

@@ -97,7 +97,7 @@ const Search = ({placeholder}) => {
 			{/* Search Field */}
 			<div className={`${styles.container} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
 				<input
-					className={`${styles.search} ${darkModeTheme ? styles["dark-mode-search"] : ""}`}
+					className={`${styles.search} ${darkModeTheme ? styles["dark-mode"] : ""}`}
 					type="text"
 					placeholder={placeholder}
 					value={searchQuery}

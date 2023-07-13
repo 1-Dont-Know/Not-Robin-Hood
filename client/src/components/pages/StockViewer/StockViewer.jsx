@@ -9,11 +9,8 @@ import { useSelector } from 'react-redux';
 import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 
 const StockViewer = () => {
-    {/* Dark Mode Theme*/}
-    const darkModeTheme = useSelector(selectDarkMode);
-    // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
-    useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
-    {/* End Dark Mode Theme*/}
+  const darkModeTheme = useSelector(selectDarkMode);
+  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]); // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);

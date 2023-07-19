@@ -37,7 +37,7 @@ input {
   text-transform:uppercase;
 
   /* Dark mode styles */
-  &.dark-mode {
+  &.dark-mode-search {
     background: url(../../../assets/icons/search-icon.svg) no-repeat left;
     filter: invert(100%);
   }

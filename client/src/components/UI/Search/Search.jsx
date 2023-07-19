@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from "react";
 import styles from "./Search.module.scss";
 import {Link} from "react-router-dom";
 import {useGetStockTickerQuery} from "../../../redux/slices/api/alphaVantageApiSlice";
+import { useGetSearchResultQuery } from "../../../redux/slices/user/userApiSlice";
 // Dark Mode
 import {useSelector} from "react-redux";
 import {selectDarkMode} from "./../../../redux/slices/darkModeSlice";
@@ -36,9 +37,13 @@ const Search = ({placeholder}) => {
 	}
 
 	const [searchQuery, setSearchQuery] = useState("");
+	const [skip, setSkip] = useState(true);
 	const debouncedSearchQuery = useDebounce(searchQuery, 500);
 	const [resultsIsOpen, setResultsIsOpen] = useState(false);
 
+	console.log("SKIP:", skip);
+	console.log("search query:", searchQuery);
+	console.log("debounced query:", debouncedSearchQuery);
 	//Function that handles when the user changes the text in the search bar
 	const inputChanged = (e) => {
 		setSearchQuery(e.target.value);
@@ -51,14 +56,32 @@ const Search = ({placeholder}) => {
 		localStorage.setItem("darkMode", darkModeTheme);
 	}, [darkModeTheme]);
 
-	//Alpha Vantage API call to search for company/stock ticker. Only runs after set amount of time defined by useDebounce call.
-	//Skips calling the API if the search query is an empty string.
-	const {
-		data: {bestMatches} = {},
-		isSuccess,
-		isLoading,
-		isError,
-	} = useGetStockTickerQuery(debouncedSearchQuery);
+ //Alpha Vantage API call to search for company/stock ticker. Only runs after set amount of time defined by useDebounce call.
+  //Skips calling the API if the search query is an empty string.
+  //   const {
+  //     data: { bestMatches } = {},
+  //     isSuccess,
+  //     isLoading,
+  //     isError,
+  //   } = useGetStockTickerQuery(debouncedSearchQuery);
+
+  const {
+    data: { bestMatches } = {},
+    isSuccess,
+    isLoading,
+    isError,
+    isUninitialized,
+  } = useGetSearchResultQuery(debouncedSearchQuery, {
+    skip: debouncedSearchQuery === "" || skip,
+  });
+
+  useEffect(() => {
+    if (debouncedSearchQuery !== "") {
+      setSkip((prevState) => !prevState);
+    }
+  }, [debouncedSearchQuery]);
+
+  console.log(bestMatches);
 
 	/* Function to handle if user clicks outside search box or search window */
 	function useOutsideAlerter(ref) {
@@ -97,7 +120,7 @@ const Search = ({placeholder}) => {
 			{/* Search Field */}
 			<div className={`${styles.container} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
 				<input
-					className={`${styles.search} ${darkModeTheme ? styles["dark-mode"] : ""}`}
+					className={`${styles.search} ${darkModeTheme ? styles["dark-mode-search"] : ""}`}
 					type="text"
 					placeholder={placeholder}
 					value={searchQuery}
@@ -127,13 +150,19 @@ const Search = ({placeholder}) => {
 												}`}
 												to={{
 													pathname: "/stock-viewer",
-													search: `?symbol=${item["1. symbol"]}&description=${item[
-														"2. name"
-													].replace(/\s+/g, "+")}`,
+													search: `?symbol=${
+														item["1. symbol"]
+													}&description=${item["2. name"].replace(
+														/\s+/g,
+														"+"
+													)}`,
 												}}
-												onClick={() => setResultsIsOpen(false)}>
+												onClick={() => setResultsIsOpen(false)}
+											>
 												<span>{item["2. name"]}</span>
-												<span style={{color: "green"}}>{item["1. symbol"]}</span>
+												<span style={{ color: "green" }}>
+												{item["1. symbol"]}
+												</span>
 											</Link>
 										</li>
 									)

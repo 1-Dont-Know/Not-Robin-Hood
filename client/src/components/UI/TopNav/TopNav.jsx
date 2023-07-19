@@ -19,9 +19,13 @@ import {
 } from "../../../redux/slices/user/userApiSlice";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 import Loading from "../Loading/Loading";
 
 const TopNav = () => {
+  const darkModeTheme = useSelector(selectDarkMode);
+  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showFundsPopup, setShowFundsPopup] = useState(false);
@@ -70,11 +74,11 @@ const TopNav = () => {
         </section>
         {/* BUY / PORTFOLIO BUTTON SECTION */}
         <section className={styles.cta}>
-          <Link to="/markets" className={globalStyles.buyButton}>
+          <Link to="/markets" className={`${globalStyles.buyButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}>
             <img src={cart} alt="cart" />
             Buy
           </Link>
-          <Link to="/portfolio" className={globalStyles.portfolioButton}>
+          <Link to="/portfolio" className={`${globalStyles.portfolioButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}>
             <img src={portfolio} alt="Portfolio" />
             Portfolio
           </Link>
@@ -86,17 +90,17 @@ const TopNav = () => {
               {" "}
               <button
                 onClick={notificationsHandler}
-                className={globalStyles.notificationButton}
+                className={`${globalStyles.notificationButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}
                 id="notifications"
               >
                 <img src={notification} alt="notification" />
-                <span className={styles.notifications}>
+                <span className={`${styles.notifications} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
                   {notifications?.length}
                 </span>
               </button>
               <button
                 onClick={profileHandler}
-                className={globalStyles.profileButton}
+                className={`${globalStyles.profileButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}
                 id="profile"
               >
                 <img src={profile} alt="profile" />
@@ -104,19 +108,19 @@ const TopNav = () => {
             </>
           )}
           {showProfile && (
-            <div onClick={profileHandler} className={styles.profileMenu}>
+            <div onClick={profileHandler} className={`${styles.profileMenu} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
               <div className={styles.info}>
                 <h4>{isLoading ? <Loading /> : username}</h4>
                 <img src={profile} alt="profile" />
               </div>
               <div className={styles.profileCta}>
-                <button className={globalStyles.shareButton}>
+                <button className={`${globalStyles.shareButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}>
                   <img src={ShareIcon} alt="Share" />
                   Share Profile
                 </button>
                 <button
                   onClick={addFundsHandler}
-                  className={globalStyles.AddFundsProfileButton}
+                  className={`${globalStyles.AddFundsProfileButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}
                 >
                   <img src={AddIcon} alt="Add" />
                   Add Funds

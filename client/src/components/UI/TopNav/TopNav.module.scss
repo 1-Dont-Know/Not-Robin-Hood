@@ -58,6 +58,9 @@
     top: 0;
     right: 0;
     color: #fff;
+    &.dark-mode {
+      background-color: #A46128;;
+    }
   }
 }
 
@@ -75,6 +78,14 @@
   background-color: variables.$primary-color;
   border-radius: 25px;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.17);
+  &.dark-mode { //dark mode styles for profile menu
+    background-color: #3A514E;
+    .info {
+      h4 {
+        color: white;
+      }
+    }
+  }
   .info {
     display: flex;
     justify-content: center;

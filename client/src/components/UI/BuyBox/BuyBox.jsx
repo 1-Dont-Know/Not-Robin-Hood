@@ -17,8 +17,12 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/slices/auth/authSlice";
 import { nanoid } from "nanoid";
 import toast, { Toaster } from "react-hot-toast";
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 
 const BuyBox = ({ type, symbol, price, name }) => {
+  const darkModeTheme = useSelector(selectDarkMode);
+  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+
   // Handling stock quantity
   const [qty, setQty] = useState(0);
 
@@ -237,7 +241,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
   }, [transactions]);
 
   return (
-    <div className={styles.BuyBody}>
+    <div className={`${styles.BuyBody} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
       <Toaster />
       {/* CALL TO ACTION BUTTONS SECTION */}
       <section className={styles.ctaSection}>
@@ -249,7 +253,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
           Buy
         </button>
         <button
-          className={globalStyles.sellButton}
+          className={`${globalStyles.sellButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}
           onClick={(event) => handlePurchaseSubmit(event, sellAmount)}
         >
           <img src={buyIcon} alt="Sell" />
@@ -264,7 +268,7 @@ const BuyBox = ({ type, symbol, price, name }) => {
           onChange={qtyHandler}
           type="number"
           id="Quantity"
-          className={styles.inputBoxes}
+          className={`${styles.inputBoxes} ${darkModeTheme ? styles["dark-mode"] : ""}`}
           placeholder="QTY"
           onKeyDown={(event) => checkIfNumber(event)}
         />
@@ -274,20 +278,20 @@ const BuyBox = ({ type, symbol, price, name }) => {
           min={datePurchased}
           max={datePurchased}
           id="userDate"
-          className={styles.inputBoxes}
+          className={`${styles.inputBoxes} ${darkModeTheme ? styles["dark-mode"] : ""}`}
           onChange={purchaseDateHandler}
           value={datePurchased}
         />
         {/* Total Amount  */}
-        <div className={styles.inputBoxes}>
+        <div className={`${styles.inputBoxes} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           Total: ${qty === 0 ? 0 : sellAmount}
         </div>
       </section>
 
       {/* ORDERS SECTION */}
-      <section className={styles.ordersSection}>
+      <section className={`${styles.ordersSection} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
         <h1>Purchase History</h1>
-        <div className={styles.orders}>
+        <div className={`${styles.orders} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           {purchaseHistory && purchaseHistory.length > 0
             ? purchaseHistory.map((item) => {
                 const dateString = item.date;

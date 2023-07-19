@@ -43,8 +43,8 @@ const StockViewer = () => {
     <>
       <Hero>
         <div className={styles.stockNameWrapper}>
-          <h1 className={styles.stockName}>{description} ({symbol})</h1>
-          <p className={styles.stockPrice}>
+          <h1 className={`${styles.stockName} ${darkModeTheme ? styles["dark-mode"] : ""}`}>{description} ({symbol})</h1>
+          <p className={`${styles.stockPrice} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
             ${getPriceStock('c')}
             <span className={styles.growth}
               style={{color: priceData && priceData.d  < 0 ? 'red' : '#2ab795'}}>${getPriceStock('d')}({getPriceStock('dp')}%)

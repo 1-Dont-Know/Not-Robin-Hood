@@ -1,11 +1,11 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./Search.module.scss";
 import {Link} from "react-router-dom";
 import {useGetStockTickerQuery} from "../../../redux/slices/api/alphaVantageApiSlice";
 import { useGetSearchResultQuery } from "../../../redux/slices/user/userApiSlice";
 // Dark Mode
-import {useSelector} from "react-redux";
-import {selectDarkMode} from "./../../../redux/slices/darkModeSlice";
+import { useSelector } from "react-redux";
+import { selectDarkMode } from "./../../../redux/slices/darkModeSlice";
 
 // Search Bar component receives a placeholder prop for the search default message
 const Search = ({placeholder}) => {

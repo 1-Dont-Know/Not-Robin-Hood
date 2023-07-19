@@ -50,6 +50,7 @@ export const userApi = createApi({
     "Balance",
     "Stocks",
     "User",
+    "searchQuery",
     "AssetValue",
     "AssetCondition",
     "Notifications",
@@ -90,6 +91,12 @@ export const userApi = createApi({
     getUserById: builder.query({
       query: (id) => `user/${id}/info`,
       providesTags: ["User"],
+    }),
+    //* Get Search Results
+    getSearchResult: builder.query({
+      query: (userQuery) => `user/search/${userQuery}`,
+      transformResponse: (response) => response.results,
+      providesTags: ["searchQuery"],
     }),
     //* Get "BALANCE"
     getBalance: builder.query({
@@ -232,6 +239,7 @@ export const userApi = createApi({
 export const {
   useGetUserByIdQuery,
   useGetBalanceQuery,
+  useGetSearchResultQuery,
   useAddBalanceMutation,
   useGetAssetValueQuery,
   useGetAssetConditionQuery,

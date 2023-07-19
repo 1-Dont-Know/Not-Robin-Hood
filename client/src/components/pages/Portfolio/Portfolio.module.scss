@@ -13,6 +13,9 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   border-radius: 25px 25px 0 0;
   background-color: variables.$light-yellow;
+  &.dark-mode {
+    background-color: #57361c;
+  }
 }
 
 .tabButton {
@@ -35,7 +38,7 @@
     background-color: variables.$secondary-color;
     color: variables.$primary-color;
   }
-
+  
   // &:focus {
   //     background-color: variables.$secondary-color;
   //     color: variables.$primary-color;
@@ -51,6 +54,9 @@
   border-radius: 0 25px 25px 25px;
   background-color: variables.$light-yellow;
   padding: 20px;
+  &.dark-mode {
+    background-color: #57361c;
+  }
 }
 
 .calculateBtn {
@@ -67,6 +73,12 @@
   }
   &:hover {
     box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.45);
+  }
+  &.dark-mode {
+    background-color: #ce9595;
+    img {
+      filter: contrast(100%);
+    }
   }
 }
 
@@ -92,12 +104,18 @@
   line-height: 38px;
   color: variables.$secondary-color;
   margin-bottom: 20px;
+  &.dark-mode {
+    color: #76d8cb;
+  }
 }
 
 .totalPortfolioValue {
   font-weight: 400;
   font-size: 24px;
   line-height: 29px;
+  &.dark-mode {
+    color: #33ff00;
+  }
 }
 
 .sectionTitle {
@@ -106,6 +124,9 @@
   color: variables.$secondary-color;
   margin-bottom: 30px;
   flex: 1 1 50%;
+  &.dark-mode {
+    color: #92aaa7;
+  }
 }
 
 .sectionPercent {
@@ -114,6 +135,9 @@
   line-height: 39px;
   flex: 1 1 25%;
   color: #32543a;
+  &.dark-mode {
+    color: #56bdb0;;
+  }
 }
 
 .sectionValue {
@@ -185,6 +209,12 @@
     border-radius: 25px;
     padding: 1.4rem;
   }
+  &.dark-mode {
+    p {
+      color: #fff;
+      background-color: #333333;
+    }
+  }
 }
 .stockDetails {
   width: 100%;
@@ -203,6 +233,12 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+  &.dark-mode {
+    input {
+      color: #fff;
+      background-color: #333333;
+    }
   }
 }
 

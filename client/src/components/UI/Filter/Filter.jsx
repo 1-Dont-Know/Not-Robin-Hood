@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Filter.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 // import ToolIcon from "../../../assets/icons/tools-icon.svg";
@@ -13,8 +13,16 @@ import { useDispatch } from "react-redux";
 import { setGraphFilterRange } from "../../../redux/slices/graphFilterRangeSlice";
 import { useSelector } from "react-redux";
 import { selectGraphFilterRange } from "../../../redux/slices/graphFilterRangeSlice";
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 
 const Filter = () => {
+  
+   {/* Dark Mode Theme*/}
+  const darkModeTheme = useSelector(selectDarkMode);
+  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
+  {/* End Dark Mode Theme*/}
+  
   const range = ["1D", "1W", "1M", "3M", "6M", "1Y"];
 
   const dispatch = useDispatch();
@@ -46,10 +54,11 @@ const Filter = () => {
   };
 
 
+
   return (
     <div className={styles.container}>
       <div className={styles.tools}>
-        <button className={globalStyles.toolsButton}>
+        <button className={`${globalStyles.toolsButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}>
           <img src={tools} alt="Tools" />
           <p>Tools</p>
         </button>
@@ -62,11 +71,11 @@ const Filter = () => {
       </div>
       
       {/* Common Filter Coontainer */}
-      <div className={styles.commonFilter}>
-        <div className={styles.commonFilterTools}>
+      <div className={`${styles.commonFilter} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
+        <div className={`${styles.commonFilterTools} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           <img src={tools} alt="Tools" />
         </div>
-        <div className={styles.commonFilterRange}>
+        <div className={`${styles.commonFilterRange} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           {range.map((item) => {
             return (
               <button key={item} className={globalStyles.timeBarButton} onClick={() => handleClick(item)}>

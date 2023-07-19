@@ -36,12 +36,10 @@ input {
   //   padding: 20px 0px 20px 25px;
   text-transform:uppercase;
 
-  
   /* Dark mode styles */
   &.dark-mode-search {
-    background: invert;
-    background-color: #2A2C2E;
-    color: #fff;
+    background: url(../../../assets/icons/search-icon.svg) no-repeat left;
+    filter: invert(100%);
   }
 }
 

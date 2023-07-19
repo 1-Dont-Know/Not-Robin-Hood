@@ -13,6 +13,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  &.dark-mode {
+    background-color: rgba(104, 42, 42, 0.412);
+  }
 }
 
 .popup {
@@ -29,6 +32,9 @@
   @include mixins.boxShadow();
   border-radius: 25px;
   padding: 4rem;
+  &.dark-mode {
+    background-color: #68472a;
+  }
 }
 .sellStock {
   position: absolute;
@@ -44,6 +50,9 @@
   @include mixins.boxShadow();
   border-radius: 25px;
   padding: 4rem;
+  &.dark-mode {
+    background-color: #5c807b;
+  }
 }
 
 .closePopupButtonSellStock {

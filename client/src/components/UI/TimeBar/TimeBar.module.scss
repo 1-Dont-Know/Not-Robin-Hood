@@ -12,18 +12,37 @@
   padding: 0.5rem 0.75rem;
   width: 100%;
   border-radius: 25px;
+  &.dark-mode {
+    background-color: #5c807b;
+  }
 
   @include mixins.breakpoint-down(xlarge) {
     // display: none;
     margin: 1rem 0rem;
+    &.dark-mode {
+      background: #424649;
+      color: #fff;
+    }
   }
   @include mixins.breakpoint-down(large) {
     margin: 1rem 0rem;
+    &.dark-mode {
+      background: #46484b;
+      color: #fff;
+    }
   }
   @include mixins.breakpoint-down(medium) {
     margin: 1rem 0rem;
+    &.dark-mode {
+      background: #2A2C2E;
+      color: #fff;
+    }
   }
   @include mixins.breakpoint-down(small) {
     margin: 1rem 0rem;
+    &.dark-mode {
+      background: #2A2C2E;
+      color: #fff;
+    }
   }
 }

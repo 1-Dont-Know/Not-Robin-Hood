@@ -39,4 +39,8 @@
   font-size: 14px;
   line-height: 1.5rem;
   text-align: justify;
+  &.dark-mode {
+    color: #fff;
+    background-color: #2b2b2b;
+  }
 }

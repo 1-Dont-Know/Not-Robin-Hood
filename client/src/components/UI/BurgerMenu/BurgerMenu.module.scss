@@ -27,7 +27,9 @@
   justify-content: flex-end;
   align-items: center;
   gap: 2rem;
-
+  &.dark-mode {
+    background-color: #486461;
+  }
   @include mixins.breakpoint-up(xxlarge) {
     display: none;
   }

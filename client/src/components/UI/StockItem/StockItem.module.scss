@@ -10,6 +10,9 @@
   background: #d5e3e1;
   border-radius: 1.563rem;
   gap: 1rem;
+  &.dark-mode {
+    background: #5C807B;
+  }
 }
 
 .stockSymbol {

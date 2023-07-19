@@ -28,6 +28,9 @@
   padding: 20px;
   margin-bottom: 10px;
   color: #000;
+  &.dark-mode {
+    background-color: #774040;
+  }
 }
 
 .sellBtn,
@@ -42,6 +45,14 @@
   &:hover {
     color: #fff;
     background-color: variables.$secondary-color;
+  }
+  &.dark-mode {
+    color: #ffffff59;
+    background-color: rgba(255, 225, 197, 0.247);
+    &:hover {
+      color: #000000;
+      background-color: rgba(255, 255, 255, 0.562);
+    }
   }
 }
 

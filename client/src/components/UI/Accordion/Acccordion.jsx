@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./Accordion.module.scss";
 import globalStyles from "../../../styles/main.module.scss";
 import DownVectorIcon from "../../../assets/icons/down-vector.svg";
+import { useSelector } from 'react-redux';
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 
 // Accordion components that take in props as argument manages its open/closed state with the isOpen state variable
 function Accordion(props) {
@@ -26,6 +28,12 @@ function Accordion(props) {
     setIsOpen(!isOpen);
   };
 
+    {/* Dark Mode Theme*/}
+    const darkModeTheme = useSelector(selectDarkMode);
+    // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+    useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
+    {/* End Dark Mode Theme*/}
+
 // to ensure styling to work properly create a function where it sets the max-height property of the content to the height 
 // if the isOpen state is true when accordion is open then set the maxHeight to the value of the height variable
 // if the isOpen state is false when accordion is closed then set the max height to 0. To hide the accordion.
@@ -39,7 +47,7 @@ function Accordion(props) {
     <div className={styles.stockInfo}>
       {/* added onClick where trigger function called toggleAccordion when clicked */}
       <button
-        className={globalStyles.stockInfoButton}
+        className={`${globalStyles.stockInfoButton} ${darkModeTheme ? globalStyles["dark-mode"] : ""}`}
         onClick={toggleAccordion}
       >
         {/* props.title is used to display the title of the accordion, which is "Stock Information" in this case */}
@@ -52,7 +60,7 @@ function Accordion(props) {
       </button>
       {/* Check if the accordion should be open and show the content if true */}
       <div className={styles.stockInfoContent} style={contentStyle}>
-        <div className={styles.stockInfoText} ref={contentRef}>
+        <div className={`${styles.stockInfoText} ${darkModeTheme ? styles["dark-mode"] : ""}`} ref={contentRef}>
           {props.children}
         </div>
           {/* props.children is calling the <p> inside the accordion */}

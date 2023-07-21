@@ -1,13 +1,21 @@
-import React from "react";
+import { useSelector } from 'react-redux';
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
+import React, { useEffect } from "react";
 import styles from "./NotificationPopUp.module.scss";
 
 const NotificationPopUp = ({ name, notifications, data }) => {
+    {/* Dark Mode Theme*/}
+    const darkModeTheme = useSelector(selectDarkMode);
+    // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+    useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);
+    {/* End Dark Mode Theme*/}
+    
   return (
-    <div className={styles.container}>
-      <h1 className={styles.greetingTitle}>{`Hello, ${name}!`}</h1>
+    <div className={`${styles.container} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
+      <h1 className={`${styles.greetingTitle} ${darkModeTheme ? styles["dark-mode"] : ""}`}>{`Hello, ${name}!`}</h1>
 
       <h3
-        className={styles.subTitle}
+        className={`${styles.subTitle} ${darkModeTheme ? styles["dark-mode"] : ""}`}
       >{`You Have (${notifications}) Notifications`}</h3>
 
       <div className={styles.notificationsWrapper}>

@@ -11,11 +11,16 @@
   width: 100%;
   color: #000;
   gap: 1rem;
-
   transition: 0.3s ease-in-out;
-
+  &.dark-mode {
+    background-color: #5C807B;
+   color: #fff;
+  }
   &:hover {
     box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.45);
+  }
+  &.dark-mode:hover {
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.45);
   }
 }
 
@@ -25,6 +30,9 @@
   background-color: #fff;
   padding: 1rem 1.5rem;
   border-radius: 25px;
+  &.dark-mode {
+    background-color: #37433A;
+  }
 }
 
 .stockName,

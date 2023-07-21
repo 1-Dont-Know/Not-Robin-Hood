@@ -27,13 +27,19 @@
   gap: 0.5rem;
   span {
     font-size: 18px;
-    color: #2ab795;
+    color: #2ecca7;
+  }
+  &.dark-mode {
+    color: #ffffff;
   }
 }
 
 .stockName {
   font-size: 36px;
   font-weight: variables.$font-bold;
+  &.dark-mode {
+    color: #D5E3E1;
+  }
 }
 
 .preview {

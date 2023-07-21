@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./StockList.module.scss";
 import { Link } from "react-router-dom";
 import Popup from "../Popup/Popup";
 import DownVectorIcon from "../../../assets/icons/down-vector.svg";
+import { useSelector } from 'react-redux';
+import { selectDarkMode } from './../../../redux/slices/darkModeSlice';
 
 const StockList = ({
   name,
@@ -14,9 +16,12 @@ const StockList = ({
   equity,
   sellHandler,
 }) => {
+  const darkModeTheme = useSelector(selectDarkMode);
+  useEffect(() => {localStorage.setItem("darkMode", darkModeTheme);}, [darkModeTheme]);  // When Settings page is rendered, we will set our localstorage "darkMode": false by default;
+
   return (
     <>
-      <div className={styles.stockList}>
+      <div className={`${styles.stockList} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
         <div className={styles.container}>
           <Link
             className={styles.item}
@@ -50,7 +55,7 @@ const StockList = ({
           <p className={styles.item}>${totalReturn}</p>
           <p className={styles.item}>${equity}</p>
         </div>
-        <button onClick={sellHandler} className={styles.sellBtn}>
+        <button onClick={sellHandler} className={`${styles.sellBtn} ${darkModeTheme ? styles["dark-mode"] : ""}`}>
           SELL
         </button>
         {/* TODO: According of stocks with the same name  */}

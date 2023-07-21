@@ -8,4 +8,7 @@
   border-radius: 25px;
   padding: 20px;
   background-color: variables.$light-yellow;
+  &.dark-mode {
+    background-color: #111111;
+  }
 }

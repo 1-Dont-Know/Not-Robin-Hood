@@ -26,6 +26,9 @@ const Graph = ({ chartData }) => {
         display: true,
         // text: "GAINS!",
       },
+      legend: {
+        display: false,
+      },
       //Edit the X+Y Axis Colors
       scales: {
         x: {
